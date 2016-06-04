@@ -46,17 +46,22 @@
 
 	"use strict";
 
-	var _elementsJS = __webpack_require__(1);
-
-	///-------elementsJS requires---------///
+	///-------Begin Module requires---------///
 	var _$ = __webpack_require__(1)._$;
 	var dom = __webpack_require__(1).dom;
 	var make = __webpack_require__(1).make;
 	var element = __webpack_require__(1).element;
 	///|------------------------------------|//
 
+	var elementsJS = __webpack_require__(1);
+	var go = elementsJS.go;
+	var info = elementsJS.info;
+	var log = elementsJS.log;
+
+	///End Module requires///
+
 	go(function () {
-	  (0, _elementsJS.info)('hello elementsJS');
+	  info('hello elementsJS');
 	});
 
 /***/ },
