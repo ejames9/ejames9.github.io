@@ -20,6 +20,9 @@
     <!-- Custom styles for this template -->
     <link href="./src/css/bootstrapCover.css" rel="stylesheet">
 
+    <!-- Custom styles for this site -->
+    <link href="./src/css/ericfosterIO.css" rel="stylesheet">
+
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="./src/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="./src/js/ie-emulation-modes-warning.js"></script>
@@ -33,45 +36,93 @@
 
   <body>
 
-    <div class="site-wrapper">
+    <div id='wrapper'  style='overflow-x: hidden;' class="site-wrapper">
+      <div id='innerWrapper'  style='overflow-x: hidden;' class="site-wrapper-inner">
+        <!--Inner Wrapper Content=========================================-->
 
-      <div class="site-wrapper-inner">
+        <!--Content Container----------------------------------------------->
+        <div id='container' style='overflow-x: hidden;' class="cover-container">
 
-        <div class="cover-container">
-
-          <div class="masthead clearfix">
+          <!--Header, Fixed------------------------------------------------->
+          <div id='header' class="masthead clearfix">
             <div class="inner">
-              <h3 class="masthead-brand">Home</h3>
+              <h3 id='meBrand' class="masthead-brand">Eric Foster</h3>
               <nav>
-                <ul class="nav masthead-nav">
-                  <li class="active"><a href="#">Home</a></li>
-                  <li><a href="#">Projects</a></li>
-                  <li><a href="#">Contact</a></li>
+                <ul id='mainNav' class="nav masthead-nav">
+                  <li class="active"><a href="#top">Top</a></li>
+                  <li><a href="#me">Me</a></li>
+                  <li><a href="#projects">Projects</a></li>
+                  <li><a href="#contactMe">Contact</a></li>
                 </ul>
               </nav>
             </div>
           </div>
 
-          <div class="inner cover">
-            <h1 class="cover-heading">Eric Foster</h1>
-            <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+          <!--My Head------------------------------------------------------->
+          <!-- <img id='me' src='./images/me.png'> -->
+          <!--Top Inner Cover Content--------------------------------------->
+          <div id='coverDescContainer' class="inner cover">
+            <h1 id='coverDesc' class="cover-heading">JavaScript Developer, Code Sorcerer, Regular Expression Wielder, Espresso Addict, Phobiaphobic Jib Cutter.</h1>
             <p class="lead">
               <a href="#" class="btn btn-lg btn-default">Learn more</a>
             </p>
           </div>
 
-          <div class="mastfoot">
-            <div class="inner">
-              <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+          <!--About Me Section and hash link-------------------------------->
+          <a id='me'></a>
+          <div id='aboutMe'>
+            <div id='aboutMeContainer'>
+              <h2>Me</h2>
+              <p>I am a loving husband and father, a web developer, an erstwhile musician and sound engineer, a conservationalist. A good speller. A former Sous Chef. I am passionate about web technology and all things JavaScript, writing and recording music, fiddling with computers and playing with my daughter.</p>
+              <h2>In my toolbox...</h2>
+              <p>JavaScript. HTML5/CSS3. SCSS/Sass. Less. JQuery. Git. GitHub. Node.js. npm. Express. Python. Django. Grunt. gulp. React. Mapbox. D3. three.js. Loads of JavaScript Libraries. Regular Expressions. Creativity. An unending desire to learn. An unrelenting drive to finish what I've started. Attention to Detail. Compassion for others.</p>
+              <h2>I love.....</h2>
+              <p>Music. Coding. Espresso. JavaScript. Family. Guitars. Sleeping. Camping. Road Trips. Espresso. A Good Pinot Noir, Cleverness. Jamming. Oregon. Good Cheesecake. Scallops. Cooking. Espresso. Avoiding politics. Free will. Philosophy. Art. Creativity. Kindness. Did I mention Espresso?</p>
+            </div>
+          </div>
+          <!-- Three.js/projects Container and hash link-------------------->
+          <a id='projects'></a>
+          <div id='threejs'></div>
+          <!--Contact info and hash----------------------------------------->
+          <a id='contactMe'></a>
+          <div id='contact'></div>
+          <div id='buttons'>
+            <div id='buttonsContainer' width='400px'>
+              <div class='buttons'>
+                <a href="#" class="btn btn-lg btn-default">eMail</a>
+              </div>
+              <div class='buttons'>
+                <a href="#" class="btn btn-lg btn-default">Gitter</a>
+              </div>
+              <div class='buttons'>
+                <a href="#" class="btn btn-lg btn-default">GitHub</a>
+              </div>
+              <div class='buttons'>
+                <a href="#" class="btn btn-lg btn-default">Linkedin</a>
+              </div>
+            </div>
+          </div>
+          <!--Contact Me Section and hash----------------------------------->
+          <a id='mapLink'></a>
+          <div id='map'>
+            <div id='mapFrame'>
+              <img src="https://api.mapbox.com/styles/v1/ejames9/cip74e9ve0016bdm6w2ot6gtv/static/-122.677487,45.522526,12.14,23.00,60.00/1280x400@2x?access_token=pk.eyJ1IjoiZWphbWVzOSIsImEiOiIyNGNlYWUyYTU4M2Q4YTViYWM0YTBlMDRmNzIyMTYyNCJ9.RbU_-nlAAF6EOSVxj1kVMg&attribution=false" width="1280" height="400" alt="Dark" />
+
             </div>
           </div>
 
-        </div>
+          <!--Footer, Fixed------------------------------------------------->
+          <!-- <div class="mastfoot">
+            <div class="inner">
+              <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+            </div>
+          </div> -->
 
-      </div>
+        </div><!--End Cover Container--------------------------------------->
 
-    </div>
-    <div id='threejs'></div>
+      </div><!--End Inner Wrapper------------------------------------------->
+    </div><!--End Outer Wrapper--------------------------------------------->
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
