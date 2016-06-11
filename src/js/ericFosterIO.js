@@ -8,6 +8,7 @@ Author: Eric Foster
 //elementsJS imports
 use 'elementsJS' go, info, log, el, inspect, scroll
 use 'three' as THREE
+use 'tween.js' as TWEEN
 use 'underscore' as __
 use 'moment' as moment
 
@@ -20,10 +21,11 @@ use '../../src/js/OrbitControls'
 var scene,
     camera,
     clock,
+    sides = [],
     controls,
     css3DRenderer;
 
-var initScene = function () {
+var initProjectsScene = function () {
   // set the scene size
   var width = window.innerWidth,
       height = window.innerHeight;
@@ -46,24 +48,25 @@ var initScene = function () {
   // add the camera to the scene
   scene.add(camera);
   // the camera starts at 0,0,0, so pull it back
-  camera.position.z = 800;
-  camera.position.x = 500;
-  camera.position.y = 700;
+  camera.position.z = 2200;
+  camera.position.x = 0;
+  camera.position.y = 0;
   camera.lookAt(scene.position);
 
   controls = new THREE.OrbitControls(camera);
-  controls.autoRotate = true;
+
+  // controls.autoRotate = true;
 
   clock = new THREE.Clock();
 
-  controls.rotateSpeed          = 2.0;
+  controls.rotateSpeed          = 0.007;
 	controls.zoomSpeed            = 2.0;
 	controls.panSpeed             = 1.5;
 	controls.enableZoom           = false;
 	controls.enablePan            = false;
 	controls.staticMoving         = true;
 	// controls.dynamicDampingFactor = 0.3;
-	// controls.keys                 = [ 65, 83, 68 ];
+	controls.keys                 = [ 65, 83, 68 ];
 	// controls.addEventListener( 'change', animate );
 
 
@@ -86,15 +89,16 @@ function createCSS3DObject(s) {
      return object;
 }
 
-function createSides(s, geometry) {
+function createSides(strings, geometry) {
+  var tick = -1;
     // iterate over all the sides
-    for (var iFace = 0;
-      iFace < geometry.faces.length; iFace += 2) {
+    for (var i = 0;i < geometry.faces.length;i += 2) {
+      tick++
       // create a new object based on the supplied HTML String
-      var side = createCSS3DObject(s);
+      var side = createCSS3DObject(strings[tick]);
       // get this face and the next which both make the cube
-      var face = geometry.faces[iFace];
-      var faceNext = geometry.faces[iFace + 1];
+      var face = geometry.faces[i];
+      var faceNext = geometry.faces[i + 1];
       // reposition the sides using the center of the faces
       var centroid = new THREE.Vector3();
       centroid.copy( geometry.vertices[face.a] )
@@ -108,9 +112,10 @@ function createSides(s, geometry) {
       side.position.y = centroid.y;
       side.position.z = centroid.z;
 
+      sides.push(side);
       // Calculate and apply the rotation for this side
       var up = new THREE.Vector3(0, 0, 1);
-      var normal = geometry.faces[iFace].normal;
+      var normal = geometry.faces[i].normal;
       // We calculate the axis on which to rotate by
       // selecting the cross of the vectors
       var axis = new THREE.Vector3();
@@ -130,29 +135,11 @@ function createSides(s, geometry) {
       // add to the scene
       scene.add(side);
  }
+ inspect(sides);
 }
 
-
-
-var animate = function() {
-  //update OrbitControls
-  controls.update(clock.getDelta());
-  //renderer
-  css3DRenderer.render(scene, camera);
-  //animation function
-  requestAnimationFrame( animate );
-}
-
-
-
-
-var iframe = '<iframe width="600" height="600" frameborder="0"' +
-     ' style="border:0" src="{URL}"></iframe>';
-var eJSURL = 'http://elementsjs.io',
-      html = <html/>.el;
-
-
-go(()=> {
+//Scroll events....
+function onScroll() {
   //affix mainNav to top upon scroll.
   scroll(window, (e)=> {
     //Affix to top.
@@ -174,6 +161,13 @@ go(()=> {
               .bgColor('black')
               .opacity('.6');
 
+      if (<body/>.scrolled() > 2496) {
+        <'#footer'/>
+              .viz('visible');
+      } else {
+        <'#footer'/>
+              .viz('hidden');
+      }
     } else {
       //Release.
       <'#meBrand'/>
@@ -194,12 +188,141 @@ go(()=> {
               .opacity('');
     }
   });
+}
+
+//Assemble Projects Cube.....
+function assembleCube() {
+  //iframe template.
+  var iframe = '<iframe width="1200" height="1200" frameborder="0"' +
+       ' style="border:0" src="{URL}"></iframe>';
+  //URL's....
+  var eJSURL        = 'http://elementsjs.io',
+      dJamURL       = 'https://pypi.python.org/pypi/DjamBase',
+      showTURL      = 'https://showtrippers.com',
+      gulpeJSIntURL = 'https://www.npmjs.com/package/gulp-elementsjs-interpreter',
+      efosterIOURL  = 'https://ejames9.github.io',
+      urlsArray     = [],
+      cubeSidesHTML = [];
+  //Store urls in array.
+  urlsArray.push(efosterIOURL);
+  urlsArray.push(showTURL);
+  urlsArray.push(eJSURL);
+  urlsArray.push(eJSURL);
+  urlsArray.push(eJSURL);
+  urlsArray.push(efosterIOURL);
+  //Combine urls with iframe template in new array.
+  urlsArray.forEach((url)=> {
+    cubeSidesHTML.push(iframe.replace('{URL}', url));
+  });
+
+  //Create the cube.
+  createSides(cubeSidesHTML, new THREE.CubeGeometry(1200,1200,1200));
+}
+
+
+//Animation function.
+function animate() {
+  //update OrbitControls
+  controls.update(clock.getDelta());
+  //renderer
+  css3DRenderer.render(scene, camera);
+
+  // inspect(camera.position);
+
+  var x = camera.position.x;
+  var z = camera.position.z;
+  camera.position.x = x * Math.cos(controls.rotateSpeed) +
+    z * Math.sin(controls.rotateSpeed);
+  camera.position.z = z * Math.cos(controls.rotateSpeed) -
+    x * Math.sin(controls.rotateSpeed);
+  camera.lookAt(scene.position);
+  //animation function
+  requestAnimationFrame(animate);
+}
+
+
+
+
+//---DOM Ready function---//
+go(()=> {
   //Set site wrapper to window parameters.
   <'#wrapper'/>
             .size(String(window.innerHeight) + 'px', String(window.innerWidth) + 'px');
-  //set up three.js scene.
-  initScene();
-  createSides(iframe.replace('{URL}', eJSURL), new THREE.CubeGeometry(600,600,600));
-
+  onScroll();
+  //Set up three.js scene.
+  initProjectsScene();
+  //Call Cube Assembly Function..
+  assembleCube();
+  //Initiate cube spin animation.
+  // setUpTween();
+  //initiate render loop.
   animate();
 });
+
+
+
+
+//===Code Bin===============================================================>>>
+
+
+//--Code for making the Projects cube spin.-------------------------------->>
+
+// inspect(camera.position);
+//
+// var x = camera.position.x;
+// var z = camera.position.z;
+// camera.position.x = x * Math.cos(controls.rotateSpeed) +
+//   z * Math.sin(controls.rotateSpeed);
+// camera.position.z = z * Math.cos(controls.rotateSpeed) -
+//   x * Math.sin(controls.rotateSpeed);
+// camera.lookAt(scene.position);
+
+//--Code for Updating Cube position.---------------------------------------->>
+
+// var posit = new THREE.Vector3(7.699, 6.7355, 1099.973);
+// var posit2 = new THREE.Vector3(355.4065, 6.7355, 1041.0025);
+// var posit3 = new THREE.Vector3(1100, 6.7355, 0);
+// var posit4 = new THREE.Vector3(0, 6.7355, -1100);
+// var posit5 = new THREE.Vector3(-1100, 6.7355, 0);
+//
+// camera.position.x = posit.x;
+// camera.position.y = posit.y;
+// camera.position.z = posit.z;
+// camera.lookAt(scene.position);
+// animate();
+// setTimeout(function() {
+//   log('11111111');
+//   inspect(posit2.x);
+//   camera.position.x = posit2.x;
+//   camera.position.y = posit2.y;
+//   camera.position.z = posit2.z;
+//   camera.lookAt(scene.position);
+//   animate();
+//   setTimeout(function() {
+//     log('22222222222');
+//     inspect(posit3.y);
+//     camera.position.x = posit3.x;
+//     camera.position.y = posit3.y;
+//     camera.position.z = posit3.z;
+//     camera.lookAt(scene.position);
+//     animate();
+//     setTimeout(function() {
+//       log('33333333');
+//       inspect(posit4);
+//       camera.position.x = posit4.x;
+//       camera.position.y = posit4.y;
+//       camera.position.z = posit4.z;
+//       camera.lookAt(scene.position);
+//       animate();
+//       setTimeout(function() {
+//         log('44444444444');
+//         inspect(posit5);
+//         camera.position.x = posit5.x;
+//         camera.position.y = posit5.y;
+//         camera.position.z = posit5.z;
+//         camera.lookAt(scene.position);
+//         animate();
+//       }, 3000);
+//     }, 3000);
+//   }, 3000);
+// }, 3000);

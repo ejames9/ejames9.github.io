@@ -83,8 +83,29 @@ body {
   z-index: 10;
 }
 
+#coverDescContainer div a {
+  display: inline;
+  font-size: 36px;
+  background-color: #43234c;
+  border: 1px solid #43234c;
+  color: #fff;;
+}
+#coverDescContainer div a:hover {
+  background-color: #164cac;
+  opacity: .7;
+  color: #fff;
+  border: 1px solid #000;
+}
+#coverDescContainer div a:active {
+  background-color: #e12d22;
+  opacity: 1;
+  color: #000;
+  border: 1px solid #000;
+}
+
 #coverDesc {
   font-size: 48px;
+  margin-bottom: 20px;
 }
 
 
@@ -138,13 +159,27 @@ body {
 #contact {
   position: absolute;
   left: 0px;
-  top: 2215px;
-  height: 265px;
+  top: 2240px;
+  height: 220px;
   width: 1280px;
   background-color: #191a1a;
+  color: #000;
   opacity: .8;
-  padding: 130px 0px 130px 0px;
+  padding: 60px 0px 0px 0px;
+  text-align: center;
+  font-family: amatic sc;
 }
+
+#contactMeText {
+  color: white;
+  font-family: amatic sc;
+  font-weight: 800;
+  font-size: 84px;
+}
+
+/*#contact h1 {
+ font-size: 124px;
+}*/
 
 #buttons {
   position: absolute;
@@ -153,7 +188,8 @@ body {
   width: 100%;
   height: 260px;
   background-color: transparent;
-  padding: 80px 0px 120px 0px;
+  padding: 60px 0px 140px 0px;
+  text-align: center;
 }
 
 .buttons {
@@ -167,6 +203,18 @@ body {
   background-color: transparent;
   color: white;
   margin-right: 40px;
+}
+#buttons div a:hover {
+  background-color: #164cac;
+  opacity: .7;
+  color: #ffffff;
+  border: 1px solid #164cac;
+}
+#buttons div a:active {
+  background-color: #43234c;
+  opacity: 1;
+  color: #fff;
+  border: 1px solid #43234c;
 }
 
 #buttonsContainer {
@@ -200,4 +248,8 @@ body {
 .navBarTop {
   font-size: 36px;
   top: 7px;
+}
+
+#footer {
+  visibility: hidden;
 }
