@@ -144,21 +144,21 @@
 	     camera.position.y = 0;
 	     camera.lookAt(scene.position);
 
-	     controls = new THREE.OrbitControls(camera);
+	     // controls = new THREE.OrbitControls(camera);
 
 	     // controls.autoRotate = true;
 
-	     clock = new THREE.Clock();
-
-	     controls.rotateSpeed = 0.007;
-	     controls.zoomSpeed = 2.0;
-	     controls.panSpeed = 1.5;
-	     controls.enableZoom = false;
-	     controls.enablePan = false;
-	     controls.staticMoving = true;
-	     // controls.dynamicDampingFactor = 0.3;
-	     controls.keys = [65, 83, 68];
-	     // controls.addEventListener( 'change', animate );
+	     // clock = new THREE.Clock();
+	     //
+	     // controls.rotateSpeed          = 0.007;
+	     // controls.zoomSpeed            = 2.0;
+	     // controls.panSpeed             = 1.5;
+	     // controls.enableZoom           = false;
+	     // controls.enablePan            = false;
+	     // controls.staticMoving         = true;
+	     // // controls.dynamicDampingFactor = 0.3;
+	     // controls.keys                 = [ 65, 83, 68 ];
+	     // // controls.addEventListener( 'change', animate );
 
 	     // attach the render-supplied DOM element
 	     _container.appendChild(css3DRenderer.domElement);
@@ -284,23 +284,23 @@
 	//Assemble Projects Cube.....
 	function assembleCube() {
 	     //iframe template.
-	     var iframe = '<iframe width="1200" height="1200" frameborder="0"' + ' style="border:0" src="{URL}"></iframe>';
+	     var iframe = '<iframe width="1200" height="800" frameborder="0"' + ' style="border:0" src="{URL}"></iframe>';
 	     //URL's....
 	     var eJSURL = 'http://elementsjs.io',
 	         dJamURL = 'https://pypi.python.org/pypi/DjamBase',
 	         showTURL = 'https://showtrippers.com',
 	         gulpeJSIntURL = 'https://www.npmjs.com/package/gulp-elementsjs-interpreter',
-	         efosterIOURL = 'https://ejames9.github.io',
+	         efosterIOURL = 'http://ejames9.github.io/#top',
 	         efosterIOURL2 = 'https://ejames9.github.io/#projects',
 	         urlsArray = [],
 	         cubeSidesHTML = [];
 	     //Store urls in array.
+	     urlsArray.push(eJSURL);
 	     urlsArray.push(efosterIOURL);
-	     urlsArray.push(showTURL);
 	     urlsArray.push(eJSURL);
 	     urlsArray.push(eJSURL);
 	     urlsArray.push(eJSURL);
-	     urlsArray.push(efosterIOURL2);
+	     urlsArray.push(eJSURL);
 	     //Combine urls with iframe template in new array.
 	     urlsArray.forEach(function (url) {
 	          cubeSidesHTML.push(iframe.replace('{URL}', url));
@@ -313,7 +313,7 @@
 	//Animation function.
 	function animate() {
 	     //update OrbitControls
-	     controls.update(clock.getDelta());
+	     // controls.update(clock.getDelta());
 	     //renderer
 	     css3DRenderer.render(scene, camera);
 
@@ -321,8 +321,8 @@
 
 	     var x = camera.position.x;
 	     var z = camera.position.z;
-	     camera.position.x = x * Math.cos(controls.rotateSpeed) + z * Math.sin(controls.rotateSpeed);
-	     camera.position.z = z * Math.cos(controls.rotateSpeed) - x * Math.sin(controls.rotateSpeed);
+	     camera.position.x = x * Math.cos(0.007) + z * Math.sin(0.007);
+	     camera.position.z = z * Math.cos(0.007) - x * Math.sin(0.007);
 	     camera.lookAt(scene.position);
 	     //animation function
 	     requestAnimationFrame(animate);
@@ -331,10 +331,8 @@
 	//---DOM Ready function---//
 	go(function () {
 	     //Set site wrapper to window parameters.
-	     (function () {
-	          var elem10 = _$('#wrapper') ? dom('#wrapper') : make('#wrapper').put("body");
-	          return elem10;
-	     })().size(String(window.innerHeight) + 'px', String(window.innerWidth) + 'px');
+	     // <'#wrapper'/>
+	     //           .size(String(window.innerHeight) + 'px', String(window.innerWidth) + 'px');
 	     onScroll();
 	     //Set up three.js scene.
 	     initProjectsScene();
@@ -354,10 +352,10 @@
 	//
 	// var x = camera.position.x;
 	// var z = camera.position.z;
-	// camera.position.x = x * Math.cos(controls.rotateSpeed) +
-	//   z * Math.sin(controls.rotateSpeed);
-	// camera.position.z = z * Math.cos(controls.rotateSpeed) -
-	//   x * Math.sin(controls.rotateSpeed);
+	// camera.position.x = x * Math.cos(0.007) +
+	//   z * Math.sin(0.007);
+	// camera.position.z = z * Math.cos(0.007) -
+	//   x * Math.sin(0.007);
 	// camera.lookAt(scene.position);
 
 	//--Code for Updating Cube position.---------------------------------------->>
