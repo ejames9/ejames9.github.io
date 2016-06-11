@@ -291,6 +291,7 @@
 	         showTURL = 'https://showtrippers.com',
 	         gulpeJSIntURL = 'https://www.npmjs.com/package/gulp-elementsjs-interpreter',
 	         efosterIOURL = 'https://ejames9.github.io',
+	         efosterIOURL2 = 'https://ejames9.github.io/#projects',
 	         urlsArray = [],
 	         cubeSidesHTML = [];
 	     //Store urls in array.
@@ -299,7 +300,7 @@
 	     urlsArray.push(eJSURL);
 	     urlsArray.push(eJSURL);
 	     urlsArray.push(eJSURL);
-	     urlsArray.push(efosterIOURL);
+	     urlsArray.push(efosterIOURL2);
 	     //Combine urls with iframe template in new array.
 	     urlsArray.forEach(function (url) {
 	          cubeSidesHTML.push(iframe.replace('{URL}', url));

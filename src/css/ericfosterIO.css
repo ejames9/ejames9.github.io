@@ -117,6 +117,7 @@ body {
   /*max-width: 100%;*/
   background-image: url('../../images/andromeda.jpg');
   background-repeat: repeat-x;
+  background-repeat: repeat-y;
   background-color: black;
   z-index: 11;
   padding: 0px;
