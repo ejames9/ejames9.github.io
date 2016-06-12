@@ -141,7 +141,7 @@
 	     // the camera starts at 0,0,0, so pull it back
 	     camera.position.z = 2200;
 	     camera.position.x = 0;
-	     camera.position.y = 0;
+	     camera.position.y = -100;
 	     camera.lookAt(scene.position);
 
 	     // controls = new THREE.OrbitControls(camera);
@@ -164,6 +164,7 @@
 	     _container.appendChild(css3DRenderer.domElement);
 	};
 
+	//Simple function to create CSS3DObjects from the given HTML string.
 	function createCSS3DObject(s) {
 	     // create outerdiv and set inner HTML from supplied string
 	     var div = document.createElement('div');
@@ -178,6 +179,7 @@
 	     return object;
 	}
 
+	//Create the sides of the specified geometry with CSS3DObjects created using the given HTML strings, and shift them into position.
 	function createSides(strings, geometry) {
 	     var tick = -1;
 	     // iterate over all the sides
@@ -219,6 +221,43 @@
 	          scene.add(side);
 	     }
 	     inspect(sides);
+	}
+
+	//Assemble Projects Cube.....
+	function assembleCube() {
+	     //iframe template.
+	     var iframe = '<iframe width="1280" height="740" frameborder="0"' + ' style="border:0" src="{URL}"></iframe>',
+	         divWrap = '<div><div class="drapes"></div><img src="{SRC}" width="1280" height="740"></div>';
+	     //URL's....
+	     var eJSURL = 'http://elementsjs.io',
+	         eJSsideNavURL = 'http://elementsjs.io/#interpreter-install',
+	         efosterIOURL = 'https://ejames9.github.io',
+	         showTURL = 'http://showtrippers.com',
+	         dJamSRC = './images/DjamBase.png',
+	         gulpeJSIntSRC = './images/gulpEJSInterpreter.png',
+	         efosterIOSRC = './images/ericfosterIO.png',
+	         urlsArray = [],
+	         cubeSidesHTML = [];
+	     //Store urls in array.
+	     urlsArray.push(dJamSRC);
+	     urlsArray.push(gulpeJSIntSRC);
+	     urlsArray.push(eJSURL);
+	     urlsArray.push(eJSsideNavURL);
+	     urlsArray.push(showTURL);
+	     urlsArray.push(eJSsideNavURL);
+	     //Combine urls with iframe template in new array.
+	     urlsArray.forEach(function (url) {
+	          if (/https?\:\/\//.test(url)) {
+	               cubeSidesHTML.push(iframe.replace('{URL}', url));
+	          } else {
+	               cubeSidesHTML.push(divWrap.replace('{SRC}', url));
+	          }
+	     });
+
+	     //Create the cube.
+	     createSides(cubeSidesHTML, new THREE.CubeGeometry(1280, 740, 1280));
+	     //
+	     inspect(cubeSidesHTML);
 	}
 
 	//Scroll events....
@@ -279,35 +318,6 @@
 	               })().height('').bgColor('').opacity('');
 	          }
 	     });
-	}
-
-	//Assemble Projects Cube.....
-	function assembleCube() {
-	     //iframe template.
-	     var iframe = '<iframe width="1200" height="800" frameborder="0"' + ' style="border:0" src="{URL}"></iframe>';
-	     //URL's....
-	     var eJSURL = 'http://elementsjs.io',
-	         dJamURL = 'https://pypi.python.org/pypi/DjamBase',
-	         showTURL = 'https://showtrippers.com',
-	         gulpeJSIntURL = 'https://www.npmjs.com/package/gulp-elementsjs-interpreter',
-	         efosterIOURL = 'http://ejames9.github.io/#top',
-	         efosterIOURL2 = 'https://ejames9.github.io/#projects',
-	         urlsArray = [],
-	         cubeSidesHTML = [];
-	     //Store urls in array.
-	     urlsArray.push(eJSURL);
-	     urlsArray.push(efosterIOURL);
-	     urlsArray.push(eJSURL);
-	     urlsArray.push(eJSURL);
-	     urlsArray.push(eJSURL);
-	     urlsArray.push(eJSURL);
-	     //Combine urls with iframe template in new array.
-	     urlsArray.forEach(function (url) {
-	          cubeSidesHTML.push(iframe.replace('{URL}', url));
-	     });
-
-	     //Create the cube.
-	     createSides(cubeSidesHTML, new THREE.CubeGeometry(1200, 1200, 1200));
 	}
 
 	//Animation function.
