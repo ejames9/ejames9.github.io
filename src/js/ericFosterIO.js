@@ -151,7 +151,7 @@ function assembleCube() {
   //URL's....
   var eJSURL        = 'http://elementsjs.io',
       eJSsideNavURL = 'http://elementsjs.io/#interpreter-install',
-      efosterIOURL  = 'https://ejames9.github.io',
+      efosterIOURL  = 'http://ejames9.github.io',
       showTURL      = 'http://showtrippers.com',
       dJamSRC       = './images/DjamBase.png',
       gulpeJSIntSRC = './images/gulpEJSInterpreter.png',
