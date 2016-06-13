@@ -256,7 +256,7 @@
 	  URLs.push(dJamSRC);
 	  URLs.push(gulpeJSIntSRC);
 	  URLs.push(eJSURL);
-	  URLs.push(eJSURL);
+	  URLs.push(efosterIOURL);
 	  URLs.push(showTURL);
 	  URLs.push(eJSsideNavURL);
 	  //Combine urls with iframe template in new array.
@@ -379,17 +379,19 @@
 	  //Set site wrapper to window parameters.
 	  // <'#wrapper'/>
 	  //           .size(String(window.innerHeight) + 'px', String(window.innerWidth) + 'px');
-	  onScroll();
-	  //Set up three.js scene.
-	  initProjectsScene();
-	  //Call Cube Assembly Function..
-	  assembleCube();
-	  //Initiate cube onHover behaviour.
-	  onHover();
-	  //Initiate cube onClick behaviour.
-	  // onClick();
-	  //initiate render loop.
-	  animate();
+	  if (!window.frameElement) {
+	    onScroll();
+	    //Set up three.js scene.
+	    initProjectsScene();
+	    //Call Cube Assembly Function..
+	    assembleCube();
+	    //Initiate cube onHover behaviour.
+	    onHover();
+	    //Initiate cube onClick behaviour.
+	    // onClick();
+	    //initiate render loop.
+	    animate();
+	  }
 	});
 
 	//===Code Bin===============================================================>>>

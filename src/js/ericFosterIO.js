@@ -176,7 +176,7 @@ function assembleCube() {
   URLs.push(dJamSRC);
   URLs.push(gulpeJSIntSRC);
   URLs.push(eJSURL);
-  URLs.push(eJSURL);
+  URLs.push(efosterIOURL);
   URLs.push(showTURL);
   URLs.push(eJSsideNavURL);
   //Combine urls with iframe template in new array.
