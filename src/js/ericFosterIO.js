@@ -6,10 +6,10 @@ Author: Eric Foster
 
 
 //elementsJS imports
-use 'elementsJS' go, info, log, el, inspect, scroll
+use 'elementsJS' go, info, log, el, inspect, scroll, mouse, click, once
 use 'three' as THREE
 use 'tween.js' as TWEEN
-use 'underscore' as __
+use 'lodash' zipObject
 use 'moment' as moment
 
 use '../../src/js/CSS3DRenderer'
@@ -17,11 +17,25 @@ use '../../src/js/TrackballControls'
 use '../../src/js/OrbitControls'
 
 
+//global boolean flag that enables code that spins the portfolio cube.
+window.spinSwitch = true;
+
+var cameraPositions = [
+  new THREE.Vector3({x: 2200, y: -90, z: 0}),
+  new THREE.Vector3({x:-2200, y: -90, z: 0}),
+  new THREE.Vector3({x:-90, y: 2000, z: 0}),
+  new THREE.Vector3({x: 0, y:-2000, z: -90}),
+  new THREE.Vector3({x: 0, y: -90, z: 2200}),
+  new THREE.Vector3({x: 0, y: -90, z:-2200 })
+];
+
 //globals..
 var scene,
     camera,
     clock,
     sides = [],
+    URLs  = [],
+    camCoordinates,
     controls,
     css3DRenderer;
 
@@ -50,7 +64,7 @@ var initProjectsScene = function () {
   // the camera starts at 0,0,0, so pull it back
   camera.position.z = 2200;
   camera.position.x = 0;
-  camera.position.y = -100;
+  camera.position.y = -90;
   camera.lookAt(scene.position);
 
   // controls = new THREE.OrbitControls(camera);
@@ -115,7 +129,7 @@ function createSides(strings, geometry) {
       side.position.y = centroid.y;
       side.position.z = centroid.z;
 
-      sides.push(side);
+      sides.push(side.position);
       // Calculate and apply the rotation for this side
       var up = new THREE.Vector3(0, 0, 1);
       var normal = geometry.faces[i].normal;
@@ -134,7 +148,6 @@ function createSides(strings, geometry) {
       matrix4.makeRotationAxis(axis, angle);
       // apply the rotation
       side.rotation.setFromRotationMatrix(matrix4);
-
       // add to the scene
       scene.add(side);
  }
@@ -142,12 +155,14 @@ function createSides(strings, geometry) {
 }
 
 
-//Assemble Projects Cube.....
+//Assemble Portfolio Cube.....
 function assembleCube() {
   //iframe template.
-  var iframe = '<iframe width="1280" height="740" frameborder="0"' +
-               ' style="border:0" src="{URL}"></iframe>',
-     divWrap = '<div><div class="drapes"></div><img src="{SRC}" width="1280" height="740"></div>';
+  var iframe   = '<iframe width="1280" height="740" frameborder="0"' +
+               '2style="border:0" src="{URL}"></iframe>',
+      boxFrame = '<iframe width="1280" height="1280" frameborder="0"' +
+                   'style="border:0" src="{URL}"></iframe>',
+      divWrap  = '<div><div class="drapes"></div><img src="{SRC}" width="1280" height="740"></div>';
   //URL's....
   var eJSURL        = 'http://elementsjs.io',
       eJSsideNavURL = 'http://elementsjs.io/#interpreter-install',
@@ -156,28 +171,32 @@ function assembleCube() {
       dJamSRC       = './images/DjamBase.png',
       gulpeJSIntSRC = './images/gulpEJSInterpreter.png',
       efosterIOSRC  = './images/ericfosterIO.png',
-      urlsArray     = [],
       cubeSidesHTML = [];
   //Store urls in array.
-  urlsArray.push(dJamSRC);
-  urlsArray.push(gulpeJSIntSRC);
-  urlsArray.push(eJSURL);
-  urlsArray.push(eJSsideNavURL);
-  urlsArray.push(showTURL);
-  urlsArray.push(eJSsideNavURL);
+  URLs.push(dJamSRC);
+  URLs.push(gulpeJSIntSRC);
+  URLs.push(eJSURL);
+  URLs.push(eJSURL);
+  URLs.push(showTURL);
+  URLs.push(eJSsideNavURL);
   //Combine urls with iframe template in new array.
-  urlsArray.forEach((url)=> {
+  URLs.forEach((url, i)=> {
     if (/https?\:\/\//.test(url)) {
-      cubeSidesHTML.push(iframe.replace('{URL}', url));
+      log(i, 'blue');
+      if (i === 2 || i === 3) {
+        cubeSidesHTML.push(boxFrame.replace('{URL}', url));
+      } else {
+        cubeSidesHTML.push(iframe.replace('{URL}', url));
+      }
     } else {
       cubeSidesHTML.push(divWrap.replace('{SRC}', url));
     }
   });
-
   //Create the cube.
   createSides(cubeSidesHTML, new THREE.CubeGeometry(1280,740,1280));
-  //
-  inspect(cubeSidesHTML);
+  //Map URLs to 3D coordinates, for tweening purposes.
+  camCoordinates = zipObject(URLs, cameraPositions);
+  inspect(camCoordinates);
 }
 
 
@@ -233,6 +252,20 @@ function onScroll() {
   });
 }
 
+//Portfolio cube, onHover function.
+function onHover() {
+  mouse('over', <html/>.el, (e)=> {
+    if (e.target.className === 'projects-list-item') {
+      //Create tween based on the camera's position.
+      const tween = new TWEEN.Tween(camera.position);
+      //Determine which face to move to.
+      // switch (<e.target/>.attrib('data-uri')) {
+      //   case ():
+      // }
+
+    }
+  });
+}
 
 
 //Animation function.
@@ -241,16 +274,16 @@ function animate() {
   // controls.update(clock.getDelta());
   //renderer
   css3DRenderer.render(scene, camera);
-
   // inspect(camera.position);
-
-  var x = camera.position.x;
-  var z = camera.position.z;
-  camera.position.x = x * Math.cos(0.007) +
-    z * Math.sin(0.007);
-  camera.position.z = z * Math.cos(0.007) -
-    x * Math.sin(0.007);
-  camera.lookAt(scene.position);
+  if (spinSwitch) {
+    var x = camera.position.x,
+        z = camera.position.z;
+    camera.position.x = x * Math.cos(0.007) +
+      z * Math.sin(0.007);
+    camera.position.z = z * Math.cos(0.007) -
+      x * Math.sin(0.007);
+    camera.lookAt(scene.position);
+  }
   //animation function
   requestAnimationFrame(animate);
 }
@@ -262,15 +295,19 @@ go(()=> {
   //Set site wrapper to window parameters.
   // <'#wrapper'/>
   //           .size(String(window.innerHeight) + 'px', String(window.innerWidth) + 'px');
-  onScroll();
-  //Set up three.js scene.
-  initProjectsScene();
-  //Call Cube Assembly Function..
-  assembleCube();
-  //Initiate cube spin animation.
-  // setUpTween();
-  //initiate render loop.
-  animate();
+  if (!window.frameElement) {
+    onScroll();
+    //Set up three.js scene.
+    initProjectsScene();
+    //Call Cube Assembly Function..
+    assembleCube();
+    //Initiate cube onHover behaviour.
+    onHover()
+    //Initiate cube onClick behaviour.
+    // onClick();
+    //initiate render loop.
+    animate();
+  }
 });
 
 
