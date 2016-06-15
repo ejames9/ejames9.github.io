@@ -6,11 +6,10 @@ Author: Eric Foster
 
 
 //elementsJS imports
-use 'elementsJS' go, info, log, el, inspect, scroll, mouse, click, once
+use 'elementsJS' go, info, warn, log, el, inspect, scroll, mouse, click, once, on, off
+use 'lodash' zipObject
 use 'three' as THREE
 use 'tween.js' as TWEEN
-use 'lodash' zipObject
-use 'moment' as moment
 
 use '../../src/js/CSS3DRenderer'
 use '../../src/js/TrackballControls'
@@ -19,14 +18,29 @@ use '../../src/js/OrbitControls'
 
 //global boolean flag that enables code that spins the portfolio cube.
 window.spinSwitch = true;
+//global boolean flag that allows code to know when it is being run for the first time.
+window.focusFlag  = false;
+window.showFlag   = false;
+//global boolean flag that essentially turns off some event handling code  but continues to allow other code to run.
+window.tweenFlag  = true;
 
+//Camera face view coordinates for tween.js.
 var cameraPositions = [
-  new THREE.Vector3({x: 2200, y: -90, z: 0}),
-  new THREE.Vector3({x:-2200, y: -90, z: 0}),
-  new THREE.Vector3({x:-90, y: 2000, z: 0}),
-  new THREE.Vector3({x: 0, y:-2000, z: -90}),
-  new THREE.Vector3({x: 0, y: -90, z: 2200}),
-  new THREE.Vector3({x: 0, y: -90, z:-2200 })
+  new THREE.Vector3(2200, -90, 0),
+  new THREE.Vector3(-2200, -90, 0),
+  new THREE.Vector3(0, 2000, 90),
+  new THREE.Vector3(0, -2000, 90),
+  new THREE.Vector3(0, -90, 2200),
+  new THREE.Vector3(0, -90, -2200)
+];
+//Camera close-up face view coordinates for tween.js.
+var closeUps = [
+  new THREE.Vector3(1600, 0, 0),
+  new THREE.Vector3(-1600, 0, 0),
+  new THREE.Vector3(0, 1700, 90),
+  new THREE.Vector3(0, -1700, 90),
+  new THREE.Vector3(0, 0, 1600),
+  new THREE.Vector3(0, 0, -1600)
 ];
 
 //globals..
@@ -37,7 +51,11 @@ var scene,
     URLs  = [],
     camCoordinates,
     controls,
-    css3DRenderer;
+    css3DRenderer,
+    tween,
+    tweenTwo,
+    tween3,
+    tween4;
 
 var initProjectsScene = function () {
   // set the scene size
@@ -67,23 +85,6 @@ var initProjectsScene = function () {
   camera.position.y = -90;
   camera.lookAt(scene.position);
 
-  // controls = new THREE.OrbitControls(camera);
-
-  // controls.autoRotate = true;
-
-  // clock = new THREE.Clock();
-  //
-  // controls.rotateSpeed          = 0.007;
-	// controls.zoomSpeed            = 2.0;
-	// controls.panSpeed             = 1.5;
-	// controls.enableZoom           = false;
-	// controls.enablePan            = false;
-	// controls.staticMoving         = true;
-	// // controls.dynamicDampingFactor = 0.3;
-	// controls.keys                 = [ 65, 83, 68 ];
-	// // controls.addEventListener( 'change', animate );
-
-
   // attach the render-supplied DOM element
   _container.appendChild(css3DRenderer.domElement);
 }
@@ -97,7 +98,8 @@ function createCSS3DObject(s) {
      //set some values on the div to style it, standard CSS
     //  div.style.width = '370px';
     //  div.style.height = '370px';
-     div.style.opacity = '.7';
+     div.className = 'div';
+     div.style.opacity = '0.8';
 
 
      // create a CSS3Dobject and return it.
@@ -158,11 +160,11 @@ function createSides(strings, geometry) {
 //Assemble Portfolio Cube.....
 function assembleCube() {
   //iframe template.
-  var iframe   = '<iframe width="1280" height="740" frameborder="0"' +
+  var iframe   = '<iframe class="div" width="1280" height="740" frameborder="0"' +
                '2style="border:0" src="{URL}"></iframe>',
-      boxFrame = '<iframe width="1280" height="1280" frameborder="0"' +
+      boxFrame = '<iframe class="div" width="1280" height="1280" frameborder="0"' +
                    'style="border:0" src="{URL}"></iframe>',
-      divWrap  = '<div><div class="drapes"></div><img src="{SRC}" width="1280" height="740"></div>';
+      divWrap  = '<div><img src="{SRC}" width="1280" height="740"></div>';
   //URL's....
   var eJSURL        = 'http://elementsjs.io',
       eJSsideNavURL = 'http://elementsjs.io/#interpreter-install',
@@ -175,10 +177,10 @@ function assembleCube() {
   //Store urls in array.
   URLs.push(dJamSRC);
   URLs.push(gulpeJSIntSRC);
-  URLs.push(eJSURL);
+  URLs.push(eJSsideNavURL);
   URLs.push(efosterIOURL);
   URLs.push(showTURL);
-  URLs.push(eJSsideNavURL);
+  URLs.push(eJSURL);
   //Combine urls with iframe template in new array.
   URLs.forEach((url, i)=> {
     if (/https?\:\/\//.test(url)) {
@@ -196,7 +198,9 @@ function assembleCube() {
   createSides(cubeSidesHTML, new THREE.CubeGeometry(1280,740,1280));
   //Map URLs to 3D coordinates, for tweening purposes.
   camCoordinates = zipObject(URLs, cameraPositions);
-  inspect(camCoordinates);
+        closeUps = zipObject(URLs, closeUps);
+
+  inspect(closeUps);
 }
 
 
@@ -252,31 +256,161 @@ function onScroll() {
   });
 }
 
-//Portfolio cube, onHover function.
-function onHover() {
-  mouse('over', <html/>.el, (e)=> {
-    if (e.target.className === 'projects-list-item') {
-      //Create tween based on the camera's position.
-      const tween = new TWEEN.Tween(camera.position);
-      //Determine which face to move to.
-      // switch (<e.target/>.attrib('data-uri')) {
-      //   case ():
-      // }
 
+//Created a closure here, mainly for organization, but also for the ability to share variables between functions.
+function cubeFolioController() {
+  let eTarget = null;
+
+  //Initiate onHover handler...
+  onHover();
+  //Initiate onClick handler...
+  onClick();
+
+  //CubeFolio, onHover function.
+  function onHover() {
+    mouse('over', <'html'>, hoverCallBack);
+  }
+
+  //Callback for onHover()..
+  function hoverCallBack(e) {
+    if (e.target.className === 'projects-list-item') {
+      if (tweenFlag) {
+        //Kill Spin.
+        spinSwitch = false;
+        // //Create tween based on the camera's position.
+        tween = new TWEEN.Tween(camera.position);
+        //Configure animation.
+        tween
+            .to(camCoordinates[ <e.target/>.attrib('data-uri') ], 5000)
+            .easing(TWEEN.Easing.Elastic.Out)
+            .onUpdate(function() {
+              camera.position.x = this.x;
+              camera.position.y = this.y;
+              camera.position.z = this.z;
+              camera.lookAt(scene.position);
+            })
+            .start();
+        //Show pertinent Info paragraph.
+        // <e.target/>
+        //         .sib('next')
+        //         .class('hide', '-');
+      }
+      eTarget = e.target;
+      //Set mouseout behaviour.
+      on('mouseout', e.target, mouseoutCallBack);
+      //Add onHover CSS.
+      <e.target/>
+              .class('hover', '+');
     }
-  });
+  }
+
+  //Callback for once('mouseout')..
+  function mouseoutCallBack() {
+    if (tweenFlag) {
+      //Cancel handler
+      off('mouseout', eTarget, mouseoutCallBack);
+      //Re-hide Info Paragraph
+      // <eTarget/>
+      //       .sib('next')
+      //       .class('hide', '+')
+      //Stop Tween.
+      tween.stop()
+      //Make sure camera is properly oriented.
+      if (camera.position.y < 80 || camera.position.y > 100) {
+        if (camera.position.y > -80 || camera.position.y < -100) {
+          let
+          target   = new THREE.Vector3(0, -90, -2200),
+          tweenTwo = new TWEEN.Tween(camera.position);
+          tweenTwo
+              .to(target, 3000)
+              .easing(TWEEN.Easing.Elastic.Out)
+              .onUpdate(()=> {
+                camera.lookAt(scene.position);
+              })
+              .start();
+        }
+      }
+      //Restart spin.
+      spinSwitch = true;
+    }
+    //Unhighlight target.
+    <eTarget/>
+            .class('hover', '-');
+  }
+
+  //CubeFolio onClick function.
+  function onClick() {
+    const projectRE = /projects\-list\-item/;
+
+    click(<'html'>, (e)=> {
+      //Highlight focused list item.
+      if (focusFlag) {
+        <'[name=focus]'/>
+                  .attrib('name', '')
+                  .color('')
+                  .fontWeight('')
+                  .textShadow('')
+                  .zIndex('');
+      }
+      focusFlag = true;
+      log(e.target.className, 'orange');
+      //Hone in on click events happening on our target elements.
+      if (projectRE.test(e.target.className)) {
+        //Give target focus class.
+        <e.target/>
+                  .attrib('name', 'focus')
+                  .color('white')
+                  .fontWeight('900')
+                  .textShadow('0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87')
+                  .zIndex('1000');
+        //Kill spin.
+        spinSwitch = false;
+        //New tween/target for close-up animation.
+        let tween3 = new TWEEN.Tween(camera.position),
+           target  = closeUps[ <e.target/>.attrib('data-uri') ];
+        //tweenify...
+        tween3
+            .to(target, 1500)
+            .easing(TWEEN.Easing.Linear.None)
+            .onUpdate(function() {
+              camera.lookAt(scene.position);
+            })
+            .start();
+        //kill mouseover/out behaviour..
+        tweenFlag = false;
+        // off('mouseover', <'html'>, hoverCallBack);
+        // off('mouseout', eTarget, mouseoutCallBack);
+        if (showFlag) {
+          <'[class~=show]'/>
+                      .class('show', '-')
+                      .class('hide', '+');
+        }
+        showFlag = true;
+        let elString = 'data-url~=' + <e.target/>.attrib('data-uri');
+        log(elString, 'green');
+        log('elString', 'blue');
+        inspect(dom(elString));
+        //Show Project Info..
+        <'#project-info'/>
+                    .class('hidden', '-');
+        dom(elString)
+                    .class('hide', '-')
+                    .class('show', '+');
+
+      }
+    });
+  }
 }
 
 
-//Animation function.
+
+//---Animation function---//
 function animate() {
-  //update OrbitControls
-  // controls.update(clock.getDelta());
   //renderer
   css3DRenderer.render(scene, camera);
   // inspect(camera.position);
   if (spinSwitch) {
-    var x = camera.position.x,
+    let x = camera.position.x,
         z = camera.position.z;
     camera.position.x = x * Math.cos(0.007) +
       z * Math.sin(0.007);
@@ -284,10 +418,11 @@ function animate() {
       x * Math.sin(0.007);
     camera.lookAt(scene.position);
   }
+  //Update tween.
+  TWEEN.update()
   //animation function
   requestAnimationFrame(animate);
 }
-
 
 
 //---DOM Ready function---//
@@ -295,18 +430,20 @@ go(()=> {
   //Set site wrapper to window parameters.
   // <'#wrapper'/>
   //           .size(String(window.innerHeight) + 'px', String(window.innerWidth) + 'px');
-  if (!window.frameElement) {
-    onScroll();
-    //Set up three.js scene.
-    initProjectsScene();
-    //Call Cube Assembly Function..
-    assembleCube();
-    //Initiate cube onHover behaviour.
-    onHover()
-    //Initiate cube onClick behaviour.
-    // onClick();
-    //initiate render loop.
-    animate();
+  try {
+    if (!window.frameElement) {
+      onScroll();
+      //Set up three.js scene.
+      initProjectsScene();
+      //Call Cube Assembly Function..
+      assembleCube();
+      //Initiate cube hover and click events/behaviour.
+      cubeFolioController();
+      //initiate render loop.
+      animate();
+    }
+  } catch(e) {
+    log(e, 'red');
   }
 });
 

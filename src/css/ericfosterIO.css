@@ -26,6 +26,7 @@ body {
   right: 0;
 }
 
+
 #container {
   max-width: 100%;
   overflow-x: hidden;
@@ -36,6 +37,9 @@ body {
   width: 100%;
   right: 0px;;
 }
+
+
+/*===Cover===============================================*/
 
 #header {
   left: 0px;
@@ -63,7 +67,6 @@ body {
 }
 
 
-
 #me {
   top: 50px;
   left: 0px;
@@ -78,7 +81,7 @@ body {
   display: block;
   font-family: amatic sc;
   left: 100px;
-  top: 340px;
+  top: 280px;
   height: 230px;
   width: 380px;
   z-index: 10;
@@ -109,6 +112,7 @@ body {
   margin-bottom: 20px;
 }
 
+/*===Projects Page=======================================*/
 
 #threejs {
   position: absolute;
@@ -149,19 +153,44 @@ body {
   z-index: 999
 }
 
-.projects-list-item:hover {
+/*.projects-list-item:hover {
   color: black;
   font-weight: 900;
   text-shadow: 0 0 0.2em #9e9e9d, 0 0 0.2em #9e9e9d, 0 0 0.2em #9e9e9d, 0 0 0.2em #9e9e9d, 0 0 0.2em #9e9e9d, 0 0 0.2em #9e9e9d, 0 0 0.2em #9e9e9d, 0 0 0.2em #9e9e9d;
   z-index: 1000;
-}
+}*/
 .projects-list-item:active {
-  color: white;
+  color: #FF8A22;
   font-weight: 900;
   text-shadow: 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87;
   z-index: 1000;
 }
 
+#project-info {
+  background-color: black;
+  color: #fff;
+  opacity:  .7;
+  font-family: amatic sc;
+  font-size: 32px;
+  padding: 40px;
+  z-index: 9999;
+}
+
+#project-info h2 {
+  color: #FFf;
+  font-weight: 900;
+  text-shadow: 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87;
+  z-index: 1000;
+}
+
+/*
+See Assignable classes for:
+
+.focus {}
+.hover {}
+*/
+
+/*===About Me===================================*/
 
 #me {
   position: absolute;
@@ -187,8 +216,7 @@ body {
   font-size: 28px;
 }
 
-#aboutMeContainer {
-}
+/*===Contact Me======================================*/
 
 #contactMe {
   position: absolute;
@@ -292,4 +320,29 @@ body {
 
 #footer {
   visibility: hidden;
+}
+
+
+/*===Assignable Classes===================================*/
+
+.hide {
+  visibility: hidden;
+}
+
+.hidden {
+  display: none;
+}
+
+.hover {
+  color: black;
+  font-weight: 900;
+  text-shadow: 0 0 0.2em #9e9e9d, 0 0 0.2em #9e9e9d, 0 0 0.2em #9e9e9d, 0 0 0.2em #9e9e9d, 0 0 0.2em #9e9e9d, 0 0 0.2em #9e9e9d, 0 0 0.2em #9e9e9d, 0 0 0.2em #9e9e9d;
+  z-index: 1000;
+}
+
+.focus {
+  color: white;
+  font-weight: 900;
+  text-shadow: 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87;
+  z-index: 1000;
 }
