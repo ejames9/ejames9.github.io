@@ -30,7 +30,7 @@ gulp.task('ejf-babel', ()=> {
   return gulp.src(jsSrc)
     .pipe(elemsJS())
     .pipe(babel({
-      presets: ['es2015']
+      presets: ["es2015-loose"]
     }))
     .pipe(gulp.dest(jsDst));
 });

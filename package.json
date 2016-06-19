@@ -4,6 +4,8 @@
   "description": "A Portfolio Site for Eric Foster.",
   "main": "ericFosterIO.js",
   "dependencies": {
+    "bowser": "^1.3.0",
+    "font-awesome": "^4.6.3",
     "lodash": "^4.13.1",
     "moment": "^2.13.0",
     "tween.js": "^16.3.4",
@@ -11,6 +13,7 @@
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.9.0",
+    "babel-preset-es2015-loose": "^7.0.0",
     "bootstrap": "^3.3.6",
     "connect": "^3.4.1",
     "elementsJS": "^0.9.26",

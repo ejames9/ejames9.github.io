@@ -56,6 +56,11 @@ body {
   font-size: 101px;
   z-index: 999;
 }
+#meBrand:hover {
+  color: #FFf;
+  font-weight: 900;
+  text-shadow: 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87;
+}
 
 #mainNav {
   margin-right: 30px;
@@ -66,14 +71,6 @@ body {
   font-size: 46px;
 }
 
-
-#me {
-  top: 50px;
-  left: 0px;
-  opacity: .3;
-  position: absolute;
-  z-index: 10;
-}
 
 
 #coverDescContainer {
@@ -133,6 +130,22 @@ body {
   list-style: none;
 }
 
+#x {
+  position: absolute;
+  top: 85px;
+  left: 55px;
+  color: white;
+  z-index: 10999;
+}
+#x:hover {
+  color: #e12d22;
+}
+#x:active {
+  text-shadow: 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22;
+  color: white;
+}
+
+
 #leftProjList {
   position: absolute;
   left: 0px;
@@ -167,20 +180,130 @@ body {
 }
 
 #project-info {
+  position: absolute;
+  max-width: 700px;
+  margin: auto;
+  top: 110px;
+  left: 300px;
+  border-radius: 10px;
   background-color: black;
   color: #fff;
-  opacity:  .7;
+  opacity:  .8;
   font-family: amatic sc;
-  font-size: 32px;
-  padding: 40px;
+  /*font-size: 32px;*/
+  padding: 40px 40px 100px 40px;
   z-index: 9999;
 }
 
 #project-info h2 {
+  font-family: monoton;
   color: #FFf;
   font-weight: 900;
   text-shadow: 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87;
   z-index: 1000;
+}
+
+#chevyL {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  color: white;
+  z-index: 10000;
+}
+#chevyL:hover {
+  color: #6f3b87;
+}
+#chevyL:active {
+  text-shadow: 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87;
+  color: white;
+}
+
+#chevy {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  color: white;
+  z-index: 10000;
+}
+#chevy:hover {
+  color: #6f3b87;
+}
+#chevy:active {
+  text-shadow: 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87;
+  color: white;
+}
+
+
+.browser {
+  position: absolute;
+  bottom: 20px;
+  left: 230px;
+  color: white;
+  z-index: 10000;
+}
+
+#github {
+  position: absolute;
+  fill: white;
+  bottom: 20px;
+  right: 230px;
+  color: white;
+  z-index: 10000;
+}
+
+#project-info-buttons {
+  margin-top: 20px;
+}
+
+#see-code {
+  position: absolute;
+  font-size: 4;
+  font-family: londrina sketch, rum raisin;
+  bottom: 20px;
+  right: 55px;
+}
+
+.visit-page {
+  position: absolute;
+  font-size: 6;
+  font-family: rum raisin;
+  color: white;
+  bottom: 20px;
+  left: 115px;
+}
+
+.svg-Icon {
+  height: 70px;
+  width: 70px;
+}
+
+#github-link:hover > #github {
+  fill: #6f3b87;
+}
+#github-link:active > #github {
+  fill: #164cac;
+}
+#github-link:hover > #see-code {
+  color: #6f3b87;
+}
+#github-link:active > #see-code {
+  color: yellow;
+}
+#github-link:active > #see-code span {
+  color:#e12d22;
+}
+.site-link:hover > .browser {
+  opacity: .5;
+  fill: #164cac;
+}
+.site-link:active > .browser {
+  opacity: 1;
+}
+.site-link:hover > .visit-page {
+  color: #e12d22;
+}
+.site-link:active > .visit-page {
+  color: #164cac;
 }
 
 /*
@@ -199,7 +322,7 @@ See Assignable classes for:
 
 #aboutMe {
   position: absolute;
-  top: 750px;
+  top: 740px;
   left: 0;
   height: 800px;
   width: 1280px;
@@ -220,7 +343,7 @@ See Assignable classes for:
 
 #contactMe {
   position: absolute;
-  top: 2220px;
+  top: 2260px;
   left: 0px;
 }
 
@@ -233,7 +356,7 @@ See Assignable classes for:
   background-color: #191a1a;
   color: #000;
   opacity: .8;
-  padding: 60px 0px 0px 0px;
+  padding: 80px 0px 60px 0px;
   text-align: center;
   font-family: amatic sc;
 }
@@ -263,6 +386,7 @@ See Assignable classes for:
 .buttons {
   display: inline;
   width: 80px;
+  border-radius: 22px;
 }
 
 #buttons div a {
@@ -274,8 +398,10 @@ See Assignable classes for:
 }
 #buttons div a:hover {
   background-color: #164cac;
-  opacity: .7;
-  color: #ffffff;
+  opacity: .9;
+  color: #fff;
+  text-shadow: 0 0 0.2em #fff, 0 0 0.2em #fff, 0 0 0.2em #fff, 0 0 0.2em #fff, 0 0 0.2em #fff, 0 0 0.2em #fff, 0 0 0.2em #fff, 0 0 0.2em #fff;
+
   border: 1px solid #164cac;
 }
 #buttons div a:active {
@@ -292,10 +418,41 @@ See Assignable classes for:
   width: 100%;
 }
 
+#linkedin {
+  font-size: 30px;
+  margin-right: 10px;
+}
+#gitsquare {
+  font-size: 30px;
+  margin-right: 10px;
+}
+#envelope {
+  font-size: 30px;
+  margin-right: 10px;
+}
+#share {
+  font-size: 30px;
+  margin-right: 10px;
+}
+
+
 #mapLink {
   position: absolute;
   top: 2355px;
   left: 0px;
+}
+
+#buttons div a:hover #linkedin {
+  color: #e0e0e0;
+}
+#buttons div a:hover #share {
+  color: #e0e0e0;
+}
+#buttons div a:hover #gitsquare {
+  color: #e0e0e0;
+}
+#buttons div a:hover #envelope {
+  color: #e0e0e0;
 }
 
 #mapFrame {
@@ -346,3 +503,13 @@ See Assignable classes for:
   text-shadow: 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87;
   z-index: 1000;
 }
+
+.active {
+  /*color: #6f3b87;*/
+  text-shadow: 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87;
+
+}
+
+ .info {
+   margin-bottom: 20px;
+ }

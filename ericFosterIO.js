@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	"use_loosey_goosey";
 
 	/*
 	ericFosterIO.js javascript file for my portfolio site.
@@ -66,6 +66,7 @@
 	var warn = elementsJS.warn;
 	var log = elementsJS.log;
 	var el = elementsJS.el;
+	var make = elementsJS.make;
 	var inspect = elementsJS.inspect;
 	var scroll = elementsJS.scroll;
 	var mouse = elementsJS.mouse;
@@ -73,6 +74,7 @@
 	var once = elementsJS.once;
 	var on = elementsJS.on;
 	var off = elementsJS.off;
+	var hasAncestor = elementsJS.hasAncestor;
 
 	var lodash = __webpack_require__(9);
 	var zipObject = lodash.zipObject;
@@ -80,6 +82,8 @@
 	var THREE = __webpack_require__(11);
 
 	var TWEEN = __webpack_require__(12);
+
+	var browser = __webpack_require__(13);
 
 	///End Module requires///
 
@@ -96,6 +100,7 @@
 	var warn = elementsJS.warn;
 	var log = elementsJS.log;
 	var el = elementsJS.el;
+	var make = elementsJS.make;
 	var inspect = elementsJS.inspect;
 	var scroll = elementsJS.scroll;
 	var mouse = elementsJS.mouse;
@@ -103,6 +108,7 @@
 	var once = elementsJS.once;
 	var on = elementsJS.on;
 	var off = elementsJS.off;
+	var hasAncestor = elementsJS.hasAncestor;
 
 	var lodash = __webpack_require__(9);
 	var zipObject = lodash.zipObject;
@@ -111,452 +117,680 @@
 
 	var TWEEN = __webpack_require__(12);
 
-	__webpack_require__(13);
+	var browser = __webpack_require__(13);
 
 	__webpack_require__(14);
 
 	__webpack_require__(15);
 
+	__webpack_require__(16);
+
 	///End Module requires///
 
-	//global boolean flag that enables code that spins the portfolio cube.
-	window.spinSwitch = true;
-	//global boolean flag that allows code to know when it is being run for the first time.
-	window.focusFlag = false;
-	window.showFlag = false;
+	//Application Data..
+	var APPLICATION_DATA = {};
+	APPLICATION_DATA.FLAGS_ = {};
+	APPLICATION_DATA.PROJECT_URLS = {};
+	APPLICATION_DATA.REPO_URLS = {};
+	//Boolean flag that enables code that spins the portfolio cube.
+	APPLICATION_DATA.FLAGS_.SPIN_SWITCH_ = true;
+	//Flag that allows code to know when it is being run for the first time.
+	APPLICATION_DATA.FLAGS_.FOCUS_ = false;
+	//Flag that tells whether or not the 'show' class has been assigned yet. (project-info pane)
+	APPLICATION_DATA.FLAGS_.SHOW_ = false;
+	//Flag that tells whether or not the 'show2' class has been assigned yet. (browser-icon button)
+	APPLICATION_DATA.FLAGS_.SHOW2_ = false;
+	//Flag that tells whether or not the 'show3' class has been assigned yet. (visit-page text)
+	APPLICATION_DATA.FLAGS_.SHOW3_ = false;
+	//Flag that trips the tweenTwo snap-back animation.
+	APPLICATION_DATA.FLAGS_.TWEENTWO_ = false;
+	//This flag is set to false when the project-info pane is off-screen, and set back to true when it returns.
+	APPLICATION_DATA.FLAGS_.PROJ_PANE_ = true;
+	//This flag is set to true when a project is clicked, and not set back until the closeUp scene is exited.
+	APPLICATION_DATA.FLAGS_.FIRST_CLICK_ = false;
 	//global boolean flag that essentially turns off some event handling code  but continues to allow other code to run.
-	window.tweenFlag = true;
+	APPLICATION_DATA.FLAGS_.TWEEN_ = true;
+	APPLICATION_DATA.FLAGS_.HEAD_TWEEN_ = true;
 
-	//Camera face view coordinates for tween.js.
-	var cameraPositions = [new THREE.Vector3(2200, -90, 0), new THREE.Vector3(-2200, -90, 0), new THREE.Vector3(0, 2000, 90), new THREE.Vector3(0, -2000, 90), new THREE.Vector3(0, -90, 2200), new THREE.Vector3(0, -90, -2200)];
-	//Camera close-up face view coordinates for tween.js.
-	var closeUps = [new THREE.Vector3(1600, 0, 0), new THREE.Vector3(-1600, 0, 0), new THREE.Vector3(0, 1700, 90), new THREE.Vector3(0, -1700, 90), new THREE.Vector3(0, 0, 1600), new THREE.Vector3(0, 0, -1600)];
+	//Project URLs..
+	APPLICATION_DATA.PROJECT_URLS['_1'] = 'http://elementsjs.io';
+	APPLICATION_DATA.PROJECT_URLS['_2'] = 'http://elementsjs.io/#interpreter-install';
+	APPLICATION_DATA.PROJECT_URLS['_3'] = 'https://www.npmjs.com/package/gulp-elementsjs-interpreter';
+	APPLICATION_DATA.PROJECT_URLS['_4'] = 'http://showtrippers.com';
+	APPLICATION_DATA.PROJECT_URLS['_5'] = 'https://pypi.python.org/pypi/DjamBase';
+	APPLICATION_DATA.PROJECT_URLS['_6'] = 'http://ejames9.github.io';
 
-	//globals..
-	var scene,
-	    camera,
-	    clock,
-	    sides = [],
-	    URLs = [],
-	    camCoordinates,
-	    controls,
-	    css3DRenderer,
-	    tween,
-	    tweenTwo,
-	    tween3,
-	    tween4;
+	//Repository URLs..
+	APPLICATION_DATA.REPO_URLS['_1'] = 'https://github.com/ejames9/elementsJS';
+	APPLICATION_DATA.REPO_URLS['_2'] = 'https://github.com/ejames9/elementsJS/blob/gh-pages/js/sideNavControl.js';
+	APPLICATION_DATA.REPO_URLS['_3'] = 'https://github.com/ejames9/gulp-elementsJS-interpreter';
+	APPLICATION_DATA.REPO_URLS['_4'] = 'https://github.com/ejames9/GoOnTour';
+	APPLICATION_DATA.REPO_URLS['_5'] = 'https://github.com/ejames9/DjamBase';
+	APPLICATION_DATA.REPO_URLS['_6'] = 'https://github.com/ejames9/ejames9.github.io';
 
-	var initProjectsScene = function initProjectsScene() {
-	  // set the scene size
-	  var width = window.innerWidth,
-	      height = window.innerHeight;
-	  // set some camera attributes
-	  var fov = 45,
-	      aspect = width / height,
-	      near = 0.1,
-	      far = 1000;
-	  // get the DOM element to attach to
-	  var _container = el('#threejs');
+	//Compress flag names.
+	window.flags = APPLICATION_DATA.FLAGS_;
 
-	  //css3DRenderer.
-	  css3DRenderer = new THREE.CSS3DRenderer();
-	  css3DRenderer.setSize(width, height);
+	inspect(APPLICATION_DATA);
+	//--The IIFE that runs my portfolio site.
+	//--Created a closure for organization, and fewer globals.============================>>>
+	var ericfosterIO = function () {
+	  //Compress URL names..
+	  var repos = APPLICATION_DATA.REPO_URLS,
+	      projs = APPLICATION_DATA.PROJECT_URLS;
 
-	  //Setting up the camera.
-	  camera = new THREE.PerspectiveCamera(fov, width / height, near, far);
-	  scene = new THREE.Scene();
-	  // add the camera to the scene
-	  scene.add(camera);
-	  // the camera starts at 0,0,0, so pull it back
-	  camera.position.z = 2200;
-	  camera.position.x = 0;
-	  camera.position.y = -90;
-	  camera.lookAt(scene.position);
+	  //Camera face view coordinates for tween.js.
+	  var cameraPositions = [new THREE.Vector3(2200, -90, 0), new THREE.Vector3(-2200, -90, 0), new THREE.Vector3(0, 2000, 90), new THREE.Vector3(0, -2000, 90), new THREE.Vector3(0, -90, 2200), new THREE.Vector3(0, -90, -2200)];
 
-	  // attach the render-supplied DOM element
-	  _container.appendChild(css3DRenderer.domElement);
-	};
+	  //Camera close-up face view coordinates for tween.js.
+	  var closeUps = [new THREE.Vector3(1600, 0, 0), new THREE.Vector3(-1600, 0, 0), new THREE.Vector3(0, 1700, 90), new THREE.Vector3(0, -1700, 90), new THREE.Vector3(0, 0, 1600), new THREE.Vector3(0, 0, -1600)];
 
-	//Simple function to create CSS3DObjects from the given HTML string.
-	function createCSS3DObject(s) {
-	  // create outerdiv and set inner HTML from supplied string
-	  var div = document.createElement('div');
-	  div.innerHTML = s;
-	  //set some values on the div to style it, standard CSS
-	  //  div.style.width = '370px';
-	  //  div.style.height = '370px';
-	  div.className = 'div';
-	  div.style.opacity = '0.8';
+	  //globals..
+	  var tween = void 0,
+	      scene = void 0,
+	      camera = void 0,
+	      tweenTwo = void 0,
+	      css3DRenderer = void 0,
+	      camCoordinates = void 0,
+	      sides = [],
+	      URLs = [];
 
-	  // create a CSS3Dobject and return it.
-	  var object = new THREE.CSS3DObject(div);
-	  return object;
-	}
+	  //--Initiate three.js scene and assemble portfolio cube. Closure is mainly for organization.=============>>>
+	  function assembleCubeFolio() {
 
-	//Create the sides of the specified geometry with CSS3DObjects created using the given HTML strings, and shift them into position.
-	function createSides(strings, geometry) {
-	  var tick = -1;
-	  // iterate over all the sides
-	  for (var i = 0; i < geometry.faces.length; i += 2) {
-	    tick++;
-	    // create a new object based on the supplied HTML String
-	    var side = createCSS3DObject(strings[tick]);
-	    // get this face and the next which both make the cube
-	    var face = geometry.faces[i];
-	    var faceNext = geometry.faces[i + 1];
-	    // reposition the sides using the center of the faces
-	    var centroid = new THREE.Vector3();
-	    centroid.copy(geometry.vertices[face.a]).add(geometry.vertices[face.b]).add(geometry.vertices[face.c]).add(geometry.vertices[faceNext.a]).add(geometry.vertices[faceNext.b]).add(geometry.vertices[faceNext.c]).divideScalar(6);
-	    side.position.x = centroid.x;
-	    side.position.y = centroid.y;
-	    side.position.z = centroid.z;
+	    //Create three.js scene..
+	    initProjectsScene();
+	    //Assemble CubeFolio..
+	    assembleCube();
 
-	    sides.push(side.position);
-	    // Calculate and apply the rotation for this side
-	    var up = new THREE.Vector3(0, 0, 1);
-	    var normal = geometry.faces[i].normal;
-	    // We calculate the axis on which to rotate by
-	    // selecting the cross of the vectors
-	    var axis = new THREE.Vector3();
-	    axis.crossVectors(up, normal);
-	    var a = axis.crossVectors(up, normal);
-	    // based on the axis, in relation to our normal vector
-	    // we can calculate the angle.
-	    var angle = Math.atan2(axis.length(), up.dot(normal));
-	    axis.normalize();
-	    // now we can use matrix function to rotate the object so
-	    // it is aligned with the normal from the face
-	    var matrix4 = new THREE.Matrix4();
-	    matrix4.makeRotationAxis(axis, angle);
-	    // apply the rotation
-	    side.rotation.setFromRotationMatrix(matrix4);
-	    // add to the scene
-	    scene.add(side);
-	  }
-	  inspect(sides);
-	}
+	    //Set scene size, camera attributes and position, create container element, create renderer and attach to element.
+	    function initProjectsScene() {
+	      // set scene size
+	      var width = window.innerWidth,
+	          height = window.innerHeight;
+	      // set camera attributes
+	      var fov = 45,
+	          aspect = width / height,
+	          near = 0.1,
+	          far = 1000;
+	      // get the container element
+	      var _container = el('#threejs');
 
-	//Assemble Portfolio Cube.....
-	function assembleCube() {
-	  //iframe template.
-	  var iframe = '<iframe class="div" width="1280" height="740" frameborder="0"' + '2style="border:0" src="{URL}"></iframe>',
-	      boxFrame = '<iframe class="div" width="1280" height="1280" frameborder="0"' + 'style="border:0" src="{URL}"></iframe>',
-	      divWrap = '<div><img src="{SRC}" width="1280" height="740"></div>';
-	  //URL's....
-	  var eJSURL = 'http://elementsjs.io',
-	      eJSsideNavURL = 'http://elementsjs.io/#interpreter-install',
-	      efosterIOURL = 'http://ejames9.github.io',
-	      showTURL = 'http://showtrippers.com',
-	      dJamSRC = './images/DjamBase.png',
-	      gulpeJSIntSRC = './images/gulpEJSInterpreter.png',
-	      efosterIOSRC = './images/ericfosterIO.png',
-	      cubeSidesHTML = [];
-	  //Store urls in array.
-	  URLs.push(dJamSRC);
-	  URLs.push(gulpeJSIntSRC);
-	  URLs.push(eJSsideNavURL);
-	  URLs.push(efosterIOURL);
-	  URLs.push(showTURL);
-	  URLs.push(eJSURL);
-	  //Combine urls with iframe template in new array.
-	  URLs.forEach(function (url, i) {
-	    if (/https?\:\/\//.test(url)) {
-	      log(i, 'blue');
-	      if (i === 2 || i === 3) {
-	        cubeSidesHTML.push(boxFrame.replace('{URL}', url));
-	      } else {
-	        cubeSidesHTML.push(iframe.replace('{URL}', url));
-	      }
-	    } else {
-	      cubeSidesHTML.push(divWrap.replace('{SRC}', url));
+	      //css3DRenderer.
+	      css3DRenderer = new THREE.CSS3DRenderer();
+	      css3DRenderer.setSize(width, height);
+
+	      //Setting up the camera.
+	      camera = new THREE.PerspectiveCamera(fov, width / height, near, far);
+	      scene = new THREE.Scene();
+	      // add the camera to the scene
+	      scene.add(camera);
+	      // the camera starts at 0,0,0, so pull it back
+	      camera.position.z = 2200;
+	      camera.position.x = 0;
+	      camera.position.y = -90;
+	      camera.lookAt(scene.position);
+
+	      // attach the render-supplied DOM element
+	      _container.appendChild(css3DRenderer.domElement);
 	    }
-	  });
-	  //Create the cube.
-	  createSides(cubeSidesHTML, new THREE.CubeGeometry(1280, 740, 1280));
-	  //Map URLs to 3D coordinates, for tweening purposes.
-	  camCoordinates = zipObject(URLs, cameraPositions);
-	  closeUps = zipObject(URLs, closeUps);
 
-	  inspect(closeUps);
-	}
+	    //Assemble Portfolio Cube.....
+	    function assembleCube() {
+	      //iframe template.
+	      var iframe = '<iframe class="div" width="1280" height="740" frameborder="0"' + '2style="border:0" src="{URL}"></iframe>',
+	          boxFrame = '<iframe class="div" width="1280" height="1280" frameborder="0"' + 'style="border:0" src="{URL}"></iframe>',
+	          divWrap = '<div><img src="{SRC}" width="1280" height="740"></div>';
 
-	//Scroll events....
-	function onScroll() {
-	  //affix mainNav to top upon scroll.
-	  scroll(window, function (e) {
-	    //Affix to top.
-	    if (function () {
-	      var elem0 = _$("body") ? dom("body") : make(".body1", "body").put("body");
-	      return elem0;
-	    }().scrolled() > 700) {
-	      (function () {
-	        var elem1 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
-	        return elem1;
-	      })().fontSize('42px').top('8px');
-	      dom('#mainNav li a').every(function (element) {
-	        element.fontSize('36px');
+	      //URL's....
+	      var eJSURL = 'http://elementsjs.io',
+	          eJSsideNavURL = 'http://elementsjs.io/#interpreter-install',
+	          efosterIOURL = 'http://ejames9.github.io',
+	          showTURL = 'http://showtrippers.com',
+	          dJamSRC = './images/DjamBase.png',
+	          gulpeJSIntSRC = './images/gulpEJSInterpreter.png',
+	          efosterIOSRC = './images/ericfosterIO.png',
+	          cubeSidesHTML = [];
+
+	      //Store urls in array.
+	      URLs.push(dJamSRC);
+	      URLs.push(gulpeJSIntSRC);
+	      URLs.push(eJSsideNavURL);
+	      URLs.push(efosterIOURL);
+	      URLs.push(showTURL);
+	      URLs.push(eJSURL);
+
+	      //Combine urls with iframe template in new array.
+	      URLs.forEach(function (url, i) {
+	        if (/https?\:\/\//.test(url)) {
+	          if (i === 2 || i === 3) {
+	            cubeSidesHTML.push(boxFrame.replace('{URL}', url));
+	          } else {
+	            cubeSidesHTML.push(iframe.replace('{URL}', url));
+	          }
+	        } else {
+	          cubeSidesHTML.push(divWrap.replace('{SRC}', url));
+	        }
 	      });
-	      (function () {
-	        var elem2 = _$('#mainNav') ? dom('#mainNav') : make('#mainNav').put("body");
-	        return elem2;
-	      })().position('absolute').top('-5px').right('25px');
-	      (function () {
-	        var elem3 = _$('#header') ? dom('#header') : make('#header').put("body");
-	        return elem3;
-	      })().height('70px').bgColor('black').opacity('.6');
 
-	      if (function () {
-	        var elem4 = _$("body") ? dom("body") : make(".body1", "body").put("body");
-	        return elem4;
-	      }().scrolled() > 2496) {
-	        (function () {
-	          var elem5 = _$('#footer') ? dom('#footer') : make('#footer').put("body");
-	          return elem5;
-	        })().viz('visible');
-	      } else {
-	        (function () {
-	          var elem6 = _$('#footer') ? dom('#footer') : make('#footer').put("body");
-	          return elem6;
-	        })().viz('hidden');
-	      }
-	    } else {
-	      //Release.
-	      (function () {
-	        var elem7 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
-	        return elem7;
-	      })().fontSize('101px').top('25px');
-	      dom('#mainNav li a').every(function (element) {
-	        element.fontSize('46px');
-	      });
-	      (function () {
-	        var elem8 = _$('#mainNav') ? dom('#mainNav') : make('#mainNav').put("body");
-	        return elem8;
-	      })().position('').top('').right('');
-	      (function () {
-	        var elem9 = _$('#header') ? dom('#header') : make('#header').put("body");
-	        return elem9;
-	      })().height('').bgColor('').opacity('');
+	      //Create the cube.
+	      createSides(cubeSidesHTML, new THREE.CubeGeometry(1280, 740, 1280));
+	      //Map URLs to 3D coordinates, for tweening purposes.
+	      camCoordinates = zipObject(URLs, cameraPositions);
+	      closeUps = zipObject(URLs, closeUps);
 	    }
-	  });
-	}
 
-	//Created a closure here, mainly for organization, but also for the ability to share variables between functions.
-	function cubeOnHoverClick() {
-	  var eTarget = null;
+	    //Create the sides of the specified geometry with CSS3DObjects created using the given HTML strings, and shift them into position.
+	    function createSides(strings, geometry) {
+	      var tick = -1;
 
-	  //Initiate onHover handler...
-	  onHover();
-	  //Initiate onClick handler...
-	  onClick();
+	      // iterate over all the sides
+	      for (var i = 0; i < geometry.faces.length; i += 2) {
+	        tick++;
+	        // create a new object based on the supplied HTML String
+	        var side = createCSS3DObject(strings[tick]);
+	        // get this face and the next which both make the cube
+	        var face = geometry.faces[i],
+	            faceNext = geometry.faces[i + 1];
+	        // reposition the sides using the center of the faces
+	        var centroid = new THREE.Vector3();
+	        centroid.copy(geometry.vertices[face.a]).add(geometry.vertices[face.b]).add(geometry.vertices[face.c]).add(geometry.vertices[faceNext.a]).add(geometry.vertices[faceNext.b]).add(geometry.vertices[faceNext.c]).divideScalar(6);
+	        side.position.x = centroid.x;
+	        side.position.y = centroid.y;
+	        side.position.z = centroid.z;
 
-	  //CubeFolio, onHover function.
-	  function onHover() {
-	    mouse('over', el('html'), hoverCallBack);
-	  }
-
-	  //Callback for onHover()..
-	  function hoverCallBack(e) {
-	    if (e.target.className === 'projects-list-item') {
-	      if (tweenFlag) {
-	        //Kill Spin.
-	        spinSwitch = false;
-	        // //Create tween based on the camera's position.
-	        tween = new TWEEN.Tween(camera.position);
-	        //Configure animation.
-	        tween.to(camCoordinates[element(e.target).attrib('data-uri')], 5000).easing(TWEEN.Easing.Elastic.Out).onUpdate(function () {
-	          camera.position.x = this.x;
-	          camera.position.y = this.y;
-	          camera.position.z = this.z;
-	          camera.lookAt(scene.position);
-	        }).start();
-	        //Show pertinent Info paragraph.
-	        // <e.target/>
-	        //         .sib('next')
-	        //         .class('hide', '-');
+	        sides.push(side.position);
+	        // Calculate and apply the rotation for this side
+	        var up = new THREE.Vector3(0, 0, 1),
+	            normal = geometry.faces[i].normal;
+	        // We calculate the axis on which to rotate by
+	        // selecting the cross of the vectors
+	        var axis = new THREE.Vector3();
+	        axis.crossVectors(up, normal);
+	        var a = axis.crossVectors(up, normal);
+	        // based on the axis, in relation to our normal vector
+	        // we can calculate the angle.
+	        var angle = Math.atan2(axis.length(), up.dot(normal));
+	        axis.normalize();
+	        // now we can use matrix function to rotate the object so
+	        // it is aligned with the normal from the face
+	        var matrix4 = new THREE.Matrix4();
+	        matrix4.makeRotationAxis(axis, angle);
+	        // apply the rotation
+	        side.rotation.setFromRotationMatrix(matrix4);
+	        // add to the scene
+	        scene.add(side);
 	      }
-	      eTarget = e.target;
-	      //Set mouseout behaviour.
-	      on('mouseout', e.target, mouseoutCallBack);
-	      //Add onHover CSS.
-	      element(e.target).class('hover', '+');
+	    }
+
+	    //Simple function to create CSS3DObjects from the given HTML string.
+	    function createCSS3DObject(s) {
+	      //Create outerdiv and set inner HTML from string (s)..
+	      var div = document.createElement('div');
+	      div.innerHTML = s;
+
+	      //Apply any CSS Styling here.
+	      div.className = 'div';
+	      div.style.opacity = '0.8';
+
+	      //Create the CSS3DObject and return it.
+	      var object = new THREE.CSS3DObject(div);
+	      return object;
 	    }
 	  }
 
-	  //Callback for once('mouseout')..
-	  function mouseoutCallBack() {
-	    if (tweenFlag) {
-	      //Cancel handler
-	      off('mouseout', eTarget, mouseoutCallBack);
-	      //Re-hide Info Paragraph
-	      // <eTarget/>
-	      //       .sib('next')
-	      //       .class('hide', '+')
-	      //Stop Tween.
-	      tween.stop();
-	      //Make sure camera is properly oriented.
-	      if (camera.position.y < 80 || camera.position.y > 100) {
-	        if (camera.position.y > -80 || camera.position.y < -100) {
-	          warn(camera.position.y);
-	          var target = new THREE.Vector3(0, -90, -2200),
-	              _tweenTwo = new TWEEN.Tween(camera.position);
-	          _tweenTwo.to(target, 3000).easing(TWEEN.Easing.Elastic.Out).onUpdate(function () {
+	  //Created a closure here, mainly for organization, but also for the ability to share variables between functions=======>>>
+	  function cubeFolioController() {
+	    var eTarget = null;
+
+	    //Initiate onHover handler...
+	    onHover();
+	    //Initiate onClick handler...
+	    onClick();
+
+	    //CubeFolio, onHover function.
+	    function onHover() {
+	      mouse('over', el('html'), hoverCallBack);
+	    }
+
+	    //Callback for onHover()..
+	    function hoverCallBack(e) {
+	      //If a project hasn't been clicked (TWEEN_), and the previous hovered project was _2 or _6 (TWEENTWO_)....
+	      if (flags.TWEEN_ && flags.TWEENTWO_) {
+	        //and..If the next mouseover element is not a project-list-item......
+	        if (!hasAncestor(e.target, el('#rightProjList')) && !hasAncestor(e.target, el('#leftProjList'))) {
+	          //Make sure camera is properly oriented. (Run the snap-back tween)
+	          var target = new THREE.Vector3(0, -90, -2200);
+	          tweenTwo = new TWEEN.Tween(camera.position);
+	          tweenTwo.to(target, 3000).easing(TWEEN.Easing.Elastic.Out).onUpdate(function () {
+	            camera.lookAt(scene.position);
+	          }).start();
+	          //Reset tTFlag..
+	          flags.TWEENTWO_ = false;
+	        } else {
+	          //Reset tTFlag..
+	          flags.TWEENTWO_ = false;
+	        }
+	      }
+	      if (e.target.className === 'projects-list-item') {
+	        if (e.target.id === '_2' || e.target.id === '_6') {
+	          //Stop tweenTwo
+	          flags.TWEENTWO_ = true;
+	        }
+	        if (flags.TWEEN_) {
+	          //Kill Spin.
+	          flags.SPIN_SWITCH_ = false;
+	          // //Create tween based on the camera's position.
+	          tween = new TWEEN.Tween(camera.position);
+	          //Configure animation.
+	          tween.to(camCoordinates[element(e.target).attrib('data-uri')], 1000).easing(TWEEN.Easing.Cubic.In).onUpdate(function () {
+	            camera.position.x = this.x;
+	            camera.position.y = this.y;
+	            camera.position.z = this.z;
 	            camera.lookAt(scene.position);
 	          }).start();
 	        }
+	        eTarget = e.target;
+	        //Set mouseout behaviour.
+	        on('mouseout', e.target, mouseoutCallBack);
+	        //Add onHover CSS.
+	        element(e.target).class('hover', '+');
 	      }
-	      //Restart spin.
-	      spinSwitch = true;
 	    }
-	    //Unhighlight target.
-	    element(eTarget).class('hover', '-');
-	  }
 
-	  //CubeFolio onClick function.
-	  function onClick() {
-	    var projectRE = /projects\-list\-item/;
-
-	    click(el('html'), function (e) {
-	      //Highlight focused list item.
-	      if (focusFlag) {
-	        dom('[name=focus]').attrib('name', '').color('').fontWeight('').textShadow('').zIndex('');
+	    //Callback for once('mouseout')..
+	    function mouseoutCallBack() {
+	      if (flags.TWEEN_) {
+	        //Cancel handler
+	        off('mouseout', eTarget, mouseoutCallBack);
+	        //Stop Tween.
+	        // tween.stop()
+	        //Restart spin.
+	        flags.SPIN_SWITCH_ = true;
 	      }
-	      focusFlag = true;
-	      log(e.target.className, 'orange');
-	      //Hone in on click events happening on our target elements.
-	      if (projectRE.test(e.target.className)) {
-	        //Give target focus class.
-	        element(e.target).attrib('name', 'focus').color('white').fontWeight('900').textShadow('0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87').zIndex('1000');
-	        //Kill spin.
-	        spinSwitch = false;
-	        //New tween/target for close-up animation.
-	        var _tween = new TWEEN.Tween(camera.position),
-	            target = closeUps[element(e.target).attrib('data-uri')];
-	        //tweenify...
-	        _tween.to(target, 1500).easing(TWEEN.Easing.Linear.None).onUpdate(function () {
+	      //Unhighlight target.
+	      element(eTarget).class('hover', '-');
+	    }
+
+	    //CubeFolio onClick function.
+	    function onClick() {
+	      var projectRE = /projects\-list\-item/;
+
+	      click(el('html'), function (e) {
+	        //If one of the links in the main navigation header are clicked..
+	        if (e.target.className === 'head-nav') {
+	          //Find the currently 'active' link, and remove the active class..
+	          dom('[class~=active]').class('active', '-');
+	          //Add 'active' class to clicked link..
+	          element(e.target).ma().class('active', '+');
+	        } else if (e.target.id === 'chevy') {
+	          //Tween project-info out of the way..
+	          var _tween = new TWEEN.Tween({ top: 0, left: 0 });
+	          _tween.to({ left: 920 }, 1300).easing(TWEEN.Easing.Cubic.In).onUpdate(function () {
+	            el('#project-info').style.transform = 'translate(' + this.left + 'px, ' + this.top + 'px)';
+	          }).start();
+	          //Set flag that signifies that the project-info pane is off-screen..
+	          flags.PROJ_PANE_ = false;
+	          //Reveal left chevron button.
+	          (function () {
+	            var elem0 = _$('#chevyL') ? dom('#chevyL') : make('#chevyL').put("body");
+	            return elem0;
+	          })().class('hide', '-');
+	          //Hide right chevron.
+	          (function () {
+	            var elem1 = _$('#chevy') ? dom('#chevy') : make('#chevy').put("body");
+	            return elem1;
+	          })().class('hide', '+');
+	        } else if (e.target.id === 'chevyL') {
+	          //Tween project-info back into view..
+	          projectInfoTweenBack();
+	        } else if (e.target.id === 'x') {
+	          //Reset the FIRST_CLICK_..
+	          flags.FIRST_CLICK_ = true;
+	          //Return to spinning cube..
+	          backToSpinningCube();
+	        } else {
+	          //Highlight focused list item.
+	          if (flags.FOCUS_) {
+	            dom('[name=focus]').attrib('name', '').color('').fontWeight('').textShadow('').zIndex('');
+	          }
+	          flags.FOCUS_ = true;
+	          //Hone in on click events happening on our target elements.
+	          if (projectRE.test(e.target.className)) {
+	            //Give target focus.
+	            element(e.target).attrib('name', 'focus').color('white').fontWeight('900').textShadow('0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87').zIndex('1000');
+	            //Kill spin.
+	            flags.SPIN_SWITCH_ = false;
+	            //New tween/target for close-up animation.
+	            var tween3 = new TWEEN.Tween(camera.position),
+	                target = closeUps[element(e.target).attrib('data-uri')];
+	            //tweenify...
+	            tween3.to(target, 1500).easing(TWEEN.Easing.Linear.None).onUpdate(function () {
+	              camera.lookAt(scene.position);
+	            }).start();
+	            //kill mouseover/out behaviour..
+	            flags.TWEEN_ = false;
+	            // off('mouseover', el('html'), hoverCallBack);
+	            // off('mouseout', eTarget, mouseoutCallBack);
+	            //Setup the project-info pane..
+	            projectInfoPane(e.target);
+	          } else {
+	            flags.FOCUS_ = false;
+	          }
+	        }
+	      });
+	    }
+
+	    //Function containing code for the project-info pane setup/click responses..
+	    function projectInfoPane(e_target) {
+	      //If the show class has been assigned to an element, remove it..
+	      if (flags.SHOW_) {
+	        dom('[class~=show]').class('show', '-').class('hide', '+');
+	      }
+	      //Set the flag..
+	      flags.SHOW_ = true;
+	      var elString = '[name=' + e_target.id + ']';
+	      //Show Project Info, re-assign the 'show' class..
+	      (function () {
+	        var elem2 = _$('#project-info') ? dom('#project-info') : make('#project-info').put("body");
+	        return elem2;
+	      })().class('hidden', '-');
+	      dom(elString).class('hide', '-').class('show', '+');
+
+	      if (flags.SHOW2_) {
+	        dom('[class~=show2]').class('show2', '-').class('hide', '+');
+	      }
+	      (function () {
+	        var elem3 = _$('#github-link') ? dom('#github-link') : make('#github-link').put("body");
+	        return elem3;
+	      })().href(repos[e_target.id]);
+	      //determine which browser icon to show, using bowser.
+	      // log('browser');
+	      // log(browser.name);
+	      if (flags.SHOW3_) {
+	        dom('[class~=show3]').class('show3', '-').class('hide', '+');
+	      }
+	      switch (browser.name) {
+	        case 'Safari':
+	          (function () {
+	            var elem4 = _$('#safari') ? dom('#safari') : make('#safari').put("body");
+	            return elem4;
+	          })().class('hide', '-').class('show2', '+').sib('next').class('hide', '-').class('show3', '+').ma().href(projs[e_target.id]);
+	          break;
+	        case 'Chrome':
+	          (function () {
+	            var elem5 = _$('#chrome') ? dom('#chrome') : make('#chrome').put("body");
+	            return elem5;
+	          })().class('hide', '-').class('show2', '+').sib('next').class('hide', '-').class('show3', '+').ma().href(projs[e_target.id]);
+	          break;
+	        case 'Firefox':
+	          (function () {
+	            var elem6 = _$('#firefox') ? dom('#firefox') : make('#firefox').put("body");
+	            return elem6;
+	          })().class('hide', '-').class('show2', '+').sib('next').class('hide', '-').class('show3', '+').ma().href(projs[e_target.id]);
+	          break;
+	        case 'Internet Explorer':
+	          (function () {
+	            var elem7 = _$('#ie') ? dom('#ie') : make('#ie').put("body");
+	            return elem7;
+	          })().class('hide', '-').class('show2', '+').sib('next').class('hide', '-').class('show3', '+').ma().href(projs[e_target.id]);
+	          break;
+	        case 'Edge':
+	          (function () {
+	            var elem8 = _$('#ie') ? dom('#ie') : make('#ie').put("body");
+	            return elem8;
+	          })().class('hide', '-').class('show2', '+').sib('next').class('hide', '-').class('show3', '+').ma().href(projs[e_target.id]);
+	          break;
+	        default:
+	          (function () {
+	            var elem9 = _$('#www') ? dom('#www') : make('#www').put("body");
+	            return elem9;
+	          })().class('hide', '-').class('show2', '+').sib('next').class('hide', '-').class('show3', '+').ma().href(projs[e_target.id]);
+	      }
+	      //Display Project info Closing 'X' button.
+	      (function () {
+	        var elem10 = _$('#x') ? dom('#x') : make('#x').put("body");
+	        return elem10;
+	      })().class('hide', '-');
+	      //Check PROJ_PANE_ to see if project-info pane is offScreen. If so, move it back into view.
+	      if (!flags.PROJ_PANE_ && flags.FIRST_CLICK_) {
+	        //Invoke theSnitch Function..
+	        theSnitch();
+	        //reset FIRST_CLICK_ flag..
+	        flags.FIRST_CLICK_ = false;
+	      }
+	    }
+
+	    //Using a middle man (snitch) function to get a value for Function.caller;
+	    function theSnitch() {
+	      return projectInfoTweenBack();
+	    }
+
+	    //Return from closeUps to original camera coordinates and spinning cube.
+	    function backToSpinningCube() {
+	      //Return to spinning cube..
+	      //Check the orientation of the cube, to determine which "tweenBack" to run.
+	      //If the z coordinate = 90, we need to turn the cube as well is zoom out. (else)=>..
+	      if (camera.position.z === 90) {
+	        //Make sure camera is properly oriented. (Run the snap-back tween)
+	        var target = new THREE.Vector3(0, -90, -2200);
+	        tweenTwo = new TWEEN.Tween(camera.position);
+	        tweenTwo.to(target, 2500).easing(TWEEN.Easing.Elastic.Out).onUpdate(function () {
 	          camera.lookAt(scene.position);
 	        }).start();
-	        //kill mouseover/out behaviour..
-	        tweenFlag = false;
-	        // off('mouseover', el('html'), hoverCallBack);
-	        // off('mouseout', eTarget, mouseoutCallBack);
-	        if (showFlag) {
-	          dom('[class~=show]').class('show', '-').class('hide', '+');
+
+	        //Reset tTFlag..
+	        flags.TWEENTWO_ = false;
+
+	        //..<=(if) Otherwise, do the following..
+	      } else {
+	          var currentProject = void 0,
+	              camPosition = [];
+
+	          //Convert camera coordinates to simple array.
+	          camPosition.push(camera.position.x);
+	          camPosition.push(camera.position.y);
+	          camPosition.push(camera.position.z);
+
+	          for (var uri in closeUps) {
+	            var cUpsPosition = [];
+	            //Convert closeUps coordinates to simple array.
+	            cUpsPosition.push(closeUps[uri].x);
+	            cUpsPosition.push(closeUps[uri].y);
+	            cUpsPosition.push(closeUps[uri].z);
+	            //Compare cUpsPosition to camPosition to find a match.
+	            if (String(cUpsPosition) === String(camPosition)) {
+	              currentProject = uri;
+	            }
+	          }
+	          //Tween cube back to spinning state..
+	          var _tween2 = new TWEEN.Tween(camera.position);
+	          _tween2.to(camCoordinates[currentProject], 2000).easing(TWEEN.Easing.Elastic.Out).onUpdate(function () {
+	            camera.lookAt(scene.position);
+	          }).start();
 	        }
-	        showFlag = true;
-	        var elString = 'data-url~=' + element(e.target).attrib('data-uri');
-	        log(elString, 'green');
-	        log('elString', 'blue');
-	        inspect(dom(elString));
-	        //Show Project Info..
+
+	      //Get rid of 'x' and project-info pane..
+	      (function () {
+	        var elem11 = _$('#project-info') ? dom('#project-info') : make('#project-info').put("body");
+	        return elem11;
+	      })().class('hidden', '+');
+	      (function () {
+	        var elem12 = _$('#x') ? dom('#x') : make('#x').put("body");
+	        return elem12;
+	      })().class('hide', '+');
+	      //Flip the SPIN_SWITCH_/TWEEN_ back on.
+	      flags.SPIN_SWITCH_ = true;
+	      flags.TWEEN_ = true;
+	    }
+
+	    //moves project-info pane back into original viewing position.
+	    function projectInfoTweenBack() {
+	      var tweenTime = void 0;
+
+	      if (projectInfoTweenBack.caller.name.toString() === 'theSnitch') {
+	        tweenTime = 20;
+	      } else {
+	        tweenTime = 1300;
+	      }
+	      //Tween project-info back into view..
+	      var tween = new TWEEN.Tween({ top: 0, left: 920 });
+	      tween.to({ left: 0 }, tweenTime).easing(TWEEN.Easing.Cubic.In).onUpdate(function () {
+	        el('#project-info').style.transform = 'translate(' + this.left + 'px, ' + this.top + 'px)';
+	      }).start();
+	      //Set flag that signifies the project-info pane is on-screen..
+	      flags.PROJ_PANE_ = true;
+	      //Re-hide left chevron button.
+	      (function () {
+	        var elem13 = _$('#chevyL') ? dom('#chevyL') : make('#chevyL').put("body");
+	        return elem13;
+	      })().class('hide', '+');
+	      //Show right chevron.
+	      (function () {
+	        var elem14 = _$('#chevy') ? dom('#chevy') : make('#chevy').put("body");
+	        return elem14;
+	      })().class('hide', '-');
+	    }
+	  }
+
+	  //--ericfoster.io Scroll events=====================================>>>
+	  function onScroll() {
+	    //affix mainNav to top upon scroll.
+	    scroll(window, function (e) {
+	      //Affix to top.
+	      if (function () {
+	        var elem15 = _$("body") ? dom("body") : make(".body1", "body").put("body");
+	        return elem15;
+	      }().scrolled() > 700 || function () {
+	        var elem16 = _$("html") ? dom("html") : make(".html1", "html").put("body");
+	        return elem16;
+	      }().scrolled() > 700) {
+	        //   //Create new tween for header animation..
+	        //   if (flags.HEAD_TWEEN_) {
+	        //     const
+	        //     tween = new TWEEN.Tween({fontS: 101, fontS2: 46});
+	        //     tween
+	        //         .to({fontS: 42, fontS2: 36}, 200)
+	        //         .easing(TWEEN.Easing.Linear.None)
+	        //         .onUpdate(function() {
+	        //           <'#meBrand'/>
+	        //                   .fontSize(this.fontS + 'px');
+	        //           <'#mainNav li a'/>
+	        //                   .every((element)=> {
+	        //                     element
+	        //                        .fontSize(this.fontS2 + 'px')
+	        //                   });
+	        //         })
+	        //         .start();
+	        //     //Reset flag to false..
+	        //     flags.HEAD_TWEEN_ = false;
+	        //   }
+
 	        (function () {
-	          var elem10 = _$('#project-info') ? dom('#project-info') : make('#project-info').put("body");
-	          return elem10;
-	        })().class('hidden', '-');
-	        dom(elString).class('hide', '-').class('show', '+');
+	          var elem17 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
+	          return elem17;
+	        })().fontSize('42px').top('5px');
+	        dom('#mainNav li a').every(function (element) {
+	          element.fontSize('36px');
+	        });
+	        (function () {
+	          var elem18 = _$('#mainNav') ? dom('#mainNav') : make('#mainNav').put("body");
+	          return elem18;
+	        })().position('absolute').top('-5px').right('25px');
+	        (function () {
+	          var elem19 = _$('#header') ? dom('#header') : make('#header').put("body");
+	          return elem19;
+	        })().height('70px').bgColor('black').opacity('.6');
+
+	        if (function () {
+	          var elem20 = _$("body") ? dom("body") : make(".body1", "body").put("body");
+	          return elem20;
+	        }().scrolled() > 2496 || function () {
+	          var elem21 = _$("html") ? dom("html") : make(".html1", "html").put("body");
+	          return elem21;
+	        }().scrolled() > 2496) {
+	          (function () {
+	            var elem22 = _$('#footer') ? dom('#footer') : make('#footer').put("body");
+	            return elem22;
+	          })().viz('visible');
+	        } else {
+	          (function () {
+	            var elem23 = _$('#footer') ? dom('#footer') : make('#footer').put("body");
+	            return elem23;
+	          })().viz('hidden');
+	        }
+	      } else {
+	        //Release.
+	        (function () {
+	          var elem24 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
+	          return elem24;
+	        })().fontSize('101px').top('25px');
+	        dom('#mainNav li a').every(function (element) {
+	          element.fontSize('46px');
+	        });
+	        (function () {
+	          var elem25 = _$('#mainNav') ? dom('#mainNav') : make('#mainNav').put("body");
+	          return elem25;
+	        })().position('').top('').right('');
+	        (function () {
+	          var elem26 = _$('#header') ? dom('#header') : make('#header').put("body");
+	          return elem26;
+	        })().height('').bgColor('').opacity('');
 	      }
 	    });
 	  }
-	}
 
-	//---Animation function---//
-	function animate() {
-	  //renderer
-	  css3DRenderer.render(scene, camera);
-	  // inspect(camera.position);
-	  if (spinSwitch) {
-	    var x = camera.position.x,
-	        z = camera.position.z;
-	    camera.position.x = x * Math.cos(0.007) + z * Math.sin(0.007);
-	    camera.position.z = z * Math.cos(0.007) - x * Math.sin(0.007);
-	    camera.lookAt(scene.position);
+	  //---Cube Animation Function============================>>>
+	  function animate() {
+	    //The Renderers Call to Render..
+	    css3DRenderer.render(scene, camera);
+	    //Make the cube spin..
+	    if (flags.SPIN_SWITCH_) {
+	      var x = camera.position.x,
+	          z = camera.position.z;
+	      camera.position.x = x * Math.cos(0.007) + z * Math.sin(0.007);
+	      camera.position.z = z * Math.cos(0.007) - x * Math.sin(0.007);
+	      camera.lookAt(scene.position);
+	    }
+	    //Update tween.
+	    TWEEN.update();
+	    //Animation Loop Function
+	    requestAnimationFrame(animate);
 	  }
-	  //Update tween.
-	  TWEEN.update();
-	  //animation function
-	  requestAnimationFrame(animate);
-	}
 
-	//---DOM Ready function---//
-	go(function () {
-	  //Set site wrapper to window parameters.
-	  // <'#wrapper'/>
-	  //           .size(String(window.innerHeight) + 'px', String(window.innerWidth) + 'px');
-	  if (!window.frameElement) {
-	    onScroll();
-	    //Set up three.js scene.
-	    initProjectsScene();
-	    //Call Cube Assembly Function..
-	    assembleCube();
-	    //Initiate cube hover and click events/behaviour.
-	    cubeOnHoverClick();
-	    //initiate render loop.
-	    animate();
-	  }
-	});
+	  //---DOM Ready Function=================================>>>
+	  go(function () {
+	    //Set site wrapper to window parameters.
+	    // <'#wrapper'/>
+	    //           .size(String(window.innerHeight) + 'px', String(window.innerWidth) + 'px');
+	    try {
+	      if (!window.frameElement) {
+	        onScroll();
+	        //Set up three.js scene.
+	        //Call Cube Assembly Function..
+	        assembleCubeFolio();
+	        //Initiate cube hover and click events/behaviour.
+	        cubeFolioController();
+	        //initiate render loop.
+	        animate();
+	      }
+	    } catch (e) {
+	      log(e, 'red');
+	    }
+	  });
+	  //Run IIFE..
+	}();
 
 	//===Code Bin===============================================================>>>
 
-	//--Code for making the Projects cube spin.-------------------------------->>
-
-	// inspect(camera.position);
-	//
-	// var x = camera.position.x;
-	// var z = camera.position.z;
-	// camera.position.x = x * Math.cos(0.007) +
-	//   z * Math.sin(0.007);
-	// camera.position.z = z * Math.cos(0.007) -
-	//   x * Math.sin(0.007);
-	// camera.lookAt(scene.position);
-
-	//--Code for Updating Cube position.---------------------------------------->>
-
-	// var posit = new THREE.Vector3(7.699, 6.7355, 1099.973);
-	// var posit2 = new THREE.Vector3(355.4065, 6.7355, 1041.0025);
-	// var posit3 = new THREE.Vector3(1100, 6.7355, 0);
-	// var posit4 = new THREE.Vector3(0, 6.7355, -1100);
-	// var posit5 = new THREE.Vector3(-1100, 6.7355, 0);
-	//
-	// camera.position.x = posit.x;
-	// camera.position.y = posit.y;
-	// camera.position.z = posit.z;
-	// camera.lookAt(scene.position);
-	// animate();
-	// setTimeout(function() {
-	//   log('11111111');
-	//   inspect(posit2.x);
-	//   camera.position.x = posit2.x;
-	//   camera.position.y = posit2.y;
-	//   camera.position.z = posit2.z;
-	//   camera.lookAt(scene.position);
-	//   animate();
-	//   setTimeout(function() {
-	//     log('22222222222');
-	//     inspect(posit3.y);
-	//     camera.position.x = posit3.x;
-	//     camera.position.y = posit3.y;
-	//     camera.position.z = posit3.z;
-	//     camera.lookAt(scene.position);
-	//     animate();
-	//     setTimeout(function() {
-	//       log('33333333');
-	//       inspect(posit4);
-	//       camera.position.x = posit4.x;
-	//       camera.position.y = posit4.y;
-	//       camera.position.z = posit4.z;
-	//       camera.lookAt(scene.position);
-	//       animate();
-	//       setTimeout(function() {
-	//         log('44444444444');
-	//         inspect(posit5);
-	//         camera.position.x = posit5.x;
-	//         camera.position.y = posit5.y;
-	//         camera.position.z = posit5.z;
-	//         camera.lookAt(scene.position);
-	//         animate();
-	//       }, 3000);
-	//     }, 3000);
-	//   }, 3000);
-	// }, 3000);
+	// do({
+	//         el: [el('#block'), position],
+	//     easing: [Elastic.In, 2000],
+	//         to: target,
+	//   onUpdate: (function() {
+	//       el('#project-info').style.transform = 'translate(' + this.left + 'px, ' + this.top + 'px)';
+	//   })
+	// });
 
 /***/ },
 /* 1 */
@@ -63247,6 +63481,430 @@
 /* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	 * Bowser - a browser detector
+	 * https://github.com/ded/bowser
+	 * MIT License | (c) Dustin Diaz 2015
+	 */
+
+	!function (name, definition) {
+	  if (typeof module != 'undefined' && module.exports) module.exports = definition()
+	  else if (true) !(__WEBPACK_AMD_DEFINE_FACTORY__ = (definition), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))
+	  else this[name] = definition()
+	}('bowser', function () {
+	  /**
+	    * See useragents.js for examples of navigator.userAgent
+	    */
+
+	  var t = true
+
+	  function detect(ua) {
+
+	    function getFirstMatch(regex) {
+	      var match = ua.match(regex);
+	      return (match && match.length > 1 && match[1]) || '';
+	    }
+
+	    function getSecondMatch(regex) {
+	      var match = ua.match(regex);
+	      return (match && match.length > 1 && match[2]) || '';
+	    }
+
+	    var iosdevice = getFirstMatch(/(ipod|iphone|ipad)/i).toLowerCase()
+	      , likeAndroid = /like android/i.test(ua)
+	      , android = !likeAndroid && /android/i.test(ua)
+	      , nexusMobile = /nexus\s*[0-6]\s*/i.test(ua)
+	      , nexusTablet = !nexusMobile && /nexus\s*[0-9]+/i.test(ua)
+	      , chromeos = /CrOS/.test(ua)
+	      , silk = /silk/i.test(ua)
+	      , sailfish = /sailfish/i.test(ua)
+	      , tizen = /tizen/i.test(ua)
+	      , webos = /(web|hpw)os/i.test(ua)
+	      , windowsphone = /windows phone/i.test(ua)
+	      , windows = !windowsphone && /windows/i.test(ua)
+	      , mac = !iosdevice && !silk && /macintosh/i.test(ua)
+	      , linux = !android && !sailfish && !tizen && !webos && /linux/i.test(ua)
+	      , edgeVersion = getFirstMatch(/edge\/(\d+(\.\d+)?)/i)
+	      , versionIdentifier = getFirstMatch(/version\/(\d+(\.\d+)?)/i)
+	      , tablet = /tablet/i.test(ua)
+	      , mobile = !tablet && /[^-]mobi/i.test(ua)
+	      , xbox = /xbox/i.test(ua)
+	      , result
+
+	    if (/opera|opr|opios/i.test(ua)) {
+	      result = {
+	        name: 'Opera'
+	      , opera: t
+	      , version: versionIdentifier || getFirstMatch(/(?:opera|opr|opios)[\s\/](\d+(\.\d+)?)/i)
+	      }
+	    }
+	    else if (/coast/i.test(ua)) {
+	      result = {
+	        name: 'Opera Coast'
+	        , coast: t
+	        , version: versionIdentifier || getFirstMatch(/(?:coast)[\s\/](\d+(\.\d+)?)/i)
+	      }
+	    }
+	    else if (/yabrowser/i.test(ua)) {
+	      result = {
+	        name: 'Yandex Browser'
+	      , yandexbrowser: t
+	      , version: versionIdentifier || getFirstMatch(/(?:yabrowser)[\s\/](\d+(\.\d+)?)/i)
+	      }
+	    }
+	    else if (/ucbrowser/i.test(ua)) {
+	      result = {
+	          name: 'UC Browser'
+	        , ucbrowser: t
+	        , version: getFirstMatch(/(?:ucbrowser)[\s\/](\d+(?:\.\d+)+)/i)
+	      }
+	    }
+	    else if (/mxios/i.test(ua)) {
+	      result = {
+	        name: 'Maxthon'
+	        , maxthon: t
+	        , version: getFirstMatch(/(?:mxios)[\s\/](\d+(?:\.\d+)+)/i)
+	      }
+	    }
+	    else if (/epiphany/i.test(ua)) {
+	      result = {
+	        name: 'Epiphany'
+	        , epiphany: t
+	        , version: getFirstMatch(/(?:epiphany)[\s\/](\d+(?:\.\d+)+)/i)
+	      }
+	    }
+	    else if (/puffin/i.test(ua)) {
+	      result = {
+	        name: 'Puffin'
+	        , puffin: t
+	        , version: getFirstMatch(/(?:puffin)[\s\/](\d+(?:\.\d+)?)/i)
+	      }
+	    }
+	    else if (/sleipnir/i.test(ua)) {
+	      result = {
+	        name: 'Sleipnir'
+	        , sleipnir: t
+	        , version: getFirstMatch(/(?:sleipnir)[\s\/](\d+(?:\.\d+)+)/i)
+	      }
+	    }
+	    else if (/k-meleon/i.test(ua)) {
+	      result = {
+	        name: 'K-Meleon'
+	        , kMeleon: t
+	        , version: getFirstMatch(/(?:k-meleon)[\s\/](\d+(?:\.\d+)+)/i)
+	      }
+	    }
+	    else if (windowsphone) {
+	      result = {
+	        name: 'Windows Phone'
+	      , windowsphone: t
+	      }
+	      if (edgeVersion) {
+	        result.msedge = t
+	        result.version = edgeVersion
+	      }
+	      else {
+	        result.msie = t
+	        result.version = getFirstMatch(/iemobile\/(\d+(\.\d+)?)/i)
+	      }
+	    }
+	    else if (/msie|trident/i.test(ua)) {
+	      result = {
+	        name: 'Internet Explorer'
+	      , msie: t
+	      , version: getFirstMatch(/(?:msie |rv:)(\d+(\.\d+)?)/i)
+	      }
+	    } else if (chromeos) {
+	      result = {
+	        name: 'Chrome'
+	      , chromeos: t
+	      , chromeBook: t
+	      , chrome: t
+	      , version: getFirstMatch(/(?:chrome|crios|crmo)\/(\d+(\.\d+)?)/i)
+	      }
+	    } else if (/chrome.+? edge/i.test(ua)) {
+	      result = {
+	        name: 'Microsoft Edge'
+	      , msedge: t
+	      , version: edgeVersion
+	      }
+	    }
+	    else if (/vivaldi/i.test(ua)) {
+	      result = {
+	        name: 'Vivaldi'
+	        , vivaldi: t
+	        , version: getFirstMatch(/vivaldi\/(\d+(\.\d+)?)/i) || versionIdentifier
+	      }
+	    }
+	    else if (sailfish) {
+	      result = {
+	        name: 'Sailfish'
+	      , sailfish: t
+	      , version: getFirstMatch(/sailfish\s?browser\/(\d+(\.\d+)?)/i)
+	      }
+	    }
+	    else if (/seamonkey\//i.test(ua)) {
+	      result = {
+	        name: 'SeaMonkey'
+	      , seamonkey: t
+	      , version: getFirstMatch(/seamonkey\/(\d+(\.\d+)?)/i)
+	      }
+	    }
+	    else if (/firefox|iceweasel|fxios/i.test(ua)) {
+	      result = {
+	        name: 'Firefox'
+	      , firefox: t
+	      , version: getFirstMatch(/(?:firefox|iceweasel|fxios)[ \/](\d+(\.\d+)?)/i)
+	      }
+	      if (/\((mobile|tablet);[^\)]*rv:[\d\.]+\)/i.test(ua)) {
+	        result.firefoxos = t
+	      }
+	    }
+	    else if (silk) {
+	      result =  {
+	        name: 'Amazon Silk'
+	      , silk: t
+	      , version : getFirstMatch(/silk\/(\d+(\.\d+)?)/i)
+	      }
+	    }
+	    else if (/phantom/i.test(ua)) {
+	      result = {
+	        name: 'PhantomJS'
+	      , phantom: t
+	      , version: getFirstMatch(/phantomjs\/(\d+(\.\d+)?)/i)
+	      }
+	    }
+	    else if (/slimerjs/i.test(ua)) {
+	      result = {
+	        name: 'SlimerJS'
+	        , slimer: t
+	        , version: getFirstMatch(/slimerjs\/(\d+(\.\d+)?)/i)
+	      }
+	    }
+	    else if (/blackberry|\bbb\d+/i.test(ua) || /rim\stablet/i.test(ua)) {
+	      result = {
+	        name: 'BlackBerry'
+	      , blackberry: t
+	      , version: versionIdentifier || getFirstMatch(/blackberry[\d]+\/(\d+(\.\d+)?)/i)
+	      }
+	    }
+	    else if (webos) {
+	      result = {
+	        name: 'WebOS'
+	      , webos: t
+	      , version: versionIdentifier || getFirstMatch(/w(?:eb)?osbrowser\/(\d+(\.\d+)?)/i)
+	      };
+	      /touchpad\//i.test(ua) && (result.touchpad = t)
+	    }
+	    else if (/bada/i.test(ua)) {
+	      result = {
+	        name: 'Bada'
+	      , bada: t
+	      , version: getFirstMatch(/dolfin\/(\d+(\.\d+)?)/i)
+	      };
+	    }
+	    else if (tizen) {
+	      result = {
+	        name: 'Tizen'
+	      , tizen: t
+	      , version: getFirstMatch(/(?:tizen\s?)?browser\/(\d+(\.\d+)?)/i) || versionIdentifier
+	      };
+	    }
+	    else if (/qupzilla/i.test(ua)) {
+	      result = {
+	        name: 'QupZilla'
+	        , qupzilla: t
+	        , version: getFirstMatch(/(?:qupzilla)[\s\/](\d+(?:\.\d+)+)/i) || versionIdentifier
+	      }
+	    }
+	    else if (/chromium/i.test(ua)) {
+	      result = {
+	        name: 'Chromium'
+	        , chromium: t
+	        , version: getFirstMatch(/(?:chromium)[\s\/](\d+(?:\.\d+)?)/i) || versionIdentifier
+	      }
+	    }
+	    else if (/chrome|crios|crmo/i.test(ua)) {
+	      result = {
+	        name: 'Chrome'
+	        , chrome: t
+	        , version: getFirstMatch(/(?:chrome|crios|crmo)\/(\d+(\.\d+)?)/i)
+	      }
+	    }
+	    else if (android) {
+	      result = {
+	        name: 'Android'
+	        , version: versionIdentifier
+	      }
+	    }
+	    else if (/safari|applewebkit/i.test(ua)) {
+	      result = {
+	        name: 'Safari'
+	      , safari: t
+	      }
+	      if (versionIdentifier) {
+	        result.version = versionIdentifier
+	      }
+	    }
+	    else if (iosdevice) {
+	      result = {
+	        name : iosdevice == 'iphone' ? 'iPhone' : iosdevice == 'ipad' ? 'iPad' : 'iPod'
+	      }
+	      // WTF: version is not part of user agent in web apps
+	      if (versionIdentifier) {
+	        result.version = versionIdentifier
+	      }
+	    }
+	    else if(/googlebot/i.test(ua)) {
+	      result = {
+	        name: 'Googlebot'
+	      , googlebot: t
+	      , version: getFirstMatch(/googlebot\/(\d+(\.\d+))/i) || versionIdentifier
+	      }
+	    }
+	    else {
+	      result = {
+	        name: getFirstMatch(/^(.*)\/(.*) /),
+	        version: getSecondMatch(/^(.*)\/(.*) /)
+	     };
+	   }
+
+	    // set webkit or gecko flag for browsers based on these engines
+	    if (!result.msedge && /(apple)?webkit/i.test(ua)) {
+	      if (/(apple)?webkit\/537\.36/i.test(ua)) {
+	        result.name = result.name || "Blink"
+	        result.blink = t
+	      } else {
+	        result.name = result.name || "Webkit"
+	        result.webkit = t
+	      }
+	      if (!result.version && versionIdentifier) {
+	        result.version = versionIdentifier
+	      }
+	    } else if (!result.opera && /gecko\//i.test(ua)) {
+	      result.name = result.name || "Gecko"
+	      result.gecko = t
+	      result.version = result.version || getFirstMatch(/gecko\/(\d+(\.\d+)?)/i)
+	    }
+
+	    // set OS flags for platforms that have multiple browsers
+	    if (!result.msedge && (android || result.silk)) {
+	      result.android = t
+	    } else if (iosdevice) {
+	      result[iosdevice] = t
+	      result.ios = t
+	    } else if (mac) {
+	      result.mac = t
+	    } else if (xbox) {
+	      result.xbox = t
+	    } else if (windows) {
+	      result.windows = t
+	    } else if (linux) {
+	      result.linux = t
+	    }
+
+	    // OS version extraction
+	    var osVersion = '';
+	    if (result.windowsphone) {
+	      osVersion = getFirstMatch(/windows phone (?:os)?\s?(\d+(\.\d+)*)/i);
+	    } else if (iosdevice) {
+	      osVersion = getFirstMatch(/os (\d+([_\s]\d+)*) like mac os x/i);
+	      osVersion = osVersion.replace(/[_\s]/g, '.');
+	    } else if (android) {
+	      osVersion = getFirstMatch(/android[ \/-](\d+(\.\d+)*)/i);
+	    } else if (result.webos) {
+	      osVersion = getFirstMatch(/(?:web|hpw)os\/(\d+(\.\d+)*)/i);
+	    } else if (result.blackberry) {
+	      osVersion = getFirstMatch(/rim\stablet\sos\s(\d+(\.\d+)*)/i);
+	    } else if (result.bada) {
+	      osVersion = getFirstMatch(/bada\/(\d+(\.\d+)*)/i);
+	    } else if (result.tizen) {
+	      osVersion = getFirstMatch(/tizen[\/\s](\d+(\.\d+)*)/i);
+	    }
+	    if (osVersion) {
+	      result.osversion = osVersion;
+	    }
+
+	    // device type extraction
+	    var osMajorVersion = osVersion.split('.')[0];
+	    if (
+	         tablet
+	      || nexusTablet
+	      || iosdevice == 'ipad'
+	      || (android && (osMajorVersion == 3 || (osMajorVersion >= 4 && !mobile)))
+	      || result.silk
+	    ) {
+	      result.tablet = t
+	    } else if (
+	         mobile
+	      || iosdevice == 'iphone'
+	      || iosdevice == 'ipod'
+	      || android
+	      || nexusMobile
+	      || result.blackberry
+	      || result.webos
+	      || result.bada
+	    ) {
+	      result.mobile = t
+	    }
+
+	    // Graded Browser Support
+	    // http://developer.yahoo.com/yui/articles/gbs
+	    if (result.msedge ||
+	        (result.msie && result.version >= 10) ||
+	        (result.yandexbrowser && result.version >= 15) ||
+			    (result.vivaldi && result.version >= 1.0) ||
+	        (result.chrome && result.version >= 20) ||
+	        (result.firefox && result.version >= 20.0) ||
+	        (result.safari && result.version >= 6) ||
+	        (result.opera && result.version >= 10.0) ||
+	        (result.ios && result.osversion && result.osversion.split(".")[0] >= 6) ||
+	        (result.blackberry && result.version >= 10.1)
+	        ) {
+	      result.a = t;
+	    }
+	    else if ((result.msie && result.version < 10) ||
+	        (result.chrome && result.version < 20) ||
+	        (result.firefox && result.version < 20.0) ||
+	        (result.safari && result.version < 6) ||
+	        (result.opera && result.version < 10.0) ||
+	        (result.ios && result.osversion && result.osversion.split(".")[0] < 6)
+	        ) {
+	      result.c = t
+	    } else result.x = t
+
+	    return result
+	  }
+
+	  var bowser = detect(typeof navigator !== 'undefined' ? navigator.userAgent : '')
+
+	  bowser.test = function (browserList) {
+	    for (var i = 0; i < browserList.length; ++i) {
+	      var browserItem = browserList[i];
+	      if (typeof browserItem=== 'string') {
+	        if (browserItem in bowser) {
+	          return true;
+	        }
+	      }
+	    }
+	    return false;
+	  }
+
+	  /*
+	   * Set our detect method to the main bowser object so we can
+	   * reuse it to test other user agents.
+	   * This is needed to implement future tests.
+	   */
+	  bowser._detect = detect;
+
+	  return bowser
+	});
+
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/**
 	 * Based on http://www.emagix.net/academic/mscs-project/item/camera-sync-with-css3-and-webgl-threejs
 	 * @author mrdoob / http://mrdoob.com/
@@ -63497,7 +64155,7 @@
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64128,7 +64786,7 @@
 
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
