@@ -662,21 +662,30 @@ const ericfosterIO = (function() {
 
   //--ericfoster.io Scroll events=====================================>>>
   function onScroll() {
+    //cache elements..
+    let _body    = <body/>,
+        _html    = <html/>,
+      _meBrand   = <'#meBrand'/>,
+      _mainNavLI = <'#mainNav li a'/>,
+      _mainNav   = <'#mainNav'/>,
+      _header    = <'#header'/>,
+      _footer    = <'#footer'/>;
+
     //affix mainNav to top upon scroll.
     scroll(window, (e)=> {
       //Affix to top.
-      if (<body/>.scrolled() > 700 || <html/>.scrolled() > 700) {
+      if (_body.scrolled() > 700 || _html.scrolled() > 700) {
       //   //Create new tween for header animation..
       //   if (flags.HEAD_TWEEN_) {
       //     const
       //     tween = new TWEEN.Tween({fontS: 101, fontS2: 46});
       //     tween
-      //         .to({fontS: 42, fontS2: 36}, 200)
+      //         .to({fontS: 42, fontS2: 36}, 500)
       //         .easing(TWEEN.Easing.Linear.None)
       //         .onUpdate(function() {
-      //           <'#meBrand'/>
+      //           _meBrand
       //                   .fontSize(this.fontS + 'px');
-      //           <'#mainNav li a'/>
+      //           _mainNavLI
       //                   .every((element)=> {
       //                     element
       //                        .fontSize(this.fontS2 + 'px')
@@ -686,49 +695,48 @@ const ericfosterIO = (function() {
       //     //Reset flag to false..
       //     flags.HEAD_TWEEN_ = false;
       //   }
+        _meBrand
+              .fontSize('42px')
+              .top('2px');
+        _mainNavLI
+              .every((element)=> {
+                element
+                  .fontSize('36px')
+              });
+        _mainNav
+              .position('absolute')
+              .top('-5px')
+              .right('25px');
+        _header
+              .height('70px')
+              .bgColor('black')
+              .opacity('.6');
 
-        <'#meBrand'/>
-                .fontSize('42px')
-                .top('2px');
-        <'#mainNav li a'/>
-                .every((element)=> {
-                  element
-                     .fontSize('36px')
-                });
-        <'#mainNav'/>
-                .position('absolute')
-                .top('-5px')
-                .right('25px');
-        <'#header'/>
-                .height('70px')
-                .bgColor('black')
-                .opacity('.6');
-
-        if (<body/>.scrolled() > 2496 || <html/>.scrolled() > 2496) {
-          <'#footer'/>
-                .viz('visible');
+        if (_body.scrolled() > 2496 || _html.scrolled() > 2496) {
+          _footer
+              .viz('visible');
         } else {
-          <'#footer'/>
-                .viz('hidden');
+          _footer
+              .viz('hidden');
         }
       } else {
         //Release.
-        <'#meBrand'/>
-                .fontSize('101px')
-                .top('25px');
-        <'#mainNav li a'/>
-                .every((element)=> {
-                  element
-                     .fontSize('46px')
+        _meBrand
+              .fontSize('101px')
+              .top('25px');
+        _mainNavLI
+              .every((element)=> {
+                element
+                  .fontSize('46px')
                 });
-        <'#mainNav'/>
-                .position('')
-                .top('')
-                .right('');
-        <'#header'/>
-                .height('')
-                .bgColor('')
-                .opacity('');
+        _mainNav
+              .position('')
+              .top('')
+              .right('');
+        _header
+              .height('')
+              .bgColor('')
+              .opacity('');
       }
     });
   }
@@ -781,8 +789,12 @@ const ericfosterIO = (function() {
 
 
 
-//===Code Bin===============================================================>>>
+//===TO DO===============================================================>>>
 
+//TODO: Smoothly animate header..
+//TODO: Finish project descriptions..
+//TODO: animate scroll to different sections..
+//TODO: 
 
 
 // do({

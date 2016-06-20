@@ -655,27 +655,48 @@
 
 	  //--ericfoster.io Scroll events=====================================>>>
 	  function onScroll() {
+	    //cache elements..
+	    var _body = function () {
+	      var elem15 = _$("body") ? dom("body") : make(".body1", "body").put("body");
+	      return elem15;
+	    }(),
+	        _html = function () {
+	      var elem16 = _$("html") ? dom("html") : make(".html1", "html").put("body");
+	      return elem16;
+	    }(),
+	        _meBrand = function () {
+	      var elem17 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
+	      return elem17;
+	    }(),
+	        _mainNavLI = dom('#mainNav li a'),
+	        _mainNav = function () {
+	      var elem18 = _$('#mainNav') ? dom('#mainNav') : make('#mainNav').put("body");
+	      return elem18;
+	    }(),
+	        _header = function () {
+	      var elem19 = _$('#header') ? dom('#header') : make('#header').put("body");
+	      return elem19;
+	    }(),
+	        _footer = function () {
+	      var elem20 = _$('#footer') ? dom('#footer') : make('#footer').put("body");
+	      return elem20;
+	    }();
+
 	    //affix mainNav to top upon scroll.
 	    scroll(window, function (e) {
 	      //Affix to top.
-	      if (function () {
-	        var elem15 = _$("body") ? dom("body") : make(".body1", "body").put("body");
-	        return elem15;
-	      }().scrolled() > 700 || function () {
-	        var elem16 = _$("html") ? dom("html") : make(".html1", "html").put("body");
-	        return elem16;
-	      }().scrolled() > 700) {
+	      if (_body.scrolled() > 700 || _html.scrolled() > 700) {
 	        //   //Create new tween for header animation..
 	        //   if (flags.HEAD_TWEEN_) {
 	        //     const
 	        //     tween = new TWEEN.Tween({fontS: 101, fontS2: 46});
 	        //     tween
-	        //         .to({fontS: 42, fontS2: 36}, 200)
+	        //         .to({fontS: 42, fontS2: 36}, 500)
 	        //         .easing(TWEEN.Easing.Linear.None)
 	        //         .onUpdate(function() {
-	        //           <'#meBrand'/>
+	        //           _meBrand
 	        //                   .fontSize(this.fontS + 'px');
-	        //           <'#mainNav li a'/>
+	        //           _mainNavLI
 	        //                   .every((element)=> {
 	        //                     element
 	        //                        .fontSize(this.fontS2 + 'px')
@@ -685,57 +706,26 @@
 	        //     //Reset flag to false..
 	        //     flags.HEAD_TWEEN_ = false;
 	        //   }
-
-	        (function () {
-	          var elem17 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
-	          return elem17;
-	        })().fontSize('42px').top('5px');
-	        dom('#mainNav li a').every(function (element) {
+	        _meBrand.fontSize('42px').top('2px');
+	        _mainNavLI.every(function (element) {
 	          element.fontSize('36px');
 	        });
-	        (function () {
-	          var elem18 = _$('#mainNav') ? dom('#mainNav') : make('#mainNav').put("body");
-	          return elem18;
-	        })().position('absolute').top('-5px').right('25px');
-	        (function () {
-	          var elem19 = _$('#header') ? dom('#header') : make('#header').put("body");
-	          return elem19;
-	        })().height('70px').bgColor('black').opacity('.6');
+	        _mainNav.position('absolute').top('-5px').right('25px');
+	        _header.height('70px').bgColor('black').opacity('.6');
 
-	        if (function () {
-	          var elem20 = _$("body") ? dom("body") : make(".body1", "body").put("body");
-	          return elem20;
-	        }().scrolled() > 2496 || function () {
-	          var elem21 = _$("html") ? dom("html") : make(".html1", "html").put("body");
-	          return elem21;
-	        }().scrolled() > 2496) {
-	          (function () {
-	            var elem22 = _$('#footer') ? dom('#footer') : make('#footer').put("body");
-	            return elem22;
-	          })().viz('visible');
+	        if (_body.scrolled() > 2496 || _html.scrolled() > 2496) {
+	          _footer.viz('visible');
 	        } else {
-	          (function () {
-	            var elem23 = _$('#footer') ? dom('#footer') : make('#footer').put("body");
-	            return elem23;
-	          })().viz('hidden');
+	          _footer.viz('hidden');
 	        }
 	      } else {
 	        //Release.
-	        (function () {
-	          var elem24 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
-	          return elem24;
-	        })().fontSize('101px').top('25px');
-	        dom('#mainNav li a').every(function (element) {
+	        _meBrand.fontSize('101px').top('25px');
+	        _mainNavLI.every(function (element) {
 	          element.fontSize('46px');
 	        });
-	        (function () {
-	          var elem25 = _$('#mainNav') ? dom('#mainNav') : make('#mainNav').put("body");
-	          return elem25;
-	        })().position('').top('').right('');
-	        (function () {
-	          var elem26 = _$('#header') ? dom('#header') : make('#header').put("body");
-	          return elem26;
-	        })().height('').bgColor('').opacity('');
+	        _mainNav.position('').top('').right('');
+	        _header.height('').bgColor('').opacity('');
 	      }
 	    });
 	  }

@@ -57,9 +57,9 @@ body {
   z-index: 999;
 }
 #meBrand:hover {
-  color: #FFf;
+  color: #12307c;
   font-weight: 900;
-  text-shadow: 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87;
+  text-shadow: 0 0 0.2em #3189cd, 0 0 0.2em #3189cd, 0 0 0.2em #3189cd, 0 0 0.2em #3189cd, 0 0 0.2em #3189cd, 0 0 0.2em #3189cd, 0 0 0.2em #3189cd, 0 0 0.2em #3189cd;
 }
 
 #mainNav {
@@ -71,14 +71,94 @@ body {
   font-size: 46px;
 }
 
+#js {
+  position: absolute;
+  right: 40px;
+  bottom: 40px;
+  color: #fed935;
+  font-size: 86px;
+  opacity: .8;
+
+}
+
+#css {
+  position: absolute;
+  right: 40px;
+  bottom: 155px;
+  color: #d0191b;
+  font-size: 86px;
+  opacity: .6;
+}
+
+#html {
+  position: absolute;
+  right: 40px;
+  bottom: 270px;
+  color: #256ece;
+  font-size: 86px;
+  opacity: .8;
+}
+
+#node {
+  position: absolute;
+  right: 160px;
+  bottom: 40px;
+  font-size: 96px;
+  color: #6f3b87;
+  opacity: .8;
+}
+
+#atom {
+  position: absolute;
+  right: 280px;
+  bottom: -25px;
+  font-size: 196px;
+  /*color: #6f3b87;*/
+}
+
+#elec {
+  position: absolute;
+  left: 30px;
+  top: 165px;
+  font-size: 96px;
+  color: #4fab67;
+}
+
+#apple {
+  position: absolute;
+  right: 485px;
+  bottom: 40px;
+  font-size: 96px;
+  opacity: .8;
+  color: #000;
+}
+
+#bootstrap {
+  position: absolute;
+  right: 610px;
+  bottom: 40px;
+  font-size: 86px;
+  opacity: .8;
+  color: #714477;
+}
+
+#django {
+  position: absolute;
+  right: 730px;
+  bottom: 15px;
+  font-size: 96px;
+  opacity: .8;
+  color: #3c734b;
+}
+
 
 
 #coverDescContainer {
   position: absolute;
   display: block;
   font-family: amatic sc;
-  left: 100px;
-  top: 280px;
+  left: 30px;
+  top: 290px;
   height: 230px;
   width: 380px;
   z-index: 10;
@@ -173,7 +253,7 @@ body {
   z-index: 1000;
 }*/
 .projects-list-item:active {
-  color: #FF8A22;
+  color: #e12d22;
   font-weight: 900;
   text-shadow: 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87;
   z-index: 1000;
