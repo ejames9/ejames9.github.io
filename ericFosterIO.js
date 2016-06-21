@@ -166,12 +166,11 @@
 	APPLICATION_DATA.REPO_URLS['_3'] = 'https://github.com/ejames9/gulp-elementsJS-interpreter';
 	APPLICATION_DATA.REPO_URLS['_4'] = 'https://github.com/ejames9/GoOnTour';
 	APPLICATION_DATA.REPO_URLS['_5'] = 'https://github.com/ejames9/DjamBase';
-	APPLICATION_DATA.REPO_URLS['_6'] = 'https://github.com/ejames9/ejames9.github.io';
+	APPLICATION_DATA.REPO_URLS['_6'] = 'https://github.com/ejames9/ejames9.github.io/blob/master/src/js/ericFosterIO.js';
 
 	//Compress flag names.
 	window.flags = APPLICATION_DATA.FLAGS_;
 
-	inspect(APPLICATION_DATA);
 	//--The IIFE that runs my portfolio site.
 	//--Created a closure for organization, and fewer globals.============================>>>
 	var ericfosterIO = function () {
