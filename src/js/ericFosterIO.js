@@ -476,8 +476,8 @@ const ericfosterIO = (function() {
       <'#github-link'/>
                     .href(repos[e_target.id]);
       //determine which browser icon to show, using bowser.
-      // log('browser');
-      // log(browser.name);
+      log('browser');
+      log(browser.name);
       if (flags.SHOW3_) {
         <'[class~=show3]'/>
                     .class('show3', '-')

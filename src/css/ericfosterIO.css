@@ -58,9 +58,9 @@ body {
   z-index: 999;
 }
 #meBrand:hover {
-  color: #12307c;
+  color: #714277;
   font-weight: 900;
-  text-shadow: 0 0 0.2em #3189cd, 0 0 0.2em #3189cd, 0 0 0.2em #3189cd, 0 0 0.2em #3189cd, 0 0 0.2em #3189cd, 0 0 0.2em #3189cd, 0 0 0.2em #3189cd, 0 0 0.2em #3189cd;
+  text-shadow: 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830;
 }
 
 #mainNav {
@@ -440,14 +440,15 @@ body {
   color: white;
 }
 
-
 .browser {
   position: absolute;
+  font-size: 66px;
   bottom: 20px;
   left: 230px;
   color: white;
   z-index: 10000;
 }
+
 
 #github {
   position: absolute;
@@ -500,8 +501,7 @@ body {
   color:#e12d22;
 }
 .site-link:hover > .browser {
-  opacity: .5;
-  fill: #164cac;
+  color: #e12d22;
 }
 .site-link:active > .browser {
   opacity: 1;

@@ -504,8 +504,8 @@
 	        return elem3;
 	      })().href(repos[e_target.id]);
 	      //determine which browser icon to show, using bowser.
-	      // log('browser');
-	      // log(browser.name);
+	      log('browser');
+	      log(browser.name);
 	      if (flags.SHOW3_) {
 	        dom('[class~=show3]').class('show3', '-').class('hide', '+');
 	      }
