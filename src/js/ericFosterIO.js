@@ -63,7 +63,7 @@ APPLICATION_DATA.REPO_URLS['_6']     = 'https://github.com/ejames9/ejames9.githu
 window.flags = APPLICATION_DATA.FLAGS_;
 
 
-inspect(APPLICATION_DATA);
+
 //--The IIFE that runs my portfolio site.
 //--Created a closure for organization, and fewer globals.============================>>>
 const ericfosterIO = (function() {
