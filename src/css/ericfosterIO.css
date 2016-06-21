@@ -318,6 +318,12 @@ body {
 
 /*===Projects Page=======================================*/
 
+#projects {
+  position: absolute;
+  left: 0;
+  top: 1500px;
+}
+
 #threejs {
   position: absolute;
   top: 1500px;
@@ -532,7 +538,7 @@ See Assignable classes for:
   top: 740px;
   left: 0;
   height: 800px;
-  width: 1280px;
+  width: 100%;
   /*color: #256ece;*/
   background-color: #191a1a;
   text-align: center;
@@ -560,7 +566,7 @@ See Assignable classes for:
   left: 0px;
   top: 2240px;
   height: 220px;
-  width: 1280px;
+  width: 100%;
   background-color: #191a1a;
   color: #000;
   opacity: .8;
@@ -673,7 +679,7 @@ See Assignable classes for:
   left: 0px;
   top: 2725px;
   height: 555px;
-  width: 1280px;
+  width: 100%;
   background-color: transparent;;
   padding: 0px 0px 115px 0px;
 }

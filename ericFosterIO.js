@@ -749,9 +749,14 @@
 
 	  //---DOM Ready Function=================================>>>
 	  go(function () {
-	    //Set site wrapper to window parameters.
-	    // <'#wrapper'/>
-	    //           .size(String(window.innerHeight) + 'px', String(window.innerWidth) + 'px');
+	    //Set projects pane to parameters appropriate for firefox
+	    if (browser.firefox) {
+	      log('firefox');
+	      (function () {
+	        var elem21 = _$('#projects') ? dom('#projects') : make('#projects').put("body");
+	        return elem21;
+	      })().top('1530px');
+	    }
 	    try {
 	      if (!window.frameElement) {
 	        onScroll();
