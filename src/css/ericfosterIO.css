@@ -51,6 +51,7 @@ body {
 
 #meBrand {
   position: absolute;
+  color: #714277;
   left: 15px;
   font-family: monoton, love ya like a sister, im fell english sc, trade winds, henny penny, galindo, mystery quest, londrina shadow, londrina sketch, rum raisin;
   font-size: 101px;
@@ -69,86 +70,212 @@ body {
 
 #mainNav li a {
   font-size: 46px;
+  color: #714277;
 }
 
+/*#show-techs {
+  background-color: black;
+  opacity: .5;
+}*/
+
 #js {
-  position: absolute;
-  right: 40px;
-  bottom: 40px;
+  position: fixed;
+  left: 1175px;
+  bottom: 15px;
   color: #fed935;
-  font-size: 86px;
+  font-size: 46px;
   opacity: .8;
 
 }
 
 #css {
-  position: absolute;
-  right: 40px;
-  bottom: 155px;
+  position: fixed;
+  left: 1115px;
+  bottom: 15px;
   color: #d0191b;
-  font-size: 86px;
+  font-size: 46px;
   opacity: .6;
 }
 
 #html {
-  position: absolute;
-  right: 40px;
-  bottom: 270px;
+  position: fixed;
+  left: 1055px;
+  bottom: 15px;
   color: #256ece;
-  font-size: 86px;
+  font-size: 46px;
   opacity: .8;
 }
+
+#python {
+  position: fixed;
+  left: 995px;
+  bottom: 15px;
+  color: #fdb830;
+  font-size: 46px;
+  opacity: .8;
+}
+
+#gulp {
+  position: fixed;
+  left: 935px;
+  bottom: 15px;
+  color: #992223;
+  font-size: 56px;
+  opacity: .8;
+}
+
 
 #node {
-  position: absolute;
-  right: 160px;
-  bottom: 40px;
-  font-size: 96px;
-  color: #6f3b87;
+  position: fixed;
+  left: 880px;
+  bottom: 15px;
+  font-size: 56px;
+  color: #748f56;
   opacity: .8;
 }
 
-#atom {
-  position: absolute;
-  right: 280px;
-  bottom: -25px;
-  font-size: 196px;
-  /*color: #6f3b87;*/
-}
+/*#atom {
+  position: fixed;
+  right: 160px;
+  bottom: -12px;
+  font-size: 106px;
+}*/
 
 #elec {
-  position: absolute;
-  left: 30px;
-  top: 165px;
-  font-size: 96px;
+  position: fixed;
+  left: 815px;
+  bottom: 15px;
+  font-size: 56px;
   color: #4fab67;
 }
 
 #apple {
-  position: absolute;
-  right: 485px;
-  bottom: 40px;
-  font-size: 96px;
+  position: fixed;
+  left: 755px;
+  bottom: 15px;
+  font-size: 56px;
   opacity: .8;
   color: #000;
 }
 
 #bootstrap {
-  position: absolute;
-  right: 610px;
-  bottom: 40px;
-  font-size: 86px;
+  position: fixed;
+  left: 700px;
+  bottom: 15px;
+  font-size: 46px;
   opacity: .8;
   color: #714477;
 }
 
 #django {
-  position: absolute;
-  right: 730px;
-  bottom: 15px;
-  font-size: 96px;
+  position: fixed;
+  left: 625px;
+  bottom: 5px;
+  font-size: 56px;
   opacity: .8;
   color: #3c734b;
+}
+
+#githb {
+  position: fixed;
+  left: 565px;
+  bottom: 15px;
+  font-size: 46px;
+  opacity: .8;
+  color: #22204c;
+}
+
+#git {
+  position: fixed;
+  left: 505px;
+  bottom: 15px;
+  font-size: 46px;
+  opacity: .8;
+  color: #d41f1c;
+}
+
+#c {
+  position: fixed;
+  left: 445px;
+  bottom: 15px;
+  font-size: 46px;
+  opacity: .8;
+  color: #f77431;
+}
+
+#trello {
+  position: fixed;
+  left: 385px;
+  bottom: 15px;
+  font-size: 46px;
+  opacity: .8;
+  color: #408fdd;
+}
+
+#postgres {
+  position: fixed;
+  left: 325px;
+  bottom: 15px;
+  font-size: 46px;
+  opacity: .8;
+  color: #7b537e;
+}
+
+#sass {
+  position: fixed;
+  left: 265px;
+  bottom: 15px;
+  font-size: 46px;
+  opacity: .8;
+  color: #bb5041;
+}
+
+#travis {
+  position: fixed;
+  left: 205px;
+  bottom: 15px;
+  font-size: 46px;
+  opacity: .8;
+  color: #286141;
+}
+
+#react {
+  position: fixed;
+  left: 145px;
+  bottom: 20px;
+  font-size: 46px;
+  opacity: .8;
+  color: #3a80d1;
+}
+
+#apache {
+  position: fixed;
+  left: 85px;
+  bottom: 10px;
+  font-size: 46px;
+  opacity: .8;
+  color: #9a1224;
+}
+
+#ubuntu {
+  position: fixed;
+  left: 25px;
+  bottom: 15px;
+  font-size: 46px;
+  opacity: .8;
+  color: #fd7f29;
+}
+
+
+
+
+#grunt {
+  position: fixed;
+  right: 590px;
+  bottom: 25px;
+  font-size: 46px;
+  opacity: .8;
+  color: #a0503f;
 }
 
 
@@ -158,7 +285,7 @@ body {
   display: block;
   font-family: amatic sc;
   left: 30px;
-  top: 290px;
+  top: 230px;
   height: 230px;
   width: 380px;
   z-index: 10;
@@ -167,7 +294,7 @@ body {
 #coverDescContainer div a {
   display: inline;
   font-size: 36px;
-  background-color: #43234c;
+  background-color: #fdc331;
   border: 1px solid #43234c;
   color: #fff;;
 }
@@ -406,6 +533,7 @@ See Assignable classes for:
   left: 0;
   height: 800px;
   width: 1280px;
+  /*color: #256ece;*/
   background-color: #191a1a;
   text-align: center;
   font-family: amatic sc;
@@ -555,8 +683,19 @@ See Assignable classes for:
   top: 7px;
 }
 
+#ef {
+  font-family: amatic sc;
+  font-weight: 900;
+  font-size: 24px;
+  color: #FFF;
+}
+
 #footer {
   visibility: hidden;
+  bottom: 25px;
+}
+#footer span {
+  color: #e12d22;
 }
 
 
@@ -586,7 +725,7 @@ See Assignable classes for:
 
 .active {
   /*color: #6f3b87;*/
-  text-shadow: 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87;
+  /*text-shadow: 0 0 0.2em #000, 0 0 0.2em #000, 0 0 0.2em #000, 0 0 0.2em #000, 0 0 0.2em #000, 0 0 0.2em #000, 0 0 0.2em #000, 0 0 0.2em #000;*/
 
 }
 

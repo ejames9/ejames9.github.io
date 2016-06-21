@@ -713,7 +713,7 @@
 	        _mainNav.position('absolute').top('-5px').right('25px');
 	        _header.height('70px').bgColor('black').opacity('.6');
 
-	        if (_body.scrolled() > 2496 || _html.scrolled() > 2496) {
+	        if (_body.scrolled() > 2520 || _html.scrolled() > 2520) {
 	          _footer.viz('visible');
 	        } else {
 	          _footer.viz('hidden');
@@ -771,7 +771,12 @@
 	  //Run IIFE..
 	}();
 
-	//===Code Bin===============================================================>>>
+	//===TO DO===============================================================>>>
+
+	//TODO: Smoothly animate header..
+	//TODO: Finish project descriptions..
+	//TODO: animate scroll to different sections..
+	//TODO:
 
 	// do({
 	//         el: [el('#block'), position],

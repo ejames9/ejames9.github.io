@@ -92,7 +92,7 @@ body {
 .masthead-nav > .active > a:hover,
 .masthead-nav > .active > a:focus {
   color: #fff;
-  border-bottom-color: #fff;
+  border-bottom-color: #d41f1c;
 }
 
 @media (min-width: 768px) {

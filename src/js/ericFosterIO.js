@@ -292,7 +292,7 @@ const ericfosterIO = (function() {
       //If a project hasn't been clicked (TWEEN_), and the previous hovered project was _2 or _6 (TWEENTWO_)....
       if (flags.TWEEN_ && flags.TWEENTWO_) {
         //and..If the next mouseover element is not a project-list-item......
-        if (!hasAncestor(e.target, <'#rightProjList'>) && !hasAncestor(e.target, <'#leftProjList'>)) {
+        if (!hasAncestor(e.target, <'#rightProjList'>) && !hasAncestor(e.target, <'#leftProjList'> )) {
           //Make sure camera is properly oriented. (Run the snap-back tween)
           let
           target   = new THREE.Vector3(0, -90, -2200);
@@ -361,7 +361,7 @@ const ericfosterIO = (function() {
     function onClick() {
       const projectRE = /projects\-list\-item/;
 
-      click(<'html'>, function(e) {
+      click( <'html'>, function(e) {
         //If one of the links in the main navigation header are clicked..
         if (e.target.className === 'head-nav') {
           //Find the currently 'active' link, and remove the active class..
@@ -712,7 +712,7 @@ const ericfosterIO = (function() {
               .bgColor('black')
               .opacity('.6');
 
-        if (_body.scrolled() > 2496 || _html.scrolled() > 2496) {
+        if (_body.scrolled() > 2520 || _html.scrolled() > 2520) {
           _footer
               .viz('visible');
         } else {
@@ -794,7 +794,7 @@ const ericfosterIO = (function() {
 //TODO: Smoothly animate header..
 //TODO: Finish project descriptions..
 //TODO: animate scroll to different sections..
-//TODO: 
+//TODO:
 
 
 // do({
