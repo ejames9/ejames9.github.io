@@ -674,7 +674,7 @@ const ericfosterIO = (function() {
     //affix mainNav to top upon scroll.
     scroll(window, (e)=> {
       //Affix to top.
-      if (_body.scrolled() > 700 || _html.scrolled() > 700) {
+      if (_body.scrolled() > 700 || _html.scrolled() > 680) {
       //   //Create new tween for header animation..
       //   if (flags.HEAD_TWEEN_) {
       //     const
@@ -713,7 +713,6 @@ const ericfosterIO = (function() {
               .opacity('.6');
 
         if (_body.scrolled() > 2460 || _html.scrolled() > 2460) {
-          log('blue', 'blue');
           log(_body.scrolled());
           _footer
               .viz('visible');
@@ -770,8 +769,10 @@ const ericfosterIO = (function() {
   (function() {
     //Set projects pane to parameters appropriate for firefox
     if (browser.firefox) {
-      <'#projects'/>
-                .top('1530px');
+      <'#aboutMe'/>
+                .top('-15px');
+      <'#aboutMeContainer'/>
+                .top('-55px');
     }
     try {
       if (!window.frameElement) {

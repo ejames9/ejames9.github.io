@@ -486,10 +486,10 @@ See Assignable classes for:
   width: 100%;
 }
 
-#aboutMeContainer {
+/*#aboutMeContainer {
   position: relative;
   top: -20px;
-}
+}*/
 
 #aboutMe {
   position: relative;

@@ -684,7 +684,7 @@
 	    //affix mainNav to top upon scroll.
 	    scroll(window, function (e) {
 	      //Affix to top.
-	      if (_body.scrolled() > 700 || _html.scrolled() > 700) {
+	      if (_body.scrolled() > 700 || _html.scrolled() > 680) {
 	        //   //Create new tween for header animation..
 	        //   if (flags.HEAD_TWEEN_) {
 	        //     const
@@ -713,7 +713,6 @@
 	        _header.height('70px').bgColor('black').opacity('.6');
 
 	        if (_body.scrolled() > 2460 || _html.scrolled() > 2460) {
-	          log('blue', 'blue');
 	          log(_body.scrolled());
 	          _footer.viz('visible');
 	        } else {
@@ -754,9 +753,13 @@
 	    //Set projects pane to parameters appropriate for firefox
 	    if (browser.firefox) {
 	      (function () {
-	        var elem21 = _$('#projects') ? dom('#projects') : make('#projects').put("body");
+	        var elem21 = _$('#aboutMe') ? dom('#aboutMe') : make('#aboutMe').put("body");
 	        return elem21;
-	      })().top('1530px');
+	      })().top('-15px');
+	      (function () {
+	        var elem22 = _$('#aboutMeContainer') ? dom('#aboutMeContainer') : make('#aboutMeContainer').put("body");
+	        return elem22;
+	      })().top('-55px');
 	    }
 	    try {
 	      if (!window.frameElement) {
