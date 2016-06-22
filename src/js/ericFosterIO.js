@@ -712,7 +712,9 @@ const ericfosterIO = (function() {
               .bgColor('black')
               .opacity('.6');
 
-        if (_body.scrolled() > 2520 || _html.scrolled() > 2520) {
+        if (_body.scrolled() > 2460 || _html.scrolled() > 2460) {
+          log('blue', 'blue');
+          log(_body.scrolled());
           _footer
               .viz('visible');
         } else {

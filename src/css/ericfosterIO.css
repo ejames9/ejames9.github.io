@@ -12,30 +12,34 @@ html,body {
  height: 100%;
  margin: 0px;
  padding: 0px;
- overflow-x: hidden;
+ /*overflow-x: hidden;*/
 }
 
 body {
-  background-image: url('../../images/rainbula.jpg');
+  background-image: url('../../images/rainbula2.jpg');
   background-color: black;
   background-attachment: fixed;
   background-repeat: repeat-x;
   background-repeat: repeat-y;
-  max-width: 100%;
+  /*max-width: 100%;
   overflow-x: hidden;
-  right: 0;
+  right: 0;*/
 }
 
 
-#container {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-#innerWrapper {
-  height: 730px;
+#wrapper, #innerWrapper, #container {
+  height: 100%;
   width: 100%;
-  right: 0px;;
+  /*right: 0px;*/
+}
+
+#t {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  background-color: transparent;
 }
 
 
@@ -52,6 +56,7 @@ body {
 #meBrand {
   position: absolute;
   color: #714277;
+  top: 25px;
   left: 15px;
   font-family: monoton, love ya like a sister, im fell english sc, trade winds, henny penny, galindo, mystery quest, londrina shadow, londrina sketch, rum raisin;
   font-size: 101px;
@@ -65,6 +70,7 @@ body {
 
 #mainNav {
   margin-right: 30px;
+  /*margin-top: 20px;*/
   font-family: amatic sc, carme;
 }
 
@@ -73,15 +79,18 @@ body {
   color: #714277;
 }
 
-/*#show-techs {
-  background-color: black;
-  opacity: .5;
-}*/
+#show-techs {
+  position: fixed;
+  left: 20px;
+  bottom: 15px;
+  z-index: 5;
+}
+
+#show-techs i {
+  margin-right: 10px;
+}
 
 #js {
-  position: fixed;
-  left: 1175px;
-  bottom: 15px;
   color: #fed935;
   font-size: 46px;
   opacity: .8;
@@ -89,36 +98,24 @@ body {
 }
 
 #css {
-  position: fixed;
-  left: 1115px;
-  bottom: 15px;
   color: #d0191b;
   font-size: 46px;
   opacity: .6;
 }
 
 #html {
-  position: fixed;
-  left: 1055px;
-  bottom: 15px;
   color: #256ece;
   font-size: 46px;
   opacity: .8;
 }
 
 #python {
-  position: fixed;
-  left: 995px;
-  bottom: 15px;
   color: #fdb830;
   font-size: 46px;
   opacity: .8;
 }
 
 #gulp {
-  position: fixed;
-  left: 935px;
-  bottom: 15px;
   color: #992223;
   font-size: 56px;
   opacity: .8;
@@ -126,9 +123,6 @@ body {
 
 
 #node {
-  position: fixed;
-  left: 880px;
-  bottom: 15px;
   font-size: 56px;
   color: #748f56;
   opacity: .8;
@@ -142,137 +136,89 @@ body {
 }*/
 
 #elec {
-  position: fixed;
-  left: 815px;
-  bottom: 15px;
   font-size: 56px;
   color: #4fab67;
 }
 
 #apple {
-  position: fixed;
-  left: 755px;
-  bottom: 15px;
   font-size: 56px;
   opacity: .8;
   color: #000;
 }
 
 #bootstrap {
-  position: fixed;
-  left: 700px;
-  bottom: 15px;
   font-size: 46px;
   opacity: .8;
   color: #714477;
 }
 
 #django {
-  position: fixed;
-  left: 625px;
-  bottom: 5px;
   font-size: 56px;
   opacity: .8;
   color: #3c734b;
 }
 
 #githb {
-  position: fixed;
-  left: 565px;
-  bottom: 15px;
   font-size: 46px;
   opacity: .8;
   color: #22204c;
 }
 
 #git {
-  position: fixed;
-  left: 505px;
-  bottom: 15px;
   font-size: 46px;
   opacity: .8;
   color: #d41f1c;
 }
 
 #c {
-  position: fixed;
-  left: 445px;
-  bottom: 15px;
   font-size: 46px;
   opacity: .8;
   color: #f77431;
 }
 
 #trello {
-  position: fixed;
-  left: 385px;
-  bottom: 15px;
   font-size: 46px;
   opacity: .8;
   color: #408fdd;
 }
 
 #postgres {
-  position: fixed;
-  left: 325px;
-  bottom: 15px;
   font-size: 46px;
   opacity: .8;
   color: #7b537e;
 }
 
 #sass {
-  position: fixed;
-  left: 265px;
-  bottom: 15px;
   font-size: 46px;
   opacity: .8;
   color: #bb5041;
 }
 
 #travis {
-  position: fixed;
-  left: 205px;
-  bottom: 15px;
   font-size: 46px;
   opacity: .8;
   color: #286141;
 }
 
 #react {
-  position: fixed;
-  left: 145px;
-  bottom: 20px;
   font-size: 46px;
   opacity: .8;
   color: #3a80d1;
 }
 
 #apache {
-  position: fixed;
-  left: 85px;
-  bottom: 10px;
   font-size: 46px;
   opacity: .8;
   color: #9a1224;
 }
 
 #ubuntu {
-  position: fixed;
-  left: 25px;
-  bottom: 15px;
   font-size: 46px;
   opacity: .8;
   color: #fd7f29;
 }
 
-
-
-
 #grunt {
-  position: fixed;
-  right: 590px;
-  bottom: 25px;
   font-size: 46px;
   opacity: .8;
   color: #a0503f;
@@ -285,7 +231,7 @@ body {
   display: block;
   font-family: amatic sc;
   left: 30px;
-  top: 230px;
+  bottom: 280px;
   height: 230px;
   width: 380px;
   z-index: 10;
@@ -294,9 +240,9 @@ body {
 #coverDescContainer div a {
   display: inline;
   font-size: 36px;
-  background-color: #fdc331;
+  background-color: #fa6121;
   border: 1px solid #43234c;
-  color: #fff;;
+  color: #43234c;;
 }
 #coverDescContainer div a:hover {
   background-color: #164cac;
@@ -319,16 +265,19 @@ body {
 /*===Projects Page=======================================*/
 
 #projects {
-  position: absolute;
+  /*position: absolute;
   left: 0;
-  top: 1500px;
+  top: 1478px;*/
+  height: 0px;
+  width: 100%;
 }
 
 #threejs {
-  position: absolute;
-  top: 1500px;
-  height: 760px;
-  left: 0;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
   font-family: amatic sc;
   font-size: 28px;
   background-image: url('../../images/andromeda.jpg');
@@ -363,11 +312,13 @@ body {
   position: absolute;
   left: 0px;
   bottom: 0px;
+  margin-bottom: 0px;
 }
 #rightProjList {
   position: absolute;
   right: 0px;
   bottom: 0px;
+  margin-bottom: 0px;
 }
 
 .projects-list {
@@ -529,21 +480,29 @@ See Assignable classes for:
 /*===About Me===================================*/
 
 #me {
-  position: absolute;
-  top: 740px;
+  /*position: absolute;*/
+  /*top: 740px;*/
+  height: 0px;
+  width: 100%;
+}
+
+#aboutMeContainer {
+  position: relative;
+  top: -20px;
 }
 
 #aboutMe {
-  position: absolute;
-  top: 740px;
-  left: 0;
-  height: 800px;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  height: 100%;
   width: 100%;
   /*color: #256ece;*/
   background-color: #191a1a;
   text-align: center;
   font-family: amatic sc;
   padding: 80px 30px 100px 30px;
+  z-index: 12;
 }
 
 #aboutMe h2 {
@@ -556,15 +515,16 @@ See Assignable classes for:
 /*===Contact Me======================================*/
 
 #contactMe {
-  position: absolute;
-  top: 2260px;
+  position: relative;
+  top: 0px;
   left: 0px;
+  z-index: 11;
 }
 
 #contact {
-  position: absolute;
+  position: relative;
+  top: 0px;
   left: 0px;
-  top: 2240px;
   height: 220px;
   width: 100%;
   background-color: #191a1a;
@@ -573,6 +533,7 @@ See Assignable classes for:
   padding: 80px 0px 60px 0px;
   text-align: center;
   font-family: amatic sc;
+  z-index: 11;
 }
 
 #contactMeText {
@@ -587,14 +548,15 @@ See Assignable classes for:
 }*/
 
 #buttons {
-  position: absolute;
-  top: 2485px;
+  position: relative;
+  top: 0px;
   left: 0px;
   width: 100%;
-  height: 260px;
+  height: 250px;
   background-color: transparent;
   padding: 60px 0px 140px 0px;
   text-align: center;
+  z-index: 11;
 }
 
 .buttons {
@@ -626,9 +588,11 @@ See Assignable classes for:
 }
 
 #buttonsContainer {
+  position: relative;
   font-family: amatic sc;
   display: inline;
   margin: auto;
+  top: 30px;
   width: 100%;
 }
 
@@ -651,8 +615,8 @@ See Assignable classes for:
 
 
 #mapLink {
-  position: absolute;
-  top: 2355px;
+  position: relative;
+  top: 0px;
   left: 0px;
 }
 
@@ -672,16 +636,19 @@ See Assignable classes for:
 #mapFrame {
   background-color: #191a1a;
   padding: 25px 0px 25px 0px;
+  z-index: 10;
 }
 
 #map {
-  position: absolute;
+  position: relative;
+  top: 0px;
   left: 0px;
-  top: 2725px;
+  /*top: 2725px;*/
   height: 555px;
   width: 100%;
-  background-color: transparent;;
+  background-color: transparent;
   padding: 0px 0px 115px 0px;
+  z-index: 11;
 }
 
 .navBarTop {
@@ -698,7 +665,8 @@ See Assignable classes for:
 
 #footer {
   visibility: hidden;
-  bottom: 25px;
+  bottom: 30px;
+  left: 22.5%;
 }
 #footer span {
   color: #e12d22;
@@ -737,4 +705,139 @@ See Assignable classes for:
 
  .info {
    margin-bottom: 20px;
+ }
+
+
+ /*-----------------------Media Queries--------------------*/
+
+ /*@media screen and (max-width: 1300px) {
+   body {
+     background-image: url('../../images/rainbula.jpg');
+   }
+
+   #meBrand {
+     top: 25px;
+     left: 15px;
+     font-size: 78px;
+
+   }
+
+   #mainNav li a {
+     font-size: 32px;
+   }
+
+   #show-techs i {
+     font-size: 32
+   }
+ }*/
+
+ @media screen and (min-width: 1300px) {
+   body {
+     background-image: url('../../images/rainbula2.jpg');
+     background-color: black;
+     background-attachment: fixed;
+   }
+
+
+ @media screen and (max-width: 1366px) {
+
+
+   #meBrand {
+     top: 25px;
+     left: 15px;
+     font-size: 101px;
+   }
+
+   #mainNav li a {
+     font-size: 46;
+   }
+
+   #show-techs i {
+     font-size: 46
+   }
+
+ }
+
+
+ @media screen and (max-width: 800px) {
+
+
+   #meBrand {
+     top: 25px;
+     left: 15px;
+     font-size: 78px;
+
+   }
+
+   #mainNav li a {
+     font-size: 32px;
+   }
+
+   #show-techs i {
+     font-size: 32
+   }
+ }
+
+
+ @media screen and (max-width: 520px) {
+   body {
+     background-image: url('../../images/rainbula3.jpg');
+     background-color: black;
+     background-attachment: fixed;
+
+   }
+
+   #meBrand {
+     top: 25px;
+     left: 15px;
+     font-size: 66px;
+
+   }
+
+   #mainNav li a {
+     font-size: 32px;
+   }
+
+   #show-techs i {
+     font-size: 32
+   }
+ }
+
+ @media screen and (max-width: 360px) {
+
+
+   #meBrand {
+     top: 25px;
+     left: 15px;
+     font-size: 58px;
+
+   }
+
+   #mainNav li a {
+     font-size: 26px;
+   }
+
+   #show-techs i {
+     font-size: 26
+   }
+
+ }
+
+ @media screen and (max-width: 240px) {
+
+
+   #meBrand {
+     top: 25px;
+     left: 15px;
+     font-size: 48px;
+
+   }
+
+   #mainNav li a {
+     font-size: 22px;
+   }
+
+   #show-techs i {
+     font-size: 22
+   }
  }

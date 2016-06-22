@@ -712,7 +712,9 @@
 	        _mainNav.position('absolute').top('-5px').right('25px');
 	        _header.height('70px').bgColor('black').opacity('.6');
 
-	        if (_body.scrolled() > 2520 || _html.scrolled() > 2520) {
+	        if (_body.scrolled() > 2460 || _html.scrolled() > 2460) {
+	          log('blue', 'blue');
+	          log(_body.scrolled());
 	          _footer.viz('visible');
 	        } else {
 	          _footer.viz('hidden');
@@ -751,7 +753,6 @@
 	  go(function () {
 	    //Set projects pane to parameters appropriate for firefox
 	    if (browser.firefox) {
-	      log('firefox');
 	      (function () {
 	        var elem21 = _$('#projects') ? dom('#projects') : make('#projects').put("body");
 	        return elem21;
