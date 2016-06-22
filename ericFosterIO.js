@@ -755,11 +755,11 @@
 	      (function () {
 	        var elem21 = _$('#aboutMe') ? dom('#aboutMe') : make('#aboutMe').put("body");
 	        return elem21;
-	      })().top('-15px');
+	      })().top('-10px');
 	      (function () {
 	        var elem22 = _$('#aboutMeContainer') ? dom('#aboutMeContainer') : make('#aboutMeContainer').put("body");
 	        return elem22;
-	      })().top('-55px');
+	      })().top('-35px');
 	    }
 	    try {
 	      if (!window.frameElement) {

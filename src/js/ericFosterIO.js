@@ -770,9 +770,9 @@ const ericfosterIO = (function() {
     //Set projects pane to parameters appropriate for firefox
     if (browser.firefox) {
       <'#aboutMe'/>
-                .top('-15px');
+                .top('-10px');
       <'#aboutMeContainer'/>
-                .top('-55px');
+                .top('-35px');
     }
     try {
       if (!window.frameElement) {
