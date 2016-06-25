@@ -138,7 +138,7 @@ const ericfosterIO = (function() {
       // the camera starts at 0,0,0, so pull it back
       camera.position.z = 2200;
       camera.position.x = 0;
-      camera.position.y = -90;
+      camera.position.y = -120;
       camera.lookAt(scene.position);
 
       // attach the render-supplied DOM element
@@ -662,6 +662,29 @@ const ericfosterIO = (function() {
 
   //--ericfoster.io Scroll events=====================================>>>
   function onScroll() {
+    //affix mainNav to top upon scroll.
+    scroll(window, (e)=> {
+      //This switch statement is for accomodating multiple screen sizes/configs. (Responsive Design).
+      switch (99===9*9+18) {
+        case (window.innerWidth > 1010):
+            headerFooterAnimation(700, 2460, 42, 36);
+            //Make sure map is centered by removing img-responsive class.
+            <'#map-image'/>
+                      .class('img-responsive', '-');
+            break;
+        case (window.innerWidth > 810):
+            headerFooterAnimation(700, 2460, 42, 36);
+            break;
+        case (window.innerWidth > 520):
+            headerFooterAnimation(600, 2000, 38, 32);
+            break;
+        case (window.innerWidth > 340):
+            break;
+      }
+    });
+  }
+
+  function headerFooterAnimation(offSet1, offSet2, fontSize1, fontSize2) {
     //cache elements..
     let _body    = <body/>,
         _html    = <html/>,
@@ -671,75 +694,51 @@ const ericfosterIO = (function() {
       _header    = <'#header'/>,
       _footer    = <'#footer'/>;
 
-    //affix mainNav to top upon scroll.
-    scroll(window, (e)=> {
-      //Affix to top.
-      if (_body.scrolled() > 700 || _html.scrolled() > 680) {
-      //   //Create new tween for header animation..
-      //   if (flags.HEAD_TWEEN_) {
-      //     const
-      //     tween = new TWEEN.Tween({fontS: 101, fontS2: 46});
-      //     tween
-      //         .to({fontS: 42, fontS2: 36}, 500)
-      //         .easing(TWEEN.Easing.Linear.None)
-      //         .onUpdate(function() {
-      //           _meBrand
-      //                   .fontSize(this.fontS + 'px');
-      //           _mainNavLI
-      //                   .every((element)=> {
-      //                     element
-      //                        .fontSize(this.fontS2 + 'px')
-      //                   });
-      //         })
-      //         .start();
-      //     //Reset flag to false..
-      //     flags.HEAD_TWEEN_ = false;
-      //   }
-        _meBrand
-              .fontSize('42px')
-              .top('2px');
-        _mainNavLI
-              .every((element)=> {
-                element
-                  .fontSize('36px')
-              });
-        _mainNav
-              .position('absolute')
-              .top('-5px')
-              .right('25px');
-        _header
-              .height('70px')
-              .bgColor('black')
-              .opacity('.6');
+    //The following code exectutes if the page is scrolled beyond the # of px's below. This is the header animation.
+    if (_body.scrolled() > offSet1 || _html.scrolled() > offSet1 - 20) {
+      _meBrand
+            .fontSize(String(fontSize1) + 'px')
+            .top('2px');
+      _mainNavLI
+            .every((element)=> {
+              element
+                .fontSize(String(fontSize2) + 'px')
+            });
+      _mainNav
+            .position('absolute')
+            .top('-5px')
+            .right('25px');
+      _header
+            .height('70px')
+            .bgColor('black')
+            .opacity('.7');
 
-        if (_body.scrolled() > 2460 || _html.scrolled() > 2460) {
-          log(_body.scrolled());
-          _footer
-              .viz('visible');
-        } else {
-          _footer
-              .viz('hidden');
-        }
+      if (_body.scrolled() > offSet2 || _html.scrolled() > offSet2) {
+        _footer
+            .viz('visible');
       } else {
-        //Release.
-        _meBrand
-              .fontSize('101px')
-              .top('25px');
-        _mainNavLI
-              .every((element)=> {
-                element
-                  .fontSize('46px')
-                });
-        _mainNav
-              .position('')
-              .top('')
-              .right('');
-        _header
-              .height('')
-              .bgColor('')
-              .opacity('');
+        _footer
+            .viz('hidden');
       }
-    });
+    } else {
+      //Release.
+      _meBrand
+            .fontSize('')
+            .top('25px');
+      _mainNavLI
+            .every((element)=> {
+              element
+                .fontSize('')
+              });
+      _mainNav
+            .position('')
+            .top('')
+            .right('');
+      _header
+            .height('')
+            .bgColor('')
+            .opacity('');
+    }
   }
 
 
@@ -773,6 +772,16 @@ const ericfosterIO = (function() {
                 .top('-10px');
       <'#aboutMeContainer'/>
                 .top('-35px');
+    }
+    if (browser.webkit) {
+      <'#footer span'/>
+                .every((element, a)=> {
+                  element
+                   .only(2, ()=> {
+                     element
+                       .color('#000');
+                   }, a);
+                });
     }
     try {
       if (!window.frameElement) {
@@ -810,3 +819,29 @@ const ericfosterIO = (function() {
 //       <'#project-info'>.style.transform = 'translate(' + this.left + 'px, ' + this.top + 'px)';
 //   })
 // });
+
+
+
+//===CODE BIN===============================================================>>>
+
+
+//   //Create new tween for header animation..
+//   if (flags.HEAD_TWEEN_) {
+//     const
+//     tween = new TWEEN.Tween({fontS: 101, fontS2: 46});
+//     tween
+//         .to({fontS: 42, fontS2: 36}, 500)
+//         .easing(TWEEN.Easing.Linear.None)
+//         .onUpdate(function() {
+//           _meBrand
+//                   .fontSize(this.fontS + 'px');
+//           _mainNavLI
+//                   .every((element)=> {
+//                     element
+//                        .fontSize(this.fontS2 + 'px')
+//                   });
+//         })
+//         .start();
+//     //Reset flag to false..
+//     flags.HEAD_TWEEN_ = false;
+//   }
