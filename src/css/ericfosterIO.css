@@ -84,7 +84,7 @@ body {
 }
 
 #coverDescContainer {
-  position: relative;;
+  position: relative;
   font-family: amatic sc;
   top: 230px;
   left: 50px;
@@ -325,7 +325,6 @@ body {
   font-size: 28px;
   background-image: url('../../images/andromeda.jpg');
   background-repeat: repeat;
-
   background-color: black;
   z-index: 11;
   padding: 0px;
@@ -369,7 +368,7 @@ body {
   padding: 12px;
   border-radius: 10px;
   bottom: 0;
-  background-color: black;
+  background-color: #000;
   opacity: .7;
   z-index: 999
 }
@@ -394,7 +393,7 @@ body {
   top: 110px;
   left: 300px;
   border-radius: 10px;
-  background-color: black;
+  background-color: #000;
   color: #fff;
   opacity:  .8;
   font-family: amatic sc;
@@ -624,7 +623,7 @@ See Assignable classes for:
   display: inline;
   margin: auto;
   top: 30px;
-  width: 100%;
+  width: 400px;
 }
 
 #linkedin {
@@ -781,7 +780,7 @@ Width-- 1100 > 1990px ===------------------------------>>
  }
 
  /*
- Width-- 810 => 1100px ===------------------------------>>
+ Width-- 1000 => 1100px ===------------------------------>>
  */
  @media screen and (max-width: 1100px) {
    #meBrand {
@@ -832,11 +831,15 @@ Width-- 1100 > 1990px ===------------------------------>>
 
  }
 
+
+
  /*
 #threejs--#mobile-projs, -- 0 => 1000px wide and 1000px => 8===------------------------------>>
 This is the swapping of the Desktop (cubefolio) and the
 mobile version of the portfolio at
 1000px width.
+
+ALSO 900px => 1000px
  */
  @media screen and (min-width: 1000px) {
    #threejs {
@@ -855,13 +858,17 @@ mobile version of the portfolio at
    #mobile-projs {
      display: block;
    }
+
+   #show-techs i {
+     font-size: 33px;
+   }
  }
 
 
  /*
- Width-- 520 => 810px ===------------------------------>>
+ Width-- 800 => 900px ===------------------------------>>
  */
- @media screen and (max-width: 810px) {
+ @media screen and (max-width: 900px) {
    #meBrand {
      font-size: 60px;
    }
@@ -914,30 +921,628 @@ mobile version of the portfolio at
  }
 
  /*
- Width-- 360 => 520px ===------------------------------>>
+ Width-- 700 => 800px, Height-- 800px++ ===------------------------------>>
  */
- @media screen and (max-width: 520px) {
-   body {
-     background-image: url('../../images/rainbula3.jpg');
-   }
-
+ @media screen and (max-width: 800px) and (min-height: 800px) {
    #meBrand {
      font-size: 48px;
    }
 
    #mainNav li a {
-     font-size: 32px;
+     font-size: 42px;
    }
 
    #show-techs i {
+     font-size: 56px;
+   }
+
+   #coverDesc {
+     font-size: 44px;
+     margin-bottom: 20px;
+   }
+
+   #coverDescContainer {
+     /*margin: auto;*/
+     left: 200px;
+     top: 300px;
+     height: 430px;
+     width: 380px;
+   }
+
+   #aboutMe h2 {
+     font-size: 54px;
+   }
+
+   #aboutMe p {
+     font-size: 26px;
+   }
+
+   #aboutMeContainer {
+     position: relative;
+     top: 100px;
+   }
+
+   #threejs {
+     background-repeat: repeat-y;
+   }
+
+   #map {
+     margin-bottom: 85px;
+   }
+
+   .buttons {
+     width: 40px;
+   }
+
+   #buttons div a {
+     font-size: 30px;
+     margin-right: 20px;
+   }
+
+   #footer {
+     padding-bottom: 100px;
+   }
+ }
+ /*
+ Width-- 700 => 800px, Height-- 800px--  ===------------------------------>>
+ */
+ @media screen and (max-width: 800px) and (max-height: 800px) {
+   #meBrand {
+      top: -5px;
+     font-size: 52px;
+   }
+
+   #mainNav li a {
+     font-size: 42px;
+   }
+   #mainNav {
+     position: absolute;
+     top: -15px;
+     right: 0px;
+   }
+
+   #show-techs i {
+     font-size: 22px;
+   }
+
+   #coverDesc {
+     color: #000;
+     font-size: 26px;
+     margin-bottom: 20px;
+   }
+
+   #coverDescContainer {
+     /*margin: auto;*/
+     left: 230px;
+     top: 110px;
+     height: 130px;
+     width: 300px;
+   }
+
+   #aboutMe h2 {
      font-size: 32px;
    }
+
+   #aboutMe p {
+     font-size: 16px;
+   }
+
+   #aboutMeContainer {
+     position: relative;
+     top: -60px;
+   }
+
+   #threejs {
+     background-repeat: repeat-y;
+   }
+
+   #map {
+     margin-bottom: 75px;
+   }
+
+   .buttons {
+     width: 40px;
+   }
+
+   #buttons div a {
+     font-size: 30px;
+     margin-right: 20px;
+   }
+
+   #footer {
+     position: fixed;
+     left: 290px;
+     top: 340px;
+   }
+
+ }
+
+
+
+ /*
+ Width-- 600 => 700px, Height 700px++===------------------------------>>
+ */
+ @media screen and (max-width: 700px) and (min-height: 700px) {
+   #meBrand {
+     font-size: 69px;
+     left: 65px;
+     top: 10px;
+   }
+
+   #mainNav {
+     display: none;
+   }
+
+   #mainNav li a {
+     font-size: 55px;
+   }
+
+   #show-techs i {
+     font-size: 44px;
+   }
+
+   #coverDesc {
+     font-size: 44px;
+     margin-bottom: 20px;
+   }
+
+   #coverDescContainer {
+     /*margin: auto;*/
+     left: 130px;
+     top: 300px;
+     height: 430px;
+     width: 380px;
+   }
+
+   #aboutMe h2 {
+     font-size: 54px;
+   }
+
+   #aboutMe p {
+     font-size: 26px;
+   }
+
+   #aboutMeContainer {
+     position: relative;
+     top: 20px;
+   }
+
+   #threejs {
+     background-repeat: repeat-y;
+   }
+
+   #map {
+     margin-bottom: 85px;
+   }
+
+   .buttons {
+     width: 35px;
+   }
+
+   #buttons div a {
+     font-size: 30px;
+     margin-right: 20px;
+   }
+
+   #footer {
+     padding-bottom: 100px;
+   }
+
+ }
+ /*
+ Width-- 600 => 700px, Height 700px--===------------------------------>>
+ */
+ @media screen and (max-width: 700px) and (max-height: 700px) {
+   #meBrand {
+      top: -5px;
+     font-size: 42px;
+   }
+
+   #mainNav li a {
+     font-size: 40px;
+   }
+   #mainNav {
+     position: absolute;
+     top: -15px;
+     right: 0px;
+   }
+
+   #show-techs i {
+     font-size: 18px;
+   }
+
+   #coverDesc {
+     color: #000;
+     font-size: 26px;
+     margin-bottom: 20px;
+   }
+
+   #coverDescContainer {
+     /*margin: auto;*/
+     left: 190px;
+     top: 110px;
+     height: 130px;
+     width: 300px;
+   }
+
+   #aboutMe h2 {
+     font-size: 28px;
+   }
+
+   #aboutMe p {
+     font-size: 14px;
+   }
+
+   #aboutMeContainer {
+     position: relative;
+     top: -60px;
+   }
+
+   #threejs {
+     background-repeat: repeat-y;
+   }
+
+   #map {
+     margin-bottom: 85px;
+   }
+
+   .buttons {
+     width: 40px;
+   }
+
+   #buttons div a {
+     font-size: 30px;
+     margin-right: 20px;
+   }
+
+   #footer {
+     position: fixed;
+     top: 300px;
+     left: 250px;
+   }
+
+
  }
 
  /*
- Width-- 240 => 360px ===------------------------------>>
+ Width-- 500 => 600px, Portrait ===------------------------------>>
  */
- @media screen and (max-width: 360px) {
+ @media screen and (max-width: 600px) and (orientation: portrait) {
+   #meBrand {
+     position: absolute;
+     margin: auto;
+     right: 0;
+     left: 0;
+     font-size: 65px;
+   }
+
+   #mainNav {
+     display: none;
+   }
+
+   #mainNav li a {
+     font-size: 24px;
+   }
+
+   #show-techs i {
+     font-size: 37px;
+   }
+
+   #coverDesc {
+     font-size: 44px;
+     margin-bottom: 20px;
+   }
+
+   #coverDescContainer {
+     margin: auto;
+     position: absolute;
+     top: 0;
+     left: 0;
+     bottom: 0;
+     right: 0;
+     width: 380px;
+   }
+
+   #aboutMe h2 {
+     font-size: 44px;
+   }
+
+   #aboutMe p {
+     font-size: 22px;
+   }
+
+   #aboutMeContainer {
+     position: relative;
+     top: 15px;
+   }
+
+   #threejs {
+     background-repeat: repeat-y;
+   }
+
+   #map {
+     margin-bottom: 85px;
+   }
+
+   .buttons {
+     width: 20px;
+   }
+
+   #buttons div a {
+     font-size: 21px;
+     margin-right: 7px;
+   }
+
+   #footer {
+     padding-bottom: 30px;
+   }
+ }
+ /*
+ Width-- 500 => 600px, Landscape ===------------------------------>>
+ */
+ @media screen and (max-width: 600px) and (orientation: landscape) {
+   #meBrand {
+      top: -5px;
+     font-size: 34px;
+   }
+
+   #mainNav li a {
+     font-size: 36px;
+   }
+   #mainNav {
+     position: absolute;
+     top: -15px;
+     right: 0px;
+   }
+
+   #show-techs i {
+     font-size: 13px;
+   }
+
+   #coverDesc {
+     color: #000;
+     font-size: 26px;
+     margin-bottom: 20px;
+   }
+
+   #coverDescContainer {
+     top: 70px;
+     left: 160px;
+     height: 130px;
+     width: 300px;
+   }
+
+   #aboutMe h2 {
+     font-size: 20px;
+   }
+
+   #aboutMe p {
+     font-size: 12px;
+   }
+
+   #aboutMeContainer {
+     position: relative;
+     top: -60px;
+   }
+
+   #threejs {
+     background-repeat: repeat-y;
+   }
+
+   #map {
+     margin-bottom: 85px;
+   }
+
+   .buttons {
+     width: 40px;
+   }
+
+   #buttons {
+     padding-bottom: 60px;
+   }
+
+   #buttons div a {
+     font-size: 21px;
+     margin-right: 7px;
+   }
+
+   #footer {
+     top: 240px;
+     left: 200px;
+   }
+
+
+ }
+
+
+ /*
+ Width-- 400 => 500px, Portrait ===------------------------------>>
+ */
+ @media screen and (max-width: 500px) and (orientation: portrait) {
+   body {
+     background-image: url('../../images/rainbula2.jpg');
+   }
+
+   #meBrand {
+     position: absolute;
+     margin: auto;
+     right: 0;
+     left: 0;
+     font-size: 55px;
+   }
+
+   #mainNav {
+     display: none;
+   }
+
+
+   #show-techs i {
+     font-size: 37px;
+   }
+
+   #coverDesc {
+     font-size: 38px;
+     margin-bottom: 20px;
+     color: #fff;
+   }
+
+   #coverDescContainer {
+     margin: auto;
+     position: absolute;
+     top: 0;
+     left: 0;
+     bottom: 0;
+     right: 0;
+     width: 380px;
+   }
+
+   #aboutMe h2 {
+     font-size: 38px;
+   }
+
+   #aboutMe p {
+     font-size: 19px;
+   }
+
+   #aboutMeContainer {
+     position: relative;
+     top: -10px;
+   }
+
+   #threejs {
+     background-repeat: repeat-y;
+   }
+
+   #map {
+     margin-bottom: 145px;
+   }
+
+   #buttons {
+     padding: 0;
+   }
+
+   .tact {
+     width: 20px;
+     display: block;
+     margin-bottom: 25px;
+
+   }
+
+   #buttons div a {
+     font-size: 21px;
+   }
+
+   #buttonsContainer {
+     position: absolute;
+     width: 100px;
+     margin: auto;
+     left: 0; right: 0;
+     top: 15px;
+   }
+
+   #footer {
+     /*position: relative;*/
+
+   }
+
+ }
+ /*
+ Width-- 400 => 500px, Landscape ===------------------------------>>
+ */
+ @media screen and (max-width: 500px) and (orientation: landscape) {
+   body {
+     background-image: url('../../images/rainbula2.jpg');
+   }
+
+   #meBrand {
+      top: -5px;
+     font-size: 27px;
+   }
+
+   #mainNav li a {
+     font-size: 30px;
+     padding-bottom: 0px;
+   }
+
+   #mainNav {
+     position: absolute;
+     top: -15px;
+     right: -10px;
+   }
+
+   #header {
+     height: 45px;
+   }
+
+   #show-techs i {
+     font-size: 9px;
+   }
+
+   #coverDesc {
+     color: #000;
+     font-size: 26px;
+     margin-bottom: 20px;
+   }
+
+   #coverDescContainer {
+     top: 60px;
+     left: 160px;
+     height: 130px;
+     width: 300px;
+   }
+
+   #aboutMe h2 {
+     font-size: 20px;
+   }
+
+   #aboutMe p {
+     font-size: 12px;
+   }
+
+   #aboutMeContainer {
+     position: relative;
+     top: -70px;
+   }
+
+   #threejs {
+     background-repeat: repeat-y;
+   }
+
+   #map {
+     margin-bottom: 85px;
+   }
+
+   .buttons {
+     width: 40px;
+   }
+
+   #buttons {
+     padding-bottom: 60px;
+   }
+
+   #buttons div a {
+     font-size: 21px;
+     margin-right: 7px;
+   }
+
+   #footer {
+     top: 240px;
+     left: 200px;
+   }
+
+ }
+
+ /*
+ Width-- 300 => 400px ===------------------------------>>
+ */
+ @media screen and (max-width: 400px) {
+
+ }
+
+ /*
+ Width-- 200 => 300px ===------------------------------>>
+ */
+ @media screen and (max-width: 300px) {
    #meBrand {
      font-size: 40px;
 
@@ -951,9 +1556,9 @@ mobile version of the portfolio at
  }
 
  /*
- Width-- 0 => 360px ===------------------------------>>
+ Width-- 0 => 200px ===------------------------------>>
  */
- @media screen and (max-width: 240px) {
+ @media screen and (max-width: 200px) {
 
 
    #meBrand {

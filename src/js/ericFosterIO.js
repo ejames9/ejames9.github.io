@@ -42,6 +42,8 @@ APPLICATION_DATA.FLAGS_.FIRST_CLICK_ = false;
 //global boolean flag that essentially turns off some event handling code  but continues to allow other code to run.
 APPLICATION_DATA.FLAGS_.TWEEN_       = true;
 APPLICATION_DATA.FLAGS_.HEAD_TWEEN_  = true;
+//This flag is set to true when the header is fixed to the top, and set back to false when it is released.
+APPLICATION_DATA.FLAGS_.HEADER_FIXED_ = false;
 
 //Project URLs..
 APPLICATION_DATA.PROJECT_URLS['_1']  = 'http://elementsjs.io';
@@ -659,85 +661,193 @@ const ericfosterIO = (function() {
     }
   }
 
+  //Created closure for organization of Scroll event-handling functions.
+  function responsiveScrollEventHandling() {
+    //
+    onScroll();
 
-  //--ericfoster.io Scroll events=====================================>>>
-  function onScroll() {
-    //affix mainNav to top upon scroll.
-    scroll(window, (e)=> {
-      //This switch statement is for accomodating multiple screen sizes/configs. (Responsive Design).
-      switch (99===9*9+18) {
-        case (window.innerWidth > 1010):
-            headerFooterAnimation(700, 2460, 42, 36);
-            //Make sure map is centered by removing img-responsive class.
-            <'#map-image'/>
-                      .class('img-responsive', '-');
-            break;
-        case (window.innerWidth > 810):
-            headerFooterAnimation(700, 2460, 42, 36);
-            break;
-        case (window.innerWidth > 520):
-            headerFooterAnimation(600, 2000, 38, 32);
-            break;
-        case (window.innerWidth > 340):
-            break;
-      }
-    });
-  }
+    //--ericfoster.io Scroll events=====================================>>>
+    function onScroll() {
+      //affix mainNav to top upon scroll.
+      scroll(window, (e)=> {
+        //This switch statement is for accomodating multiple screen sizes/configs. (Responsive Design).
+        switch (99===9*9+18) {
+          case (window.innerWidth > 1000):
+              headerFooterAnimation(700, 2460, 42, 36);
+              //Make sure map is centered by removing img-responsive class.
+              <'#map-image'/>
+                        .class('img-responsive', '-');
+              break;
+          case (window.innerWidth > 900):
+              headerFooterAnimation(600, 2060, 42, 36);
+              break;
+          case (window.innerWidth > 780):
+              headerFooterAnimation(500, 2060, 42, 36);
+              break;
+          case (window.innerWidth > 700):
+              if (window.innerHeight > 700) {
+                headerFooterAnimation(1000, 2060, 42, 36);
+              } else {
+                headerFooterAnimation(380, 1600, 42, 36);
+              }
+              break;
+          case (window.innerWidth > 600):
+              if (window.innerHeight > 600) {
+                headerFooterAnimation_Mobile(100, 2000, 56);
+              } else {
+                headerFooterAnimation(380, 1450, 42, 36);
+              }
+              break;
+          case (window.innerWidth > 500):
+              if (window.innerHeight > 500) {
+                headerFooterAnimation_Mobile(100, 2000, 50, 55);
+              } else {
+                headerFooterAnimation(310, 1430, 32, 32);
+              }
+              break;
+          case (window.innerWidth > 400):
+              if (window.innerHeight > 400) {
+                headerFooterAnimation_Mobile(100, 2000, 48, 30);
+                //Adust margin between nav items.
+                <'#mainNav li a'/>
+                        .every((element)=> {
+                          element
+                              .marginRight('10px');
+                        });
+              } else {
+                headerFooterAnimation(300, 1400, 26, 29);
+                //Make a couple adjustments..
+                <'#header'/>
+                      .height('45px');
+                <'#mainNav'/>
+                      .right('5px');
+              }
+              break;
+          case (window.innerWidth > 300):
+              break;
+          case (window.innerWidth > 200):
+              break;
+          default:
+              break;
+        }
+      });
+    }
 
-  function headerFooterAnimation(offSet1, offSet2, fontSize1, fontSize2) {
-    //cache elements..
-    let _body    = <body/>,
-        _html    = <html/>,
-      _meBrand   = <'#meBrand'/>,
-      _mainNavLI = <'#mainNav li a'/>,
-      _mainNav   = <'#mainNav'/>,
-      _header    = <'#header'/>,
-      _footer    = <'#footer'/>;
 
-    //The following code exectutes if the page is scrolled beyond the # of px's below. This is the header animation.
-    if (_body.scrolled() > offSet1 || _html.scrolled() > offSet1 - 20) {
-      _meBrand
-            .fontSize(String(fontSize1) + 'px')
-            .top('2px');
-      _mainNavLI
-            .every((element)=> {
-              element
-                .fontSize(String(fontSize2) + 'px')
-            });
-      _mainNav
-            .position('absolute')
-            .top('-5px')
-            .right('25px');
-      _header
-            .height('70px')
-            .bgColor('black')
-            .opacity('.7');
+    function headerFooterAnimation_Mobile(offSet1, offSet2, fontSize, left=90) {
+      //cache elements..
+      let _body    = <body/>,
+          _html    = <html/>,
+        _meBrand   = <'#meBrand'/>,
+        _mainNavLI = <'#mainNav li a'/>,
+        _mainNav   = <'#mainNav'/>,
+        _header    = <'#header'/>,
+        _footer    = <'#footer'/>;
 
-      if (_body.scrolled() > offSet2 || _html.scrolled() > offSet2) {
-        _footer
-            .viz('visible');
-      } else {
-        _footer
-            .viz('hidden');
-      }
-    } else {
-      //Release.
-      _meBrand
-            .fontSize('')
-            .top('25px');
-      _mainNavLI
-            .every((element)=> {
-              element
-                .fontSize('')
+      //The following code exectutes if the page is scrolled beyond the # of px's below. This is the header animation.
+      if (_body.scrolled() > offSet1 || _html.scrolled() > offSet1 - 20) {
+        _meBrand
+              .display('none');
+        _mainNavLI
+              .every((element)=> {
+                element
+                  .fontSize(String(fontSize) + 'px')
+                  .marginRight('30px');
               });
-      _mainNav
-            .position('')
-            .top('')
-            .right('');
-      _header
-            .height('')
-            .bgColor('')
-            .opacity('');
+        _mainNav
+              .display('block')
+              .position('absolute')
+              .top('-10px')
+              .left(String(left) + 'px');
+        _header
+              .top('0px')
+              .height('90px')
+              .bgColor('black')
+              .opacity('.7');
+
+        if (_body.scrolled() > offSet2 || _html.scrolled() > offSet2) {
+          _footer
+              .viz('visible');
+        } else {
+          _footer
+              .viz('hidden');
+        }
+      } else {
+        //Release.
+        _meBrand
+              .display('block');
+        _mainNavLI
+              .every((element)=> {
+                element
+                  .fontSize('')
+                });
+        _mainNav
+              .display('none');
+        _header
+              .height('')
+              .bgColor('')
+              .opacity('');
+      }
+    }
+
+
+    function headerFooterAnimation(offSet1, offSet2, fontSize1, fontSize2) {
+      //cache elements..
+      let _body    = <body/>,
+          _html    = <html/>,
+        _meBrand   = <'#meBrand'/>,
+        _mainNavLI = <'#mainNav li a'/>,
+        _mainNav   = <'#mainNav'/>,
+        _header    = <'#header'/>,
+        _footer    = <'#footer'/>;
+
+      //The following code exectutes if the page is scrolled beyond the # of px's below. This is the header animation.
+      if (_body.scrolled() > offSet1 || _html.scrolled() > offSet1 - 20) {
+        _meBrand
+              .fontSize(String(fontSize1) + 'px')
+              .top('2px');
+        _mainNavLI
+              .every((element)=> {
+                element
+                  .fontSize(String(fontSize2) + 'px')
+              });
+        _mainNav
+              .position('absolute')
+              .top('-5px')
+              .right('25px');
+        _header
+              .height('70px')
+              .top('0px')
+              .bgColor('black')
+              .opacity('.7');
+
+        if (_body.scrolled() > offSet2 || _html.scrolled() > offSet2) {
+          _footer
+              .viz('visible');
+        } else {
+          _footer
+              .viz('hidden');
+        }
+      } else {
+        //Release.
+        _meBrand
+              .fontSize('')
+              .top('');
+        _mainNavLI
+              .every((element)=> {
+                element
+                  .fontSize('')
+                });
+        _mainNav
+              .position('')
+              .top('')
+              .right('');
+        _header
+              .height('')
+              .top('')
+              .bgColor('')
+              .opacity('');
+      }
     }
   }
 
@@ -773,19 +883,20 @@ const ericfosterIO = (function() {
       <'#aboutMeContainer'/>
                 .top('-35px');
     }
-    if (browser.webkit) {
-      <'#footer span'/>
-                .every((element, a)=> {
-                  element
-                   .only(2, ()=> {
-                     element
-                       .color('#000');
-                   }, a);
-                });
-    }
+    // if (browser.webkit) {
+    //   <'#footer span'/>
+    //             .every((element, a)=> {
+    //               element
+    //                .only(2, ()=> {
+    //                  element
+    //                    .color('#000');
+    //                }, a);
+    //             });
+    // }
     try {
       if (!window.frameElement) {
-        onScroll();
+        //Activate scroll-handling.
+        responsiveScrollEventHandling();
         //Set up three.js scene.
         //Call Cube Assembly Function..
         assembleCubeFolio();
@@ -823,6 +934,9 @@ const ericfosterIO = (function() {
 
 
 //===CODE BIN===============================================================>>>
+//light table color combo
+//background-color: #3e6b6b;
+//color: #7ffffd;
 
 
 //   //Create new tween for header animation..

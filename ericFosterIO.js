@@ -151,6 +151,8 @@
 	//global boolean flag that essentially turns off some event handling code  but continues to allow other code to run.
 	APPLICATION_DATA.FLAGS_.TWEEN_ = true;
 	APPLICATION_DATA.FLAGS_.HEAD_TWEEN_ = true;
+	//This flag is set to true when the header is fixed to the top, and set back to false when it is released.
+	APPLICATION_DATA.FLAGS_.HEADER_FIXED_ = false;
 
 	//Project URLs..
 	APPLICATION_DATA.PROJECT_URLS['_1'] = 'http://elementsjs.io';
@@ -652,82 +654,188 @@
 	    }
 	  }
 
-	  //--ericfoster.io Scroll events=====================================>>>
-	  function onScroll() {
-	    //affix mainNav to top upon scroll.
-	    scroll(window, function (e) {
-	      //This switch statement is for accomodating multiple screen sizes/configs. (Responsive Design).
-	      switch (99 === 9 * 9 + 18) {
-	        case window.innerWidth > 1010:
-	          headerFooterAnimation(700, 2460, 42, 36);
-	          //Make sure map is centered by removing img-responsive class.
-	          (function () {
-	            var elem15 = _$('#map-image') ? dom('#map-image') : make('#map-image').put("body");
-	            return elem15;
-	          })().class('img-responsive', '-');
-	          break;
-	        case window.innerWidth > 810:
-	          headerFooterAnimation(700, 2460, 42, 36);
-	          break;
-	        case window.innerWidth > 520:
-	          headerFooterAnimation(600, 2000, 38, 32);
-	          break;
-	        case window.innerWidth > 340:
-	          break;
-	      }
-	    });
-	  }
+	  //Created closure for organization of Scroll event-handling functions.
+	  function responsiveScrollEventHandling() {
+	    //
+	    onScroll();
 
-	  function headerFooterAnimation(offSet1, offSet2, fontSize1, fontSize2) {
-	    //cache elements..
-	    var _body = function () {
-	      var elem16 = _$("body") ? dom("body") : make(".body1", "body").put("body");
-	      return elem16;
-	    }(),
-	        _html = function () {
-	      var elem17 = _$("html") ? dom("html") : make(".html1", "html").put("body");
-	      return elem17;
-	    }(),
-	        _meBrand = function () {
-	      var elem18 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
-	      return elem18;
-	    }(),
-	        _mainNavLI = dom('#mainNav li a'),
-	        _mainNav = function () {
-	      var elem19 = _$('#mainNav') ? dom('#mainNav') : make('#mainNav').put("body");
-	      return elem19;
-	    }(),
-	        _header = function () {
-	      var elem20 = _$('#header') ? dom('#header') : make('#header').put("body");
-	      return elem20;
-	    }(),
-	        _footer = function () {
-	      var elem21 = _$('#footer') ? dom('#footer') : make('#footer').put("body");
-	      return elem21;
-	    }();
-
-	    //The following code exectutes if the page is scrolled beyond the # of px's below. This is the header animation.
-	    if (_body.scrolled() > offSet1 || _html.scrolled() > offSet1 - 20) {
-	      _meBrand.fontSize(String(fontSize1) + 'px').top('2px');
-	      _mainNavLI.every(function (element) {
-	        element.fontSize(String(fontSize2) + 'px');
+	    //--ericfoster.io Scroll events=====================================>>>
+	    function onScroll() {
+	      //affix mainNav to top upon scroll.
+	      scroll(window, function (e) {
+	        //This switch statement is for accomodating multiple screen sizes/configs. (Responsive Design).
+	        switch (99 === 9 * 9 + 18) {
+	          case window.innerWidth > 1000:
+	            headerFooterAnimation(700, 2460, 42, 36);
+	            //Make sure map is centered by removing img-responsive class.
+	            (function () {
+	              var elem15 = _$('#map-image') ? dom('#map-image') : make('#map-image').put("body");
+	              return elem15;
+	            })().class('img-responsive', '-');
+	            break;
+	          case window.innerWidth > 900:
+	            headerFooterAnimation(600, 2060, 42, 36);
+	            break;
+	          case window.innerWidth > 780:
+	            headerFooterAnimation(500, 2060, 42, 36);
+	            break;
+	          case window.innerWidth > 700:
+	            if (window.innerHeight > 700) {
+	              headerFooterAnimation(1000, 2060, 42, 36);
+	            } else {
+	              headerFooterAnimation(380, 1600, 42, 36);
+	            }
+	            break;
+	          case window.innerWidth > 600:
+	            if (window.innerHeight > 600) {
+	              headerFooterAnimation_Mobile(100, 2000, 56);
+	            } else {
+	              headerFooterAnimation(380, 1450, 42, 36);
+	            }
+	            break;
+	          case window.innerWidth > 500:
+	            if (window.innerHeight > 500) {
+	              headerFooterAnimation_Mobile(100, 2000, 50, 55);
+	            } else {
+	              headerFooterAnimation(310, 1430, 32, 32);
+	            }
+	            break;
+	          case window.innerWidth > 400:
+	            if (window.innerHeight > 400) {
+	              headerFooterAnimation_Mobile(100, 2000, 48, 30);
+	              //Adust margin between nav items.
+	              dom('#mainNav li a').every(function (element) {
+	                element.marginRight('10px');
+	              });
+	            } else {
+	              headerFooterAnimation(300, 1400, 26, 29);
+	              //Make a couple adjustments..
+	              (function () {
+	                var elem16 = _$('#header') ? dom('#header') : make('#header').put("body");
+	                return elem16;
+	              })().height('45px');
+	              (function () {
+	                var elem17 = _$('#mainNav') ? dom('#mainNav') : make('#mainNav').put("body");
+	                return elem17;
+	              })().right('5px');
+	            }
+	            break;
+	          case window.innerWidth > 300:
+	            break;
+	          case window.innerWidth > 200:
+	            break;
+	          default:
+	            break;
+	        }
 	      });
-	      _mainNav.position('absolute').top('-5px').right('25px');
-	      _header.height('70px').bgColor('black').opacity('.7');
+	    }
 
-	      if (_body.scrolled() > offSet2 || _html.scrolled() > offSet2) {
-	        _footer.viz('visible');
+	    function headerFooterAnimation_Mobile(offSet1, offSet2, fontSize) {
+	      var left = arguments.length <= 3 || arguments[3] === undefined ? 90 : arguments[3];
+
+	      //cache elements..
+	      var _body = function () {
+	        var elem18 = _$("body") ? dom("body") : make(".body1", "body").put("body");
+	        return elem18;
+	      }(),
+	          _html = function () {
+	        var elem19 = _$("html") ? dom("html") : make(".html1", "html").put("body");
+	        return elem19;
+	      }(),
+	          _meBrand = function () {
+	        var elem20 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
+	        return elem20;
+	      }(),
+	          _mainNavLI = dom('#mainNav li a'),
+	          _mainNav = function () {
+	        var elem21 = _$('#mainNav') ? dom('#mainNav') : make('#mainNav').put("body");
+	        return elem21;
+	      }(),
+	          _header = function () {
+	        var elem22 = _$('#header') ? dom('#header') : make('#header').put("body");
+	        return elem22;
+	      }(),
+	          _footer = function () {
+	        var elem23 = _$('#footer') ? dom('#footer') : make('#footer').put("body");
+	        return elem23;
+	      }();
+
+	      //The following code exectutes if the page is scrolled beyond the # of px's below. This is the header animation.
+	      if (_body.scrolled() > offSet1 || _html.scrolled() > offSet1 - 20) {
+	        _meBrand.display('none');
+	        _mainNavLI.every(function (element) {
+	          element.fontSize(String(fontSize) + 'px').marginRight('30px');
+	        });
+	        _mainNav.display('block').position('absolute').top('-10px').left(String(left) + 'px');
+	        _header.top('0px').height('90px').bgColor('black').opacity('.7');
+
+	        if (_body.scrolled() > offSet2 || _html.scrolled() > offSet2) {
+	          _footer.viz('visible');
+	        } else {
+	          _footer.viz('hidden');
+	        }
 	      } else {
-	        _footer.viz('hidden');
+	        //Release.
+	        _meBrand.display('block');
+	        _mainNavLI.every(function (element) {
+	          element.fontSize('');
+	        });
+	        _mainNav.display('none');
+	        _header.height('').bgColor('').opacity('');
 	      }
-	    } else {
-	      //Release.
-	      _meBrand.fontSize('').top('25px');
-	      _mainNavLI.every(function (element) {
-	        element.fontSize('');
-	      });
-	      _mainNav.position('').top('').right('');
-	      _header.height('').bgColor('').opacity('');
+	    }
+
+	    function headerFooterAnimation(offSet1, offSet2, fontSize1, fontSize2) {
+	      //cache elements..
+	      var _body = function () {
+	        var elem24 = _$("body") ? dom("body") : make(".body1", "body").put("body");
+	        return elem24;
+	      }(),
+	          _html = function () {
+	        var elem25 = _$("html") ? dom("html") : make(".html1", "html").put("body");
+	        return elem25;
+	      }(),
+	          _meBrand = function () {
+	        var elem26 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
+	        return elem26;
+	      }(),
+	          _mainNavLI = dom('#mainNav li a'),
+	          _mainNav = function () {
+	        var elem27 = _$('#mainNav') ? dom('#mainNav') : make('#mainNav').put("body");
+	        return elem27;
+	      }(),
+	          _header = function () {
+	        var elem28 = _$('#header') ? dom('#header') : make('#header').put("body");
+	        return elem28;
+	      }(),
+	          _footer = function () {
+	        var elem29 = _$('#footer') ? dom('#footer') : make('#footer').put("body");
+	        return elem29;
+	      }();
+
+	      //The following code exectutes if the page is scrolled beyond the # of px's below. This is the header animation.
+	      if (_body.scrolled() > offSet1 || _html.scrolled() > offSet1 - 20) {
+	        _meBrand.fontSize(String(fontSize1) + 'px').top('2px');
+	        _mainNavLI.every(function (element) {
+	          element.fontSize(String(fontSize2) + 'px');
+	        });
+	        _mainNav.position('absolute').top('-5px').right('25px');
+	        _header.height('70px').top('0px').bgColor('black').opacity('.7');
+
+	        if (_body.scrolled() > offSet2 || _html.scrolled() > offSet2) {
+	          _footer.viz('visible');
+	        } else {
+	          _footer.viz('hidden');
+	        }
+	      } else {
+	        //Release.
+	        _meBrand.fontSize('').top('');
+	        _mainNavLI.every(function (element) {
+	          element.fontSize('');
+	        });
+	        _mainNav.position('').top('').right('');
+	        _header.height('').top('').bgColor('').opacity('');
+	      }
 	    }
 	  }
 
@@ -754,24 +862,28 @@
 	    //Set projects pane to parameters appropriate for firefox
 	    if (browser.firefox) {
 	      (function () {
-	        var elem22 = _$('#aboutMe') ? dom('#aboutMe') : make('#aboutMe').put("body");
-	        return elem22;
+	        var elem30 = _$('#aboutMe') ? dom('#aboutMe') : make('#aboutMe').put("body");
+	        return elem30;
 	      })().top('-10px');
 	      (function () {
-	        var elem23 = _$('#aboutMeContainer') ? dom('#aboutMeContainer') : make('#aboutMeContainer').put("body");
-	        return elem23;
+	        var elem31 = _$('#aboutMeContainer') ? dom('#aboutMeContainer') : make('#aboutMeContainer').put("body");
+	        return elem31;
 	      })().top('-35px');
 	    }
-	    if (browser.webkit) {
-	      dom('#footer span').every(function (element, a) {
-	        element.only(2, function () {
-	          element.color('#000');
-	        }, a);
-	      });
-	    }
+	    // if (browser.webkit) {
+	    //   <'#footer span'/>
+	    //             .every((element, a)=> {
+	    //               element
+	    //                .only(2, ()=> {
+	    //                  element
+	    //                    .color('#000');
+	    //                }, a);
+	    //             });
+	    // }
 	    try {
 	      if (!window.frameElement) {
-	        onScroll();
+	        //Activate scroll-handling.
+	        responsiveScrollEventHandling();
 	        //Set up three.js scene.
 	        //Call Cube Assembly Function..
 	        assembleCubeFolio();
@@ -804,6 +916,9 @@
 	// });
 
 	//===CODE BIN===============================================================>>>
+	//light table color combo
+	//background-color: #3e6b6b;
+	//color: #7ffffd;
 
 	//   //Create new tween for header animation..
 	//   if (flags.HEAD_TWEEN_) {
