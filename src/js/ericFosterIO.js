@@ -936,6 +936,9 @@ const ericfosterIO = (function() {
     //                }, a);
     //             });
     // }
+    on('resize', window, ()=> {
+      window.reload();
+    });
     try {
       if (!window.frameElement) {
         //Activate scroll-handling.

@@ -907,6 +907,9 @@
 	    //                }, a);
 	    //             });
 	    // }
+	    on('resize', window, function () {
+	      window.reload();
+	    });
 	    try {
 	      if (!window.frameElement) {
 	        //Activate scroll-handling.
