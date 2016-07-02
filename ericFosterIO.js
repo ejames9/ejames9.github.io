@@ -907,7 +907,7 @@
 	    //                }, a);
 	    //             });
 	    // }
-	    on('resize', window, function () {
+	    on('orientationchange', window, function () {
 	      window.reload();
 	    });
 	    try {
