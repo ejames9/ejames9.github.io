@@ -919,11 +919,6 @@ const ericfosterIO = (function() {
   //---DOM Ready Function=================================>>>
   go
   (function() {
-    if (isMobile()) {
-      alert('is Mobile!');
-    } else {
-      log('not mobile...');
-    }
     //Set projects pane to parameters appropriate for firefox
     if (browser.firefox) {
       <'#aboutMe'/>
