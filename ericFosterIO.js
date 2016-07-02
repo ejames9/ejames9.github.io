@@ -75,6 +75,7 @@
 	var on = elementsJS.on;
 	var off = elementsJS.off;
 	var hasAncestor = elementsJS.hasAncestor;
+	var isMobile = elementsJS.isMobile;
 
 	var lodash = __webpack_require__(9);
 	var zipObject = lodash.zipObject;
@@ -109,6 +110,7 @@
 	var on = elementsJS.on;
 	var off = elementsJS.off;
 	var hasAncestor = elementsJS.hasAncestor;
+	var isMobile = elementsJS.isMobile;
 
 	var lodash = __webpack_require__(9);
 	var zipObject = lodash.zipObject;
@@ -152,7 +154,7 @@
 	APPLICATION_DATA.FLAGS_.TWEEN_ = true;
 	APPLICATION_DATA.FLAGS_.HEAD_TWEEN_ = true;
 	//This flag is set to true when the header is fixed to the top, and set back to false when it is released.
-	APPLICATION_DATA.FLAGS_.HEADER_FIXED_ = false;
+	APPLICATION_DATA.FLAGS_.HEADR_FIXED_ = false;
 
 	//Project URLs..
 	APPLICATION_DATA.PROJECT_URLS['_1'] = 'http://elementsjs.io';
@@ -886,6 +888,11 @@
 
 	  //---DOM Ready Function=================================>>>
 	  go(function () {
+	    if (isMobile()) {
+	      alert('is Mobile!');
+	    } else {
+	      log('not mobile...');
+	    }
 	    //Set projects pane to parameters appropriate for firefox
 	    if (browser.firefox) {
 	      (function () {
@@ -897,16 +904,8 @@
 	        return elem30;
 	      })().top('-35px');
 	    }
-	    // if (browser.webkit) {
-	    //   <'#footer span'/>
-	    //             .every((element, a)=> {
-	    //               element
-	    //                .only(2, ()=> {
-	    //                  element
-	    //                    .color('#000');
-	    //                }, a);
-	    //             });
-	    // }
+
+	    //Reload window if orientation changes, to avoid 'scrambling' of header.
 	    on('orientationchange', window, function () {
 	      window.location.reload();
 	    });
@@ -1009,12 +1008,12 @@
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; } /*
 	                                                                                                                                                                                                                  Elements.js
-	                                                                                                                                                                                                                  
+
 	                                                                                                                                                                                                                  A JavaScript DOM manipulation/Alias function Library.
 	                                                                                                                                                                                                                  This is the index file for the library. It contains alias functions for
 	                                                                                                                                                                                                                  all of the librarys' public functions. This makes it easy to import the
 	                                                                                                                                                                                                                  functions without a module prefix es6 style.
-	                                                                                                                                                                                                                  
+
 	                                                                                                                                                                                                                  Author: Eric James Foster
 	                                                                                                                                                                                                                  EMail: maniphestival@gmail.com
 	                                                                                                                                                                                                                  License: MIT
@@ -1220,6 +1219,10 @@
 
 	var lookBehind = function lookBehind(leftContextRE, matchRE, subject) {
 	  return utils.lookBehind(leftContextRE, matchRE, subject);
+	};
+
+	var isMobile = function isMobile() {
+	  return utils.isMobile();
 	};
 
 	//This practically useless function will lock up the browser for a preset amount of time.
@@ -1510,6 +1513,7 @@
 	  // functions: functions,
 	  hasAncestor: hasAncestor,
 	  lookBehind: lookBehind,
+	  isMobile: isMobile,
 	  put: put,
 	  on: on,
 	  off: off,
@@ -1532,6 +1536,7 @@
 
 	//DONE:30 functions: err(), info(), warn().
 	//DONE:130 Complete all standalone style functions.
+
 
 /***/ },
 /* 2 */
@@ -3563,6 +3568,29 @@
 	  return returnMatch;
 	};
 
+	function isMobile() {
+	  this.android = function() {
+	      return navigator.userAgent.match(/Android/i);
+	  };
+	  this.blackBerry = function() {
+	      return navigator.userAgent.match(/BlackBerry/i);
+	  },
+	  this.iOS = function() {
+	      return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+	  },
+	  this.operaMini = function() {
+	      return navigator.userAgent.match(/Opera Mini/i);
+	  },
+	  this.windowsMobile = function() {
+	      return navigator.userAgent.match(/IEMobile/i);
+	  },
+	  this.any = function() {
+	      return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+	  }
+	  return this.any;
+	}
+
+
 	module.exports = {
 	  queryDOM: queryDOM,
 	  functions: functions,
@@ -3573,7 +3601,8 @@
 	  sleep: sleep,
 	  proto: proto,
 	  hasAncestor: hasAncestor,
-	  lookBehind: lookBehind
+	  lookBehind: lookBehind,
+	  isMobile: isMobile
 	};
 
 

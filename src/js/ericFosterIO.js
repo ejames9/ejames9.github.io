@@ -6,7 +6,7 @@ Author: Eric Foster
 
 
 //elementsJS imports
-use 'elementsJS' go, info, warn, log, el, make, inspect, scroll, mouse, click, once, on, off, hasAncestor
+use 'elementsJS' go, info, warn, log, el, make, inspect, scroll, mouse, click, once, on, off, hasAncestor, isMobile
 use 'lodash' zipObject
 use 'three' as THREE
 use 'tween.js' as TWEEN
@@ -43,7 +43,7 @@ APPLICATION_DATA.FLAGS_.FIRST_CLICK_ = false;
 APPLICATION_DATA.FLAGS_.TWEEN_       = true;
 APPLICATION_DATA.FLAGS_.HEAD_TWEEN_  = true;
 //This flag is set to true when the header is fixed to the top, and set back to false when it is released.
-APPLICATION_DATA.FLAGS_.HEADER_FIXED_ = false;
+APPLICATION_DATA.FLAGS_.HEADR_FIXED_ = false;
 
 //Project URLs..
 APPLICATION_DATA.PROJECT_URLS['_1']  = 'http://elementsjs.io';
@@ -919,6 +919,11 @@ const ericfosterIO = (function() {
   //---DOM Ready Function=================================>>>
   go
   (function() {
+    if (isMobile()) {
+      alert('is Mobile!');
+    } else {
+      log('not mobile...');
+    }
     //Set projects pane to parameters appropriate for firefox
     if (browser.firefox) {
       <'#aboutMe'/>
@@ -926,16 +931,8 @@ const ericfosterIO = (function() {
       <'#aboutMeContainer'/>
                 .top('-35px');
     }
-    // if (browser.webkit) {
-    //   <'#footer span'/>
-    //             .every((element, a)=> {
-    //               element
-    //                .only(2, ()=> {
-    //                  element
-    //                    .color('#000');
-    //                }, a);
-    //             });
-    // }
+
+    //Reload window if orientation changes, to avoid 'scrambling' of header.
     on('orientationchange', window, ()=> {
       window.location.reload();
     });

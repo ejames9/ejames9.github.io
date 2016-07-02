@@ -51,12 +51,7 @@
 
         <!--Header, Fixed------------------------------------------------->
         <div id='header' class="masthead clearfix">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
+
           <div class="inner">
             <h3 id='meBrand' class="masthead-brand">Eric Foster</h3>
             <nav>
@@ -136,9 +131,46 @@
           <p>Music. Coding. Espresso. JavaScript. Family. Guitars. Sleeping. Camping. Road Trips. Espresso. A Good Pinot Noir, Cleverness. Jamming. Oregon. Good Cheesecake. Scallops. Cooking. Espresso. Avoiding politics. Free will. Philosophy. Art. Creativity. Kindness. Did I mention Espresso?</p>
         </div>
       </div>
-      <!-- Three.js/projects Container and hash link-------------------->
+
+      <!-- Three.js/projects Container and hash link=======================-->
       <a id='projects'></a>
-      <div id='mobile-projs'x></div>
+      <!--Container for Project thumbnails, when cubefolio is not active===-->
+      <div id='mobile-projs' class='container'>
+        <!--Bootstrap grid container=======================================-->
+        <div id='projects-row' class='row'>
+          <!--Left Row=====================================================-->
+          <div class='col-md-6'>
+            <div class='proj-pic-box'>
+              <img src="./images/elementsjs.io.png" alt="elementsjs.io, elementsJS project site">
+              <div class=proj-pic-curtain></div>
+            </div>
+            <div class='proj-pic-box'>
+              <img src="./images/elementsjs.io/#click.png" alt="elementsjs.io side navigation menu">
+              <div class=proj-pic-curtain></div>
+            </div>
+            <div class='proj-pic-box'>
+              <img src="./images/gulpEJSInterpreter.png" alt="gulp-elementsJS-interpreter">
+              <div class=proj-pic-curtain></div>
+            </div>
+          </div>
+          <!--Right Row=====================================================-->
+          <div class='col-md-6'>
+            <div class='proj-pic-box'>
+              <img src="./images/showTrippers.png" alt="">
+              <div class=proj-pic-curtain></div>
+            </div>
+            <div class='proj-pic-box'>
+              <img src="./images/DjamBase.png" alt="DjamBase Python Library">
+              <div class=proj-pic-curtain></div>
+            </div>
+            <div class='proj-pic-box'>
+              <img src="./images/cubeFolio.png" alt="Eric Foster's Portfolio Site Portfolio Cube">
+              <div class=proj-pic-curtain></div>
+            </div>
+          </div>
+        </div>
+      </div><!--End mobile-projs Projects Container=========================-->
+
       <div id='threejs'>
         <i id='x' class="fa fa-times-circle-o fa-3x hide"></i>
         <ul id='leftProjList'                                              class='projects-list'>
