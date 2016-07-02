@@ -656,6 +656,32 @@
 
 	  //Created closure for organization of Scroll event-handling functions.
 	  function responsiveScrollEventHandling() {
+	    //cache elements..
+	    var _body = function () {
+	      var elem15 = _$("body") ? dom("body") : make(".body1", "body").put("body");
+	      return elem15;
+	    }(),
+	        _html = function () {
+	      var elem16 = _$("html") ? dom("html") : make(".html1", "html").put("body");
+	      return elem16;
+	    }(),
+	        _meBrand = function () {
+	      var elem17 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
+	      return elem17;
+	    }(),
+	        _mainNavLI = dom('#mainNav li a'),
+	        _mainNav = function () {
+	      var elem18 = _$('#mainNav') ? dom('#mainNav') : make('#mainNav').put("body");
+	      return elem18;
+	    }(),
+	        _header = function () {
+	      var elem19 = _$('#header') ? dom('#header') : make('#header').put("body");
+	      return elem19;
+	    }(),
+	        _footer = function () {
+	      var elem20 = _$('#footer') ? dom('#footer') : make('#footer').put("body");
+	      return elem20;
+	    }();
 	    //
 	    onScroll();
 
@@ -669,8 +695,8 @@
 	            headerFooterAnimation(700, 2460, 42, 36);
 	            //Make sure map is centered by removing img-responsive class.
 	            (function () {
-	              var elem15 = _$('#map-image') ? dom('#map-image') : make('#map-image').put("body");
-	              return elem15;
+	              var elem21 = _$('#map-image') ? dom('#map-image') : make('#map-image').put("body");
+	              return elem21;
 	            })().class('img-responsive', '-');
 	            break;
 	          case window.innerWidth > 900:
@@ -711,16 +737,69 @@
 	              headerFooterAnimation(300, 1400, 26, 29);
 	              //Make a couple adjustments..
 	              (function () {
-	                var elem16 = _$('#header') ? dom('#header') : make('#header').put("body");
-	                return elem16;
+	                var elem22 = _$('#header') ? dom('#header') : make('#header').put("body");
+	                return elem22;
 	              })().height('45px');
 	              (function () {
-	                var elem17 = _$('#mainNav') ? dom('#mainNav') : make('#mainNav').put("body");
-	                return elem17;
+	                var elem23 = _$('#mainNav') ? dom('#mainNav') : make('#mainNav').put("body");
+	                return elem23;
 	              })().right('5px');
 	            }
 	            break;
 	          case window.innerWidth > 300:
+	            if (window.innerHeight > 300) {
+	              if (window.innerHeight > 600) {
+	                headerFooterAnimation_Mobile(100, 2100, 42, 22);
+	                //Adust margin between nav items.
+	                dom('#mainNav li a').every(function (element) {
+	                  element.marginRight('10px');
+	                });
+	                //
+	                (function () {
+	                  var elem24 = _$('#header') ? dom('#header') : make('#header').put("body");
+	                  return elem24;
+	                })().height('75px');
+	              } else if (window.innerHeight > 500) {
+	                headerFooterAnimation_Mobile(100, 1900, 34, 20);
+	                //Adust margin between nav items.
+	                dom('#mainNav li a').every(function (element, a) {
+	                  element.marginRight('10px').only(4, function () {
+	                    log(element, 'blue');
+	                    element.marginRight('0px');
+	                  }, a);
+	                });
+	                //
+	                (function () {
+	                  var elem25 = _$('#header') ? dom('#header') : make('#header').put("body");
+	                  return elem25;
+	                })().height('65px');
+	              } else {
+	                headerFooterAnimation_Mobile(100, 1700, 34, 20);
+	                //Adust margin between nav items.
+	                dom('#mainNav li a').every(function (element, a) {
+	                  element.marginRight('10px').only(4, function () {
+	                    log(element, 'blue');
+	                    element.marginRight('0px');
+	                  }, a);
+	                });
+	                //
+	                (function () {
+	                  var elem26 = _$('#header') ? dom('#header') : make('#header').put("body");
+	                  return elem26;
+	                })().height('65px');
+	              }
+	            } else {
+	              headerFooterAnimation(300, 1400, 26, 29);
+	              //Make a couple adjustments..
+	              (function () {
+	                var elem27 = _$('#header') ? dom('#header') : make('#header').put("body");
+	                return elem27;
+	              })().height('45px');
+	              (function () {
+	                var elem28 = _$('#mainNav') ? dom('#mainNav') : make('#mainNav').put("body");
+	                return elem28;
+	              })().right('5px');
+	            }
 	            break;
 	          case window.innerWidth > 200:
 	            break;
@@ -730,35 +809,9 @@
 	      });
 	    }
 
+	    //This function adusts header and footer animation at lower resolutions in portrait mode..
 	    function headerFooterAnimation_Mobile(offSet1, offSet2, fontSize) {
 	      var left = arguments.length <= 3 || arguments[3] === undefined ? 90 : arguments[3];
-
-	      //cache elements..
-	      var _body = function () {
-	        var elem18 = _$("body") ? dom("body") : make(".body1", "body").put("body");
-	        return elem18;
-	      }(),
-	          _html = function () {
-	        var elem19 = _$("html") ? dom("html") : make(".html1", "html").put("body");
-	        return elem19;
-	      }(),
-	          _meBrand = function () {
-	        var elem20 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
-	        return elem20;
-	      }(),
-	          _mainNavLI = dom('#mainNav li a'),
-	          _mainNav = function () {
-	        var elem21 = _$('#mainNav') ? dom('#mainNav') : make('#mainNav').put("body");
-	        return elem21;
-	      }(),
-	          _header = function () {
-	        var elem22 = _$('#header') ? dom('#header') : make('#header').put("body");
-	        return elem22;
-	      }(),
-	          _footer = function () {
-	        var elem23 = _$('#footer') ? dom('#footer') : make('#footer').put("body");
-	        return elem23;
-	      }();
 
 	      //The following code exectutes if the page is scrolled beyond the # of px's below. This is the header animation.
 	      if (_body.scrolled() > offSet1 || _html.scrolled() > offSet1 - 20) {
@@ -785,34 +838,8 @@
 	      }
 	    }
 
+	    //This function adjusts header footer animation..
 	    function headerFooterAnimation(offSet1, offSet2, fontSize1, fontSize2) {
-	      //cache elements..
-	      var _body = function () {
-	        var elem24 = _$("body") ? dom("body") : make(".body1", "body").put("body");
-	        return elem24;
-	      }(),
-	          _html = function () {
-	        var elem25 = _$("html") ? dom("html") : make(".html1", "html").put("body");
-	        return elem25;
-	      }(),
-	          _meBrand = function () {
-	        var elem26 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
-	        return elem26;
-	      }(),
-	          _mainNavLI = dom('#mainNav li a'),
-	          _mainNav = function () {
-	        var elem27 = _$('#mainNav') ? dom('#mainNav') : make('#mainNav').put("body");
-	        return elem27;
-	      }(),
-	          _header = function () {
-	        var elem28 = _$('#header') ? dom('#header') : make('#header').put("body");
-	        return elem28;
-	      }(),
-	          _footer = function () {
-	        var elem29 = _$('#footer') ? dom('#footer') : make('#footer').put("body");
-	        return elem29;
-	      }();
-
 	      //The following code exectutes if the page is scrolled beyond the # of px's below. This is the header animation.
 	      if (_body.scrolled() > offSet1 || _html.scrolled() > offSet1 - 20) {
 	        _meBrand.fontSize(String(fontSize1) + 'px').top('2px');
@@ -862,12 +889,12 @@
 	    //Set projects pane to parameters appropriate for firefox
 	    if (browser.firefox) {
 	      (function () {
-	        var elem30 = _$('#aboutMe') ? dom('#aboutMe') : make('#aboutMe').put("body");
-	        return elem30;
+	        var elem29 = _$('#aboutMe') ? dom('#aboutMe') : make('#aboutMe').put("body");
+	        return elem29;
 	      })().top('-10px');
 	      (function () {
-	        var elem31 = _$('#aboutMeContainer') ? dom('#aboutMeContainer') : make('#aboutMeContainer').put("body");
-	        return elem31;
+	        var elem30 = _$('#aboutMeContainer') ? dom('#aboutMeContainer') : make('#aboutMeContainer').put("body");
+	        return elem30;
 	      })().top('-35px');
 	    }
 	    // if (browser.webkit) {

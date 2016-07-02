@@ -663,6 +663,14 @@ const ericfosterIO = (function() {
 
   //Created closure for organization of Scroll event-handling functions.
   function responsiveScrollEventHandling() {
+    //cache elements..
+    let _body    = <body/>,
+        _html    = <html/>,
+      _meBrand   = <'#meBrand'/>,
+      _mainNavLI = <'#mainNav li a'/>,
+      _mainNav   = <'#mainNav'/>,
+      _header    = <'#header'/>,
+      _footer    = <'#footer'/>;
     //
     onScroll();
 
@@ -724,6 +732,59 @@ const ericfosterIO = (function() {
               }
               break;
           case (window.innerWidth > 300):
+              if (window.innerHeight > 300) {
+                if (window.innerHeight > 600) {
+                  headerFooterAnimation_Mobile(100, 2100, 42, 22);
+                  //Adust margin between nav items.
+                  <'#mainNav li a'/>
+                          .every((element)=> {
+                            element
+                                .marginRight('10px');
+                          });
+                  //
+                  <'#header'/>
+                        .height('75px');
+                } else if (window.innerHeight > 500) {
+                  headerFooterAnimation_Mobile(100, 1900, 34, 20);
+                  //Adust margin between nav items.
+                  <'#mainNav li a'/>
+                          .every((element, a)=> {
+                            element
+                                .marginRight('10px')
+                                .only(4, ()=> {
+                                  log(element, 'blue');
+                                  element
+                                      .marginRight('0px');
+                                }, a);
+                          });
+                  //
+                  <'#header'/>
+                        .height('65px');
+                } else {
+                  headerFooterAnimation_Mobile(100, 1700, 34, 20);
+                  //Adust margin between nav items.
+                  <'#mainNav li a'/>
+                          .every((element, a)=> {
+                            element
+                                .marginRight('10px')
+                                .only(4, ()=> {
+                                  log(element, 'blue');
+                                  element
+                                      .marginRight('0px');
+                                }, a);
+                          });
+                  //
+                  <'#header'/>
+                        .height('65px');
+                }
+              } else {
+                headerFooterAnimation(300, 1400, 26, 29);
+                //Make a couple adjustments..
+                <'#header'/>
+                      .height('45px');
+                <'#mainNav'/>
+                      .right('5px');
+              }
               break;
           case (window.innerWidth > 200):
               break;
@@ -733,17 +794,8 @@ const ericfosterIO = (function() {
       });
     }
 
-
+    //This function adusts header and footer animation at lower resolutions in portrait mode..
     function headerFooterAnimation_Mobile(offSet1, offSet2, fontSize, left=90) {
-      //cache elements..
-      let _body    = <body/>,
-          _html    = <html/>,
-        _meBrand   = <'#meBrand'/>,
-        _mainNavLI = <'#mainNav li a'/>,
-        _mainNav   = <'#mainNav'/>,
-        _header    = <'#header'/>,
-        _footer    = <'#footer'/>;
-
       //The following code exectutes if the page is scrolled beyond the # of px's below. This is the header animation.
       if (_body.scrolled() > offSet1 || _html.scrolled() > offSet1 - 20) {
         _meBrand
@@ -790,17 +842,8 @@ const ericfosterIO = (function() {
       }
     }
 
-
+    //This function adjusts header footer animation..
     function headerFooterAnimation(offSet1, offSet2, fontSize1, fontSize2) {
-      //cache elements..
-      let _body    = <body/>,
-          _html    = <html/>,
-        _meBrand   = <'#meBrand'/>,
-        _mainNavLI = <'#mainNav li a'/>,
-        _mainNav   = <'#mainNav'/>,
-        _header    = <'#header'/>,
-        _footer    = <'#footer'/>;
-
       //The following code exectutes if the page is scrolled beyond the # of px's below. This is the header animation.
       if (_body.scrolled() > offSet1 || _html.scrolled() > offSet1 - 20) {
         _meBrand

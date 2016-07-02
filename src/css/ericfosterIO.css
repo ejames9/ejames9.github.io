@@ -1532,11 +1532,268 @@ ALSO 900px => 1000px
 
  }
 
- /*
- Width-- 300 => 400px ===------------------------------>>
- */
- @media screen and (max-width: 400px) {
 
+ /*
+ Width-- 300 => 400px, iPhone 6 Portrait===------------------------------>>
+ */
+ @media screen and (max-width: 400px) and (max-height: 700px) {
+   #meBrand {
+     position: absolute;
+     margin: auto;
+     right: 0;
+     left: 0;
+     top: 40px;
+     font-size: 50px;
+   }
+
+   #mainNav {
+     display: none;
+   }
+
+
+   #show-techs i {
+     font-size: 20px;
+   }
+
+   #coverDesc {
+     font-size: 38px;
+     margin-bottom: 20px;
+     color: #fff;
+   }
+
+   #coverDescContainer {
+     margin: auto;
+     position: absolute;
+     top: -60px;
+     left: 0px;
+     right: 0px;
+     width: 380px;
+   }
+
+   #aboutMe h2 {
+     font-size: 35px;
+   }
+
+   #aboutMe p {
+     font-size: 17px;
+   }
+
+   #aboutMeContainer {
+     position: relative;
+     top: -25px;
+   }
+
+   #threejs {
+     background-repeat: repeat-y;
+   }
+
+   #map {
+     margin-bottom: 145px;
+   }
+
+   #buttons {
+     padding: 0;
+   }
+
+   .tact {
+     width: 20px;
+     display: block;
+     margin-bottom: 25px;
+
+   }
+
+   #buttons div a {
+     font-size: 21px;
+   }
+
+   #buttonsContainer {
+     position: absolute;
+     width: 100px;
+     margin: auto;
+     left: 0; right: 0;
+     top: 15px;
+   }
+
+   #footer {
+     padding-bottom: 0px;
+     left: 110px;
+     top: 550px;
+
+   }
+ }
+ /*
+ Width-- 300 => 400px, iPhone 5 Portrait===------------------------------>>
+ */
+ @media screen and (max-width: 400px) and (max-height: 600px) {
+   #meBrand {
+     position: absolute;
+     margin: auto;
+     right: 0;
+     left: 0;
+     top: 40px;
+     font-size: 43px;
+   }
+
+   #mainNav {
+     display: none;
+   }
+
+
+   #show-techs i {
+     font-size: 26px;
+   }
+
+   #coverDesc {
+     font-size: 28px;
+     margin-bottom: 20px;
+     color: #fff;
+   }
+
+   #coverDescContainer {
+     position: absolute;
+     margin: auto;
+     top: -80px;
+     left: 0px;
+     right: 0px;
+     width: 300px;
+   }
+
+   #aboutMe h2 {
+     font-size: 31px;
+   }
+
+   #aboutMe p {
+     font-size: 14px;
+   }
+
+   #aboutMeContainer {
+     position: relative;
+     top: -35px;
+   }
+
+   #threejs {
+     background-repeat: repeat-y;
+   }
+
+   #map {
+     margin-bottom: 145px;
+   }
+
+   #buttons {
+     padding: 0;
+   }
+
+   .tact {
+     width: 20px;
+     display: block;
+     margin-bottom: 25px;
+
+   }
+
+   #buttons div a {
+     font-size: 21px;
+   }
+
+   #buttonsContainer {
+     position: absolute;
+     width: 100px;
+     margin: auto;
+     left: 0; right: 0;
+     top: 15px;
+   }
+
+   #footer {
+     padding-bottom: 0px;
+     left: 90px;
+     top: 420px;
+   }
+ }
+ /*
+ Width-- 300 => 400px, iPhone 4 Portrait===------------------------------>>
+ */
+ @media screen and (max-width: 400px) and (max-height: 500px) {
+   #meBrand {
+     position: absolute;
+     margin: auto;
+     right: 0;
+     left: 0;
+     top: 30px;
+     font-size: 43px;
+   }
+
+   #mainNav {
+     display: none;
+   }
+
+
+   #show-techs i {
+     font-size: 26px;
+   }
+
+   #coverDesc {
+     font-size: 28px;
+     margin-bottom: 20px;
+     color: #fff;
+   }
+
+   #coverDescContainer {
+     position: absolute;
+     margin: auto;
+     top: -140px;
+     left: 0px;
+     right: 0px;
+     width: 300px;
+   }
+
+   #aboutMe h2 {
+     font-size: 28px;
+   }
+
+   #aboutMe p {
+     font-size: 12px;
+   }
+
+   #aboutMeContainer {
+     position: relative;
+     top: -35px;
+   }
+
+   #threejs {
+     background-repeat: repeat-y;
+   }
+
+   #map {
+     margin-bottom: 145px;
+   }
+
+   #buttons {
+     padding: 0;
+   }
+
+   .tact {
+     width: 20px;
+     display: block;
+     margin-bottom: 25px;
+
+   }
+
+   #buttons div a {
+     font-size: 21px;
+   }
+
+   #buttonsContainer {
+     position: absolute;
+     width: 100px;
+     margin: auto;
+     left: 0; right: 0;
+     top: 15px;
+   }
+
+   #footer {
+     padding-bottom: 0px;
+     left: 90px;
+     top: 340px;
+   }
  }
 
  /*
@@ -1554,6 +1811,7 @@ ALSO 900px => 1000px
      font-size: 26;
    }
  }
+
 
  /*
  Width-- 0 => 200px ===------------------------------>>
