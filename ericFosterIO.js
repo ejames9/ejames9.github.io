@@ -3585,9 +3585,10 @@
 	      return navigator.userAgent.match(/IEMobile/i);
 	  },
 	  this.any = function() {
-	      return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+	      return (this.android() || this.blackBerry() || this.iOS() || this.operaMini() || this.windowsMobile());
 	  }
-	  return this.any;
+	  alert(this.android() + ', ' + this.blackBerry() + ', ' + this.iOS() + ', ' + this.operaMini() + ', ' + this.windowsMobile());
+	  return this.any();
 	}
 
 
