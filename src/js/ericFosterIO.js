@@ -937,7 +937,7 @@ const ericfosterIO = (function() {
     //             });
     // }
     on('orientationchange', window, ()=> {
-      window.reload();
+      window.location.reload();
     });
     try {
       if (!window.frameElement) {

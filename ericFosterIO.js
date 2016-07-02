@@ -908,7 +908,7 @@
 	    //             });
 	    // }
 	    on('orientationchange', window, function () {
-	      window.reload();
+	      window.location.reload();
 	    });
 	    try {
 	      if (!window.frameElement) {
