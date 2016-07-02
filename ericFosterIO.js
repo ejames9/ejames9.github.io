@@ -3587,7 +3587,6 @@
 	  this.any = function() {
 	      return (this.android() || this.blackBerry() || this.iOS() || this.operaMini() || this.windowsMobile());
 	  }
-	  alert(this.android() + ', ' + this.blackBerry() + ', ' + this.iOS() + ', ' + this.operaMini() + ', ' + this.windowsMobile());
 	  return this.any();
 	}
 
