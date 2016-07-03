@@ -126,7 +126,7 @@ const ericfosterIO = (function() {
           far    = 1000;
       // get the container element
       var
-      _container = <'#threejs'>;
+      _container = <'#cubeFolio'>;
 
       //css3DRenderer.
       css3DRenderer = new THREE.CSS3DRenderer();
@@ -926,7 +926,22 @@ const ericfosterIO = (function() {
       <'#aboutMeContainer'/>
                 .top('-35px');
     }
-
+    //If device is mobile, kill cubeFolio and show thumbNail portfolio..
+    if (!isMobile()) {
+      //Kill cubeFolio..
+      <'#cubeFolio'/>
+            .display('none');
+      //Show thumbFolio
+      <'#thumbFolio'/>
+            .display('block');
+    } else {
+      //Show cubeFolio..
+      <'#cubeFolio'/>
+            .display('block');
+      //Kill thumbFolio
+      <'#thumbFolio'/>
+            .display('none');
+    }
     //Reload window if orientation changes, to avoid 'scrambling' of header.
     on('orientationchange', window, ()=> {
       window.location.reload();

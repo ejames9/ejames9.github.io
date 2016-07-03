@@ -217,7 +217,7 @@
 	          near = 0.1,
 	          far = 1000;
 	      // get the container element
-	      var _container = el('#threejs');
+	      var _container = el('#cubeFolio');
 
 	      //css3DRenderer.
 	      css3DRenderer = new THREE.CSS3DRenderer();
@@ -888,11 +888,6 @@
 
 	  //---DOM Ready Function=================================>>>
 	  go(function () {
-	    if (isMobile()) {
-	      alert('is Mobile!');
-	    } else {
-	      log('not mobile...');
-	    }
 	    //Set projects pane to parameters appropriate for firefox
 	    if (browser.firefox) {
 	      (function () {
@@ -904,7 +899,30 @@
 	        return elem30;
 	      })().top('-35px');
 	    }
-
+	    //If device is mobile, kill cubeFolio and show thumbNail portfolio..
+	    if (!isMobile()) {
+	      //Kill cubeFolio..
+	      (function () {
+	        var elem31 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
+	        return elem31;
+	      })().display('none');
+	      //Show thumbFolio
+	      (function () {
+	        var elem32 = _$('#thumbFolio') ? dom('#thumbFolio') : make('#thumbFolio').put("body");
+	        return elem32;
+	      })().display('block');
+	    } else {
+	      //Show cubeFolio..
+	      (function () {
+	        var elem33 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
+	        return elem33;
+	      })().display('block');
+	      //Kill thumbFolio
+	      (function () {
+	        var elem34 = _$('#thumbFolio') ? dom('#thumbFolio') : make('#thumbFolio').put("body");
+	        return elem34;
+	      })().display('none');
+	    }
 	    //Reload window if orientation changes, to avoid 'scrambling' of header.
 	    on('orientationchange', window, function () {
 	      window.location.reload();
