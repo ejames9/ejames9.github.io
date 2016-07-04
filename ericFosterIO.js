@@ -900,7 +900,7 @@
 	      })().top('-35px');
 	    }
 	    //If device is mobile, kill cubeFolio and show thumbNail portfolio..
-	    if (!isMobile()) {
+	    if (true) {
 	      //Kill cubeFolio..
 	      (function () {
 	        var elem31 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");

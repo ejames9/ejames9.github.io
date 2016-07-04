@@ -927,7 +927,7 @@ const ericfosterIO = (function() {
                 .top('-35px');
     }
     //If device is mobile, kill cubeFolio and show thumbNail portfolio..
-    if (!isMobile()) {
+    if (true) {
       //Kill cubeFolio..
       <'#cubeFolio'/>
             .display('none');
