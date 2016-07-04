@@ -667,16 +667,16 @@ const ericfosterIO = (function() {
     let _body    = <body/>,
         _html    = <html/>,
       _meBrand   = <'#meBrand'/>,
-      _mainNavLI = <'#mainNav li a'/>,
-      _mainNav   = <'#mainNav'/>,
-      _header    = <'#header'/>,
+      _naviBarLI = <'#naviBar li a'/>,
+      _naviBar   = <'#naviBar'/>,
+      _header    = <'#navbar'/>,
       _footer    = <'#footer'/>;
     //
     onScroll();
 
     //--ericfoster.io Scroll events=====================================>>>
     function onScroll() {
-      //affix mainNav to top upon scroll.
+      //affix naviBar to top upon scroll.
       scroll(window, (e)=> {
         //This switch statement is for accomodating multiple screen sizes/configs. (Responsive Design).
         switch (99===9*9+18) {
@@ -722,7 +722,7 @@ const ericfosterIO = (function() {
                 //Make a couple adjustments..
                 <'#header'/>
                       .height('45px');
-                <'#mainNav'/>
+                <'#naviBar'/>
                       .right('5px');
               }
               break;
@@ -742,7 +742,7 @@ const ericfosterIO = (function() {
                 //Make a couple adjustments..
                 <'#header'/>
                       .height('45px');
-                <'#mainNav'/>
+                <'#naviBar'/>
                       .right('5px');
               }
               break;
@@ -772,21 +772,17 @@ const ericfosterIO = (function() {
       if (_body.scrolled() > offSet1 || _html.scrolled() > offSet1 - 20) {
         _meBrand
               .fontSize(String(fontSize1) + 'px')
-              .top('2px');
-        _mainNavLI
-              .every((element)=> {
-                element
-                  .fontSize(String(fontSize2) + 'px')
-              });
-        _mainNav
-              .position('absolute')
-              .top('-5px')
-              .right('25px');
+              .top('-8px');
+        // _naviBarLI
+        //       .every((element)=> {
+        //         element
+        //           .fontSize(String(fontSize2) + 'px')
+        //       });
+        _naviBar
+              .top('0');
         _header
-              .height('70px')
-              .top('0px')
-              .bgColor('black')
-              .opacity('.7');
+              .bgColor('#090a0a')
+              .border('');
 
         if (_body.scrolled() > offSet2 || _html.scrolled() > offSet2) {
           _footer
@@ -800,20 +796,16 @@ const ericfosterIO = (function() {
         _meBrand
               .fontSize('')
               .top('');
-        _mainNavLI
-              .every((element)=> {
-                element
-                  .fontSize('')
-                });
-        _mainNav
-              .position('')
-              .top('')
-              .right('');
+        // _naviBarLI
+        //       .every((element)=> {
+        //         element
+        //           .fontSize('')
+        //         });
+        _naviBar
+              .top('50px');
         _header
-              .height('')
-              .top('')
-              .bgColor('')
-              .opacity('');
+              .bgColor('transparent')
+              .border('none');
       }
     }
   }
@@ -852,6 +844,14 @@ const ericfosterIO = (function() {
     }
     //If device is mobile, kill cubeFolio and show thumbNail portfolio..
     if (true) {
+      <'#meBrand'/>
+          .position('relative')
+          .display('inline')
+          .fontSize('40px')
+          .top('4px');
+      <'#naviBar'/>
+          .class('naviBar', '-')
+          .class('naviBar_Mobile', '+');
       //Kill cubeFolio..
       <'#cubeFolio'/>
             .display('none');
@@ -926,7 +926,7 @@ const ericfosterIO = (function() {
 //         .onUpdate(function() {
 //           _meBrand
 //                   .fontSize(this.fontS + 'px');
-//           _mainNavLI
+//           _naviBarLI
 //                   .every((element)=> {
 //                     element
 //                        .fontSize(this.fontS2 + 'px')

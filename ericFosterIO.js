@@ -671,13 +671,13 @@
 	      var elem17 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
 	      return elem17;
 	    }(),
-	        _mainNavLI = dom('#mainNav li a'),
-	        _mainNav = function () {
-	      var elem18 = _$('#mainNav') ? dom('#mainNav') : make('#mainNav').put("body");
+	        _naviBarLI = dom('#naviBar li a'),
+	        _naviBar = function () {
+	      var elem18 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
 	      return elem18;
 	    }(),
 	        _header = function () {
-	      var elem19 = _$('#header') ? dom('#header') : make('#header').put("body");
+	      var elem19 = _$('#navbar') ? dom('#navbar') : make('#navbar').put("body");
 	      return elem19;
 	    }(),
 	        _footer = function () {
@@ -689,7 +689,7 @@
 
 	    //--ericfoster.io Scroll events=====================================>>>
 	    function onScroll() {
-	      //affix mainNav to top upon scroll.
+	      //affix naviBar to top upon scroll.
 	      scroll(window, function (e) {
 	        //This switch statement is for accomodating multiple screen sizes/configs. (Responsive Design).
 	        switch (99 === 9 * 9 + 18) {
@@ -739,7 +739,7 @@
 	                return elem22;
 	              })().height('45px');
 	              (function () {
-	                var elem23 = _$('#mainNav') ? dom('#mainNav') : make('#mainNav').put("body");
+	                var elem23 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
 	                return elem23;
 	              })().right('5px');
 	            }
@@ -761,7 +761,7 @@
 	                return elem24;
 	              })().height('45px');
 	              (function () {
-	                var elem25 = _$('#mainNav') ? dom('#mainNav') : make('#mainNav').put("body");
+	                var elem25 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
 	                return elem25;
 	              })().right('5px');
 	            }
@@ -788,12 +788,14 @@
 	    function headerFooterAnimation(offSet1, offSet2, fontSize1, fontSize2) {
 	      //The following code exectutes if the page is scrolled beyond the # of px's below. This is the header animation.
 	      if (_body.scrolled() > offSet1 || _html.scrolled() > offSet1 - 20) {
-	        _meBrand.fontSize(String(fontSize1) + 'px').top('2px');
-	        _mainNavLI.every(function (element) {
-	          element.fontSize(String(fontSize2) + 'px');
-	        });
-	        _mainNav.position('absolute').top('-5px').right('25px');
-	        _header.height('70px').top('0px').bgColor('black').opacity('.7');
+	        _meBrand.fontSize(String(fontSize1) + 'px').top('-8px');
+	        // _naviBarLI
+	        //       .every((element)=> {
+	        //         element
+	        //           .fontSize(String(fontSize2) + 'px')
+	        //       });
+	        _naviBar.top('0');
+	        _header.bgColor('#090a0a').border('');
 
 	        if (_body.scrolled() > offSet2 || _html.scrolled() > offSet2) {
 	          _footer.viz('visible');
@@ -803,11 +805,13 @@
 	      } else {
 	        //Release.
 	        _meBrand.fontSize('').top('');
-	        _mainNavLI.every(function (element) {
-	          element.fontSize('');
-	        });
-	        _mainNav.position('').top('').right('');
-	        _header.height('').top('').bgColor('').opacity('');
+	        // _naviBarLI
+	        //       .every((element)=> {
+	        //         element
+	        //           .fontSize('')
+	        //         });
+	        _naviBar.top('50px');
+	        _header.bgColor('transparent').border('none');
 	      }
 	    }
 	  }
@@ -845,26 +849,34 @@
 	    }
 	    //If device is mobile, kill cubeFolio and show thumbNail portfolio..
 	    if (true) {
+	      (function () {
+	        var elem28 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
+	        return elem28;
+	      })().position('relative').display('inline').fontSize('40px').top('4px');
+	      (function () {
+	        var elem29 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
+	        return elem29;
+	      })().class('naviBar', '-').class('naviBar_Mobile', '+');
 	      //Kill cubeFolio..
 	      (function () {
-	        var elem28 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
-	        return elem28;
+	        var elem30 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
+	        return elem30;
 	      })().display('none');
 	      //Show thumbFolio
 	      (function () {
-	        var elem29 = _$('#thumbFolio') ? dom('#thumbFolio') : make('#thumbFolio').put("body");
-	        return elem29;
+	        var elem31 = _$('#thumbFolio') ? dom('#thumbFolio') : make('#thumbFolio').put("body");
+	        return elem31;
 	      })().display('block');
 	    } else {
 	      //Show cubeFolio..
 	      (function () {
-	        var elem30 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
-	        return elem30;
+	        var elem32 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
+	        return elem32;
 	      })().display('block');
 	      //Kill thumbFolio
 	      (function () {
-	        var elem31 = _$('#thumbFolio') ? dom('#thumbFolio') : make('#thumbFolio').put("body");
-	        return elem31;
+	        var elem33 = _$('#thumbFolio') ? dom('#thumbFolio') : make('#thumbFolio').put("body");
+	        return elem33;
 	      })().display('none');
 	    }
 	    //Reload window if orientation changes, to avoid 'scrambling' of header.
@@ -921,7 +933,7 @@
 	//         .onUpdate(function() {
 	//           _meBrand
 	//                   .fontSize(this.fontS + 'px');
-	//           _mainNavLI
+	//           _naviBarLI
 	//                   .every((element)=> {
 	//                     element
 	//                        .fontSize(this.fontS2 + 'px')
