@@ -50,6 +50,12 @@ a:hover {
 
 /*===Cover===============================================*/
 
+#navbar {
+  width: 100%;
+  height: 100px;
+  opacity: .9;
+}
+
 #header {
   left: 0px;
   right: 0px;
@@ -1199,9 +1205,6 @@ ALSO 900px => 1000px
      top: 10px;
    }
 
-   #mainNav {
-     display: none;
-   }
 
    #mainNav li a {
      font-size: 55px;
@@ -1344,10 +1347,6 @@ ALSO 900px => 1000px
      right: 0;
      left: 0;
      font-size: 65px;
-   }
-
-   #mainNav {
-     display: none;
    }
 
    #mainNav li a {
@@ -1500,11 +1499,6 @@ ALSO 900px => 1000px
      left: 0;
      font-size: 55px;
    }
-
-   #mainNav {
-     display: none;
-   }
-
 
    #show-techs i {
      font-size: 37px;
@@ -1683,10 +1677,6 @@ ALSO 900px => 1000px
      font-size: 50px;
    }
 
-   #mainNav {
-     display: none;
-   }
-
 
    #show-techs i {
      font-size: 20px;
@@ -1772,10 +1762,6 @@ ALSO 900px => 1000px
      font-size: 43px;
    }
 
-   #mainNav {
-     display: none;
-   }
-
 
    #show-techs i {
      font-size: 26px;
@@ -1858,11 +1844,6 @@ ALSO 900px => 1000px
      top: 30px;
      font-size: 43px;
    }
-
-   #mainNav {
-     display: none;
-   }
-
 
    #show-techs i {
      font-size: 26px;

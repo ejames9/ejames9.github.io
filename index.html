@@ -50,17 +50,34 @@
         <!--Header, Fixed------------------------------------------------->
         <div id='header' class="masthead clearfix">
 
-          <div class="inner">
-            <h3 id='meBrand' class="masthead-brand">Eric Foster</h3>
-            <nav>
-              <ul id='mainNav' class="nav masthead-nav">
-                <li class="active"><a class='head-nav' href="#top">Top</a></li>
-                <li><a class='head-nav' href="#me">Me</a></li>
-                <li><a class='head-nav' href="#projects">Work</a></li>
-                <li><a class='head-nav' href="#contactMe">Contact</a></li>
-              </ul>
+          <!-- <div class="inner"> -->
+
+
+            <!--Nav Tag=======-->
+            <nav id='navbar' class='navbar navbar-inverse' role='navigation'>
+              <div class = "navbar-header">
+                <button type = "button" class = "navbar-toggle" data-toggle = "collapse" data-target = "#mobileNav">
+                  <span class = "sr-only">Toggle navigation</span>
+                  <span class = "icon-bar"></span>
+                  <span class = "icon-bar"></span>
+                  <span class = "icon-bar"></span>
+                </button>
+
+                <h3 id='meBrand' class="masthead-brand">Eric Foster</h3>
+              </div>
+
+              <div id='mobileNav' class="collapse navbar-collapse">
+                <ul id='mainNav' class="nav masthead-nav">
+                  <li class="active"><a class='head-nav' href="#top">Top</a></li>
+                  <li><a class='head-nav' href="#me">Me</a></li>
+                  <li><a class='head-nav' href="#projects">Work</a></li>
+                  <li><a class='head-nav' href="#contactMe">Contact</a></li>
+                </ul>
+              </div>
+
             </nav>
-          </div>
+
+          <!-- </div> -->
         </div>
 
         <!--Some Cool Industry Icons====================================-->
@@ -132,12 +149,15 @@
 
       <!-- Three.js/projects Container and hash link=======================-->
       <a id='projects'></a>
+
       <!--Container for Project thumbnails, when cubefolio is not active===-->
       <div id='thumbFolio' class='container-fluid'>
+
         <!--Bootstrap grid container=======================================-->
         <div id='projects-row' class='row'>
           <!--Left Row=====================================================-->
           <div class='col-md-6'>
+
             <!--elementsJS.io Project======================================-->
             <div class='proj-pic-box'>
               <img src="./images/elementsjs.io.png" alt="elementsjs.io, elementsJS project site">
@@ -161,6 +181,7 @@
                 </p></a>
               </div>
             </div>
+
             <!--elementsJS side Nav Project========================-->
             <div class='proj-pic-box'>
               <img src="./images/elementsjs.ioClick.png" alt="elementsjs.io side navigation menu">
@@ -184,6 +205,7 @@
                 </p></a>
               </div>
             </div>
+
             <!--gulp-elementsJS-interpreter================================-->
             <div class='proj-pic-box'>
               <img src="./images/gulpEJSInterpreter.png" alt="gulp-elementsJS-interpreter">
@@ -208,8 +230,10 @@
               </div>
             </div>
           </div>
+
           <!--Right Row====================================================-->
           <div class='col-md-6'>
+
             <!--showTrippers.com===========================================-->
             <div class='proj-pic-box'>
               <img src="./images/showTrippers.png" alt="">
@@ -233,6 +257,7 @@
                 </p></a>
               </div>
             </div>
+
             <!--DjamBase===================================================-->
             <div class='proj-pic-box'>
               <img src="./images/DjamBase.png" alt="DjamBase Python Library">
@@ -256,6 +281,7 @@
                 </p></a>
               </div>
             </div>
+
             <!--CubeFolio==================================================-->
             <div class='proj-pic-box'>
               <img src="./images/cubeFolio.png" alt="Eric Foster's Portfolio Site Portfolio Cube">
@@ -283,7 +309,9 @@
         </div>
       </div><!--End thumbFolio Projects Container=========================-->
 
+      <!--CubeFolio Container=============================================-->
       <div id='cubeFolio'>
+
         <i id='x' class="fa fa-times-circle-o fa-3x hide"></i>
         <ul id='leftProjList'                                              class='projects-list'>
           <li id='_1' data-uri='http://elementsjs.io'                      class='projects-list-item'>elementsJS DOM Manipulation Library/Project Site</li>
@@ -295,6 +323,7 @@
           <li id='_5' data-uri='./images/DjamBase.png'                     class='projects-list-item'>Djambase Python Library</li>
           <li id='_6' data-uri='http://ejames9.github.io'                  class='projects-list-item'>ericfoster.io Portfolio Cube</li>
         </ul>
+
         <!--Projects info Container------------------------------------->
         <div id='project-info' class='hidden'>
           <i id='chevyL' class="fa fa-chevron-circle-left hide"></i>

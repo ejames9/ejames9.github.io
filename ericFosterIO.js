@@ -716,25 +716,21 @@
 	            break;
 	          case window.innerWidth > 600:
 	            if (window.innerHeight > 600) {
-	              headerFooterAnimation_Mobile(100, 2000, 56);
+	              footerAnimation_Mobile(2000);
 	            } else {
 	              headerFooterAnimation(380, 1450, 42, 36);
 	            }
 	            break;
 	          case window.innerWidth > 500:
 	            if (window.innerHeight > 500) {
-	              headerFooterAnimation_Mobile(100, 2000, 50, 55);
+	              footerAnimation_Mobile(2000);
 	            } else {
 	              headerFooterAnimation(310, 1430, 32, 32);
 	            }
 	            break;
 	          case window.innerWidth > 400:
 	            if (window.innerHeight > 400) {
-	              headerFooterAnimation_Mobile(100, 2275, 48, 30);
-	              //Adust margin between nav items.
-	              dom('#mainNav li a').every(function (element) {
-	                element.marginRight('10px');
-	              });
+	              footerAnimation_Mobile(2275);
 	            } else {
 	              headerFooterAnimation(300, 1400, 26, 29);
 	              //Make a couple adjustments..
@@ -751,55 +747,22 @@
 	          case window.innerWidth > 300:
 	            if (window.innerHeight > 300) {
 	              if (window.innerHeight > 600) {
-	                headerFooterAnimation_Mobile(100, 2100, 42, 22);
-	                //Adust margin between nav items.
-	                dom('#mainNav li a').every(function (element) {
-	                  element.marginRight('10px');
-	                });
-	                //
-	                (function () {
-	                  var elem24 = _$('#header') ? dom('#header') : make('#header').put("body");
-	                  return elem24;
-	                })().height('75px');
+	                footerAnimation_Mobile(2100);
 	              } else if (window.innerHeight > 500) {
-	                headerFooterAnimation_Mobile(100, 1900, 34, 20);
-	                //Adust margin between nav items.
-	                dom('#mainNav li a').every(function (element, a) {
-	                  element.marginRight('10px').only(4, function () {
-	                    log(element, 'blue');
-	                    element.marginRight('0px');
-	                  }, a);
-	                });
-	                //
-	                (function () {
-	                  var elem25 = _$('#header') ? dom('#header') : make('#header').put("body");
-	                  return elem25;
-	                })().height('65px');
+	                footerAnimation_Mobile(1900);
 	              } else {
-	                headerFooterAnimation_Mobile(100, 1700, 34, 20);
-	                //Adust margin between nav items.
-	                dom('#mainNav li a').every(function (element, a) {
-	                  element.marginRight('10px').only(4, function () {
-	                    log(element, 'blue');
-	                    element.marginRight('0px');
-	                  }, a);
-	                });
-	                //
-	                (function () {
-	                  var elem26 = _$('#header') ? dom('#header') : make('#header').put("body");
-	                  return elem26;
-	                })().height('65px');
+	                footerAnimation_Mobile(1700);
 	              }
 	            } else {
 	              headerFooterAnimation(300, 1400, 26, 29);
 	              //Make a couple adjustments..
 	              (function () {
-	                var elem27 = _$('#header') ? dom('#header') : make('#header').put("body");
-	                return elem27;
+	                var elem24 = _$('#header') ? dom('#header') : make('#header').put("body");
+	                return elem24;
 	              })().height('45px');
 	              (function () {
-	                var elem28 = _$('#mainNav') ? dom('#mainNav') : make('#mainNav').put("body");
-	                return elem28;
+	                var elem25 = _$('#mainNav') ? dom('#mainNav') : make('#mainNav').put("body");
+	                return elem25;
 	              })().right('5px');
 	            }
 	            break;
@@ -812,31 +775,12 @@
 	    }
 
 	    //This function adusts header and footer animation at lower resolutions in portrait mode..
-	    function headerFooterAnimation_Mobile(offSet1, offSet2, fontSize) {
-	      var left = arguments.length <= 3 || arguments[3] === undefined ? 90 : arguments[3];
-
-	      //The following code exectutes if the page is scrolled beyond the # of px's below. This is the header animation.
-	      if (_body.scrolled() > offSet1 || _html.scrolled() > offSet1 - 20) {
-	        _meBrand.display('none');
-	        _mainNavLI.every(function (element) {
-	          element.fontSize(String(fontSize) + 'px').marginRight('30px');
-	        });
-	        _mainNav.display('block').position('absolute').top('-10px').left(String(left) + 'px');
-	        _header.top('0px').height('90px').bgColor('black').opacity('.7');
-
-	        if (_body.scrolled() > offSet2 || _html.scrolled() > offSet2) {
-	          _footer.viz('visible');
-	        } else {
-	          _footer.viz('hidden');
-	        }
+	    function footerAnimation_Mobile(offSet2) {
+	      //The following code exectutes if the page is scrolled beyond the # of px's below. This is the footer animation.
+	      if (_body.scrolled() > offSet2 || _html.scrolled() > offSet2) {
+	        _footer.viz('visible');
 	      } else {
-	        //Release.
-	        _meBrand.display('block');
-	        _mainNavLI.every(function (element) {
-	          element.fontSize('');
-	        });
-	        _mainNav.display('none');
-	        _header.height('').bgColor('').opacity('');
+	        _footer.viz('hidden');
 	      }
 	    }
 
@@ -891,36 +835,36 @@
 	    //Set projects pane to parameters appropriate for firefox
 	    if (browser.firefox) {
 	      (function () {
-	        var elem29 = _$('#aboutMe') ? dom('#aboutMe') : make('#aboutMe').put("body");
-	        return elem29;
+	        var elem26 = _$('#aboutMe') ? dom('#aboutMe') : make('#aboutMe').put("body");
+	        return elem26;
 	      })().top('-10px');
 	      (function () {
-	        var elem30 = _$('#aboutMeContainer') ? dom('#aboutMeContainer') : make('#aboutMeContainer').put("body");
-	        return elem30;
+	        var elem27 = _$('#aboutMeContainer') ? dom('#aboutMeContainer') : make('#aboutMeContainer').put("body");
+	        return elem27;
 	      })().top('-35px');
 	    }
 	    //If device is mobile, kill cubeFolio and show thumbNail portfolio..
 	    if (true) {
 	      //Kill cubeFolio..
 	      (function () {
-	        var elem31 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
-	        return elem31;
+	        var elem28 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
+	        return elem28;
 	      })().display('none');
 	      //Show thumbFolio
 	      (function () {
-	        var elem32 = _$('#thumbFolio') ? dom('#thumbFolio') : make('#thumbFolio').put("body");
-	        return elem32;
+	        var elem29 = _$('#thumbFolio') ? dom('#thumbFolio') : make('#thumbFolio').put("body");
+	        return elem29;
 	      })().display('block');
 	    } else {
 	      //Show cubeFolio..
 	      (function () {
-	        var elem33 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
-	        return elem33;
+	        var elem30 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
+	        return elem30;
 	      })().display('block');
 	      //Kill thumbFolio
 	      (function () {
-	        var elem34 = _$('#thumbFolio') ? dom('#thumbFolio') : make('#thumbFolio').put("body");
-	        return elem34;
+	        var elem31 = _$('#thumbFolio') ? dom('#thumbFolio') : make('#thumbFolio').put("body");
+	        return elem31;
 	      })().display('none');
 	    }
 	    //Reload window if orientation changes, to avoid 'scrambling' of header.

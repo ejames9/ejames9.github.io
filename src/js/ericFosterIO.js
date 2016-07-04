@@ -701,27 +701,22 @@ const ericfosterIO = (function() {
               break;
           case (window.innerWidth > 600):
               if (window.innerHeight > 600) {
-                headerFooterAnimation_Mobile(100, 2000, 56);
+                footerAnimation_Mobile(2000);
               } else {
                 headerFooterAnimation(380, 1450, 42, 36);
               }
               break;
           case (window.innerWidth > 500):
               if (window.innerHeight > 500) {
-                headerFooterAnimation_Mobile(100, 2000, 50, 55);
+                footerAnimation_Mobile(2000);
               } else {
                 headerFooterAnimation(310, 1430, 32, 32);
               }
               break;
           case (window.innerWidth > 400):
               if (window.innerHeight > 400) {
-                headerFooterAnimation_Mobile(100, 2275, 48, 30);
-                //Adust margin between nav items.
-                <'#mainNav li a'/>
-                        .every((element)=> {
-                          element
-                              .marginRight('10px');
-                        });
+                footerAnimation_Mobile(2275);
+
               } else {
                 headerFooterAnimation(300, 1400, 26, 29);
                 //Make a couple adjustments..
@@ -734,48 +729,13 @@ const ericfosterIO = (function() {
           case (window.innerWidth > 300):
               if (window.innerHeight > 300) {
                 if (window.innerHeight > 600) {
-                  headerFooterAnimation_Mobile(100, 2100, 42, 22);
-                  //Adust margin between nav items.
-                  <'#mainNav li a'/>
-                          .every((element)=> {
-                            element
-                                .marginRight('10px');
-                          });
-                  //
-                  <'#header'/>
-                        .height('75px');
+                  footerAnimation_Mobile(2100);
+
                 } else if (window.innerHeight > 500) {
-                  headerFooterAnimation_Mobile(100, 1900, 34, 20);
-                  //Adust margin between nav items.
-                  <'#mainNav li a'/>
-                          .every((element, a)=> {
-                            element
-                                .marginRight('10px')
-                                .only(4, ()=> {
-                                  log(element, 'blue');
-                                  element
-                                      .marginRight('0px');
-                                }, a);
-                          });
-                  //
-                  <'#header'/>
-                        .height('65px');
+                  footerAnimation_Mobile(1900);
+
                 } else {
-                  headerFooterAnimation_Mobile(100, 1700, 34, 20);
-                  //Adust margin between nav items.
-                  <'#mainNav li a'/>
-                          .every((element, a)=> {
-                            element
-                                .marginRight('10px')
-                                .only(4, ()=> {
-                                  log(element, 'blue');
-                                  element
-                                      .marginRight('0px');
-                                }, a);
-                          });
-                  //
-                  <'#header'/>
-                        .height('65px');
+                  footerAnimation_Mobile(1700);
                 }
               } else {
                 headerFooterAnimation(300, 1400, 26, 29);
@@ -795,50 +755,14 @@ const ericfosterIO = (function() {
     }
 
     //This function adusts header and footer animation at lower resolutions in portrait mode..
-    function headerFooterAnimation_Mobile(offSet1, offSet2, fontSize, left=90) {
-      //The following code exectutes if the page is scrolled beyond the # of px's below. This is the header animation.
-      if (_body.scrolled() > offSet1 || _html.scrolled() > offSet1 - 20) {
-        _meBrand
-              .display('none');
-        _mainNavLI
-              .every((element)=> {
-                element
-                  .fontSize(String(fontSize) + 'px')
-                  .marginRight('30px');
-              });
-        _mainNav
-              .display('block')
-              .position('absolute')
-              .top('-10px')
-              .left(String(left) + 'px');
-        _header
-              .top('0px')
-              .height('90px')
-              .bgColor('black')
-              .opacity('.7');
-
-        if (_body.scrolled() > offSet2 || _html.scrolled() > offSet2) {
-          _footer
-              .viz('visible');
-        } else {
-          _footer
-              .viz('hidden');
-        }
+    function footerAnimation_Mobile(offSet2) {
+      //The following code exectutes if the page is scrolled beyond the # of px's below. This is the footer animation.
+      if (_body.scrolled() > offSet2 || _html.scrolled() > offSet2) {
+        _footer
+            .viz('visible');
       } else {
-        //Release.
-        _meBrand
-              .display('block');
-        _mainNavLI
-              .every((element)=> {
-                element
-                  .fontSize('')
-                });
-        _mainNav
-              .display('none');
-        _header
-              .height('')
-              .bgColor('')
-              .opacity('');
+        _footer
+            .viz('hidden');
       }
     }
 
