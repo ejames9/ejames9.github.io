@@ -847,9 +847,9 @@ const ericfosterIO = (function() {
       <'#meBrand'/>
           .position('relative')
           .display('inline')
-          .float('left')
           .fontSize('40px')
-          .top('4px');
+          .top('4px')
+          .left('0');
       <'#naviBar'/>
           .class('naviBar', '-')
           .class('naviBar_Mobile', '+');

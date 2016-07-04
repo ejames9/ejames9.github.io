@@ -852,7 +852,7 @@
 	      (function () {
 	        var elem28 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
 	        return elem28;
-	      })().position('relative').display('inline').float('left').fontSize('40px').top('4px');
+	      })().position('relative').display('inline').fontSize('40px').top('4px').left('0');
 	      (function () {
 	        var elem29 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
 	        return elem29;
