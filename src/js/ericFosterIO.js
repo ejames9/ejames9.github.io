@@ -715,7 +715,7 @@ const ericfosterIO = (function() {
               break;
           case (window.innerWidth > 400):
               if (window.innerHeight > 400) {
-                headerFooterAnimation_Mobile(100, 2000, 48, 30);
+                headerFooterAnimation_Mobile(100, 2275, 48, 30);
                 //Adust margin between nav items.
                 <'#mainNav li a'/>
                         .every((element)=> {
