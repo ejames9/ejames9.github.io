@@ -843,7 +843,7 @@ const ericfosterIO = (function() {
                 .top('-35px');
     }
     //If device is mobile, kill cubeFolio and show thumbNail portfolio..
-    if (true) {
+    if (winow.innerWidth < 1000) {
       <'#meBrand'/>
           .position('relative')
           .display('inline')

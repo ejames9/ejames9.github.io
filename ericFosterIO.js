@@ -848,7 +848,7 @@
 	      })().top('-35px');
 	    }
 	    //If device is mobile, kill cubeFolio and show thumbNail portfolio..
-	    if (true) {
+	    if (winow.innerWidth < 1000) {
 	      (function () {
 	        var elem28 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
 	        return elem28;

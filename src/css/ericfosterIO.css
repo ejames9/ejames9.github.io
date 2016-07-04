@@ -87,13 +87,13 @@ a:hover {
   top: 50px;
 }
 
-.naviBar li a {
+#naviBar li a {
   font-size: 50px;
   color: #714277;
 }
 
 
-.naviBar > .active  a {
+#naviBar > .active  a {
   background-color: transparent;
   border-bottom: 1px solid #164cac;
   border-radius: 10px;
@@ -111,6 +111,10 @@ a:hover {
   float: left;
 }
 
+#cover-head {
+  font-size: 66px;
+  color: #000;
+}
 
 #coverDesc {
   font-size: 48px;
@@ -120,9 +124,9 @@ a:hover {
   position: relative;
   font-family: amatic sc;
   top: 230px;
-  left: 50px;
+  left: 250px;
   height: 230px;
-  width: 380px;
+  width: 700px;
   z-index: 10;
 }
 
