@@ -419,9 +419,9 @@ const ericfosterIO = (function() {
             //Give target focus.
             <e.target/>
                       .attrib('name', 'focus')
-                      .color('white')
+                      .color('#27130a')
                       .fontWeight('900')
-                      .textShadow('0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87')
+                      .textShadow('0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927')
                       .zIndex('1000');
             //Kill spin.
             flags.SPIN_SWITCH_ = false;
@@ -772,6 +772,7 @@ const ericfosterIO = (function() {
       if (_body.scrolled() > offSet1 || _html.scrolled() > offSet1 - 20) {
         _meBrand
               .fontSize(String(fontSize1) + 'px')
+              .textShadow('0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927')
               .top('-8px');
         // _naviBarLI
         //       .every((element)=> {
@@ -780,8 +781,14 @@ const ericfosterIO = (function() {
         //       });
         _naviBar
               .top('0');
+        _naviBarLI
+              .every((element)=> {
+                element
+                  .fontSize('32px');
+              });
         _header
-              .bgColor('#090a0a')
+              .bgColor('#191a1a')
+              .opacity('.9')
               .border('');
 
         if (_body.scrolled() > offSet2 || _html.scrolled() > offSet2) {
@@ -802,7 +809,12 @@ const ericfosterIO = (function() {
         //           .fontSize('')
         //         });
         _naviBar
-              .top('50px');
+              .top('25px')
+        _naviBarLI
+              .every((element)=> {
+                element
+                  .fontSize('40px');
+              });
         _header
               .bgColor('transparent')
               .border('none');

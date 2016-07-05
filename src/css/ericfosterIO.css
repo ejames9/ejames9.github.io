@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Amatic+SC:400,700|Monoton|Rum+Raisin|Londrina+Sketch);
-
+@import 'https://fonts.googleapis.com/css?family=Aladin';
+@import 'https://fonts.googleapis.com/css?family=Advent+Pro|Berkshire+Swash|Crushed|Dorsa|Expletus+Sans|Macondo|Marko+One|Medula+One|Merienda+One|Six+Caps|Tulpen+One|Wire+One';
 /*
 amatic sc, righteous, bangers, rock salt, special elite, viga, homemade apple, limelight, bubblegum sans, fredericka the great, fontdiner swanky,
 cabin sketch, rye, monofett, fascinate, ribeye marrow,
@@ -71,37 +72,39 @@ a:hover {
   top: 25px;
   left: 15px;
   font-family: monoton, love ya like a sister, im fell english sc, trade winds, henny penny, galindo, mystery quest, londrina shadow, londrina sketch, rum raisin;
-  font-size: 101px;
+  font-size: 144px;
   z-index: 999;
 }
 #meBrand:hover {
   color: #714277;
   font-weight: 900;
-  text-shadow: 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830;
 }
 
 .naviBar {
-  font-family: amatic sc, carme;
+  font-family: aladin, amatic sc, carme;
+  font-weight: 100;
   float: right;
   position: relative;
-  top: 50px;
+  top: 25px;
 }
 
 #naviBar li a {
-  font-size: 50px;
-  color: #714277;
+  font-size: 40px;
+  color: #f8e7da;
+  /*text-shadow: 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927;*/
+
 }
 
 
 #naviBar > .active  a {
   background-color: transparent;
-  border-bottom: 1px solid #164cac;
+  border-bottom: 1px solid #fe7927;
   border-radius: 10px;
 }
 
 .naviBar a:hover {
-  border-top: 1px solid #714277;
-  border-right: 1px solid #714277;
+  border-top: 1px solid #fe7927;
+  border-right: 1px solid #fe7927;
   border-radius: 10px;
 }
 
@@ -111,22 +114,39 @@ a:hover {
   float: left;
 }
 
-#cover-head {
-  font-size: 66px;
-  color: #000;
+.cover-head {
+  font-size: 48px;
+  font-family: aladin;
+  text-shadow: 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830;
+
+  /*text-shadow: 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927;*/
+  color: #27130a;
 }
 
 #coverDesc {
-  font-size: 48px;
+  font-size: 30px;
 }
 
+#meBrand {
+  font-family: aladin, bangers, monoton, monofett, megrim, ewert, comfortaa, aladin;
+  /*text-shadow: 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830;*/
+  text-shadow: 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927;
+
+  /*text-shadow: 0 0 0.2em #3a90a9, 0 0 0.2em #3a90a9, 0 0 0.2em #3a90a9, 0 0 0.2em #3a90a9, 0 0 0.2em #3a90a9, 0 0 0.2em #3a90a9, 0 0 0.2em #3a90a9, 0 0 0.2em #3a90a9;*/
+  color: #27130a;
+  font-size: 144px;
+}
+/*
+bangers, comfortaa, megrim, poiret one,
+*/
 #coverDescContainer {
   position: relative;
-  font-family: amatic sc;
-  top: 230px;
-  left: 250px;
+  font-family: aladin, wire one, bangers, megrim, ubuntu;
+  color: #f8e7da;
+  top: 180px;
+  margin: auto;
   height: 230px;
-  width: 700px;
+  width: 400px;
   z-index: 10;
 }
 
@@ -134,8 +154,8 @@ a:hover {
   display: inline;
   font-size: 36px;
   background-color: #fa6121;
-  border: 1px solid #43234c;
-  color: #43234c;
+  border: none;
+  color: #000;
 }
 #coverDescContainer div a:hover {
   background-color: #164cac;
@@ -316,7 +336,7 @@ a:hover {
 
 #aboutMeContainer {
   position: relative;
-  top: -20px;
+  top: -40px;
 }
 
 #aboutMe {
@@ -327,17 +347,18 @@ a:hover {
   width: 100%;
   /*color: #256ece;*/
   background-color: #191a1a;
+  opacity: .9;
   text-align: center;
-  font-family: amatic sc;
+  font-family: tulpen one, aladin, bangers, amatic sc;
   padding: 80px 30px 100px 30px;
   z-index: 12;
 }
 
 #aboutMe h2 {
-  font-size: 64px;
+  font-size: 70px;
 }
 #aboutMe p {
-  font-size: 28px;
+  font-size: 38px;
 }
 
 
@@ -360,9 +381,10 @@ a:hover {
   width: 100%;
   font-family: amatic sc;
   font-size: 28px;
-  background-image: url('../../images/andromeda.jpg');
+  /*background-image: url('../../images/andromeda.jpg');
   background-repeat: repeat;
-  background-color: black;
+  background-color: black;*/
+  background-color: transparent;
   z-index: 11;
   padding: 0px;
   overflow-x: hidden;
@@ -390,23 +412,31 @@ a:hover {
 
 #leftProjList {
   position: absolute;
+  border-top-right-radius: 10px;
   left: 0px;
   bottom: 0px;
   margin-bottom: 0px;
 }
 #rightProjList {
   position: absolute;
+  border-top-left-radius: 10px;
   right: 0px;
   bottom: 0px;
   margin-bottom: 0px;
 }
 
+/*
+advent pro, aladin, medula one, merienda one, six caps,
+*/
 .projects-list {
+  box-sizing: border-box;
   padding: 12px;
-  border-radius: 10px;
   bottom: 0;
-  background-color: #000;
-  opacity: .7;
+  background-color: #191a1a;
+  font-family: tulpen one;
+  width: 28%;
+  /*font-size: 22px;*/
+  opacity: .8;
   z-index: 999
 }
 
@@ -417,9 +447,9 @@ a:hover {
   z-index: 1000;
 }*/
 .projects-list-item:active {
-  color: #e12d22;
+  color: #fff;
   font-weight: 900;
-  text-shadow: 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87;
+  text-shadow: 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927;
   z-index: 1000;
 }
 
@@ -433,7 +463,7 @@ a:hover {
   background-color: #000;
   color: #fff;
   opacity:  .8;
-  font-family: amatic sc;
+  font-family: tulpen one, amatic sc;
   /*font-size: 32px;*/
   padding: 40px 40px 100px 40px;
   z-index: 9999;
@@ -441,10 +471,11 @@ a:hover {
 
 #project-info h2,
 .proj-descript h2 {
-  font-family: monoton;
+  font-family: aladin;
   color: #FFf;
   font-weight: 900;
-  text-shadow: 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87;
+  text-shadow: 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22;
+  /*text-shadow: 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87;*/
   z-index: 1000;
 }
 
@@ -456,10 +487,10 @@ a:hover {
   z-index: 10000;
 }
 #chevyL:hover {
-  color: #6f3b87;
+  color: #fe7927;
 }
 #chevyL:active {
-  text-shadow: 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87;
+  text-shadow: 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927;
   color: white;
 }
 
@@ -471,10 +502,10 @@ a:hover {
   z-index: 10000;
 }
 #chevy:hover {
-  color: #6f3b87;
+  color: #fe7927;
 }
 #chevy:active {
-  text-shadow: 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87;
+  text-shadow: 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927;
   color: white;
 }
 
@@ -569,11 +600,11 @@ See Assignable classes for:
   left: 0px;
   height: 100%;
   width: 100%;
-  font-family: amatic sc;
+  font-family: tulpen one, amatic sc;
   font-size: 28px;
-  background-image: url('../../images/andromeda.jpg');
-  background-repeat: repeat-x;
-  background-color: black;
+  /*background-image: url('../../images/andromeda.jpg');
+  background-repeat: repeat-x;*/
+  background-color: transparent;;
   z-index: 11;
   padding: 10px;
   overflow-x: hidden;
@@ -610,7 +641,7 @@ See Assignable classes for:
 
 .proj-descript  h2 {
   font-size: 16px;
-  font-family: monoton;
+  font-family: aladin;
   padding: 4px 0 2px;
 }
 .proj-descript  p {
@@ -732,9 +763,8 @@ See Assignable classes for:
 }
 
 #contactMeText {
-  color: white;
-  font-family: amatic sc;
-  font-weight: 800;
+  color: #f8e7da;
+  font-family: aladin, amatic sc;
   font-size: 84px;
 }
 
@@ -764,30 +794,34 @@ See Assignable classes for:
   display: inline;
   font-size: 48px;
   background-color: transparent;
-  color: white;
+  color: f8e7da;
   margin-right: 40px;
 }
 #buttons div a:hover {
-  background-color: #164cac;
-  opacity: .9;
-  color: #fff;
-  text-shadow: 0 0 0.2em #fff, 0 0 0.2em #fff, 0 0 0.2em #fff, 0 0 0.2em #fff, 0 0 0.2em #fff, 0 0 0.2em #fff, 0 0 0.2em #fff, 0 0 0.2em #fff;
+  background-color: #fe7927;
+  /*opacity: .9;*/
+  /*color: #fff;*/
+  /*text-shadow: 0 0 0.2em #fff, 0 0 0.2em #fff, 0 0 0.2em #fff, 0 0 0.2em #fff, 0 0 0.2em #fff, 0 0 0.2em #fff, 0 0 0.2em #fff, 0 0 0.2em #fff;*/
 
-  border: 1px solid #164cac;
+  border: 1px solid #fe7927;
 }
 #buttons div a:active {
   background-color: #43234c;
   opacity: 1;
-  color: #fff;
+  /*color: #f8e7da;*/
   border: 1px solid #43234c;
 }
 
 #buttonsContainer {
   position: relative;
-  font-family: amatic sc;
+  font-family: aladin, wired one, tulpen one, amatic sc;
   margin: auto;
   top: 30px;
   width: 100%;
+}
+
+.line {
+  border: 1px solid #f8e7da;
 }
 
 #linkedin {
@@ -814,7 +848,7 @@ See Assignable classes for:
   left: 0px;
 }
 
-#buttons div a:hover #linkedin {
+/*#buttons div a:hover #linkedin {
   color: #e0e0e0;
 }
 #buttons div a:hover #share {
@@ -825,7 +859,7 @@ See Assignable classes for:
 }
 #buttons div a:hover #envelope {
   color: #e0e0e0;
-}
+}*/
 
 #mapFrame {
   background-color: #191a1a;

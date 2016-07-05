@@ -461,7 +461,7 @@
 	          //Hone in on click events happening on our target elements.
 	          if (projectRE.test(e.target.className)) {
 	            //Give target focus.
-	            element(e.target).attrib('name', 'focus').color('white').fontWeight('900').textShadow('0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87').zIndex('1000');
+	            element(e.target).attrib('name', 'focus').color('#27130a').fontWeight('900').textShadow('0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927').zIndex('1000');
 	            //Kill spin.
 	            flags.SPIN_SWITCH_ = false;
 	            //New tween/target for close-up animation.
@@ -788,14 +788,17 @@
 	    function headerFooterAnimation(offSet1, offSet2, fontSize1, fontSize2) {
 	      //The following code exectutes if the page is scrolled beyond the # of px's below. This is the header animation.
 	      if (_body.scrolled() > offSet1 || _html.scrolled() > offSet1 - 20) {
-	        _meBrand.fontSize(String(fontSize1) + 'px').top('-8px');
+	        _meBrand.fontSize(String(fontSize1) + 'px').textShadow('0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927').top('-8px');
 	        // _naviBarLI
 	        //       .every((element)=> {
 	        //         element
 	        //           .fontSize(String(fontSize2) + 'px')
 	        //       });
 	        _naviBar.top('0');
-	        _header.bgColor('#090a0a').border('');
+	        _naviBarLI.every(function (element) {
+	          element.fontSize('32px');
+	        });
+	        _header.bgColor('#191a1a').opacity('.9').border('');
 
 	        if (_body.scrolled() > offSet2 || _html.scrolled() > offSet2) {
 	          _footer.viz('visible');
@@ -810,7 +813,10 @@
 	        //         element
 	        //           .fontSize('')
 	        //         });
-	        _naviBar.top('50px');
+	        _naviBar.top('25px');
+	        _naviBarLI.every(function (element) {
+	          element.fontSize('40px');
+	        });
 	        _header.bgColor('transparent').border('none');
 	      }
 	    }
