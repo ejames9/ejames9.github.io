@@ -670,6 +670,7 @@ const ericfosterIO = (function() {
       _naviBarLI = <'#naviBar li a'/>,
       _naviBar   = <'#naviBar'/>,
       _header    = <'#navbar'/>,
+      _meHead    = <'#me-head'/>,
       _footer    = <'#footer'/>;
     //
     onScroll();
@@ -689,8 +690,8 @@ const ericfosterIO = (function() {
           case (window.innerWidth > 900):
               headerFooterAnimation(600, 2060, 42, 36);
               break;
-          case (window.innerWidth > 780):
-              headerFooterAnimation(500, 2060, 42, 36);
+          case (window.innerWidth > 760):
+              headerFooterAnimation(500, 1960, 42, 36, 0);
               break;
           case (window.innerWidth > 700):
               if (window.innerHeight > 700) {
@@ -767,13 +768,14 @@ const ericfosterIO = (function() {
     }
 
     //This function adjusts header footer animation..
-    function headerFooterAnimation(offSet1, offSet2, fontSize1, fontSize2) {
+    function headerFooterAnimation(offSet1, offSet2, fontSize1, fontSize2, left=25) {
       //The following code exectutes if the page is scrolled beyond the # of px's below. This is the header animation.
       if (_body.scrolled() > offSet1 || _html.scrolled() > offSet1 - 20) {
         _meBrand
               .fontSize(String(fontSize1) + 'px')
               .textShadow('0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927')
-              .top('-8px');
+              .top('-8px')
+              .left('12px');
         // _naviBarLI
         //       .every((element)=> {
         //         element
@@ -791,6 +793,11 @@ const ericfosterIO = (function() {
               .opacity('.9')
               .border('');
 
+        if (window.innerWidth > 760) {
+          _meHead
+                .display('none');
+        }
+
         if (_body.scrolled() > offSet2 || _html.scrolled() > offSet2) {
           _footer
               .viz('visible');
@@ -802,14 +809,15 @@ const ericfosterIO = (function() {
         //Release.
         _meBrand
               .fontSize('')
-              .top('');
+              .top('')
+              .left('175px');
         // _naviBarLI
         //       .every((element)=> {
         //         element
         //           .fontSize('')
         //         });
         _naviBar
-              .top('25px')
+              .top(left + 'px')
         _naviBarLI
               .every((element)=> {
                 element
@@ -818,6 +826,11 @@ const ericfosterIO = (function() {
         _header
               .bgColor('transparent')
               .border('none');
+        //
+        if (window.innerWidth > 760) {
+          _meHead
+                .display('block');
+        }
       }
     }
   }
@@ -855,7 +868,23 @@ const ericfosterIO = (function() {
                 .top('-35px');
     }
     //If device is mobile, kill cubeFolio and show thumbNail portfolio..
-    if (window.innerWidth < 1000) {
+    if (window.innerWidth < 1100) {
+      //Kill cubeFolio..
+      <'#cubeFolio'/>
+            .display('none');
+      //Show thumbFolio
+      <'#thumbFolio'/>
+            .display('block');
+
+    } else {
+      //Show cubeFolio..
+      <'#cubeFolio'/>
+            .display('block');
+      //Kill thumbFolio
+      <'#thumbFolio'/>
+            .display('none');
+    }
+    if (window.innerWidth < 760) {
       <'#meBrand'/>
           .position('relative')
           .display('inline')
@@ -865,19 +894,9 @@ const ericfosterIO = (function() {
       <'#naviBar'/>
           .class('naviBar', '-')
           .class('naviBar_Mobile', '+');
-      //Kill cubeFolio..
-      <'#cubeFolio'/>
-            .display('none');
-      //Show thumbFolio
-      <'#thumbFolio'/>
-            .display('block');
-    } else {
-      //Show cubeFolio..
-      <'#cubeFolio'/>
-            .display('block');
-      //Kill thumbFolio
-      <'#thumbFolio'/>
-            .display('none');
+      //
+      <'#me-head'/>
+          .display('none');
     }
     //Reload window if orientation changes, to avoid 'scrambling' of header.
     on('orientationchange', window, ()=> {

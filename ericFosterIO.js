@@ -680,9 +680,13 @@
 	      var elem19 = _$('#navbar') ? dom('#navbar') : make('#navbar').put("body");
 	      return elem19;
 	    }(),
-	        _footer = function () {
-	      var elem20 = _$('#footer') ? dom('#footer') : make('#footer').put("body");
+	        _meHead = function () {
+	      var elem20 = _$('#me-head') ? dom('#me-head') : make('#me-head').put("body");
 	      return elem20;
+	    }(),
+	        _footer = function () {
+	      var elem21 = _$('#footer') ? dom('#footer') : make('#footer').put("body");
+	      return elem21;
 	    }();
 	    //
 	    onScroll();
@@ -697,15 +701,15 @@
 	            headerFooterAnimation(700, 2460, 42, 36);
 	            //Make sure map is centered by removing img-responsive class.
 	            (function () {
-	              var elem21 = _$('#map-image') ? dom('#map-image') : make('#map-image').put("body");
-	              return elem21;
+	              var elem22 = _$('#map-image') ? dom('#map-image') : make('#map-image').put("body");
+	              return elem22;
 	            })().class('img-responsive', '-');
 	            break;
 	          case window.innerWidth > 900:
 	            headerFooterAnimation(600, 2060, 42, 36);
 	            break;
-	          case window.innerWidth > 780:
-	            headerFooterAnimation(500, 2060, 42, 36);
+	          case window.innerWidth > 760:
+	            headerFooterAnimation(500, 1960, 42, 36, 0);
 	            break;
 	          case window.innerWidth > 700:
 	            if (window.innerHeight > 700) {
@@ -735,12 +739,12 @@
 	              headerFooterAnimation(300, 1400, 26, 29);
 	              //Make a couple adjustments..
 	              (function () {
-	                var elem22 = _$('#header') ? dom('#header') : make('#header').put("body");
-	                return elem22;
+	                var elem23 = _$('#header') ? dom('#header') : make('#header').put("body");
+	                return elem23;
 	              })().height('45px');
 	              (function () {
-	                var elem23 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
-	                return elem23;
+	                var elem24 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
+	                return elem24;
 	              })().right('5px');
 	            }
 	            break;
@@ -757,12 +761,12 @@
 	              headerFooterAnimation(300, 1400, 26, 29);
 	              //Make a couple adjustments..
 	              (function () {
-	                var elem24 = _$('#header') ? dom('#header') : make('#header').put("body");
-	                return elem24;
+	                var elem25 = _$('#header') ? dom('#header') : make('#header').put("body");
+	                return elem25;
 	              })().height('45px');
 	              (function () {
-	                var elem25 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
-	                return elem25;
+	                var elem26 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
+	                return elem26;
 	              })().right('5px');
 	            }
 	            break;
@@ -786,9 +790,11 @@
 
 	    //This function adjusts header footer animation..
 	    function headerFooterAnimation(offSet1, offSet2, fontSize1, fontSize2) {
+	      var left = arguments.length <= 4 || arguments[4] === undefined ? 25 : arguments[4];
+
 	      //The following code exectutes if the page is scrolled beyond the # of px's below. This is the header animation.
 	      if (_body.scrolled() > offSet1 || _html.scrolled() > offSet1 - 20) {
-	        _meBrand.fontSize(String(fontSize1) + 'px').textShadow('0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927').top('-8px');
+	        _meBrand.fontSize(String(fontSize1) + 'px').textShadow('0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927').top('-8px').left('12px');
 	        // _naviBarLI
 	        //       .every((element)=> {
 	        //         element
@@ -800,6 +806,10 @@
 	        });
 	        _header.bgColor('#191a1a').opacity('.9').border('');
 
+	        if (window.innerWidth > 760) {
+	          _meHead.display('none');
+	        }
+
 	        if (_body.scrolled() > offSet2 || _html.scrolled() > offSet2) {
 	          _footer.viz('visible');
 	        } else {
@@ -807,17 +817,21 @@
 	        }
 	      } else {
 	        //Release.
-	        _meBrand.fontSize('').top('');
+	        _meBrand.fontSize('').top('').left('175px');
 	        // _naviBarLI
 	        //       .every((element)=> {
 	        //         element
 	        //           .fontSize('')
 	        //         });
-	        _naviBar.top('25px');
+	        _naviBar.top(left + 'px');
 	        _naviBarLI.every(function (element) {
 	          element.fontSize('40px');
 	        });
 	        _header.bgColor('transparent').border('none');
+	        //
+	        if (window.innerWidth > 760) {
+	          _meHead.display('block');
+	        }
 	      }
 	    }
 	  }
@@ -845,44 +859,51 @@
 	    //Set projects pane to parameters appropriate for firefox
 	    if (browser.firefox) {
 	      (function () {
-	        var elem26 = _$('#aboutMe') ? dom('#aboutMe') : make('#aboutMe').put("body");
-	        return elem26;
+	        var elem27 = _$('#aboutMe') ? dom('#aboutMe') : make('#aboutMe').put("body");
+	        return elem27;
 	      })().top('-10px');
 	      (function () {
-	        var elem27 = _$('#aboutMeContainer') ? dom('#aboutMeContainer') : make('#aboutMeContainer').put("body");
-	        return elem27;
+	        var elem28 = _$('#aboutMeContainer') ? dom('#aboutMeContainer') : make('#aboutMeContainer').put("body");
+	        return elem28;
 	      })().top('-35px');
 	    }
 	    //If device is mobile, kill cubeFolio and show thumbNail portfolio..
-	    if (window.innerWidth < 1000) {
-	      (function () {
-	        var elem28 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
-	        return elem28;
-	      })().position('relative').display('inline').fontSize('40px').top('4px').left('0');
-	      (function () {
-	        var elem29 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
-	        return elem29;
-	      })().class('naviBar', '-').class('naviBar_Mobile', '+');
+	    if (window.innerWidth < 1100) {
 	      //Kill cubeFolio..
 	      (function () {
-	        var elem30 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
-	        return elem30;
+	        var elem29 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
+	        return elem29;
 	      })().display('none');
 	      //Show thumbFolio
 	      (function () {
-	        var elem31 = _$('#thumbFolio') ? dom('#thumbFolio') : make('#thumbFolio').put("body");
-	        return elem31;
+	        var elem30 = _$('#thumbFolio') ? dom('#thumbFolio') : make('#thumbFolio').put("body");
+	        return elem30;
 	      })().display('block');
 	    } else {
 	      //Show cubeFolio..
 	      (function () {
-	        var elem32 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
-	        return elem32;
+	        var elem31 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
+	        return elem31;
 	      })().display('block');
 	      //Kill thumbFolio
 	      (function () {
-	        var elem33 = _$('#thumbFolio') ? dom('#thumbFolio') : make('#thumbFolio').put("body");
+	        var elem32 = _$('#thumbFolio') ? dom('#thumbFolio') : make('#thumbFolio').put("body");
+	        return elem32;
+	      })().display('none');
+	    }
+	    if (window.innerWidth < 760) {
+	      (function () {
+	        var elem33 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
 	        return elem33;
+	      })().position('relative').display('inline').fontSize('40px').top('4px').left('0');
+	      (function () {
+	        var elem34 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
+	        return elem34;
+	      })().class('naviBar', '-').class('naviBar_Mobile', '+');
+	      //
+	      (function () {
+	        var elem35 = _$('#me-head') ? dom('#me-head') : make('#me-head').put("body");
+	        return elem35;
 	      })().display('none');
 	    }
 	    //Reload window if orientation changes, to avoid 'scrambling' of header.

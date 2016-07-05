@@ -58,6 +58,16 @@ a:hover {
   border: none;
 }
 
+#me-head {
+  position: relative;
+  top: 10px;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  /*border: 7px solid #27130a;*/
+  margin-right: 10px;
+}
+
 #header {
   left: 0px;
   right: 0px;
@@ -70,7 +80,7 @@ a:hover {
   position: absolute;
   color: #714277;
   top: 25px;
-  left: 15px;
+  left: 175px;
   font-family: monoton, love ya like a sister, im fell english sc, trade winds, henny penny, galindo, mystery quest, londrina shadow, londrina sketch, rum raisin;
   font-size: 144px;
   z-index: 999;
@@ -109,9 +119,8 @@ a:hover {
 }
 
 .naviBar_Mobile {
-  font-family: amatic sc, carme;
+  font-family: aladin, amatic sc, carme;
   font-size: 24px;
-  float: left;
 }
 
 .cover-head {
@@ -127,14 +136,14 @@ a:hover {
   font-size: 30px;
 }
 
+
 #meBrand {
   font-family: aladin, bangers, monoton, monofett, megrim, ewert, comfortaa, aladin;
   /*text-shadow: 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830;*/
   text-shadow: 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927;
-
   /*text-shadow: 0 0 0.2em #3a90a9, 0 0 0.2em #3a90a9, 0 0 0.2em #3a90a9, 0 0 0.2em #3a90a9, 0 0 0.2em #3a90a9, 0 0 0.2em #3a90a9, 0 0 0.2em #3a90a9, 0 0 0.2em #3a90a9;*/
   color: #27130a;
-  font-size: 144px;
+  font-size: 112px;
 }
 /*
 bangers, comfortaa, megrim, poiret one,
@@ -150,12 +159,18 @@ bangers, comfortaa, megrim, poiret one,
   z-index: 10;
 }
 
+#coverDescContainer h5 {
+  margin-bottom: 40px;
+}
+
 #coverDescContainer div a {
   display: inline;
   font-size: 36px;
   background-color: #fa6121;
   border: none;
-  color: #000;
+  /*border-radius: 40px;;*/
+  color: #27130a;
+  padding: 10px 5px;
 }
 #coverDescContainer div a:hover {
   background-color: #164cac;
@@ -993,6 +1008,10 @@ Width-- 1100 > 1990px ===------------------------------>>
      font-size: 36px;
    }
 
+   #me-head {
+     margin-left: 10px;
+   }
+
    #coverDesc {
      font-size: 30px;
      margin-bottom: 20px;
@@ -1047,44 +1066,22 @@ ALSO 900px => 1000px
    }
  }*/
  @media screen and (max-width: 1000px) {
-   /*#cubeFolio {
-     display: none;
-   }
-
-   #thumbFolio {
-     display: block;
-   }*/
-
-   #show-techs i {
-     font-size: 33px;
-   }
- }
-
-
- /*
- Width-- 800 => 900px ===------------------------------>>
- */
- @media screen and (max-width: 900px) {
    #meBrand {
-     font-size: 60px;
+     top: 60px;
    }
 
-   #mainNav li a {
-     font-size: 36px;
-   }
-
-   #show-techs i {
-     font-size: 25px;
+   .cover-head {
+     font-size: 34px;
    }
 
    #coverDesc {
-     font-size: 30px;
+     font-size: 26px;
      margin-bottom: 20px;
    }
 
    #coverDescContainer {
-     left: 30px;
-     bottom: 80px;
+     margin: auto;
+     top: 140px;
      height: 230px;
      width: 380px;
    }
@@ -1094,7 +1091,58 @@ ALSO 900px => 1000px
    }
 
    #aboutMe p {
-     font-size: 20px;
+     font-size: 29px;
+   }
+
+   #show-techs i {
+     font-size: 33px;
+   }
+
+   #footer {
+     padding-bottom: 20px;
+   }
+ }
+
+
+ /*
+ Width-- 800 => 900px ===------------------------------>>
+ */
+ @media screen and (max-width: 900px) {
+   #meBrand {
+     top: 60px;
+     font-size: 60px;
+   }
+
+   #naviBar {
+     top: 0px;
+   }
+
+   #show-techs i {
+     font-size: 27px;
+   }
+
+   .cover-head {
+     font-size: 34px;
+   }
+
+   #coverDesc {
+     font-size: 22px;
+     margin-bottom: 20px;
+   }
+
+   #coverDescContainer {
+     margin: auto;
+     top: 142px;
+     height: 230px;
+     width: 380px;
+   }
+
+   #aboutMe h2 {
+     font-size: 48px;
+   }
+
+   #aboutMe p {
+     font-size: 24px;
    }
 
    .projects-list {
@@ -1114,6 +1162,10 @@ ALSO 900px => 1000px
      margin-right: 20px;
    }
 
+   #footer {
+     padding-bottom: 20px;
+   }
+
  }
 
  /*
@@ -1124,23 +1176,23 @@ ALSO 900px => 1000px
      font-size: 48px;
    }
 
-   #mainNav li a {
-     font-size: 42px;
-   }
-
    #show-techs i {
      font-size: 56px;
    }
 
+   .cover-head {
+     font-size: 42px;
+   }
+
    #coverDesc {
-     font-size: 44px;
+     font-size: 33px;
      margin-bottom: 20px;
    }
 
    #coverDescContainer {
-     /*margin: auto;*/
-     left: 200px;
-     top: 300px;
+     margin: auto;
+     /*left: 200px;*/
+     top: 270px;
      height: 430px;
      width: 380px;
    }
@@ -1184,7 +1236,7 @@ ALSO 900px => 1000px
  */
  @media screen and (max-width: 800px) and (max-height: 800px) {
    #meBrand {
-      top: -5px;
+      top: 65px;
      font-size: 52px;
    }
 
@@ -1198,18 +1250,27 @@ ALSO 900px => 1000px
    }
 
    #show-techs i {
-     font-size: 22px;
+     font-size: 24px;
+   }
+
+   #me-head {
+     margin-left: 10px;
+   }
+
+   .cover-head {
+     font-size: 32
+     margin-bottom: 0px;
    }
 
    #coverDesc {
-     color: #000;
+     color: #f8e7da;
      font-size: 26px;
      margin-bottom: 20px;
    }
 
    #coverDescContainer {
      /*margin: auto;*/
-     left: 230px;
+     left: 200px;
      top: 110px;
      height: 130px;
      width: 300px;
@@ -1329,15 +1390,16 @@ ALSO 900px => 1000px
    #meBrand {
       top: -5px;
      font-size: 42px;
+     float: left;
    }
 
-   #mainNav li a {
-     font-size: 40px;
+   #navbar {
+     background-color: #191a1a;
+     top: -20px;
    }
-   #mainNav {
-     position: absolute;
-     top: -15px;
-     right: 0px;
+
+   .cover-head {
+    font-size: 23px;
    }
 
    #show-techs i {
@@ -1345,15 +1407,15 @@ ALSO 900px => 1000px
    }
 
    #coverDesc {
-     color: #000;
-     font-size: 26px;
+     color: #f8e7da;
+     font-size: 19px;
      margin-bottom: 20px;
    }
 
    #coverDescContainer {
-     /*margin: auto;*/
-     left: 190px;
-     top: 110px;
+     margin: auto;
+     top: 40px;
+     left: -20px;
      height: 130px;
      width: 300px;
    }
@@ -1400,25 +1462,31 @@ ALSO 900px => 1000px
  /*
  Width-- 500 => 600px, Portrait ===------------------------------>>
  */
- @media screen and (max-width: 600px) and (orientation: portrait) {
+ @media screen and (max-width: 610px) and (orientation: portrait) {
    #meBrand {
-     position: absolute;
-     margin: auto;
-     right: 0;
-     left: 0;
-     font-size: 65px;
+     position: relative;;
+     left: 80px;
+     font-size: 85px;
    }
 
-   #mainNav li a {
-     font-size: 24px;
+   #navbar {
+     background-color: #191a1a;
+   }
+
+   .naviBar_Mobile {
+
+     border-radius: 5px;
    }
 
    #show-techs i {
      font-size: 37px;
    }
 
+   .cover-head {
+     font-size: 36px;
+   }
    #coverDesc {
-     font-size: 44px;
+     font-size: 28px;
      margin-bottom: 20px;
    }
 
@@ -1552,20 +1620,20 @@ ALSO 900px => 1000px
      background-image: url('../../images/rainbula2.jpg');
    }
 
-   #meBrand {
+   /*#meBrand {
      position: absolute;
      margin: auto;
      right: 0;
      left: 0;
      font-size: 55px;
-   }
+   }*/
 
    #show-techs i {
      font-size: 37px;
    }
 
    #coverDesc {
-     font-size: 38px;
+     font-size: 30px;
      margin-bottom: 20px;
      color: #fff;
    }
@@ -1573,7 +1641,7 @@ ALSO 900px => 1000px
    #coverDescContainer {
      margin: auto;
      position: absolute;
-     top: 0;
+     top: -90px;
      left: 0;
      bottom: 0;
      right: 0;
@@ -1585,12 +1653,12 @@ ALSO 900px => 1000px
    }
 
    #aboutMe p {
-     font-size: 19px;
+     font-size: 23px;
    }
 
    #aboutMeContainer {
      position: relative;
-     top: -10px;
+     top: -40px;
    }
 
    #cubeFolio {
@@ -1602,6 +1670,7 @@ ALSO 900px => 1000px
    }
 
    #buttons {
+     height: 280px;
      width: 100%;
      padding: 0;
    }
@@ -1620,11 +1689,9 @@ ALSO 900px => 1000px
      width: 130px;
      left: 0;
      right: 0;
-     top: 1px;
+     top: 10px;
      justify-content: center;
    }
-
-
 
    #footer {
      /*position: absolute;;
@@ -1729,7 +1796,7 @@ ALSO 900px => 1000px
  */
  @media screen and (max-width: 400px) and (max-height: 700px) {
    #meBrand {
-     position: absolute;
+     position: relative;
      margin: auto;
      right: 0;
      left: 0;
@@ -1737,9 +1804,8 @@ ALSO 900px => 1000px
      font-size: 50px;
    }
 
-   #mainNav {
-     left: 0;
-     top: 0;
+   #navbar {
+     top: -20px;
    }
 
 
@@ -1748,15 +1814,15 @@ ALSO 900px => 1000px
    }
 
    #coverDesc {
-     font-size: 38px;
+     font-size: 28px;
      margin-bottom: 20px;
      color: #fff;
    }
 
    #coverDescContainer {
+     position: relative;;
      margin: auto;
-     position: absolute;
-     top: -60px;
+     top: 120px;
      left: 0px;
      right: 0px;
      width: 380px;
@@ -1767,12 +1833,12 @@ ALSO 900px => 1000px
    }
 
    #aboutMe p {
-     font-size: 17px;
+     font-size: 22px;
    }
 
    #aboutMeContainer {
      position: relative;
-     top: -25px;
+     top: -65px;
    }
 
    #cubeFolio {
