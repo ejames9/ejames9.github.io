@@ -1893,13 +1893,21 @@ ALSO 900px => 1000px
      font-size: 43px;
    }
 
+   #navbar {
+     top: 0;
+   }
+
 
    #show-techs i {
      font-size: 26px;
    }
 
+   .cover-head {
+     font-size: 30px;
+   }
+
    #coverDesc {
-     font-size: 28px;
+     font-size: 24px;
      margin-bottom: 20px;
      color: #fff;
    }
@@ -1907,7 +1915,7 @@ ALSO 900px => 1000px
    #coverDescContainer {
      position: absolute;
      margin: auto;
-     top: -80px;
+     bottom: 430px;
      left: 0px;
      right: 0px;
      width: 300px;
@@ -1918,16 +1926,20 @@ ALSO 900px => 1000px
    }
 
    #aboutMe p {
-     font-size: 14px;
+     font-size: 18px;
    }
 
    #aboutMeContainer {
      position: relative;
-     top: -35px;
+     top: -65px;
    }
 
    #cubeFolio {
      background-repeat: repeat-y;
+   }
+
+   #contactMeText {
+     font-size: 50px;
    }
 
    #map {
@@ -1951,7 +1963,7 @@ ALSO 900px => 1000px
 
    #buttonsContainer {
      position: absolute;
-     width: 100px;
+     width: 130px;
      margin: auto;
      left: 0; right: 0;
      top: 15px;
