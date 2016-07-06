@@ -1035,21 +1035,21 @@ Width-- 1100 > 1990px ===------------------------------>>
    #coverDescContainer {
      position: relative;
      margin: auto;
-     top: 130px;
+     top: 170px;
      height: 230px;
      width: 380px;
    }
 
    #aboutMe h2 {
-     font-size: 50px;
+     font-size: 52px;
    }
 
    #aboutMe p {
-     font-size: 30px;
+     font-size: 35px;
    }
 
    #aboutMeContainer {
-     top: -45px;
+     top: -35px;
    }
 
    .projects-list {
@@ -1193,7 +1193,7 @@ ALSO 900px => 1000px
  }
 
  /*
- Width-- 700 => 800px, Height-- 800px++ ===------------------------------>>
+ Width-- 700 => 800px, Height-- 800px++ Portrait===------------------------------>>
  */
  @media screen and (max-width: 805px) and (min-height: 800px) {
    #meBrand {
@@ -1226,12 +1226,12 @@ ALSO 900px => 1000px
    }
 
    #aboutMe p {
-     font-size: 45px;
+     font-size: 40px;
    }
 
    #aboutMeContainer {
      position: relative;
-     top: -40px;
+     top: -57px;
    }
 
    #cubeFolio {
