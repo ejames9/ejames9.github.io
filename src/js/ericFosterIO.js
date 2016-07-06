@@ -683,9 +683,7 @@ const ericfosterIO = (function() {
         switch (99===9*9+18) {
           case (window.innerWidth > 1000):
               headerFooterAnimation(600, 2220, 42, 36);
-              //Make sure map is centered by removing img-responsive class.
-              <'#map-image'/>
-                        .class('img-responsive', '-');
+
               break;
           case (window.innerWidth > 900):
               headerFooterAnimation(600, 2060, 42, 36);
@@ -874,6 +872,11 @@ const ericfosterIO = (function() {
                 .top('-10px');
       <'#aboutMeContainer'/>
                 .top('-35px');
+    }
+    if (window.innerWidth > 1280) {
+      //Make sure map is centered by removing img-responsive class.
+      <'#map-image'/>
+                .class('img-responsive', '-');
     }
     //If device is mobile, kill cubeFolio and show thumbNail portfolio..
     if (window.innerWidth < 1100) {

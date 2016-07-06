@@ -699,11 +699,7 @@
 	        switch (99 === 9 * 9 + 18) {
 	          case window.innerWidth > 1000:
 	            headerFooterAnimation(600, 2220, 42, 36);
-	            //Make sure map is centered by removing img-responsive class.
-	            (function () {
-	              var elem22 = _$('#map-image') ? dom('#map-image') : make('#map-image').put("body");
-	              return elem22;
-	            })().class('img-responsive', '-');
+
 	            break;
 	          case window.innerWidth > 900:
 	            headerFooterAnimation(600, 2060, 42, 36);
@@ -745,12 +741,12 @@
 	              headerFooterAnimation(300, 1400, 26, 29, 0, '');
 	              //Make a couple adjustments..
 	              (function () {
-	                var elem23 = _$('#header') ? dom('#header') : make('#header').put("body");
-	                return elem23;
+	                var elem22 = _$('#header') ? dom('#header') : make('#header').put("body");
+	                return elem22;
 	              })().height('45px');
 	              (function () {
-	                var elem24 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
-	                return elem24;
+	                var elem23 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
+	                return elem23;
 	              })().right('5px');
 	            }
 	            break;
@@ -767,12 +763,12 @@
 	              headerFooterAnimation(300, 1400, 26, 29);
 	              //Make a couple adjustments..
 	              (function () {
-	                var elem25 = _$('#header') ? dom('#header') : make('#header').put("body");
-	                return elem25;
+	                var elem24 = _$('#header') ? dom('#header') : make('#header').put("body");
+	                return elem24;
 	              })().height('45px');
 	              (function () {
-	                var elem26 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
-	                return elem26;
+	                var elem25 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
+	                return elem25;
 	              })().right('5px');
 	            }
 	            break;
@@ -868,13 +864,20 @@
 	    //Set projects pane to parameters appropriate for firefox
 	    if (browser.firefox) {
 	      (function () {
-	        var elem27 = _$('#aboutMe') ? dom('#aboutMe') : make('#aboutMe').put("body");
-	        return elem27;
+	        var elem26 = _$('#aboutMe') ? dom('#aboutMe') : make('#aboutMe').put("body");
+	        return elem26;
 	      })().top('-10px');
 	      (function () {
-	        var elem28 = _$('#aboutMeContainer') ? dom('#aboutMeContainer') : make('#aboutMeContainer').put("body");
-	        return elem28;
+	        var elem27 = _$('#aboutMeContainer') ? dom('#aboutMeContainer') : make('#aboutMeContainer').put("body");
+	        return elem27;
 	      })().top('-35px');
+	    }
+	    if (window.innerWidth > 1280) {
+	      //Make sure map is centered by removing img-responsive class.
+	      (function () {
+	        var elem28 = _$('#map-image') ? dom('#map-image') : make('#map-image').put("body");
+	        return elem28;
+	      })().class('img-responsive', '-');
 	    }
 	    //If device is mobile, kill cubeFolio and show thumbNail portfolio..
 	    if (window.innerWidth < 1100) {
