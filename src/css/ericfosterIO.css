@@ -113,8 +113,8 @@ a:hover {
 }
 
 .naviBar a:hover {
-  border-top: 1px solid #fe7927;
-  border-right: 1px solid #fe7927;
+  border-top: 1px solid #e12d22;
+  border-right: 1px solid #e12d22;
   border-radius: 10px;
 }
 
@@ -371,7 +371,10 @@ bangers, comfortaa, megrim, poiret one,
 
 #aboutMe h2 {
   font-size: 70px;
+  /*text-shadow: 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927;*/
+  text-shadow: 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830, 0 0 0.2em #fdb830;
 }
+
 #aboutMe p {
   font-size: 38px;
 }
@@ -983,12 +986,20 @@ Width-- 1100 > 1990px ===------------------------------>>
      font-size: 101px;
    }
 
+   #me-head {
+     margin-left: 10px;
+   }
+
    #mainNav li a {
      font-size: 56px;
    }
 
    #show-techs i {
      font-size: 49px;
+   }
+
+   #footer {
+     padding-bottom: 45px;
    }
  }
 
@@ -1012,24 +1023,33 @@ Width-- 1100 > 1990px ===------------------------------>>
      margin-left: 10px;
    }
 
+   .cover-head {
+     font-size: 37px;
+   }
+
    #coverDesc {
-     font-size: 30px;
+     font-size: 27px;
      margin-bottom: 20px;
    }
 
    #coverDescContainer {
-     left: 30px;
-     bottom: 80px;
+     position: relative;
+     margin: auto;
+     top: 130px;
      height: 230px;
      width: 380px;
    }
 
    #aboutMe h2 {
-     font-size: 48px;
+     font-size: 50px;
    }
 
    #aboutMe p {
-     font-size: 20px;
+     font-size: 30px;
+   }
+
+   #aboutMeContainer {
+     top: -45px;
    }
 
    .projects-list {
@@ -1043,6 +1063,10 @@ Width-- 1100 > 1990px ===------------------------------>>
    #project-info {
      top: 80px;
      left: 180px;
+   }
+
+   #footer {
+     padding-bottom: 40px;
    }
 
 
@@ -1171,7 +1195,7 @@ ALSO 900px => 1000px
  /*
  Width-- 700 => 800px, Height-- 800px++ ===------------------------------>>
  */
- @media screen and (max-width: 800px) and (min-height: 800px) {
+ @media screen and (max-width: 805px) and (min-height: 800px) {
    #meBrand {
      font-size: 48px;
    }
@@ -1198,16 +1222,16 @@ ALSO 900px => 1000px
    }
 
    #aboutMe h2 {
-     font-size: 54px;
+     font-size: 60px;
    }
 
    #aboutMe p {
-     font-size: 26px;
+     font-size: 45px;
    }
 
    #aboutMeContainer {
      position: relative;
-     top: 100px;
+     top: -40px;
    }
 
    #cubeFolio {
@@ -1234,59 +1258,75 @@ ALSO 900px => 1000px
  /*
  Width-- 700 => 800px, Height-- 800px--  ===------------------------------>>
  */
- @media screen and (max-width: 800px) and (max-height: 800px) {
+ @media screen and (max-width: 800px) and (orientation: landscape) {
    #meBrand {
-      top: 65px;
+     position: relative;
+     left: -5px;
+     top: 10px;
      font-size: 52px;
-   }
-
-   #mainNav li a {
-     font-size: 42px;
-   }
-   #mainNav {
-     position: absolute;
-     top: -15px;
-     right: 0px;
-   }
-
-   #show-techs i {
-     font-size: 24px;
+     margin-left: 5px;
+     float: left;
    }
 
    #me-head {
+     top: 10px;
+     float: left;
+   }
+
+   #navbar {
+     top: -20px;
+   }
+
+   #naviBar{
+     float: left;
+   }
+
+   #show-techs i {
+     font-size: 22px;
+   }
+
+   #me-head {
+     height: 100px;
+     width: 100px;
      margin-left: 10px;
    }
 
    .cover-head {
-     font-size: 32
+     font-size: 32px;
      margin-bottom: 0px;
    }
 
    #coverDesc {
      color: #f8e7da;
-     font-size: 26px;
+     font-size: 23px;
      margin-bottom: 20px;
    }
 
    #coverDescContainer {
-     /*margin: auto;*/
-     left: 200px;
-     top: 110px;
+     margin: auto;
+     top: 80px;
      height: 130px;
      width: 300px;
    }
 
+   #more {
+     position: relative;
+     top: -100px;
+     left: 200px;
+     border: 1px solid #27130a;
+   }
+
    #aboutMe h2 {
-     font-size: 32px;
+     font-size: 34px;
    }
 
    #aboutMe p {
-     font-size: 16px;
+     font-size: 19px;
    }
 
    #aboutMeContainer {
      position: relative;
-     top: -60px;
+     top: -50px;
    }
 
    #cubeFolio {
@@ -1294,7 +1334,7 @@ ALSO 900px => 1000px
    }
 
    #map {
-     margin-bottom: 75px;
+     padding-bottom: 5px;
    }
 
    .buttons {
@@ -1304,12 +1344,6 @@ ALSO 900px => 1000px
    #buttons div a {
      font-size: 30px;
      margin-right: 20px;
-   }
-
-   #footer {
-     position: fixed;
-     left: 290px;
-     top: 340px;
    }
 
  }
@@ -1393,13 +1427,10 @@ ALSO 900px => 1000px
      float: left;
    }
 
-   #navbar {
-     background-color: #191a1a;
-     top: -20px;
-   }
+
 
    .cover-head {
-    font-size: 23px;
+    font-size: 27px;
    }
 
    #show-techs i {
@@ -1408,13 +1439,13 @@ ALSO 900px => 1000px
 
    #coverDesc {
      color: #f8e7da;
-     font-size: 19px;
+     font-size: 21px;
      margin-bottom: 20px;
    }
 
    #coverDescContainer {
      margin: auto;
-     top: 40px;
+     top: 70px;
      left: -20px;
      height: 130px;
      width: 300px;
@@ -1422,15 +1453,17 @@ ALSO 900px => 1000px
 
    #aboutMe h2 {
      font-size: 28px;
+     margin-top: 0px;
    }
 
    #aboutMe p {
-     font-size: 14px;
+     font-size: 19px;
+     margin-bottom: 4px;
    }
 
    #aboutMeContainer {
      position: relative;
-     top: -60px;
+     top: -20px;
    }
 
    #cubeFolio {
@@ -1438,7 +1471,7 @@ ALSO 900px => 1000px
    }
 
    #map {
-     margin-bottom: 85px;
+     padding-bottom: 85px;
    }
 
    .buttons {
@@ -1464,9 +1497,10 @@ ALSO 900px => 1000px
  */
  @media screen and (max-width: 610px) and (orientation: portrait) {
    #meBrand {
-     position: relative;;
-     left: 80px;
+     position: relative;
+     margin-left: 10px;
      font-size: 85px;
+     float: left;
    }
 
    #navbar {
@@ -1474,7 +1508,6 @@ ALSO 900px => 1000px
    }
 
    .naviBar_Mobile {
-
      border-radius: 5px;
    }
 
@@ -1501,16 +1534,16 @@ ALSO 900px => 1000px
    }
 
    #aboutMe h2 {
-     font-size: 44px;
+     font-size: 46px;
    }
 
    #aboutMe p {
-     font-size: 22px;
+     font-size: 29px;
    }
 
    #aboutMeContainer {
      position: relative;
-     top: 15px;
+     top: -30px;
    }
 
    #cubeFolio {
@@ -1531,7 +1564,7 @@ ALSO 900px => 1000px
    }
 
    #footer {
-     padding-bottom: 30px;
+     padding-bottom: 60px;
    }
  }
  /*
@@ -1556,34 +1589,34 @@ ALSO 900px => 1000px
      font-size: 13px;
    }
 
+   .cover-head {
+     font-size: 28px;
+   }
+
    #coverDesc {
-     color: #000;
-     font-size: 26px;
+     color: #f8e7da;
+     font-size: 20px;
      margin-bottom: 20px;
    }
 
    #coverDescContainer {
-     top: 70px;
-     left: 160px;
+     top: 45px;
+     left: 10px;
      height: 130px;
      width: 300px;
    }
 
    #aboutMe h2 {
-     font-size: 20px;
+     font-size: 24px;
    }
 
    #aboutMe p {
-     font-size: 12px;
+     font-size: 16px;
    }
 
    #aboutMeContainer {
      position: relative;
-     top: -60px;
-   }
-
-   #cubeFolio {
-     background-repeat: repeat-y;
+     top: -40px;
    }
 
    #map {
@@ -1595,7 +1628,9 @@ ALSO 900px => 1000px
    }
 
    #buttons {
-     padding-bottom: 60px;
+     padding: 20px 0px 60px 0px;
+     margin-bottom: 0;
+     height: 150px;
    }
 
    #buttons div a {
@@ -1635,7 +1670,7 @@ ALSO 900px => 1000px
    #coverDesc {
      font-size: 30px;
      margin-bottom: 20px;
-     color: #fff;
+     color: #f8e7da;
    }
 
    #coverDescContainer {
@@ -1713,19 +1748,12 @@ ALSO 900px => 1000px
    }
 
    #meBrand {
-      top: -5px;
-     font-size: 27px;
+    top: -5px;
+     font-size: 32px;
    }
 
-   #mainNav li a {
-     font-size: 30px;
-     padding-bottom: 0px;
-   }
-
-   #mainNav {
-     position: absolute;
-     top: -15px;
-     right: -10px;
+   #naviBar li a {
+    font-size: 24px;
    }
 
    #header {
@@ -1736,34 +1764,34 @@ ALSO 900px => 1000px
      font-size: 9px;
    }
 
+   .cover-head {
+     font-size: 25px;
+   }
+
    #coverDesc {
-     color: #000;
-     font-size: 26px;
+     color: #f8e7da;
+     font-size: 20px;
      margin-bottom: 20px;
    }
 
    #coverDescContainer {
-     top: 60px;
-     left: 160px;
+     top: 50px;
+     left: -30px;
      height: 130px;
      width: 300px;
    }
 
    #aboutMe h2 {
-     font-size: 20px;
+     font-size: 22px;
    }
 
    #aboutMe p {
-     font-size: 12px;
+     font-size: 15px;
    }
 
    #aboutMeContainer {
      position: relative;
-     top: -70px;
-   }
-
-   #cubeFolio {
-     background-repeat: repeat-y;
+     top: -50px;
    }
 
    #map {
@@ -1776,18 +1804,29 @@ ALSO 900px => 1000px
 
    #buttons {
      padding-bottom: 60px;
+     height: 280px;
    }
 
    #buttons div a {
-     font-size: 21px;
-     margin-right: 7px;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+   #buttonsContainer {
+     position: absolute;
+     margin: 0 auto;
+     height: 100%;
+     width: 130px;
+     left: 0;
+     right: 0;
+     top: 10px;
+     justify-content: center;
    }
 
    #footer {
      top: 240px;
-     left: 200px;
+     margin: auto;
    }
-
  }
 
 
@@ -1816,7 +1855,7 @@ ALSO 900px => 1000px
    #coverDesc {
      font-size: 28px;
      margin-bottom: 20px;
-     color: #fff;
+     color: #f8e7da;
    }
 
    #coverDescContainer {
@@ -1909,7 +1948,7 @@ ALSO 900px => 1000px
    #coverDesc {
      font-size: 24px;
      margin-bottom: 20px;
-     color: #fff;
+     color: #f8e7da;
    }
 
    #coverDescContainer {
@@ -1992,27 +2031,35 @@ ALSO 900px => 1000px
      font-size: 26px;
    }
 
+   .cover-head {
+     font-size: 23px;
+   }
+
    #coverDesc {
-     font-size: 28px;
+     font-size: 20px;
      margin-bottom: 20px;
-     color: #fff;
+     color: #f8e7da;
    }
 
    #coverDescContainer {
      position: absolute;
-     margin: auto;
-     top: -140px;
+     margin:  auto;
+     top: 160px;
      left: 0px;
      right: 0px;
      width: 300px;
    }
 
+   #more {
+     padding: 2px;
+   }
+
    #aboutMe h2 {
-     font-size: 28px;
+     font-size: 30px;
    }
 
    #aboutMe p {
-     font-size: 12px;
+     font-size: 16px;
    }
 
    #aboutMeContainer {
@@ -2045,7 +2092,7 @@ ALSO 900px => 1000px
 
    #buttonsContainer {
      position: absolute;
-     width: 100px;
+     width: 120px;
      margin: auto;
      left: 0; right: 0;
      top: 15px;

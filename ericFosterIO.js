@@ -154,7 +154,7 @@
 	APPLICATION_DATA.FLAGS_.TWEEN_ = true;
 	APPLICATION_DATA.FLAGS_.HEAD_TWEEN_ = true;
 	//This flag is set to true when the header is fixed to the top, and set back to false when it is released.
-	APPLICATION_DATA.FLAGS_.HEADR_FIXED_ = false;
+	APPLICATION_DATA.FLAGS_.ME_HEAD_ = false;
 
 	//Project URLs..
 	APPLICATION_DATA.PROJECT_URLS['_1'] = 'http://elementsjs.io';
@@ -698,7 +698,7 @@
 	        //This switch statement is for accomodating multiple screen sizes/configs. (Responsive Design).
 	        switch (99 === 9 * 9 + 18) {
 	          case window.innerWidth > 1000:
-	            headerFooterAnimation(700, 2460, 42, 36);
+	            headerFooterAnimation(600, 2220, 42, 36);
 	            //Make sure map is centered by removing img-responsive class.
 	            (function () {
 	              var elem22 = _$('#map-image') ? dom('#map-image') : make('#map-image').put("body");
@@ -708,8 +708,14 @@
 	          case window.innerWidth > 900:
 	            headerFooterAnimation(600, 2060, 42, 36);
 	            break;
-	          case window.innerWidth > 760:
-	            headerFooterAnimation(500, 1960, 42, 36, 0);
+	          case window.innerWidth > 730:
+	            if (window.innerHeight > 730) {
+	              //Portrait
+	              headerFooterAnimation(500, 1960, 42, 36, 0);
+	            } else {
+	              //Landscape
+	              headerFooterAnimation(370, 1560, 42, 36, 0, '');
+	            }
 	            break;
 	          case window.innerWidth > 700:
 	            if (window.innerHeight > 700) {
@@ -722,21 +728,21 @@
 	            if (window.innerHeight > 600) {
 	              footerAnimation_Mobile(2000);
 	            } else {
-	              headerFooterAnimation(380, 1450, 42, 36);
+	              headerFooterAnimation(380, 1450, 42, 36, 0, '');
 	            }
 	            break;
 	          case window.innerWidth > 500:
 	            if (window.innerHeight > 500) {
 	              footerAnimation_Mobile(2000);
 	            } else {
-	              headerFooterAnimation(310, 1430, 32, 32);
+	              headerFooterAnimation(310, 1330, 32, 32, 0, '');
 	            }
 	            break;
 	          case window.innerWidth > 400:
 	            if (window.innerHeight > 400) {
 	              footerAnimation_Mobile(2275);
 	            } else {
-	              headerFooterAnimation(300, 1400, 26, 29);
+	              headerFooterAnimation(300, 1400, 26, 29, 0, '');
 	              //Make a couple adjustments..
 	              (function () {
 	                var elem23 = _$('#header') ? dom('#header') : make('#header').put("body");
@@ -790,7 +796,8 @@
 
 	    //This function adjusts header footer animation..
 	    function headerFooterAnimation(offSet1, offSet2, fontSize1, fontSize2) {
-	      var left = arguments.length <= 4 || arguments[4] === undefined ? 25 : arguments[4];
+	      var top = arguments.length <= 4 || arguments[4] === undefined ? 25 : arguments[4];
+	      var left = arguments.length <= 5 || arguments[5] === undefined ? '175px' : arguments[5];
 
 	      //The following code exectutes if the page is scrolled beyond the # of px's below. This is the header animation.
 	      if (_body.scrolled() > offSet1 || _html.scrolled() > offSet1 - 20) {
@@ -806,7 +813,7 @@
 	        });
 	        _header.bgColor('#191a1a').opacity('.9').border('');
 
-	        if (window.innerWidth > 760) {
+	        if (_meHead.display() !== 'none') {
 	          _meHead.display('none');
 	        }
 
@@ -817,20 +824,22 @@
 	        }
 	      } else {
 	        //Release.
-	        _meBrand.fontSize('').top('').left('175px');
+	        _meBrand.fontSize('').top('').left(left);
 	        // _naviBarLI
 	        //       .every((element)=> {
 	        //         element
 	        //           .fontSize('')
 	        //         });
-	        _naviBar.top(left + 'px');
+	        _naviBar.top(top + 'px');
 	        _naviBarLI.every(function (element) {
 	          element.fontSize('40px');
 	        });
 	        _header.bgColor('transparent').border('none');
 	        //
-	        if (window.innerWidth > 760) {
-	          _meHead.display('block');
+	        if (flags.ME_HEAD_) {
+	          if (_meHead.display() === 'none') {
+	            _meHead.display('block');
+	          }
 	        }
 	      }
 	    }
@@ -891,7 +900,7 @@
 	        return elem32;
 	      })().display('none');
 	    }
-	    if (window.innerWidth < 760) {
+	    if (window.innerWidth < 730 && window.innerHeight > window.innerWidth) {
 	      (function () {
 	        var elem33 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
 	        return elem33;
@@ -905,6 +914,8 @@
 	        var elem35 = _$('#me-head') ? dom('#me-head') : make('#me-head').put("body");
 	        return elem35;
 	      })().display('none');
+	    } else {
+	      flags.ME_HEAD_ = true;
 	    }
 	    //Reload window if orientation changes, to avoid 'scrambling' of header.
 	    on('orientationchange', window, function () {
