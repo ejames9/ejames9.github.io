@@ -2213,7 +2213,7 @@ ALSO 900px => 1000px
    ---*/
 
    #aboutMe {
-     padding-top: 110px;
+     padding-top: 90px;
    }
 
    #aboutMe h2 {
@@ -2224,10 +2224,7 @@ ALSO 900px => 1000px
      font-size: 17px;
    }
 
-   #aboutMeContainer {
-     position: relative;
-     top: -65px;
-   }
+
 
    /*
    Carousel
