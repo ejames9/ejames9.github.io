@@ -663,6 +663,11 @@ Carousel base class */
   background-color: #164cac;
   border: none;
 }
+#swap:active {
+  color: #fdb830;
+  background-color: #164cac;
+  border: none;
+}
 /*.item {
   position: absolute;
   top: 80px;
