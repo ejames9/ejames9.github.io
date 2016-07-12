@@ -699,16 +699,15 @@ ALSO 900px => 1000px
    }
 
    #aboutMe h2 {
-     font-size: 60px;
+     font-size: 54px;
    }
 
    #aboutMe p {
-     font-size: 40px;
+     font-size: 37px;
    }
 
-   #aboutMeContainer {
-     position: relative;
-     top: -57px;
+   #aboutMe {
+     padding-top: 90px;
    }
 
    /*
