@@ -19,13 +19,13 @@ html,body {
  padding: 0px;
 }
 
-html {
+body {
   background-image: url('../../images/rainbula2.jpg');
   background-color: black;
   background-attachment: fixed;
-  background-repeat: repeat-x;
+  /*background-repeat: repeat-x;
   background-repeat: repeat-y;
-  overflow-x: hidden;
+  overflow-x: hidden;*/
 }
 
 a:hover {

@@ -4014,7 +4014,7 @@
 	  //This function will create an intuitive scrolling experience, allowing the user to scroll directly to different sections.
 	  function scrollSnapper(destinations) {
 	    //Adjust the snapping range for different screen heights..
-	    var snapRange = window.innerHeight > 999 ? 300 : window.innerHeight > 800 ? 200 : window.innerHeight > 500 ? 150 : window.innerHeight > 200 ? 100 : 90;
+	    var snapRange = window.innerHeight > 700 ? 300 : window.innerHeight > 550 ? 200 : window.innerHeight > 400 ? 150 : window.innerHeight > 200 ? 100 : 90;
 	    //Determine snapping locale, if any,  and call snap function..
 	    switch (true) {
 	      case Math.abs(destinations[0] - window.scrollY) < snapRange:
