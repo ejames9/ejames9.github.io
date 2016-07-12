@@ -654,10 +654,10 @@ Carousel base class */
   pointer-events: all;
 }
 
-#swap:hover {
+/*#swap:hover {
   background-color: #fdb830;
   border: none;
-}
+}*/
 #swap:active {
   color: #fdb830;
   background-color: #164cac;
