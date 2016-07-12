@@ -779,6 +779,9 @@ ALSO 900px => 1000px
      font-size: 28px;
    }
 
+   .carousel-indicators {
+     bottom: -3px;
+   }
 
    /*
    Map and Contact Adjustments--*/
