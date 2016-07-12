@@ -658,7 +658,7 @@ Carousel base class */
   background-color: #fdb830;
   border: none;
 }*/
-#swap:active {
+#swap:focus {
   color: #fdb830;
   background-color: #164cac;
   border: none;
