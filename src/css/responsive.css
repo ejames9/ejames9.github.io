@@ -49,7 +49,7 @@ Width-- 1100 > 1990px ===------------------------------>>
  }
 
  /*
- Width-- 1000 => 1100px ===------------------------------>>
+ Width-- 1000 => 1100px Height- 800px-- ===------------------------------>>
  */
  @media screen and (max-width: 1100px) and (max-height: 800px) {
    #meBrand {
@@ -96,6 +96,128 @@ Width-- 1100 > 1990px ===------------------------------>>
    #aboutMeContainer {
      position: relative;
      top: -55px;
+   }
+
+   .projects-list {
+     padding: 7px;
+   }
+
+   .projects-list-item {
+     font-size: 24px;
+   }
+
+   #project-info {
+     top: 80px;
+     left: 180px;
+   }
+
+   /*
+   Carousel Adustments=====================-->>>
+   */
+
+   .carousel-image {
+     width: 65%;
+   }
+
+   .item-inner {
+     top: 45px;
+   }
+
+   .left > .glyphicon {
+     position: relative;
+     left: -15px;
+     top: 290px;
+   }
+
+   .right > .glyphicon {
+     position: relative;
+     right: -15px;
+     top: 290px;
+   }
+
+   .caption h2 {
+     font-size: 40px;
+     margin-bottom: 0;
+   }
+
+   .caption {
+     margin-top: 0;
+     font-size: 32px;
+   }
+
+   .carousel-indicators {
+     margin-bottom: 0px;
+   }
+
+
+   .github2 {
+     margin-right: 2px;
+     height: 42px;
+     width: 42px;
+   }
+
+   .www2 {
+     margin-left: 5px;
+     bottom: 2px;
+     font-size: 45px;
+   }
+
+   .see-code2 {
+     position: relative;
+     bottom: 5px;
+   }
+
+   .visit-page2 {
+     position: relative;
+     bottom: 3px;
+   }
+
+   .site-link2 {
+     position: relative;
+     /*border: 1px solid white;*/
+     padding-top: 23px;
+     padding-left: 25px;
+     left: 10px;
+     bottom: 2px;
+     font-size: 28px;
+   }
+
+   .github-link2 {
+     /*border: 1px solid white;*/
+     position: relative;
+     padding-top: 25px;
+     padding-right: 5px;
+     left: 10px;
+     font-size: 28px;
+   }
+}
+
+/*
+ Width-- 1000 => 1100px Height- 700px-- ===------------------------------>>
+ */
+ @media screen and (max-width: 1100px) and (max-height: 700px) {
+   /*
+   Cover
+   ------*/
+
+   #meBrand {
+     font-size: 66px;
+   }
+
+   /*
+   Me
+   ----*/
+
+   #aboutMe h2 {
+     font-size: 48px;
+   }
+
+   #aboutMe p {
+     font-size: 32px;
+   }
+
+   #aboutMe {
+     padding-top: 65px;
    }
 
    .projects-list {
@@ -982,15 +1104,14 @@ ALSO 900px => 1000px
  Width-- 600 => 700px, Height 700px++===------------------------------>>
  */
  @media screen and (max-width: 700px) and (min-height: 700px) {
+   /*
+   Cover
+   ------*/
+
    #meBrand {
      font-size: 69px;
      left: 65px;
      top: 10px;
-   }
-
-
-   #mainNav li a {
-     font-size: 55px;
    }
 
    #show-techs i {
@@ -1009,6 +1130,10 @@ ALSO 900px => 1000px
      height: 430px;
      width: 380px;
    }
+
+   /*
+   Me
+   ----*/
 
    #aboutMe h2 {
      font-size: 54px;
