@@ -238,55 +238,46 @@ Width-- 1100 > 1990px ===------------------------------>>
    */
 
    .carousel-image {
-     width: 65%;
-   }
-
-   .item-inner {
-     top: 45px;
-   }
-
-   .left > .glyphicon {
-     position: relative;
-     left: -15px;
-     top: 290px;
-   }
-
-   .right > .glyphicon {
-     position: relative;
-     right: -15px;
-     top: 290px;
+     width: 57%;
    }
 
    .caption h2 {
-     font-size: 40px;
+     font-size: 32px;
      margin-bottom: 0;
+   }
+
+   .caption p {
+     margin-top: 0;
    }
 
    .caption {
      margin-top: 0;
-     font-size: 32px;
+     font-size: 28px;
    }
 
    .carousel-indicators {
      margin-bottom: 0px;
+     bottom: -5px;
    }
 
 
    .github2 {
-     margin-right: 2px;
-     height: 42px;
-     width: 42px;
+     position: relative;
+     margin-right: 0px;
+     height: 35px;
+     width: 35px;
+     top: 2px;
    }
 
    .www2 {
      margin-left: 5px;
      bottom: 2px;
-     font-size: 45px;
+     font-size: 37px;
    }
 
    .see-code2 {
      position: relative;
-     bottom: 5px;
+     bottom: 3px;
    }
 
    .visit-page2 {
@@ -297,20 +288,23 @@ Width-- 1100 > 1990px ===------------------------------>>
    .site-link2 {
      position: relative;
      /*border: 1px solid white;*/
-     padding-top: 23px;
-     padding-left: 25px;
+     padding: 15px 3px 0px 20px;
+     /*padding-top: 23px;
+     padding-left: 25px;*/
      left: 10px;
      bottom: 2px;
-     font-size: 28px;
+     font-size: 24px;
    }
 
    .github-link2 {
      /*border: 1px solid white;*/
      position: relative;
-     padding-top: 25px;
-     padding-right: 5px;
+     padding: 15px 3px 0px 3px;
+     /*padding-top: 25px;
+     padding-right: 5px;*/
      left: 10px;
-     font-size: 28px;
+     bottom: 2px;
+     font-size: 24px;
    }
 }
 
