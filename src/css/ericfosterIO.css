@@ -19,13 +19,25 @@ html,body {
  padding: 0px;
 }
 
-body {
+/*body {
   background-image: url('../../images/rainbula2.jpg');
   background-color: black;
   background-attachment: fixed;
-  /*background-repeat: repeat-x;
+  background-repeat: repeat-x;
   background-repeat: repeat-y;
-  overflow-x: hidden;*/
+  overflow-x: hidden;
+}*/
+
+#back-image {
+  background-image: url('../../images/rainbula2.jpg');
+  background-color: black;
+  position: fixed;
+  background-repeat: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  z-index: -1;
 }
 
 a:hover {
