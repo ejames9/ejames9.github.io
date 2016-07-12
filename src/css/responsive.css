@@ -1,0 +1,2484 @@
+@import 'https://fonts.googleapis.com/css?family=Aladin|Tulpen+One';
+
+/*
+responsive.css
+
+This file responds to varying screen aspect ratios
+with layout adjustments.
+
+Author: Eric James Foster
+*/
+
+
+
+
+/*
+Responsive Design+++++++++++++++++++======================>>>>
+--Media Queries--------------------*/
+
+
+
+
+/*
+Width-- 1100 > 1990px ===------------------------------>>
+*/
+ @media screen and (max-width: 1990px) {
+   body {
+     background-image: url('../../images/rainbula2.jpg');
+   }
+
+   #meBrand {
+     font-size: 101px;
+   }
+
+   #me-head {
+     margin-left: 10px;
+   }
+
+   #mainNav li a {
+     font-size: 56px;
+   }
+
+   #show-techs i {
+     font-size: 49px;
+   }
+
+   #footer {
+     padding-bottom: 45px;
+   }
+ }
+
+ /*
+ Width-- 1000 => 1100px ===------------------------------>>
+ */
+ @media screen and (max-width: 1100px) and (max-height: 800px) {
+   #meBrand {
+     font-size: 66px;
+   }
+
+   #mainNav li a {
+     font-size: 42px;
+   }
+
+   #show-techs i {
+     font-size: 36px;
+   }
+
+   #me-head {
+     margin-left: 10px;
+   }
+
+   .cover-head {
+     font-size: 37px;
+   }
+
+   #coverDesc {
+     font-size: 27px;
+     margin-bottom: 20px;
+   }
+
+   #coverDescContainer {
+     position: relative;
+     margin: auto;
+     top: 170px;
+     height: 230px;
+     width: 380px;
+   }
+
+   #aboutMe h2 {
+     font-size: 52px;
+   }
+
+   #aboutMe p {
+     font-size: 35px;
+   }
+
+   #aboutMeContainer {
+     position: relative;
+     top: -55px;
+   }
+
+   .projects-list {
+     padding: 7px;
+   }
+
+   .projects-list-item {
+     font-size: 24px;
+   }
+
+   #project-info {
+     top: 80px;
+     left: 180px;
+   }
+
+   /*
+   Carousel Adustments=====================-->>>
+   */
+
+   .carousel-image {
+     width: 65%;
+   }
+
+   .item-inner {
+     top: 45px;
+   }
+
+   .left > .glyphicon {
+     position: relative;
+     left: -15px;
+     top: 290px;
+   }
+
+   .right > .glyphicon {
+     position: relative;
+     right: -15px;
+     top: 290px;
+   }
+
+   .caption h2 {
+     font-size: 40px;
+     margin-bottom: 0;
+   }
+
+   .caption {
+     margin-top: 0;
+     font-size: 32px;
+   }
+
+   .carousel-indicators {
+     margin-bottom: 0px;
+   }
+
+
+   .github2 {
+     margin-right: 2px;
+     height: 42px;
+     width: 42px;
+   }
+
+   .www2 {
+     margin-left: 5px;
+     bottom: 2px;
+     font-size: 45px;
+   }
+
+   .see-code2 {
+     position: relative;
+     bottom: 5px;
+   }
+
+   .visit-page2 {
+     position: relative;
+     bottom: 3px;
+   }
+
+   .site-link2 {
+     position: relative;
+     /*border: 1px solid white;*/
+     padding-top: 23px;
+     padding-left: 25px;
+     left: 10px;
+     bottom: 2px;
+     font-size: 28px;
+   }
+
+   .github-link2 {
+     /*border: 1px solid white;*/
+     position: relative;
+     padding-top: 25px;
+     padding-right: 5px;
+     left: 10px;
+     font-size: 28px;
+   }
+}
+
+@media screen and (max-width: 1100px) and (max-height: 610px) {
+   #meBrand {
+     font-size: 66px;
+   }
+
+   #mainNav li a {
+     font-size: 42px;
+   }
+
+   #show-techs i {
+     font-size: 36px;
+   }
+
+   #me-head {
+     margin-left: 10px;
+   }
+
+   .cover-head {
+     font-size: 36px;
+   }
+
+   #coverDesc {
+     font-size: 27px;
+     margin-bottom: 20px;
+   }
+
+   #coverDescContainer {
+     position: relative;
+     margin: auto;
+     top: 110px;
+     height: 230px;
+     width: 380px;
+   }
+
+   #aboutMe h2 {
+     font-size: 46px;
+   }
+
+   #aboutMe p {
+     font-size: 30px;
+   }
+
+   #aboutMeContainer {
+     top: -75px;
+   }
+
+   .projects-list {
+     padding: 7px;
+   }
+
+   .projects-list-item {
+     font-size: 24px;
+   }
+
+   #project-info {
+     top: 80px;
+     left: 180px;
+   }
+
+   /*
+   Carousel Adustments=====================-->>>
+   */
+
+   .carousel-image {
+     width: 45%;
+   }
+
+   .item-inner {
+     top: 42px;
+   }
+
+   .left > .glyphicon {
+     position: relative;
+     left: -15px;
+     top: 290px;
+   }
+
+   .right > .glyphicon {
+     position: relative;
+     right: -15px;
+     top: 290px;
+   }
+
+   .caption h2 {
+     font-size: 30px;
+     margin-bottom: 0;
+   }
+
+   .caption {
+     margin-top: 0;
+     font-size: 28px;
+   }
+
+   .carousel-indicators {
+     margin-bottom: 0px;
+     bottom: 0;
+   }
+
+
+   .github2 {
+     margin-right: 2px;
+     height: 42px;
+     width: 42px;
+   }
+
+   .www2 {
+     margin-left: 5px;
+     bottom: 2px;
+     font-size: 45px;
+   }
+
+   .see-code2 {
+     position: relative;
+     bottom: 5px;
+   }
+
+   .visit-page2 {
+     position: relative;
+     bottom: 3px;
+   }
+
+   .site-link2 {
+     position: relative;
+     /*border: 1px solid white;*/
+     padding-top: 23px;
+     padding-left: 25px;
+     left: 10px;
+     bottom: 2px;
+     font-size: 28px;
+   }
+
+   .github-link2 {
+     /*border: 1px solid white;*/
+     position: relative;
+     padding-top: 25px;
+     padding-right: 5px;
+     left: 10px;
+     font-size: 28px;
+   }
+
+   #footer {
+     padding-bottom: 0px;
+     margin-bottom: 0;
+   }
+
+ }
+
+ /*
+#cubeFolio--#thumbFolio, -- 0 => 1000px wide and 1000px => 8===------------------------------>>
+This is the swapping of the Desktop (cubefolio) and the
+mobile version of the portfolio at
+1000px width.
+
+ALSO 900px => 1000px
+ */
+ /*@media screen and (min-width: 1000px) {
+   #cubeFolio {
+     display: block;
+   }
+
+   #thumbFolio {
+     display: none;
+   }
+ }*/
+ @media screen and (max-width: 1000px) {
+   #meBrand {
+     top: 60px;
+   }
+
+   .cover-head {
+     font-size: 34px;
+   }
+
+   #coverDesc {
+     font-size: 26px;
+     margin-bottom: 20px;
+   }
+
+   #coverDescContainer {
+     margin: auto;
+     top: 140px;
+     height: 230px;
+     width: 380px;
+   }
+
+   #aboutMe h2 {
+     font-size: 48px;
+   }
+
+   #aboutMe p {
+     font-size: 29px;
+   }
+
+   #show-techs i {
+     font-size: 33px;
+   }
+
+   /*
+   Carousel Adustments=====================-->>>
+   */
+
+   .carousel-image {
+     width: 45%;
+   }
+
+   .item-inner {
+     top: 45px;
+   }
+
+   .left > .glyphicon {
+     position: relative;
+     left: -15px;
+     top: 290px;
+   }
+
+   .right > .glyphicon {
+     position: relative;
+     right: -15px;
+     top: 290px;
+   }
+
+   .caption h2 {
+     font-size: 32px;
+     margin-bottom: 0;
+   }
+
+   .caption {
+     margin-top: 0;
+     font-size: 24px;
+   }
+
+   .carousel-indicators {
+     margin-bottom: 0px;
+     padding-bottom: 0;
+   }
+
+
+   .github2 {
+     margin-right: 2px;
+     height: 42px;
+     width: 42px;
+   }
+
+   .www2 {
+     margin-left: 5px;
+     bottom: 2px;
+     font-size: 45px;
+   }
+
+   .see-code2 {
+     position: relative;
+     bottom: 5px;
+   }
+
+   .visit-page2 {
+     position: relative;
+     bottom: 3px;
+   }
+
+   .site-link2 {
+     position: relative;
+     /*border: 1px solid white;*/
+     padding-top: 23px;
+     padding-left: 25px;
+     left: 10px;
+     bottom: 2px;
+     font-size: 28px;
+   }
+
+   .github-link2 {
+     /*border: 1px solid white;*/
+     position: relative;
+     padding-top: 25px;
+     padding-right: 5px;
+     left: 10px;
+     font-size: 28px;
+   }
+
+
+   #footer {
+     padding-bottom: 20px;
+   }
+ }
+
+
+ /*
+ Width-- 800 => 900px ===------------------------------>>
+ */
+ @media screen and (max-width: 900px) {
+   #meBrand {
+     top: 60px;
+     font-size: 60px;
+   }
+
+   #naviBar {
+     top: 0px;
+   }
+
+   #show-techs i {
+     font-size: 27px;
+   }
+
+   .cover-head {
+     font-size: 34px;
+   }
+
+   #coverDesc {
+     font-size: 22px;
+     margin-bottom: 20px;
+   }
+
+   #coverDescContainer {
+     margin: auto;
+     top: 122px;
+     height: 230px;
+     width: 380px;
+   }
+
+   #aboutMe h2 {
+     font-size: 48px;
+   }
+
+   #aboutMe p {
+     font-size: 24px;
+   }
+
+   .item-inner {
+     top:40px;
+   }
+
+   .caption h2 {
+     font-size: 30px;
+   }
+   .caption p {
+     margin-bottom: 0;
+   }
+
+   .projects-list {
+     padding: 7px;
+   }
+
+   .projects-list-item {
+     font-size: 24px;
+   }
+
+   .buttons {
+     width: 40px;
+   }
+
+   #buttons div a {
+     font-size: 30px;
+     margin-right: 20px;
+   }
+
+   #footer {
+     padding-bottom: 20px;
+   }
+
+ }
+
+ /*
+ Width-- 700 => 800px, Height-- 800px++ Portrait
+ ================================================----------->>
+ */
+ @media screen and (max-width: 805px) and (min-height: 800px) {
+   #meBrand {
+     font-size: 48px;
+   }
+
+   #show-techs i {
+     font-size: 56px;
+   }
+
+   .cover-head {
+     font-size: 42px;
+   }
+
+   #coverDesc {
+     font-size: 33px;
+     margin-bottom: 20px;
+   }
+
+   #coverDescContainer {
+     margin: auto;
+     /*left: 200px;*/
+     top: 270px;
+     height: 430px;
+     width: 380px;
+   }
+
+   #aboutMe h2 {
+     font-size: 60px;
+   }
+
+   #aboutMe p {
+     font-size: 40px;
+   }
+
+   #aboutMeContainer {
+     position: relative;
+     top: -57px;
+   }
+
+   /*
+   Carousel Adustments=====================-->>>
+   */
+
+   .carousel-image {
+     width: 95%;
+   }
+
+   .left > .glyphicon {
+     position: relative;
+     left: -15px;
+     top: 260px;
+   }
+
+   .right > .glyphicon {
+     position: relative;
+     right: -15px;
+     top: 260px;
+   }
+
+   .caption h2 {
+     font-size: 46px;
+   }
+
+   .caption {
+     font-size: 38px;
+   }
+
+   .github2 {
+     margin-right: 2px;
+     height: 42px;
+     width: 42px;
+   }
+
+   .www2 {
+     margin-left: 5px;
+     bottom: 2px;
+     font-size: 45px;
+   }
+
+   .see-code2 {
+     position: relative;
+     bottom: 5px;
+   }
+
+   .visit-page2 {
+     position: relative;
+     bottom: 3px;
+   }
+
+   .site-link2 {
+     position: relative;
+     /*border: 1px solid white;*/
+     padding-top: 23px;
+     padding-left: 25px;
+     left: 10px;
+     bottom: 2px;
+     font-size: 28px;
+   }
+
+   .github-link2 {
+     /*border: 1px solid white;*/
+     position: relative;
+     padding-top: 25px;
+     padding-right: 5px;
+     left: 10px;
+     font-size: 28px;
+   }
+
+
+   /*
+   Map and Contact Adjustments--*/
+
+   #map {
+     margin-bottom: 85px;
+   }
+
+   .buttons {
+     width: 40px;
+   }
+
+   #buttons div a {
+     font-size: 30px;
+     margin-right: 20px;
+   }
+
+   #footer {
+     padding-bottom: 100px;
+   }
+ }
+
+
+ /*
+  Width-- 700 => 800px, Height-- 800px--  ===------------------------------>>
+  */
+  @media screen and (max-width: 810px) and (max-height: 800px) {
+    #meBrand {
+      position: relative;
+      left: -5px;
+      top: 140px;
+      font-size: 52px;
+      margin-left: 5px;
+      float: left;
+    }
+
+    #me-head {
+      top: 130px;
+      float: left;
+    }
+
+    #naviBar {
+      top: 0;
+    }
+
+    #navbar {
+      top: -100px;
+    }
+
+
+
+    #show-techs i {
+      font-size: 22px;
+    }
+
+    #me-head {
+      height: 100px;
+      width: 100px;
+      margin-left: 10px;
+    }
+
+    .cover-head {
+      font-size: 32px;
+      margin-bottom: 0px;
+    }
+
+    #coverDesc {
+      color: #f8e7da;
+      font-size: 23px;
+      margin-bottom: 20px;
+    }
+
+    #coverDescContainer {
+      margin: auto;
+      top: 130px;
+      height: 130px;
+      width: 300px;
+    }
+
+    #aboutMe h2 {
+      position: relative;
+      bottom: 50px;
+      font-size: 37px;
+    }
+
+    #aboutMe p {
+      position: relative;
+      font-size: 28px;
+      bottom: 50px;
+    }
+
+    /*#aboutMeContainer {
+      position: absolute;
+      top: 0px;
+    }*/
+
+    /*
+   Carousel Adustments=====================-->>>
+   */
+
+   .item-inner {
+     top: 0;
+   }
+   .carousel-image {
+     width: 55%;
+   }
+
+   .left > .glyphicon {
+     position: relative;
+     left: -15px;
+     top: 220px;
+   }
+
+   .right > .glyphicon {
+     position: relative;
+     right: -15px;
+     top: 220px;
+   }
+
+   .caption h2 {
+     font-size: 36px;
+   }
+
+   .caption {
+     font-size: 30px;
+   }
+
+    #map {
+      padding-bottom: 5px;
+    }
+
+    .buttons {
+      width: 40px;
+    }
+
+    #buttons div a {
+      font-size: 30px;
+      margin-right: 20px;
+    }
+
+  }
+
+
+
+ /*
+ Width-- 700 => 800px, Height-- 500px--  ===------------------------------>>
+ */
+ @media screen and (max-width: 810px) and (max-height: 500px) {
+   /*
+   Cover Adjustments
+   ------------------*/
+
+   #meBrand {
+     position: relative;
+     left: -5px;
+     top: 10px;
+     font-size: 52px;
+     margin-left: 5px;
+     float: left;
+   }
+
+   #me-head {
+     top: 10px;
+     float: left;
+   }
+
+   #navbar {
+     top: -20px;
+   }
+
+   #naviBar{
+     float: none;
+   }
+
+   #show-techs i {
+     font-size: 22px;
+   }
+
+   #me-head {
+     height: 100px;
+     width: 100px;
+     margin-left: 10px;
+   }
+
+   .cover-head {
+     font-size: 32px;
+     margin-bottom: 0px;
+   }
+
+   #coverDesc {
+     color: #f8e7da;
+     font-size: 23px;
+     margin-bottom: 20px;
+   }
+
+   #coverDescContainer {
+     margin: auto;
+     top: 80px;
+     height: 130px;
+     width: 300px;
+   }
+
+   #more {
+     position: relative;
+     top: -100px;
+     left: 200px;
+     border: 1px solid #27130a;
+   }
+
+   /*
+   Me Adjustments
+   ---------------*/
+
+   #aboutMe h2 {
+     font-size: 34px;
+     margin-bottom: 0px;
+   }
+
+   #aboutMe p {
+     margin-top: 0px;
+     font-size: 21px;
+   }
+
+   #aboutMe {
+     padding-top: 130px;
+   }
+
+  /*
+  Carousel Adjustments
+  ---------------------*/
+
+  .item-inner {
+     top: 57px;
+   }
+   .carousel-image {
+     margin-bottom: 0px;
+     width: 30%;
+   }
+
+   .left > .glyphicon {
+     position: relative;
+     left: -15px;
+     top: 150px;
+   }
+
+   .right > .glyphicon {
+     position: relative;
+     right: -15px;
+     top: 150px;
+   }
+
+   .caption h2 {
+     font-size: 22px;
+     margin-bottom: 0px;
+   }
+
+   .caption {
+     margin-top: 0px;
+     font-size: 19px;
+   }
+
+   .carousel-indicators {
+     margin-bottom: 0px;
+     padding: 0px;
+
+   }
+
+   .github2 {
+     height: 34px;
+     width: 34px;
+   }
+
+   .www2 {
+     font-size: 37px;
+   }
+
+   .see-code2 {
+     font-size: 24px;
+   }
+
+   .visit-page2 {
+     font-size: 24px;
+   }
+
+   .site-link2 {
+     padding-top: 10px;
+   }
+
+   .github-link2 {
+     padding-top: 12px;
+   }
+
+
+  /*
+  Contact, Map Adjuatments
+  -------------------------*/
+
+   #map {
+     padding-bottom: 5px;
+   }
+
+   .buttons {
+     width: 40px;
+   }
+
+   #buttons div a {
+     font-size: 30px;
+     margin-right: 20px;
+   }
+
+ }
+
+
+
+ /*
+ Width-- 600 => 700px, Height 700px++===------------------------------>>
+ */
+ @media screen and (max-width: 700px) and (min-height: 700px) {
+   #meBrand {
+     font-size: 69px;
+     left: 65px;
+     top: 10px;
+   }
+
+
+   #mainNav li a {
+     font-size: 55px;
+   }
+
+   #show-techs i {
+     font-size: 44px;
+   }
+
+   #coverDesc {
+     font-size: 44px;
+     margin-bottom: 20px;
+   }
+
+   #coverDescContainer {
+     /*margin: auto;*/
+     left: 130px;
+     top: 300px;
+     height: 430px;
+     width: 380px;
+   }
+
+   #aboutMe h2 {
+     font-size: 54px;
+   }
+
+   #aboutMe p {
+     font-size: 26px;
+   }
+
+   #aboutMeContainer {
+     position: relative;
+     top: 20px;
+   }
+
+   #cubeFolio {
+     background-repeat: repeat-y;
+   }
+
+   #map {
+     margin-bottom: 85px;
+   }
+
+   .buttons {
+     width: 35px;
+   }
+
+   #buttons div a {
+     font-size: 30px;
+     margin-right: 20px;
+   }
+
+   #footer {
+     padding-bottom: 100px;
+   }
+
+ }
+ /*
+ Width-- 600 => 700px, Height 700px--===------------------------------>>
+ */
+ @media screen and (max-width: 700px) and (max-height: 470px) {
+   /*
+   Cover
+   --------*/
+
+   #meBrand {
+     font-size: 42px;
+     float: left;
+   }
+
+   #naviBar {
+     float: left;
+   }
+
+
+   .cover-head {
+    font-size: 27px;
+   }
+
+   #show-techs i {
+     font-size: 18px;
+   }
+
+   #coverDesc {
+     color: #f8e7da;
+     font-size: 21px;
+     margin-bottom: 20px;
+   }
+
+   #coverDescContainer {
+     margin: auto;
+     top: 80px;
+     left: -20px;
+     height: 130px;
+     width: 300px;
+   }
+
+   /*
+   Me
+   ----*/
+
+   #aboutMe h2 {
+     font-size: 29px;
+     margin-top: 0px;
+   }
+
+   #aboutMe p {
+     font-size: 19px;
+     margin-bottom: 4px;
+   }
+
+   #aboutMe {
+     padding-top: 160px;
+   }
+
+   /*
+   Carousel
+   ---------*/
+
+   #swap {
+     position: absolute;
+     display: block;
+     top: 80px;
+     left: 70px;
+     padding: 0px 12px;
+
+   }
+
+   #swap i {
+     position: relative;
+     top: -3px;
+     left: 1px;
+   }
+
+   .carousel-image {
+     width: 50%;
+   }
+
+   .caption {
+     position: relative;
+     top: -100px;
+   }
+   .caption h2 {
+     margin-bottom: 0;
+   }
+
+   .caption p {
+     margin-top: 0;
+   }
+
+
+   .github2 {
+     height: 28px;
+     width: 28px;
+   }
+
+   .www2 {
+     font-size: 31px;
+   }
+
+   .see-code2 {
+     font-size: 18px;
+   }
+
+   .visit-page2 {
+     font-size: 18px;
+   }
+
+   .site-link2 {
+     /*border: 1px solid #fff;*/
+     padding-top: 5px;
+     padding-bottom: 2px;
+   }
+
+   .github-link2 {
+     /*border: 1px solid #fff;*/
+     padding-top: 7px;
+     padding-bottom: 2px;
+   }
+
+   /*
+   Contact, Map
+   -------------*/
+
+   #map {
+     padding-bottom: 85px;
+   }
+
+   .buttons {
+     width: 40px;
+   }
+
+   #buttons div a {
+     font-size: 30px;
+     margin-right: 20px;
+   }
+
+   #footer {
+     position: fixed;
+     top: 300px;
+     left: 250px;
+   }
+
+
+ }
+
+ /*
+ Width-- 500 => 610px, Portrait-Height 900px++ ===------------------------------>>
+ */
+ @media screen and (max-width: 610px) and (min-height: 900px) {
+   #meBrand {
+     position: relative;
+     margin-left: 10px;
+     font-size: 85px;
+     float: left;
+   }
+
+   #navbar {
+     background-color: #191a1a;
+     float: none;
+   }
+
+   .naviBar_Mobile {
+     border-radius: 5px;
+   }
+
+   #show-techs i {
+     font-size: 37px;
+   }
+
+   .cover-head {
+     font-size: 36px;
+   }
+   #coverDesc {
+     font-size: 28px;
+     margin-bottom: 20px;
+   }
+
+   #coverDescContainer {
+     margin: auto;
+     position: absolute;
+     top: 0;
+     left: 0;
+     bottom: 0;
+     right: 0;
+     width: 380px;
+   }
+
+   #aboutMe h2 {
+     font-size: 46px;
+   }
+
+   #aboutMe p {
+     font-size: 33px;
+   }
+
+   #aboutMeContainer {
+     position: relative;
+     top: -10px;
+   }
+
+   #cubeFolio {
+     background-repeat: repeat-y;
+   }
+
+   /*
+   Carousel Adjustments*/
+
+   .item-inner {
+     top: 95px;
+   }
+
+   .left > .glyphicon {
+     position: relative;
+     left: -15px;
+     top: 290px;
+   }
+
+   .right > .glyphicon {
+     position: relative;
+     right: -15px;
+     top: 290px;
+   }
+
+   .caption h2 {
+     font-size: 40px;
+   }
+
+   .caption {
+     font-size: 33px;
+   }
+
+   .carousel-indicators {
+     margin-bottom: 30px;
+   }
+
+   /*
+   Map and Contact Adjustments*/
+
+   #map {
+     margin-bottom: 65px;
+   }
+
+   .buttons {
+     width: 20px;
+   }
+
+   #buttons div a {
+     font-size: 21px;
+     margin-right: 7px;
+   }
+
+   #footer {
+     padding-bottom: 15px;
+   }
+ }
+
+ /*
+ Width-- 500 => 610px, Portrait-Height 899px-- ===------------------------------>>
+ */
+ @media screen and (max-width: 610px) and (max-height: 899px) {
+   #meBrand {
+     position: relative;
+     margin-left: 10px;
+     font-size: 85px;
+     float: left;
+   }
+
+   #navbar {
+     background-color: #191a1a;
+     float: none;
+   }
+
+   .naviBar_Mobile {
+     border-radius: 5px;
+   }
+
+   #show-techs i {
+     font-size: 37px;
+   }
+
+   .cover-head {
+     font-size: 36px;
+   }
+   #coverDesc {
+     font-size: 28px;
+     margin-bottom: 20px;
+   }
+
+   #coverDescContainer {
+     margin: auto;
+     position: absolute;
+     top: 0;
+     left: 0;
+     bottom: 0;
+     right: 0;
+     width: 380px;
+   }
+
+   #aboutMe h2 {
+     font-size: 46px;
+   }
+
+   #aboutMe p {
+     font-size: 29px;
+   }
+
+   #aboutMeContainer {
+     position: relative;
+     top: -10px;
+   }
+
+   /*
+   Carousel Adjustments*/
+
+   .item-inner {
+     top: 80px;
+   }
+
+   .left > .glyphicon {
+     position: relative;
+     left: -15px;
+     top: 290px;
+   }
+
+   .right > .glyphicon {
+     position: relative;
+     right: -15px;
+     top: 290px;
+   }
+
+   .caption h2 {
+     font-size: 36px;
+   }
+
+   .caption {
+     font-size: 30px;
+   }
+
+   .carousel-indicators {
+     margin-bottom: 30px;
+   }
+
+   /*
+   Map and Contact Adjustments*/
+
+   #map {
+     margin-bottom: 65px;
+   }
+
+   .buttons {
+     width: 20px;
+   }
+
+   #buttons div a {
+     font-size: 21px;
+     margin-right: 7px;
+   }
+
+   #footer {
+     padding-bottom: 15px;
+   }
+ }
+
+ /*
+ Width-- 500 => 610px, Portrait-Height 810px-- ===------------------------------>>
+ */
+ @media screen and (max-width: 610px) and (max-height: 810px) {
+   #meBrand {
+     position: relative;
+     margin-left: 10px;
+     font-size: 85px;
+     float: left;
+   }
+
+   #navbar {
+     background-color: #191a1a;
+     top: 0;
+     float: none;
+   }
+
+   .naviBar_Mobile {
+     border-radius: 5px;
+   }
+
+   #show-techs i {
+     font-size: 37px;
+   }
+
+   .cover-head {
+     font-size: 36px;
+   }
+   #coverDesc {
+     font-size: 28px;
+     margin-bottom: 20px;
+   }
+
+   #coverDescContainer {
+     margin: auto;
+     position: absolute;
+     top: 0;
+     left: 0;
+     bottom: 0;
+     right: 0;
+     width: 380px;
+   }
+
+   #aboutMe h2 {
+     font-size: 46px;
+   }
+
+   #aboutMe p {
+     font-size: 29px;
+   }
+
+   #aboutMe {
+     padding-top: 140px;
+
+   }
+
+   /*
+   Carousel Adjustments*/
+
+   .item-inner {
+     top: 70px;
+   }
+
+   .carousel-image {
+     width: 95%;
+   }
+
+   .left > .glyphicon {
+     position: relative;
+     left: -15px;
+     top: 290px;
+   }
+
+   .right > .glyphicon {
+     position: relative;
+     right: -15px;
+     top: 290px;
+   }
+
+   .caption h2 {
+     font-size: 32px;
+   }
+
+   .caption {
+     font-size: 30px;
+   }
+
+   .carousel-indicators {
+     margin-bottom: 0px;
+   }
+
+   /*
+   Map and Contact Adjustments*/
+
+   #map {
+     margin-bottom: 65px;
+   }
+
+   .buttons {
+     width: 20px;
+   }
+
+   #buttons div a {
+     font-size: 21px;
+     margin-right: 7px;
+   }
+
+   #footer {
+     padding-bottom: 15px;
+   }
+ }
+
+
+ /*
+ Width-- 500 => 600px, Height- 400px-- iPhone 5 Landscape ===------------------------------>>
+ */
+ @media screen and (max-width: 600px) and (max-height: 400px) {
+   /*
+   Cover
+   ------*/
+
+   #meBrand {
+      top: -5px;
+     font-size: 34px;
+   }
+
+   #me-head {
+     top: 5px;
+   }
+
+   #navbar {
+     background-color: transparent;
+   }
+
+   #show-techs i {
+     font-size: 13px;
+   }
+
+   .cover-head {
+     font-size: 28px;
+   }
+
+   #coverDesc {
+     color: #f8e7da;
+     font-size: 20px;
+     margin-bottom: 20px;
+   }
+
+   #coverDescContainer {
+     top: -95px;
+     left: 10px;
+     height: 130px;
+     width: 300px;
+   }
+
+   /*
+   Me
+   ----*/
+
+   #aboutMe h2 {
+     font-size: 24px;
+   }
+
+   #aboutMe p {
+     font-size: 16px;
+   }
+
+   #aboutMeContainer {
+     position: relative;
+     top: -40px;
+   }
+
+   /*
+   Carousel
+   ---------*/
+
+   #swap {
+     position: absolute;
+     display: block;
+     top: 70px;
+     left: 50px;
+     padding: 0px 12px;
+
+   }
+
+   #swap i {
+     position: relative;
+     top: -3px;
+     left: 1px;
+   }
+
+   .item-inner {
+     top: 50px;
+   }
+
+   .left > .glyphicon {
+     position: relative;
+     left: -15px;
+     top: 130px;
+   }
+
+   .right > .glyphicon {
+     position: relative;
+     right: -15px;
+     top: 130px;
+   }
+
+   .carousel-image {
+     position: relative;
+     top: 8px;
+     width: 50%;
+   }
+
+   .caption {
+     position: relative;
+     top: -90px;
+   }
+   .caption h2 {
+     margin-bottom: 0;
+     font-size: 23px;
+   }
+
+   .caption p {
+     margin-top: 0;
+     font-size: 17px;
+   }
+
+
+   .github2 {
+     height: 28px;
+     width: 28px;
+   }
+
+   .www2 {
+     font-size: 31px;
+   }
+
+   .see-code2 {
+     font-size: 18px;
+   }
+
+   .visit-page2 {
+     font-size: 18px;
+   }
+
+   .site-link2 {
+     /*border: 1px solid #fff;*/
+     padding-top: 5px;
+     padding-bottom: 2px;
+     padding-left: 13px;
+   }
+
+   .github-link2 {
+     /*border: 1px solid #fff;*/
+     padding-top: 7px;
+     padding-bottom: 0px;
+     padding-right: 5px;
+   }
+
+   .carousel-indicators {
+     bottom: -20px;
+   }
+
+
+   /*
+   Map, Contact
+   -------------*/
+
+   #map {
+     margin-bottom: 85px;
+   }
+
+   .buttons {
+     width: 40px;
+   }
+
+   #buttons {
+     padding: 20px 0px 60px 0px;
+     margin-bottom: 0;
+     height: 150px;
+   }
+
+   #buttons div a {
+     font-size: 21px;
+     margin-right: 7px;
+   }
+
+   #footer {
+     top: 240px;
+     left: 200px;
+   }
+
+
+ }
+
+
+ /*
+ Width-- 400 => 500px, Height-- 800px-- Portrait
+ ===============================================------>>
+ */
+ @media screen and (max-width: 500px) and (max-height: 800px) {
+   body {
+     background-image: url('../../images/rainbula2.jpg');
+   }
+
+   /*#meBrand {
+     position: absolute;
+     margin: auto;
+     right: 0;
+     left: 0;
+     font-size: 55px;
+   }*/
+
+   #show-techs i {
+     font-size: 24px;
+   }
+
+   #coverDesc {
+     font-size: 30px;
+     margin-bottom: 20px;
+     color: #f8e7da;
+   }
+
+   #coverDescContainer {
+     margin: auto;
+     position: absolute;
+     top: -30px;
+     left: 0;
+     bottom: 0;
+     right: 0;
+     width: 380px;
+   }
+
+   #aboutMe h2 {
+     font-size: 38px;
+   }
+
+   #aboutMe p {
+     font-size: 23px;
+   }
+
+   #aboutMe {
+     padding-top: 130px;
+   }
+
+   /*
+   Carousel Adjustments*/
+
+   .item-inner {
+     /*top: 70px;*/
+   }
+
+   .left > .glyphicon {
+     top: 250px;
+   }
+
+   .right > .glyphicon {
+     top: 250px;
+   }
+
+   .caption h2 {
+     font-size: 30px;
+   }
+
+   .caption p {
+    margin-bottom: 7px;
+  }
+
+   .caption {
+     font-size: 27px;
+   }
+
+   .carousel-indicators {
+     margin-bottom: 0px;
+   }
+
+   /*
+   Buttons Adustments*/
+
+   .github2 {
+     height: 36px;
+     width: 36px;
+   }
+
+   .www2 {
+     font-size: 39px;
+   }
+
+   .see-code2 {
+     font-size: 22px;
+   }
+
+   .visit-page2 {
+     font-size: 22px;
+   }
+
+   .site-link2 {
+     /*border: 1px solid white;*/
+     padding-top: 15px;
+     padding-left: 25px;
+   }
+
+   .github-link2 {
+     /*border: 1px solid white;*/
+     padding-top: 17px;
+     padding-right: 5px;
+   }
+
+   /*
+   Contact Adjustments*/
+   #map {
+     padding-bottom: 125px;
+   }
+
+   #buttons {
+     height: 280px;
+     width: 100%;
+     padding: 0;
+   }
+
+
+
+  #buttons div a {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+   #buttonsContainer {
+     position: absolute;
+     margin: 0 auto;
+     height: 100%;
+     width: 130px;
+     left: 0;
+     right: 0;
+     top: 10px;
+     justify-content: center;
+   }
+
+   #footer {
+     position: relative;
+     width: 200px;
+     margin: auto;
+     bottom: 100px;
+     padding-bottom: 0px;
+     /*left: 120px;*/
+     /*top: 560px;*/
+   }
+
+ }
+ /*
+ Width-- 400 => 500px, Height- 400px-- iPhone 4 Landscape ===------------------------------>>
+ */
+ @media screen and (max-width: 500px) and (max-height: 400px) {
+   /*
+   Cover
+   ------*/
+
+   body {
+     background-image: url('../../images/rainbula2.jpg');
+   }
+
+   #meBrand {
+    top: 5px;
+    font-size: 32px;
+   }
+
+   #naviBar li a {
+    font-size: 24px;
+   }
+
+   #header {
+     height: 45px;
+   }
+
+   #show-techs i {
+     font-size: 9px;
+   }
+
+   .cover-head {
+     font-size: 25px;
+   }
+
+   #coverDesc {
+     color: #f8e7da;
+     font-size: 20px;
+     margin-bottom: 20px;
+   }
+
+   #coverDescContainer {
+     top: -70px;
+     left: -60px;
+     height: 130px;
+     width: 300px;
+   }
+
+   /*
+   Me
+   ---*/
+
+   #aboutMe h2 {
+     font-size: 22px;
+   }
+
+   #aboutMe p {
+     font-size: 15px;
+   }
+
+   #aboutMe {
+     padding-top: 140px;
+   }
+
+   /*
+   Carousel
+   ---------*/
+
+   #swap {
+     position: absolute;
+     display: block;
+     top: 50px;
+     left: 50px;
+     padding: 0px 12px;
+
+   }
+
+   #swap i {
+     position: relative;
+     top: -3px;
+     left: 1px;
+   }
+
+   .item-inner {
+     top: 50px;
+   }
+
+   .caption h2 {
+     font-size: 20px;
+   }
+
+   .caption p {
+     font-size: 17px;
+   }
+
+   .github2 {
+     height: 28px;
+     width: 28px;
+   }
+
+   .www2 {
+     font-size: 31px;
+   }
+
+   .see-code2 {
+     font-size: 18px;
+   }
+
+   .visit-page2 {
+     font-size: 18px;
+   }
+
+   .site-link2 {
+     /*border: 1px solid #fff;*/
+     padding-top: 5px;
+     padding-bottom: 2px;
+     padding-left: 13px;
+   }
+
+   .github-link2 {
+     /*border: 1px solid #fff;*/
+     padding-top: 7px;
+     padding-bottom: 0px;
+     padding-right: 5px;
+   }
+
+   .left > .glyphicon {
+     position: relative;
+     left: -15px;
+     top: 150px;
+   }
+
+   .right > .glyphicon {
+     position: relative;
+     right: -15px;
+     top: 150px;
+   }
+
+
+   /*
+   Map, Contact
+   -------------*/
+
+   #map {
+     margin-bottom: 85px;
+   }
+
+   .buttons {
+     width: 40px;
+   }
+
+   #buttons {
+     padding-bottom: 60px;
+     height: 280px;
+   }
+
+   #buttons div a {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+   #buttonsContainer {
+     position: absolute;
+     margin: 0 auto;
+     height: 100%;
+     width: 130px;
+     left: 0;
+     right: 0;
+     top: 10px;
+     justify-content: center;
+   }
+
+   #footer {
+     top: 240px;
+     margin: auto;
+   }
+ }
+
+
+ /*
+ Width-- 300 => 400px, iPhone 6 Portrait===------------------------------>>
+ */
+ @media screen and (max-width: 400px) and (max-height: 700px) {
+   #meBrand {
+     position: relative;
+     margin: auto;
+     right: 0;
+     left: 0;
+     top: 40px;
+     font-size: 50px;
+   }
+
+   #navbar {
+     top: -20px;
+   }
+
+
+   #show-techs i {
+     font-size: 20px;
+   }
+
+   .cover-head {
+     font-size: 29px;
+   }
+
+   #coverDesc {
+     font-size: 24px;
+   }
+
+   #coverDescContainer {
+     position: relative;
+     margin: auto;
+     top: 160px;
+     width: 380px;
+   }
+
+   #aboutMe {
+     padding-top: 115px;
+   }
+
+   #aboutMe h2 {
+     font-size: 34px;
+   }
+
+   #aboutMe p {
+     font-size: 21px;
+   }
+
+   /*
+   Carousel
+   ----------*/
+
+   .item-inner {
+     top: 45px;
+   }
+
+   .caption h2 {
+     font-size: 22px;
+   }
+
+   .caption p {
+     font-size: 20px;
+   }
+
+   .github2 {
+     height: 29px;
+     width: 29px;
+   }
+
+   .www2 {
+     font-size: 32px;
+   }
+
+   .see-code2 {
+     font-size: 21px;
+   }
+
+   .visit-page2 {
+     font-size: 21px;
+   }
+
+   .site-link2 {
+     padding-top: 7px;
+     left: -1px;
+   }
+
+   .github-link2 {
+     padding-top: 9px;
+     left: -1px;
+   }
+
+
+   #map {
+     margin-bottom: 0px;
+   }
+
+   #buttons {
+     height: 280px;
+     padding: 0;
+   }
+
+   .tact {
+     width: 20px;
+     display: block;
+     /*margin-bottom: 25px;*/
+
+   }
+
+   #buttons div a {
+     font-size: 21px;
+   }
+
+   #buttonsContainer {
+     position: absolute;
+     width: 130px;
+     margin: auto;
+     left: 0; right: 0;
+     top: 15px;
+   }
+
+   #footer {
+     position: relative;
+     padding-top: 0px;
+     padding-bottom: 30px;
+     bottom: 70px;
+     left: 0px;
+   }
+ }
+ /*
+ Width-- 300 => 400px, iPhone 5 Portrait===------------------------------>>
+ */
+ @media screen and (max-width: 400px) and (max-height: 600px) {
+   /*
+   Cover
+   ------*/
+
+   #meBrand {
+     left: 5px;
+     top: 40px;
+     font-size: 43px;
+   }
+
+   #navbar {
+     top: 0;
+   }
+
+   #show-techs i {
+     font-size: 15px;
+   }
+
+   .cover-head {
+     font-size: 30px;
+   }
+
+   #coverDesc {
+     font-size: 24px;
+     margin-bottom: 20px;
+     color: #f8e7da;
+   }
+
+   #coverDescContainer {
+     position: absolute;
+     margin: auto;
+     bottom: 430px;
+     left: 0px;
+     right: 0px;
+     width: 300px;
+   }
+
+   /*
+   Me
+   ---*/
+
+   #aboutMe {
+     padding-top: 110px;
+   }
+
+   #aboutMe h2 {
+     font-size: 30px;
+   }
+
+   #aboutMe p {
+     font-size: 17px;
+   }
+
+   #aboutMeContainer {
+     position: relative;
+     top: -65px;
+   }
+
+   /*
+   Carousel
+   ----------*/
+
+   .caption h2 {
+     font-size: 22px;
+   }
+
+   .caption p {
+     font-size: 18px;
+   }
+
+   .github2 {
+     position: relative;
+     height: 25px;
+     width: 25px;
+     margin-right: 0;
+     top: 1px;
+   }
+
+   .www2 {
+     font-size: 27px;
+   }
+
+   .see-code2 {
+     font-size: 18px;
+     top: -3px;
+   }
+
+   .visit-page2 {
+     font-size: 18px;
+   }
+
+   .site-link2 {
+     /*border: 1px solid #fff;*/
+     padding: 3px 3px 3px 8px;
+     left: 7px;
+   }
+
+   .github-link2 {
+     /*border: 1px solid #fff;*/
+     padding: 3px 3px 3px 3px;
+     bottom: 2px;
+
+     left: -1px;
+   }
+
+
+   /*
+   Contact, Map
+   --------------*/
+
+   #contactMeText {
+     font-size: 50px;
+   }
+
+   #map {
+     margin-bottom: 0px;
+   }
+
+   #buttons {
+     padding: 0;
+   }
+
+   .tact {
+     width: 20px;
+     display: block;
+     margin-bottom: 25px;
+
+   }
+
+   #buttons div a {
+     font-size: 21px;
+   }
+
+   #buttonsContainer {
+     position: absolute;
+     width: 130px;
+     margin: auto;
+     left: 0; right: 0;
+     top: 15px;
+   }
+
+   #footer {
+     position: relative;
+     padding-top: 0px;
+     padding-bottom: 30px;
+     bottom: 70px;
+     left: 0px;
+   }
+ }
+
+
+ /*
+ Width-- 300 => 400px, iPhone 4 Portrait===------------------------------>>
+ */
+ @media screen and (max-width: 400px) and (max-height: 500px) {
+   /*
+   Cover
+   ------*/
+
+   #meBrand {
+     position: absolute;
+     margin: auto;
+     right: 0;
+     left: 0;
+     top: 30px;
+     font-size: 43px;
+   }
+
+   #show-techs i {
+     font-size: 16px;
+   }
+
+   .cover-head {
+     font-size: 23px;
+   }
+
+   #coverDesc {
+     font-size: 20px;
+     margin-bottom: 20px;
+     color: #f8e7da;
+   }
+
+   #coverDescContainer {
+     position: absolute;
+     margin:  auto;
+     top: 160px;
+     left: 0px;
+     right: 0px;
+     width: 300px;
+   }
+
+   #more {
+     position: static;
+     padding: 2px;
+   }
+
+   /*
+   Me
+   ----*/
+
+   #aboutMe h2 {
+     font-size: 30px;
+   }
+
+   #aboutMe p {
+     font-size: 16px;
+   }
+
+   #aboutMe {
+     padding-top: 140px;
+   }
+
+   /*
+   Carousel
+   ---------*/
+
+   .caption h2 {
+     font-size: 22px;
+   }
+
+   .caption p {
+     font-size: 16px;
+   }
+
+   .carousel-indicators {
+     bottom: -20px;
+   }
+
+
+   /*
+   Contact, Map
+   -------------*/
+
+   #contact {
+     padding-top: 40px;
+     padding-bottom: 5px;
+     height: 120px;
+   }
+
+   #map {
+     margin-bottom: 45px;
+   }
+
+   #buttons {
+     padding: 0;
+   }
+
+   .tact {
+     width: 20px;
+     display: block;
+     margin-bottom: 25px;
+
+   }
+
+   #buttons div a {
+     font-size: 21px;
+   }
+
+   #buttonsContainer {
+     position: absolute;
+     width: 120px;
+     margin: auto;
+     left: 0; right: 0;
+     top: 15px;
+   }
+
+   #footer {
+     position: relative;
+     padding-top: 0px;
+     padding-bottom: 0px;
+     bottom: 40px;
+     left: 0px;
+   }
+ }
+
+ /*
+ Width-- 200 => 300px ===------------------------------>>
+ */
+ @media screen and (max-width: 300px) {
+   #meBrand {
+     font-size: 40px;
+
+   }
+   #mainNav li a {
+     font-size: 26px;
+   }
+   #show-techs i {
+     font-size: 26;
+   }
+ }
+
+
+ /*
+ Width-- 0 => 200px ===------------------------------>>
+ */
+ @media screen and (max-width: 200px) {
+
+
+   #meBrand {
+     font-size: 32px;
+
+   }
+
+   #mainNav li a {
+     font-size: 18px;
+   }
+
+   #show-techs i {
+     font-size: 18;
+   }
+ }

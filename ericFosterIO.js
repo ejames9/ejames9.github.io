@@ -47,7 +47,11 @@
 	"use_loosey_goosey";
 
 	/*
-	ericFosterIO.js javascript file for my portfolio site.
+	ericFosterIO.js
+
+	This file is the entry point module for the site's
+	(ericfoster.io) JavaScript.
+
 	Author: Eric Foster
 	*/
 
@@ -62,886 +66,102 @@
 
 	var elementsJS = __webpack_require__(1);
 	var go = elementsJS.go;
-	var info = elementsJS.info;
-	var warn = elementsJS.warn;
-	var log = elementsJS.log;
 	var el = elementsJS.el;
-	var make = elementsJS.make;
-	var inspect = elementsJS.inspect;
-	var scroll = elementsJS.scroll;
-	var mouse = elementsJS.mouse;
-	var click = elementsJS.click;
-	var once = elementsJS.once;
+	var x = elementsJS.x;
+	var log = elementsJS.log;
 	var on = elementsJS.on;
-	var off = elementsJS.off;
-	var hasAncestor = elementsJS.hasAncestor;
+	var inspect = elementsJS.inspect;
 	var isMobile = elementsJS.isMobile;
 
-	var lodash = __webpack_require__(9);
-	var zipObject = lodash.zipObject;
+	var _ul = __webpack_require__(9);
+	var scrollController = _ul.scrollController;
 
-	var THREE = __webpack_require__(11);
+	var _ul = __webpack_require__(10);
+	var cubeFolio = _ul.cubeFolio;
 
-	var TWEEN = __webpack_require__(12);
-
-	var browser = __webpack_require__(13);
+	var browser = __webpack_require__(15);
 
 	///End Module requires///
 
-	///-------Begin Module Imports---------///
-	var _$ = __webpack_require__(1)._$;
-	var dom = __webpack_require__(1).dom;
-	var make = __webpack_require__(1).make;
-	var element = __webpack_require__(1).element;
-	///|------------------------------------|//
-
-	var elementsJS = __webpack_require__(1);
-	var go = elementsJS.go;
-	var info = elementsJS.info;
-	var warn = elementsJS.warn;
-	var log = elementsJS.log;
-	var el = elementsJS.el;
-	var make = elementsJS.make;
-	var inspect = elementsJS.inspect;
-	var scroll = elementsJS.scroll;
-	var mouse = elementsJS.mouse;
-	var click = elementsJS.click;
-	var once = elementsJS.once;
-	var on = elementsJS.on;
-	var off = elementsJS.off;
-	var hasAncestor = elementsJS.hasAncestor;
-	var isMobile = elementsJS.isMobile;
-
-	var lodash = __webpack_require__(9);
-	var zipObject = lodash.zipObject;
-
-	var THREE = __webpack_require__(11);
-
-	var TWEEN = __webpack_require__(12);
-
-	var browser = __webpack_require__(13);
-
-	__webpack_require__(14);
-
-	__webpack_require__(15);
-
-	__webpack_require__(16);
-
-	///End Module requires///
-
-	//Application Data..
-	var APPLICATION_DATA = {};
-	APPLICATION_DATA.FLAGS_ = {};
-	APPLICATION_DATA.PROJECT_URLS = {};
-	APPLICATION_DATA.REPO_URLS = {};
-	//Boolean flag that enables code that spins the portfolio cube.
-	APPLICATION_DATA.FLAGS_.SPIN_SWITCH_ = true;
-	//Flag that allows code to know when it is being run for the first time.
-	APPLICATION_DATA.FLAGS_.FOCUS_ = false;
-	//Flag that tells whether or not the 'show' class has been assigned yet. (project-info pane)
-	APPLICATION_DATA.FLAGS_.SHOW_ = false;
-	//Flag that tells whether or not the 'show2' class has been assigned yet. (browser-icon button)
-	APPLICATION_DATA.FLAGS_.SHOW2_ = false;
-	//Flag that tells whether or not the 'show3' class has been assigned yet. (visit-page text)
-	APPLICATION_DATA.FLAGS_.SHOW3_ = false;
-	//Flag that trips the tweenTwo snap-back animation.
-	APPLICATION_DATA.FLAGS_.TWEENTWO_ = false;
-	//This flag is set to false when the project-info pane is off-screen, and set back to true when it returns.
-	APPLICATION_DATA.FLAGS_.PROJ_PANE_ = true;
-	//This flag is set to true when a project is clicked, and not set back until the closeUp scene is exited.
-	APPLICATION_DATA.FLAGS_.FIRST_CLICK_ = false;
-	//global boolean flag that essentially turns off some event handling code  but continues to allow other code to run.
-	APPLICATION_DATA.FLAGS_.TWEEN_ = true;
-	APPLICATION_DATA.FLAGS_.HEAD_TWEEN_ = true;
-	//This flag is set to true when the header is fixed to the top, and set back to false when it is released.
-	APPLICATION_DATA.FLAGS_.ME_HEAD_ = false;
-
-	//Project URLs..
-	APPLICATION_DATA.PROJECT_URLS['_1'] = 'http://elementsjs.io';
-	APPLICATION_DATA.PROJECT_URLS['_2'] = 'http://elementsjs.io/#interpreter-install';
-	APPLICATION_DATA.PROJECT_URLS['_3'] = 'https://www.npmjs.com/package/gulp-elementsjs-interpreter';
-	APPLICATION_DATA.PROJECT_URLS['_4'] = 'http://showtrippers.com';
-	APPLICATION_DATA.PROJECT_URLS['_5'] = 'https://pypi.python.org/pypi/DjamBase';
-	APPLICATION_DATA.PROJECT_URLS['_6'] = 'http://ejames9.github.io';
-
-	//Repository URLs..
-	APPLICATION_DATA.REPO_URLS['_1'] = 'https://github.com/ejames9/elementsJS';
-	APPLICATION_DATA.REPO_URLS['_2'] = 'https://github.com/ejames9/elementsJS/blob/gh-pages/js/sideNavControl.js';
-	APPLICATION_DATA.REPO_URLS['_3'] = 'https://github.com/ejames9/gulp-elementsJS-interpreter';
-	APPLICATION_DATA.REPO_URLS['_4'] = 'https://github.com/ejames9/GoOnTour';
-	APPLICATION_DATA.REPO_URLS['_5'] = 'https://github.com/ejames9/DjamBase';
-	APPLICATION_DATA.REPO_URLS['_6'] = 'https://github.com/ejames9/ejames9.github.io/blob/master/src/js/ericFosterIO.js';
-
-	//Compress flag names.
-	window.flags = APPLICATION_DATA.FLAGS_;
-
-	//--The IIFE that runs my portfolio site.
-	//--Created a closure for organization, and fewer globals.============================>>>
-	var ericfosterIO = function () {
-	  //Compress URL names..
-	  var repos = APPLICATION_DATA.REPO_URLS,
-	      projs = APPLICATION_DATA.PROJECT_URLS;
-
-	  //Camera face view coordinates for tween.js.
-	  var cameraPositions = [new THREE.Vector3(2200, -90, 0), new THREE.Vector3(-2200, -90, 0), new THREE.Vector3(0, 2000, 90), new THREE.Vector3(0, -2000, 90), new THREE.Vector3(0, -90, 2200), new THREE.Vector3(0, -90, -2200)];
-
-	  //Camera close-up face view coordinates for tween.js.
-	  var closeUps = [new THREE.Vector3(1600, 0, 0), new THREE.Vector3(-1600, 0, 0), new THREE.Vector3(0, 1700, 90), new THREE.Vector3(0, -1700, 90), new THREE.Vector3(0, 0, 1600), new THREE.Vector3(0, 0, -1600)];
-
-	  //globals..
-	  var tween = void 0,
-	      scene = void 0,
-	      camera = void 0,
-	      tweenTwo = void 0,
-	      css3DRenderer = void 0,
-	      camCoordinates = void 0,
-	      sides = [],
-	      URLs = [];
-
-	  //--Initiate three.js scene and assemble portfolio cube. Closure is mainly for organization.=============>>>
-	  function assembleCubeFolio() {
-
-	    //Create three.js scene..
-	    initProjectsScene();
-	    //Assemble CubeFolio..
-	    assembleCube();
-
-	    //Set scene size, camera attributes and position, create container element, create renderer and attach to element.
-	    function initProjectsScene() {
-	      // set scene size
-	      var width = window.innerWidth,
-	          height = window.innerHeight;
-	      // set camera attributes
-	      var fov = 45,
-	          aspect = width / height,
-	          near = 0.1,
-	          far = 1000;
-	      // get the container element
-	      var _container = el('#cubeFolio');
-
-	      //css3DRenderer.
-	      css3DRenderer = new THREE.CSS3DRenderer();
-	      css3DRenderer.setSize(width, height);
-
-	      //Setting up the camera.
-	      camera = new THREE.PerspectiveCamera(fov, width / height, near, far);
-	      scene = new THREE.Scene();
-	      // add the camera to the scene
-	      scene.add(camera);
-	      // the camera starts at 0,0,0, so pull it back
-	      camera.position.z = 2200;
-	      camera.position.x = 0;
-	      camera.position.y = -120;
-	      camera.lookAt(scene.position);
-
-	      // attach the render-supplied DOM element
-	      _container.appendChild(css3DRenderer.domElement);
-	    }
-
-	    //Assemble Portfolio Cube.....
-	    function assembleCube() {
-	      //iframe template.
-	      var iframe = '<iframe class="div" width="1280" height="740" frameborder="0"' + '2style="border:0" src="{URL}"></iframe>',
-	          boxFrame = '<iframe class="div" width="1280" height="1280" frameborder="0"' + 'style="border:0" src="{URL}"></iframe>',
-	          divWrap = '<div><img src="{SRC}" width="1280" height="740"></div>';
-
-	      //URL's....
-	      var eJSURL = 'http://elementsjs.io',
-	          eJSsideNavURL = 'http://elementsjs.io/#interpreter-install',
-	          efosterIOURL = 'http://ejames9.github.io',
-	          showTURL = 'http://showtrippers.com',
-	          dJamSRC = './images/DjamBase.png',
-	          gulpeJSIntSRC = './images/gulpEJSInterpreter.png',
-	          efosterIOSRC = './images/ericfosterIO.png',
-	          cubeSidesHTML = [];
-
-	      //Store urls in array.
-	      URLs.push(dJamSRC);
-	      URLs.push(gulpeJSIntSRC);
-	      URLs.push(eJSsideNavURL);
-	      URLs.push(efosterIOURL);
-	      URLs.push(showTURL);
-	      URLs.push(eJSURL);
-
-	      //Combine urls with iframe template in new array.
-	      URLs.forEach(function (url, i) {
-	        if (/https?\:\/\//.test(url)) {
-	          if (i === 2 || i === 3) {
-	            cubeSidesHTML.push(boxFrame.replace('{URL}', url));
-	          } else {
-	            cubeSidesHTML.push(iframe.replace('{URL}', url));
-	          }
-	        } else {
-	          cubeSidesHTML.push(divWrap.replace('{SRC}', url));
-	        }
-	      });
-
-	      //Create the cube.
-	      createSides(cubeSidesHTML, new THREE.CubeGeometry(1280, 740, 1280));
-	      //Map URLs to 3D coordinates, for tweening purposes.
-	      camCoordinates = zipObject(URLs, cameraPositions);
-	      closeUps = zipObject(URLs, closeUps);
-	    }
-
-	    //Create the sides of the specified geometry with CSS3DObjects created using the given HTML strings, and shift them into position.
-	    function createSides(strings, geometry) {
-	      var tick = -1;
-
-	      // iterate over all the sides
-	      for (var i = 0; i < geometry.faces.length; i += 2) {
-	        tick++;
-	        // create a new object based on the supplied HTML String
-	        var side = createCSS3DObject(strings[tick]);
-	        // get this face and the next which both make the cube
-	        var face = geometry.faces[i],
-	            faceNext = geometry.faces[i + 1];
-	        // reposition the sides using the center of the faces
-	        var centroid = new THREE.Vector3();
-	        centroid.copy(geometry.vertices[face.a]).add(geometry.vertices[face.b]).add(geometry.vertices[face.c]).add(geometry.vertices[faceNext.a]).add(geometry.vertices[faceNext.b]).add(geometry.vertices[faceNext.c]).divideScalar(6);
-	        side.position.x = centroid.x;
-	        side.position.y = centroid.y;
-	        side.position.z = centroid.z;
-
-	        sides.push(side.position);
-	        // Calculate and apply the rotation for this side
-	        var up = new THREE.Vector3(0, 0, 1),
-	            normal = geometry.faces[i].normal;
-	        // We calculate the axis on which to rotate by
-	        // selecting the cross of the vectors
-	        var axis = new THREE.Vector3();
-	        axis.crossVectors(up, normal);
-	        var a = axis.crossVectors(up, normal);
-	        // based on the axis, in relation to our normal vector
-	        // we can calculate the angle.
-	        var angle = Math.atan2(axis.length(), up.dot(normal));
-	        axis.normalize();
-	        // now we can use matrix function to rotate the object so
-	        // it is aligned with the normal from the face
-	        var matrix4 = new THREE.Matrix4();
-	        matrix4.makeRotationAxis(axis, angle);
-	        // apply the rotation
-	        side.rotation.setFromRotationMatrix(matrix4);
-	        // add to the scene
-	        scene.add(side);
-	      }
-	    }
-
-	    //Simple function to create CSS3DObjects from the given HTML string.
-	    function createCSS3DObject(s) {
-	      //Create outerdiv and set inner HTML from string (s)..
-	      var div = document.createElement('div');
-	      div.innerHTML = s;
-
-	      //Apply any CSS Styling here.
-	      div.className = 'div';
-	      div.style.opacity = '0.8';
-
-	      //Create the CSS3DObject and return it.
-	      var object = new THREE.CSS3DObject(div);
-	      return object;
-	    }
-	  }
-
-	  //Created a closure here, mainly for organization, but also for the ability to share variables between functions=======>>>
-	  function cubeFolioController() {
-	    var eTarget = null;
-
-	    //Initiate onHover handler...
-	    onHover();
-	    //Initiate onClick handler...
-	    onClick();
-
-	    //CubeFolio, onHover function.
-	    function onHover() {
-	      mouse('over', el('html'), hoverCallBack);
-	    }
-
-	    //Callback for onHover()..
-	    function hoverCallBack(e) {
-	      //If a project hasn't been clicked (TWEEN_), and the previous hovered project was _2 or _6 (TWEENTWO_)....
-	      if (flags.TWEEN_ && flags.TWEENTWO_) {
-	        //and..If the next mouseover element is not a project-list-item......
-	        if (!hasAncestor(e.target, el('#rightProjList')) && !hasAncestor(e.target, el('#leftProjList'))) {
-	          //Make sure camera is properly oriented. (Run the snap-back tween)
-	          var target = new THREE.Vector3(0, -90, -2200);
-	          tweenTwo = new TWEEN.Tween(camera.position);
-	          tweenTwo.to(target, 3000).easing(TWEEN.Easing.Elastic.Out).onUpdate(function () {
-	            camera.lookAt(scene.position);
-	          }).start();
-	          //Reset tTFlag..
-	          flags.TWEENTWO_ = false;
-	        } else {
-	          //Reset tTFlag..
-	          flags.TWEENTWO_ = false;
-	        }
-	      }
-	      if (e.target.className === 'projects-list-item') {
-	        if (e.target.id === '_2' || e.target.id === '_6') {
-	          //Stop tweenTwo
-	          flags.TWEENTWO_ = true;
-	        }
-	        if (flags.TWEEN_) {
-	          //Kill Spin.
-	          flags.SPIN_SWITCH_ = false;
-	          // //Create tween based on the camera's position.
-	          tween = new TWEEN.Tween(camera.position);
-	          //Configure animation.
-	          tween.to(camCoordinates[element(e.target).attrib('data-uri')], 1000).easing(TWEEN.Easing.Cubic.In).onUpdate(function () {
-	            camera.position.x = this.x;
-	            camera.position.y = this.y;
-	            camera.position.z = this.z;
-	            camera.lookAt(scene.position);
-	          }).start();
-	        }
-	        eTarget = e.target;
-	        //Set mouseout behaviour.
-	        on('mouseout', e.target, mouseoutCallBack);
-	        //Add onHover CSS.
-	        element(e.target).class('hover', '+');
-	      }
-	    }
-
-	    //Callback for once('mouseout')..
-	    function mouseoutCallBack() {
-	      if (flags.TWEEN_) {
-	        //Cancel handler
-	        off('mouseout', eTarget, mouseoutCallBack);
-	        //Stop Tween.
-	        // tween.stop()
-	        //Restart spin.
-	        flags.SPIN_SWITCH_ = true;
-	      }
-	      //Unhighlight target.
-	      element(eTarget).class('hover', '-');
-	    }
-
-	    //CubeFolio onClick function.
-	    function onClick() {
-	      var projectRE = /projects\-list\-item/;
-
-	      click(el('html'), function (e) {
-	        //If one of the links in the main navigation header are clicked..
-	        if (e.target.className === 'head-nav') {
-	          //Find the currently 'active' link, and remove the active class..
-	          dom('[class~=active]').class('active', '-');
-	          //Add 'active' class to clicked link..
-	          element(e.target).ma().class('active', '+');
-	        } else if (e.target.id === 'chevy') {
-	          //Tween project-info out of the way..
-	          var _tween = new TWEEN.Tween({ top: 0, left: 0 });
-	          _tween.to({ left: 920 }, 1300).easing(TWEEN.Easing.Cubic.In).onUpdate(function () {
-	            el('#project-info').style.transform = 'translate(' + this.left + 'px, ' + this.top + 'px)';
-	          }).start();
-	          //Set flag that signifies that the project-info pane is off-screen..
-	          flags.PROJ_PANE_ = false;
-	          //Reveal left chevron button.
-	          (function () {
-	            var elem0 = _$('#chevyL') ? dom('#chevyL') : make('#chevyL').put("body");
-	            return elem0;
-	          })().class('hide', '-');
-	          //Hide right chevron.
-	          (function () {
-	            var elem1 = _$('#chevy') ? dom('#chevy') : make('#chevy').put("body");
-	            return elem1;
-	          })().class('hide', '+');
-	        } else if (e.target.id === 'chevyL') {
-	          //Tween project-info back into view..
-	          projectInfoTweenBack();
-	        } else if (e.target.id === 'x') {
-	          //Reset the FIRST_CLICK_..
-	          flags.FIRST_CLICK_ = true;
-	          //Return to spinning cube..
-	          backToSpinningCube();
-	        } else {
-	          //Highlight focused list item.
-	          if (flags.FOCUS_) {
-	            dom('[name=focus]').attrib('name', '').color('').fontWeight('').textShadow('').zIndex('');
-	          }
-	          flags.FOCUS_ = true;
-	          //Hone in on click events happening on our target elements.
-	          if (projectRE.test(e.target.className)) {
-	            //Give target focus.
-	            element(e.target).attrib('name', 'focus').color('#27130a').fontWeight('900').textShadow('0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927').zIndex('1000');
-	            //Kill spin.
-	            flags.SPIN_SWITCH_ = false;
-	            //New tween/target for close-up animation.
-	            var tween3 = new TWEEN.Tween(camera.position),
-	                target = closeUps[element(e.target).attrib('data-uri')];
-	            //tweenify...
-	            tween3.to(target, 1500).easing(TWEEN.Easing.Linear.None).onUpdate(function () {
-	              camera.lookAt(scene.position);
-	            }).start();
-	            //kill mouseover/out behaviour..
-	            flags.TWEEN_ = false;
-	            // off('mouseover', el('html'), hoverCallBack);
-	            // off('mouseout', eTarget, mouseoutCallBack);
-	            //Setup the project-info pane..
-	            projectInfoPane(e.target);
-	          } else {
-	            flags.FOCUS_ = false;
-	          }
-	        }
-	      });
-	    }
-
-	    //Function containing code for the project-info pane setup/click responses..
-	    function projectInfoPane(e_target) {
-	      //If the show class has been assigned to an element, remove it..
-	      if (flags.SHOW_) {
-	        dom('[class~=show]').class('show', '-').class('hide', '+');
-	      }
-	      //Set the flag..
-	      flags.SHOW_ = true;
-	      var elString = '[name=' + e_target.id + ']';
-	      //Show Project Info, re-assign the 'show' class..
-	      (function () {
-	        var elem2 = _$('#project-info') ? dom('#project-info') : make('#project-info').put("body");
-	        return elem2;
-	      })().class('hidden', '-');
-	      dom(elString).class('hide', '-').class('show', '+');
-
-	      if (flags.SHOW2_) {
-	        dom('[class~=show2]').class('show2', '-').class('hide', '+');
-	      }
-	      (function () {
-	        var elem3 = _$('#github-link') ? dom('#github-link') : make('#github-link').put("body");
-	        return elem3;
-	      })().href(repos[e_target.id]);
-	      //determine which browser icon to show, using bowser.
-	      log('browser');
-	      log(browser.name);
-	      if (flags.SHOW3_) {
-	        dom('[class~=show3]').class('show3', '-').class('hide', '+');
-	      }
-	      switch (browser.name) {
-	        case 'Safari':
-	          (function () {
-	            var elem4 = _$('#safari') ? dom('#safari') : make('#safari').put("body");
-	            return elem4;
-	          })().class('hide', '-').class('show2', '+').sib('next').class('hide', '-').class('show3', '+').ma().href(projs[e_target.id]);
-	          break;
-	        case 'Chrome':
-	          (function () {
-	            var elem5 = _$('#chrome') ? dom('#chrome') : make('#chrome').put("body");
-	            return elem5;
-	          })().class('hide', '-').class('show2', '+').sib('next').class('hide', '-').class('show3', '+').ma().href(projs[e_target.id]);
-	          break;
-	        case 'Firefox':
-	          (function () {
-	            var elem6 = _$('#firefox') ? dom('#firefox') : make('#firefox').put("body");
-	            return elem6;
-	          })().class('hide', '-').class('show2', '+').sib('next').class('hide', '-').class('show3', '+').ma().href(projs[e_target.id]);
-	          break;
-	        case 'Internet Explorer':
-	          (function () {
-	            var elem7 = _$('#ie') ? dom('#ie') : make('#ie').put("body");
-	            return elem7;
-	          })().class('hide', '-').class('show2', '+').sib('next').class('hide', '-').class('show3', '+').ma().href(projs[e_target.id]);
-	          break;
-	        case 'Edge':
-	          (function () {
-	            var elem8 = _$('#ie') ? dom('#ie') : make('#ie').put("body");
-	            return elem8;
-	          })().class('hide', '-').class('show2', '+').sib('next').class('hide', '-').class('show3', '+').ma().href(projs[e_target.id]);
-	          break;
-	        default:
-	          (function () {
-	            var elem9 = _$('#www') ? dom('#www') : make('#www').put("body");
-	            return elem9;
-	          })().class('hide', '-').class('show2', '+').sib('next').class('hide', '-').class('show3', '+').ma().href(projs[e_target.id]);
-	      }
-	      //Display Project info Closing 'X' button.
-	      (function () {
-	        var elem10 = _$('#x') ? dom('#x') : make('#x').put("body");
-	        return elem10;
-	      })().class('hide', '-');
-	      //Check PROJ_PANE_ to see if project-info pane is offScreen. If so, move it back into view.
-	      if (!flags.PROJ_PANE_ && flags.FIRST_CLICK_) {
-	        //Invoke theSnitch Function..
-	        theSnitch();
-	        //reset FIRST_CLICK_ flag..
-	        flags.FIRST_CLICK_ = false;
-	      }
-	    }
-
-	    //Using a middle man (snitch) function to get a value for Function.caller;
-	    function theSnitch() {
-	      return projectInfoTweenBack();
-	    }
-
-	    //Return from closeUps to original camera coordinates and spinning cube.
-	    function backToSpinningCube() {
-	      //Return to spinning cube..
-	      //Check the orientation of the cube, to determine which "tweenBack" to run.
-	      //If the z coordinate = 90, we need to turn the cube as well is zoom out. (else)=>..
-	      if (camera.position.z === 90) {
-	        //Make sure camera is properly oriented. (Run the snap-back tween)
-	        var target = new THREE.Vector3(0, -90, -2200);
-	        tweenTwo = new TWEEN.Tween(camera.position);
-	        tweenTwo.to(target, 2500).easing(TWEEN.Easing.Elastic.Out).onUpdate(function () {
-	          camera.lookAt(scene.position);
-	        }).start();
-
-	        //Reset tTFlag..
-	        flags.TWEENTWO_ = false;
-
-	        //..<=(if) Otherwise, do the following..
-	      } else {
-	          var currentProject = void 0,
-	              camPosition = [];
-
-	          //Convert camera coordinates to simple array.
-	          camPosition.push(camera.position.x);
-	          camPosition.push(camera.position.y);
-	          camPosition.push(camera.position.z);
-
-	          for (var uri in closeUps) {
-	            var cUpsPosition = [];
-	            //Convert closeUps coordinates to simple array.
-	            cUpsPosition.push(closeUps[uri].x);
-	            cUpsPosition.push(closeUps[uri].y);
-	            cUpsPosition.push(closeUps[uri].z);
-	            //Compare cUpsPosition to camPosition to find a match.
-	            if (String(cUpsPosition) === String(camPosition)) {
-	              currentProject = uri;
-	            }
-	          }
-	          //Tween cube back to spinning state..
-	          var _tween2 = new TWEEN.Tween(camera.position);
-	          _tween2.to(camCoordinates[currentProject], 2000).easing(TWEEN.Easing.Elastic.Out).onUpdate(function () {
-	            camera.lookAt(scene.position);
-	          }).start();
-	        }
-
-	      //Get rid of 'x' and project-info pane..
-	      (function () {
-	        var elem11 = _$('#project-info') ? dom('#project-info') : make('#project-info').put("body");
-	        return elem11;
-	      })().class('hidden', '+');
-	      (function () {
-	        var elem12 = _$('#x') ? dom('#x') : make('#x').put("body");
-	        return elem12;
-	      })().class('hide', '+');
-	      //Flip the SPIN_SWITCH_/TWEEN_ back on.
-	      flags.SPIN_SWITCH_ = true;
-	      flags.TWEEN_ = true;
-	    }
-
-	    //moves project-info pane back into original viewing position.
-	    function projectInfoTweenBack() {
-	      var tweenTime = void 0;
-
-	      if (projectInfoTweenBack.caller.name.toString() === 'theSnitch') {
-	        tweenTime = 20;
-	      } else {
-	        tweenTime = 1300;
-	      }
-	      //Tween project-info back into view..
-	      var tween = new TWEEN.Tween({ top: 0, left: 920 });
-	      tween.to({ left: 0 }, tweenTime).easing(TWEEN.Easing.Cubic.In).onUpdate(function () {
-	        el('#project-info').style.transform = 'translate(' + this.left + 'px, ' + this.top + 'px)';
-	      }).start();
-	      //Set flag that signifies the project-info pane is on-screen..
-	      flags.PROJ_PANE_ = true;
-	      //Re-hide left chevron button.
-	      (function () {
-	        var elem13 = _$('#chevyL') ? dom('#chevyL') : make('#chevyL').put("body");
-	        return elem13;
-	      })().class('hide', '+');
-	      //Show right chevron.
-	      (function () {
-	        var elem14 = _$('#chevy') ? dom('#chevy') : make('#chevy').put("body");
-	        return elem14;
-	      })().class('hide', '-');
-	    }
-	  }
-
-	  //Created closure for organization of Scroll event-handling functions.
-	  function responsiveScrollEventHandling() {
-	    //cache elements..
-	    var _body = function () {
-	      var elem15 = _$("body") ? dom("body") : make(".body1", "body").put("body");
-	      return elem15;
-	    }(),
-	        _html = function () {
-	      var elem16 = _$("html") ? dom("html") : make(".html1", "html").put("body");
-	      return elem16;
-	    }(),
-	        _meBrand = function () {
-	      var elem17 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
-	      return elem17;
-	    }(),
-	        _naviBarLI = dom('#naviBar li a'),
-	        _naviBar = function () {
-	      var elem18 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
-	      return elem18;
-	    }(),
-	        _header = function () {
-	      var elem19 = _$('#navbar') ? dom('#navbar') : make('#navbar').put("body");
-	      return elem19;
-	    }(),
-	        _meHead = function () {
-	      var elem20 = _$('#me-head') ? dom('#me-head') : make('#me-head').put("body");
-	      return elem20;
-	    }(),
-	        _footer = function () {
-	      var elem21 = _$('#footer') ? dom('#footer') : make('#footer').put("body");
-	      return elem21;
-	    }();
-	    //
-	    onScroll();
-
-	    //--ericfoster.io Scroll events=====================================>>>
-	    function onScroll() {
-	      //affix naviBar to top upon scroll.
-	      scroll(window, function (e) {
-	        //This switch statement is for accomodating multiple screen sizes/configs. (Responsive Design).
-	        switch (99 === 9 * 9 + 18) {
-	          case window.innerWidth > 1000:
-	            headerFooterAnimation(600, 2220, 42, 36);
-
-	            break;
-	          case window.innerWidth > 900:
-	            headerFooterAnimation(600, 2060, 42, 36);
-	            break;
-	          case window.innerWidth > 730:
-	            if (window.innerHeight > 730) {
-	              //Portrait
-	              headerFooterAnimation(500, 1960, 42, 36, 0);
-	            } else {
-	              //Landscape
-	              headerFooterAnimation(370, 1560, 42, 36, 0, '');
-	            }
-	            break;
-	          case window.innerWidth > 700:
-	            if (window.innerHeight > 700) {
-	              headerFooterAnimation(1000, 2060, 42, 36);
-	            } else {
-	              headerFooterAnimation(380, 1600, 42, 36);
-	            }
-	            break;
-	          case window.innerWidth > 600:
-	            if (window.innerHeight > 600) {
-	              footerAnimation_Mobile(2000);
-	            } else {
-	              headerFooterAnimation(380, 1450, 42, 36, 0, '');
-	            }
-	            break;
-	          case window.innerWidth > 500:
-	            if (window.innerHeight > 500) {
-	              footerAnimation_Mobile(2000);
-	            } else {
-	              headerFooterAnimation(310, 1330, 32, 32, 0, '');
-	            }
-	            break;
-	          case window.innerWidth > 400:
-	            if (window.innerHeight > 400) {
-	              footerAnimation_Mobile(2275);
-	            } else {
-	              headerFooterAnimation(300, 1400, 26, 29, 0, '');
-	              //Make a couple adjustments..
-	              (function () {
-	                var elem22 = _$('#header') ? dom('#header') : make('#header').put("body");
-	                return elem22;
-	              })().height('45px');
-	              (function () {
-	                var elem23 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
-	                return elem23;
-	              })().right('5px');
-	            }
-	            break;
-	          case window.innerWidth > 300:
-	            if (window.innerHeight > 300) {
-	              if (window.innerHeight > 600) {
-	                footerAnimation_Mobile(2100);
-	              } else if (window.innerHeight > 500) {
-	                footerAnimation_Mobile(1900);
-	              } else {
-	                footerAnimation_Mobile(1700);
-	              }
-	            } else {
-	              headerFooterAnimation(300, 1400, 26, 29);
-	              //Make a couple adjustments..
-	              (function () {
-	                var elem24 = _$('#header') ? dom('#header') : make('#header').put("body");
-	                return elem24;
-	              })().height('45px');
-	              (function () {
-	                var elem25 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
-	                return elem25;
-	              })().right('5px');
-	            }
-	            break;
-	          case window.innerWidth > 200:
-	            break;
-	          default:
-	            break;
-	        }
-	      });
-	    }
-
-	    //This function adusts header and footer animation at lower resolutions in portrait mode..
-	    function footerAnimation_Mobile(offSet2) {
-	      //The following code exectutes if the page is scrolled beyond the # of px's below. This is the footer animation.
-	      if (_body.scrolled() > offSet2 || _html.scrolled() > offSet2) {
-	        _footer.viz('visible');
-	      } else {
-	        _footer.viz('hidden');
-	      }
-	    }
-
-	    //This function adjusts header footer animation..
-	    function headerFooterAnimation(offSet1, offSet2, fontSize1, fontSize2) {
-	      var top = arguments.length <= 4 || arguments[4] === undefined ? 25 : arguments[4];
-	      var left = arguments.length <= 5 || arguments[5] === undefined ? '175px' : arguments[5];
-
-	      //The following code exectutes if the page is scrolled beyond the # of px's below. This is the header animation.
-	      if (_body.scrolled() > offSet1 || _html.scrolled() > offSet1 - 20) {
-	        _meBrand.fontSize(String(fontSize1) + 'px').textShadow('0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927').top('-8px').left('12px');
-	        // _naviBarLI
-	        //       .every((element)=> {
-	        //         element
-	        //           .fontSize(String(fontSize2) + 'px')
-	        //       });
-	        _naviBar.top('0');
-	        _naviBarLI.every(function (element) {
-	          element.fontSize('32px');
-	        });
-	        _header.bgColor('#191a1a').opacity('.9').border('');
-
-	        if (_meHead.display() !== 'none') {
-	          _meHead.display('none');
-	        }
-
-	        if (_body.scrolled() > offSet2 || _html.scrolled() > offSet2) {
-	          _footer.viz('visible');
-	        } else {
-	          _footer.viz('hidden');
-	        }
-	      } else {
-	        //Release.
-	        _meBrand.fontSize('').top('').left(left);
-	        // _naviBarLI
-	        //       .every((element)=> {
-	        //         element
-	        //           .fontSize('')
-	        //         });
-	        _naviBar.top(top + 'px');
-	        _naviBarLI.every(function (element) {
-	          element.fontSize('40px');
-	        });
-	        _header.bgColor('transparent').border('none');
-	        //
-	        if (flags.ME_HEAD_) {
-	          if (_meHead.display() === 'none') {
-	            _meHead.display('block');
-	          }
-	        }
-	      }
-	    }
-	  }
-
-	  //---Cube Animation Function============================>>>
-	  function animate() {
-	    //The Renderers Call to Render..
-	    css3DRenderer.render(scene, camera);
-	    //Make the cube spin..
-	    if (flags.SPIN_SWITCH_) {
-	      var x = camera.position.x,
-	          z = camera.position.z;
-	      camera.position.x = x * Math.cos(0.007) + z * Math.sin(0.007);
-	      camera.position.z = z * Math.cos(0.007) - x * Math.sin(0.007);
-	      camera.lookAt(scene.position);
-	    }
-	    //Update tween.
-	    TWEEN.update();
-	    //Animation Loop Function
-	    requestAnimationFrame(animate);
-	  }
-
-	  //---DOM Ready Function=================================>>>
-	  go(function () {
-	    //Set projects pane to parameters appropriate for firefox
-	    if (browser.firefox) {
-	      (function () {
-	        var elem26 = _$('#aboutMe') ? dom('#aboutMe') : make('#aboutMe').put("body");
-	        return elem26;
-	      })().top('-10px');
-	      (function () {
-	        var elem27 = _$('#aboutMeContainer') ? dom('#aboutMeContainer') : make('#aboutMeContainer').put("body");
-	        return elem27;
-	      })().top('-35px');
-	    }
-	    if (window.innerWidth > 1280) {
-	      //Make sure map is centered by removing img-responsive class.
-	      (function () {
-	        var elem28 = _$('#map-image') ? dom('#map-image') : make('#map-image').put("body");
-	        return elem28;
-	      })().class('img-responsive', '-');
-	    }
-	    //If device is mobile, kill cubeFolio and show thumbNail portfolio..
-	    if (window.innerWidth < 1100) {
-	      //Kill cubeFolio..
-	      (function () {
-	        var elem29 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
-	        return elem29;
-	      })().display('none');
-	      //Show thumbFolio
-	      (function () {
-	        var elem30 = _$('#thumbFolio') ? dom('#thumbFolio') : make('#thumbFolio').put("body");
-	        return elem30;
-	      })().display('block');
-	    } else {
-	      //Show cubeFolio..
-	      (function () {
-	        var elem31 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
-	        return elem31;
-	      })().display('block');
-	      //Kill thumbFolio
-	      (function () {
-	        var elem32 = _$('#thumbFolio') ? dom('#thumbFolio') : make('#thumbFolio').put("body");
-	        return elem32;
-	      })().display('none');
-	    }
-	    if (window.innerWidth < 730 && window.innerHeight > window.innerWidth) {
-	      (function () {
-	        var elem33 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
-	        return elem33;
-	      })().position('relative').display('inline').fontSize('40px').top('4px').left('0');
-	      (function () {
-	        var elem34 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
-	        return elem34;
-	      })().class('naviBar', '-').class('naviBar_Mobile', '+');
-	      //
-	      (function () {
-	        var elem35 = _$('#me-head') ? dom('#me-head') : make('#me-head').put("body");
-	        return elem35;
-	      })().display('none');
-	    } else {
-	      flags.ME_HEAD_ = true;
-	    }
-	    //Reload window if orientation changes, to avoid 'scrambling' of header.
-	    on('orientationchange', window, function () {
-	      window.location.reload();
-	    });
-	    try {
-	      if (!window.frameElement) {
-	        //Activate scroll-handling.
-	        responsiveScrollEventHandling();
-	        //Set up three.js scene.
-	        //Call Cube Assembly Function..
-	        assembleCubeFolio();
-	        //Initiate cube hover and click events/behaviour.
-	        cubeFolioController();
-	        //initiate render loop.
-	        animate();
-	      }
-	    } catch (e) {
-	      log(e, 'red');
-	    }
+	//---DOM Ready Function=================================>>>
+	go(function () {
+	  log('offsets', 'red');
+	  (function () {
+	    var elem0 = _$('.snap') ? dom('.snap') : make('.snap').put("body");
+	    return elem0;
+	  })().every(function (element) {
+	    log(element.fromTop(), 'green');
 	  });
-	  //Run IIFE..
-	}();
+	  //Set projects pane to parameters appropriate for firefox
+	  if (browser.firefox) {
+	    (function () {
+	      var elem1 = _$('#aboutMe') ? dom('#aboutMe') : make('#aboutMe').put("body");
+	      return elem1;
+	    })().top('-10px');
+	    (function () {
+	      var elem2 = _$('#aboutMeContainer') ? dom('#aboutMeContainer') : make('#aboutMeContainer').put("body");
+	      return elem2;
+	    })().top('-35px');
+	  }
+	  if (window.innerWidth > 1280) {
+	    //Make sure map is centered by removing img-responsive class.
+	    (function () {
+	      var elem3 = _$('#map-image') ? dom('#map-image') : make('#map-image').put("body");
+	      return elem3;
+	    })().class('img-responsive', '-');
+	  }
+	  //If device is mobile, kill cubeFolio and show thumbNail portfolio..
+	  if (window.innerWidth < 10100) {
+	    //Kill cubeFolio..
+	    x(el('#cubeFolio'));
+	    //Show thumbFolio
+	    (function () {
+	      var elem4 = _$('#thumbFolio') ? dom('#thumbFolio') : make('#thumbFolio').put("body");
+	      return elem4;
+	    })().display('block');
+	  } else {
+	    //Show cubeFolio..
+	    (function () {
+	      var elem5 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
+	      return elem5;
+	    })().display('block');
+	    //Kill thumbFolio
+	    x(el('#thumbFolio'));
+	  }
+	  if (window.innerWidth < 730 && window.innerHeight > window.innerWidth) {
+	    (function () {
+	      var elem6 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
+	      return elem6;
+	    })().position('relative').display('inline').fontSize('40px').top('4px').left('0');
+	    (function () {
+	      var elem7 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
+	      return elem7;
+	    })().class('naviBar', '-').class('naviBar_Mobile', '+');
+	    //
+	    (function () {
+	      var elem8 = _$('#me-head') ? dom('#me-head') : make('#me-head').put("body");
+	      return elem8;
+	    })().display('none');
+	  } else {
+	    flags.ME_HEAD_ = true;
+	  }
+	  //Reload window if orientation changes, to avoid 'scrambling' of header.
+	  on('orientationchange', window, function () {
+	    window.location.reload();
+	  });
+
+	  if (!window.frameElement) {
+	    //Activate scroll-handling.
+	    scrollController();
+	    //Set up three.js scene.
+	    //Call Cube Assembly Function..
+	    // cubeFolio.assembleCube();
+	    // //Initiate cube hover and click events/behaviour.
+	    cubeFolio.controller();
+	    // //initiate render loop.
+	    // cubeFolio.animate();
+	  }
+	});
 
 	//===TO DO===============================================================>>>
 
@@ -4616,6 +3836,936 @@
 
 /***/ },
 /* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use_loosey_goosey";
+
+	exports.__esModule = true;
+	exports.scrollController = scrollController;
+
+	/*
+	scrollController.js
+
+	This file controls  all of the scroll-based positioning/layout effects,
+	such as scroll-snapping.
+
+	Author: Eric James Foster
+	*/
+
+	//import elementsJS, elementsJS style..
+
+	///-------Begin Module Imports---------///
+	var _$ = __webpack_require__(1)._$;
+	var dom = __webpack_require__(1).dom;
+	var make = __webpack_require__(1).make;
+	var element = __webpack_require__(1).element;
+	///|------------------------------------|//
+
+	var elementsJS = __webpack_require__(1);
+	var scroll = elementsJS.scroll;
+
+	///End Module requires///
+
+	//Created closure for organization of Scroll event-handling functions.
+	function scrollController() {
+	  //cache elements..
+	  var _body = function () {
+	    var elem0 = _$("body") ? dom("body") : make(".body1", "body").put("body");
+	    return elem0;
+	  }(),
+	      _html = function () {
+	    var elem1 = _$("html") ? dom("html") : make(".html1", "html").put("body");
+	    return elem1;
+	  }(),
+	      _meBrand = function () {
+	    var elem2 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
+	    return elem2;
+	  }(),
+	      _naviBarLI = dom('#naviBar li a'),
+	      _naviBar = function () {
+	    var elem3 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
+	    return elem3;
+	  }(),
+	      _header = function () {
+	    var elem4 = _$('#navbar') ? dom('#navbar') : make('#navbar').put("body");
+	    return elem4;
+	  }(),
+	      _meHead = function () {
+	    var elem5 = _$('#me-head') ? dom('#me-head') : make('#me-head').put("body");
+	    return elem5;
+	  }(),
+	      _footer = function () {
+	    var elem6 = _$('#footer') ? dom('#footer') : make('#footer').put("body");
+	    return elem6;
+	  }();
+
+	  var timeOutID = null,
+	      snapPoints = [];
+
+	  //Get snapPoints..
+	  (function () {
+	    var elem7 = _$('.snap') ? dom('.snap') : make('.snap').put("body");
+	    return elem7;
+	  })().every(function (element) {
+	    snapPoints.push(element.fromTop());
+	  });
+
+	  // log('offsets2');
+	  // log(snapPoints);
+	  onScroll();
+
+	  //--ericfoster.io Scroll events=====================================>>>
+	  function onScroll() {
+	    //affix naviBar to top upon scroll.
+	    scroll(window, function (e) {
+	      //This switch statement is for accomodating multiple screen sizes/configs. (Responsive Design).
+	      switch (99 === 9 * 9 + 18) {
+	        case window.innerWidth > 1000:
+	          headerFooterAnimation(600, 2120, 42, 36);
+
+	          break;
+	        case window.innerWidth > 900:
+	          headerFooterAnimation(600, 2060, 42, 36);
+	          break;
+	        case window.innerWidth > 730:
+	          if (window.innerHeight > 730) {
+	            //Portrait
+	            headerFooterAnimation(500, 1960, 42, 36, 0);
+	          } else {
+	            //Landscape
+	            headerFooterAnimation(370, 1560, 42, 36, 0, '');
+	          }
+	          break;
+	        case window.innerWidth > 700:
+	          if (window.innerHeight > 700) {
+	            headerFooterAnimation(1000, 2060, 42, 36);
+	          } else {
+	            headerFooterAnimation(380, 1600, 42, 36);
+	          }
+	          break;
+	        case window.innerWidth > 600:
+	          if (window.innerHeight > 600) {
+	            footerAnimation_Mobile(2000);
+	          } else {
+	            headerFooterAnimation(380, 1450, 42, 36, 0, '');
+	          }
+	          break;
+	        case window.innerWidth > 500:
+	          if (window.innerHeight > 500) {
+	            footerAnimation_Mobile(2000);
+	          } else {
+	            headerFooterAnimation(310, 1330, 32, 32, 0, '');
+	          }
+	          break;
+	        case window.innerWidth > 400:
+	          if (window.innerHeight > 400) {
+	            footerAnimation_Mobile(2275);
+	          } else {
+	            headerFooterAnimation(300, 1400, 26, 29, 0, '');
+	            //Make a couple tweaks..
+	            (function () {
+	              var elem8 = _$('#header') ? dom('#header') : make('#header').put("body");
+	              return elem8;
+	            })().height('45px');
+	            (function () {
+	              var elem9 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
+	              return elem9;
+	            })().right('5px');
+	          }
+	          break;
+	        case window.innerWidth > 300:
+	          if (window.innerHeight > 300) {
+	            if (window.innerHeight > 600) {
+	              footerAnimation_Mobile(1600);
+	            } else if (window.innerHeight > 500) {
+	              footerAnimation_Mobile(1900);
+	            } else {
+	              footerAnimation_Mobile(1700);
+	            }
+	          } else {
+	            headerFooterAnimation(300, 1400, 26, 29);
+	            //A couple tweaks..
+	            (function () {
+	              var elem10 = _$('#header') ? dom('#header') : make('#header').put("body");
+	              return elem10;
+	            })().height('45px');
+	            (function () {
+	              var elem11 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
+	              return elem11;
+	            })().right('5px');
+	          }
+	          break;
+	        case window.innerWidth > 200:
+	          break;
+	        default:
+	          break;
+	      }
+	      //Check for existence of running setTimeout. If one exists, kill it, and create a new one.
+	      //The scrollSnapper() function will execute once the timer runs out (scrolling stops for 200 ms)..
+	      if (timeOutID) {
+	        //kill setTimeout..
+	        clearTimeout(timeOutID);
+	      }
+	      //Set new setTimeout()..
+	      timeOutID = setTimeout(scrollSnapper, 50, snapPoints);
+	    });
+	  }
+
+	  //This function will create an intuitive scrolling experience, allowing the user to scroll directly to different sections.
+	  function scrollSnapper(destinations) {
+	    //Adjust the snapping range for different screen heights..
+	    var snapRange = window.innerHeight > 999 ? 300 : window.innerHeight > 800 ? 200 : window.innerHeight > 500 ? 150 : window.innerHeight > 200 ? 100 : 90;
+	    //Determine snapping locale, if any,  and call snap function..
+	    switch (true) {
+	      case Math.abs(destinations[0] - window.scrollY) < snapRange:
+	        //Call snap function..
+	        snap(destinations[0]);
+	        break;
+
+	      case Math.abs(destinations[1] - window.scrollY) < snapRange:
+	        //
+	        snap(destinations[1]);
+	        break;
+
+	      case Math.abs(destinations[2] - window.scrollY) < snapRange:
+	        //
+	        snap(destinations[2]);
+	        break;
+
+	      case Math.abs(destinations[3] - window.scrollY) < snapRange:
+	        //
+	        snap(destinations[3]);
+	        break;
+
+	      default:
+	        //Scrolling stopped between (outside of) snapping ranges..
+	        break;
+	    }
+	    //Snapping function..
+	    function snap(destination) {
+	      //If scroll point is within 3 pixels, snap to destination, otherwise animate to destination..
+	      if (Math.abs(destination - window.scrollY) < 3) {
+	        scrollTo(0, destination);
+	      } else {
+	        scrollTo(0, window.scrollY + (destination - window.scrollY) / 2);
+	        setTimeout(snap, 20, destination);
+	      }
+	    }
+	  }
+
+	  //This function adusts header and footer animation at lower resolutions in portrait mode..
+	  function footerAnimation_Mobile(offSet2) {
+	    //The following code exectutes if the page is scrolled beyond the # of px's below. This is the footer animation.
+	    if (_body.scrolled() > offSet2 || _html.scrolled() > offSet2) {
+	      _footer.viz('visible');
+	    } else {
+	      _footer.viz('hidden');
+	    }
+	  }
+
+	  //This function adjusts header footer animation..
+	  function headerFooterAnimation(offSet1, offSet2, fontSize1, fontSize2) {
+	    var top = arguments.length <= 4 || arguments[4] === undefined ? 25 : arguments[4];
+	    var left = arguments.length <= 5 || arguments[5] === undefined ? '175px' : arguments[5];
+
+	    //The following code exectutes if the page is scrolled beyond the # of px's below. This is the header animation.
+	    if (_body.scrolled() > offSet1 || _html.scrolled() > offSet1 - 20) {
+	      _meBrand.fontSize(String(fontSize1) + 'px').textShadow('0 0 0.2em #5b85d1, 0 0 0.2em #5b85d1, 0 0 0.2em #5b85d1, 0 0 0.2em #5b85d1, 0 0 0.2em #5b85d1, 0 0 0.2em #5b85d1, 0 0 0.2em #5b85d1, 0 0 0.2em #5b85d1').top('-8px').left('12px');
+
+	      _naviBar.top('0');
+	      _naviBarLI.every(function (element) {
+	        element.fontSize('32px');
+	      });
+	      _header.bgColor('#191a1a').opacity('.9').border('');
+
+	      if (_meHead.display() !== 'none') {
+	        _meHead.display('none');
+	      }
+
+	      if (_body.scrolled() > offSet2 || _html.scrolled() > offSet2) {
+	        _footer.viz('visible');
+	      } else {
+	        _footer.viz('hidden');
+	      }
+	    } else {
+	      //Release.
+	      _meBrand.fontSize('').textShadow('0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927').top('').left(left);
+
+	      _naviBar.top(top + 'px');
+	      _naviBarLI.every(function (element) {
+	        element.fontSize('40px');
+	      });
+	      _header.bgColor('transparent').border('none');
+	      //
+	      if (flags.ME_HEAD_) {
+	        if (_meHead.display() === 'none') {
+	          _meHead.display('block');
+	        }
+	      }
+	    }
+	  }
+	}
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use_loosey_goosey";
+
+	exports.__esModule = true;
+
+	/*
+	cubeFolio.js
+
+	This file's code builds and controls my site's
+	Portfolio Cube.
+
+	Author: Eric James Foster
+	*/
+
+	///-------Begin Module Imports---------///
+	var _$ = __webpack_require__(1)._$;
+	var dom = __webpack_require__(1).dom;
+	var make = __webpack_require__(1).make;
+	var element = __webpack_require__(1).element;
+	///|------------------------------------|//
+
+	var elementsJS = __webpack_require__(1);
+	var log = elementsJS.log;
+	var el = elementsJS.el;
+	var make = elementsJS.make;
+	var inspect = elementsJS.inspect;
+	var mouse = elementsJS.mouse;
+	var click = elementsJS.click;
+	var once = elementsJS.once;
+	var on = elementsJS.on;
+	var off = elementsJS.off;
+	var hasAncestor = elementsJS.hasAncestor;
+
+	var lodash = __webpack_require__(11);
+	var zipObject = lodash.zipObject;
+
+	var THREE = __webpack_require__(13);
+
+	var TWEEN = __webpack_require__(14);
+
+	var browser = __webpack_require__(15);
+
+	///End Module requires///
+
+	///-------Begin Module Imports---------///
+	var _$ = __webpack_require__(1)._$;
+	var dom = __webpack_require__(1).dom;
+	var make = __webpack_require__(1).make;
+	var element = __webpack_require__(1).element;
+	///|------------------------------------|//
+
+	var elementsJS = __webpack_require__(1);
+	var log = elementsJS.log;
+	var el = elementsJS.el;
+	var make = elementsJS.make;
+	var inspect = elementsJS.inspect;
+	var mouse = elementsJS.mouse;
+	var click = elementsJS.click;
+	var once = elementsJS.once;
+	var on = elementsJS.on;
+	var off = elementsJS.off;
+	var hasAncestor = elementsJS.hasAncestor;
+
+	var lodash = __webpack_require__(11);
+	var zipObject = lodash.zipObject;
+
+	var THREE = __webpack_require__(13);
+
+	var TWEEN = __webpack_require__(14);
+
+	var browser = __webpack_require__(15);
+
+	__webpack_require__(16);
+
+	///End Module requires///
+
+	//Application Data..
+	var APPLICATION_DATA = {};
+	APPLICATION_DATA.FLAGS_ = {};
+	APPLICATION_DATA.PROJECT_URLS = {};
+	APPLICATION_DATA.REPO_URLS = {};
+	//Boolean flag that enables code that spins the portfolio cube.
+	APPLICATION_DATA.FLAGS_.SPIN_SWITCH_ = true;
+	//Flag that allows code to know when it is being run for the first time.
+	APPLICATION_DATA.FLAGS_.FOCUS_ = false;
+	//Flag that tells whether or not the 'show' class has been assigned yet. (project-info pane)
+	APPLICATION_DATA.FLAGS_.SHOW_ = false;
+	//Flag that tells whether or not the 'show2' class has been assigned yet. (browser-icon button)
+	APPLICATION_DATA.FLAGS_.SHOW2_ = false;
+	//Flag that tells whether or not the 'show3' class has been assigned yet. (visit-page text)
+	APPLICATION_DATA.FLAGS_.SHOW3_ = false;
+	//Flag that trips the tweenTwo snap-back animation.
+	APPLICATION_DATA.FLAGS_.TWEENTWO_ = false;
+	//This flag is set to false when the project-info pane is off-screen, and set back to true when it returns.
+	APPLICATION_DATA.FLAGS_.PROJ_PANE_ = true;
+	//This flag is set to true when a project is clicked, and not set back until the closeUp scene is exited.
+	APPLICATION_DATA.FLAGS_.FIRST_CLICK_ = false;
+	//global boolean flag that essentially turns off some event handling code  but continues to allow other code to run.
+	APPLICATION_DATA.FLAGS_.TWEEN_ = true;
+	APPLICATION_DATA.FLAGS_.HEAD_TWEEN_ = true;
+	//This flag is set to true when the header is fixed to the top, and set back to false when it is released.
+	APPLICATION_DATA.FLAGS_.ME_HEAD_ = false;
+	//This flag is set to true when the caption is on top of the carousel-image and false otherwise.
+	APPLICATION_DATA.FLAGS_.FLIPPER_ = true;
+
+	//Project URLs..
+	APPLICATION_DATA.PROJECT_URLS['_1'] = 'http://elementsjs.io';
+	APPLICATION_DATA.PROJECT_URLS['_2'] = 'http://elementsjs.io/#interpreter-install';
+	APPLICATION_DATA.PROJECT_URLS['_3'] = 'https://www.npmjs.com/package/gulp-elementsjs-interpreter';
+	APPLICATION_DATA.PROJECT_URLS['_4'] = 'http://showtrippers.com';
+	APPLICATION_DATA.PROJECT_URLS['_5'] = 'https://pypi.python.org/pypi/DjamBase';
+	APPLICATION_DATA.PROJECT_URLS['_6'] = 'http://ejames9.github.io';
+
+	//Repository URLs..
+	APPLICATION_DATA.REPO_URLS['_1'] = 'https://github.com/ejames9/elementsJS';
+	APPLICATION_DATA.REPO_URLS['_2'] = 'https://github.com/ejames9/elementsJS/blob/gh-pages/js/sideNavControl.js';
+	APPLICATION_DATA.REPO_URLS['_3'] = 'https://github.com/ejames9/gulp-elementsJS-interpreter';
+	APPLICATION_DATA.REPO_URLS['_4'] = 'https://github.com/ejames9/GoOnTour';
+	APPLICATION_DATA.REPO_URLS['_5'] = 'https://github.com/ejames9/DjamBase';
+	APPLICATION_DATA.REPO_URLS['_6'] = 'https://github.com/ejames9/ejames9.github.io/blob/master/src/js/ericFosterIO.js';
+
+	//Compress flag names.
+	window.flags = APPLICATION_DATA.FLAGS_;
+
+	//--The IIFE that runs my portfolio site.
+	//--Created a closure for organization, and fewer globals.============================>>>
+	var cubeFolio = exports.cubeFolio = function () {
+	  //Compress URL names..
+	  var repos = APPLICATION_DATA.REPO_URLS,
+	      projs = APPLICATION_DATA.PROJECT_URLS;
+
+	  //Camera face view coordinates for tween.js.
+	  var cameraPositions = [new THREE.Vector3(2200, -90, 0), new THREE.Vector3(-2200, -90, 0), new THREE.Vector3(0, 2000, 90), new THREE.Vector3(0, -2000, 90), new THREE.Vector3(0, -90, 2200), new THREE.Vector3(0, -90, -2200)];
+
+	  //Camera close-up face view coordinates for tween.js.
+	  var closeUps = [new THREE.Vector3(1600, 0, 0), new THREE.Vector3(-1600, 0, 0), new THREE.Vector3(0, 1700, 90), new THREE.Vector3(0, -1700, 90), new THREE.Vector3(0, 0, 1600), new THREE.Vector3(0, 0, -1600)];
+
+	  //globals..
+	  var tween = void 0,
+	      scene = void 0,
+	      camera = void 0,
+	      tweenTwo = void 0,
+	      css3DRenderer = void 0,
+	      camCoordinates = void 0,
+	      sides = [],
+	      URLs = [];
+
+	  //--Initiate three.js scene and assemble portfolio cube. Closure is mainly for organization.=============>>>
+	  function assembleCubeFolio() {
+
+	    //Create three.js scene..
+	    initProjectsScene();
+	    //Assemble CubeFolio..
+	    assembleCube();
+
+	    //Set scene size, camera attributes and position, create container element, create renderer and attach to element.
+	    function initProjectsScene() {
+	      // set scene size
+	      var width = window.innerWidth,
+	          height = window.innerHeight;
+	      // set camera attributes
+	      var fov = 45,
+	          aspect = width / height,
+	          near = 0.1,
+	          far = 1000;
+	      // get the container element
+	      var _container = el('#cubeFolio');
+
+	      //css3DRenderer.
+	      css3DRenderer = new THREE.CSS3DRenderer();
+	      css3DRenderer.setSize(width, height);
+
+	      //Setting up the camera.
+	      camera = new THREE.PerspectiveCamera(fov, width / height, near, far);
+	      scene = new THREE.Scene();
+	      // add the camera to the scene
+	      scene.add(camera);
+	      // the camera starts at 0,0,0, so pull it back
+	      camera.position.z = 2200;
+	      camera.position.x = 0;
+	      camera.position.y = -120;
+	      camera.lookAt(scene.position);
+
+	      // attach the render-supplied DOM element
+	      _container.appendChild(css3DRenderer.domElement);
+	    }
+
+	    //Assemble Portfolio Cube.....
+	    function assembleCube() {
+	      //iframe template.
+	      var iframe = '<iframe class="div" width="1280" height="740" frameborder="0"' + '2style="border:0" src="{URL}"></iframe>',
+	          boxFrame = '<iframe class="div" width="1280" height="1280" frameborder="0"' + 'style="border:0" src="{URL}"></iframe>',
+	          divWrap = '<div><img src="{SRC}" width="1280" height="740"></div>';
+
+	      //URL's....
+	      var eJSURL = 'http://elementsjs.io',
+	          eJSsideNavURL = 'http://elementsjs.io/#interpreter-install',
+	          efosterIOURL = 'http://ejames9.github.io',
+	          showTURL = 'http://showtrippers.com',
+	          dJamSRC = './images/DjamBase.png',
+	          gulpeJSIntSRC = './images/gulpEJSInterpreter.png',
+	          efosterIOSRC = './images/ericfosterIO.png',
+	          cubeSidesHTML = [];
+
+	      //Store urls in array.
+	      URLs.push(dJamSRC);
+	      URLs.push(gulpeJSIntSRC);
+	      URLs.push(eJSsideNavURL);
+	      URLs.push(efosterIOURL);
+	      URLs.push(showTURL);
+	      URLs.push(eJSURL);
+
+	      //Combine urls with iframe template in new array.
+	      URLs.forEach(function (url, i) {
+	        if (/https?\:\/\//.test(url)) {
+	          if (i === 2 || i === 3) {
+	            cubeSidesHTML.push(boxFrame.replace('{URL}', url));
+	          } else {
+	            cubeSidesHTML.push(iframe.replace('{URL}', url));
+	          }
+	        } else {
+	          cubeSidesHTML.push(divWrap.replace('{SRC}', url));
+	        }
+	      });
+
+	      //Create the cube.
+	      createSides(cubeSidesHTML, new THREE.CubeGeometry(1280, 740, 1280));
+	      //Map URLs to 3D coordinates, for tweening purposes.
+	      camCoordinates = zipObject(URLs, cameraPositions);
+	      closeUps = zipObject(URLs, closeUps);
+	    }
+
+	    //Create the sides of the specified geometry with CSS3DObjects created using the given HTML strings, and shift them into position.
+	    function createSides(strings, geometry) {
+	      var tick = -1;
+
+	      // iterate over all the sides
+	      for (var i = 0; i < geometry.faces.length; i += 2) {
+	        tick++;
+	        // create a new object based on the supplied HTML String
+	        var side = createCSS3DObject(strings[tick]);
+	        // get this face and the next which both make the cube
+	        var face = geometry.faces[i],
+	            faceNext = geometry.faces[i + 1];
+	        // reposition the sides using the center of the faces
+	        var centroid = new THREE.Vector3();
+	        centroid.copy(geometry.vertices[face.a]).add(geometry.vertices[face.b]).add(geometry.vertices[face.c]).add(geometry.vertices[faceNext.a]).add(geometry.vertices[faceNext.b]).add(geometry.vertices[faceNext.c]).divideScalar(6);
+	        side.position.x = centroid.x;
+	        side.position.y = centroid.y;
+	        side.position.z = centroid.z;
+
+	        sides.push(side.position);
+	        // Calculate and apply the rotation for this side
+	        var up = new THREE.Vector3(0, 0, 1),
+	            normal = geometry.faces[i].normal;
+	        // We calculate the axis on which to rotate by
+	        // selecting the cross of the vectors
+	        var axis = new THREE.Vector3();
+	        axis.crossVectors(up, normal);
+	        var a = axis.crossVectors(up, normal);
+	        // based on the axis, in relation to our normal vector
+	        // we can calculate the angle.
+	        var angle = Math.atan2(axis.length(), up.dot(normal));
+	        axis.normalize();
+	        // now we can use matrix function to rotate the object so
+	        // it is aligned with the normal from the face
+	        var matrix4 = new THREE.Matrix4();
+	        matrix4.makeRotationAxis(axis, angle);
+	        // apply the rotation
+	        side.rotation.setFromRotationMatrix(matrix4);
+	        // add to the scene
+	        scene.add(side);
+	      }
+	    }
+
+	    //Simple function to create CSS3DObjects from the given HTML string.
+	    function createCSS3DObject(s) {
+	      //Create outerdiv and set inner HTML from string (s)..
+	      var div = document.createElement('div');
+	      div.innerHTML = s;
+
+	      //Apply any CSS Styling here.
+	      div.className = 'div';
+	      div.style.opacity = '0.8';
+
+	      //Create the CSS3DObject and return it.
+	      var object = new THREE.CSS3DObject(div);
+	      return object;
+	    }
+	  }
+
+	  //Created a closure here, mainly for organization, but also for the ability to share variables between functions=======>>>
+	  function cubeFolioController() {
+	    var eTarget = null;
+
+	    //Initiate onHover handler...
+	    onHover();
+	    //Initiate onClick handler...
+	    onClick();
+
+	    //CubeFolio, onHover function.
+	    function onHover() {
+	      mouse('over', el('html'), hoverCallBack);
+	    }
+
+	    //Callback for onHover()..
+	    function hoverCallBack(e) {
+	      //If a project hasn't been clicked (TWEEN_), and the previous hovered project was _2 or _6 (TWEENTWO_)....
+	      if (flags.TWEEN_ && flags.TWEENTWO_) {
+	        //and..If the next mouseover element is not a project-list-item......
+	        if (!hasAncestor(e.target, el('#rightProjList')) && !hasAncestor(e.target, el('#leftProjList'))) {
+	          //Make sure camera is properly oriented. (Run the snap-back tween)
+	          var target = new THREE.Vector3(0, -90, -2200);
+	          tweenTwo = new TWEEN.Tween(camera.position);
+	          tweenTwo.to(target, 3000).easing(TWEEN.Easing.Elastic.Out).onUpdate(function () {
+	            camera.lookAt(scene.position);
+	          }).start();
+	          //Reset tTFlag..
+	          flags.TWEENTWO_ = false;
+	        } else {
+	          //Reset tTFlag..
+	          flags.TWEENTWO_ = false;
+	        }
+	      }
+	      if (e.target.className === 'projects-list-item') {
+	        if (e.target.id === '_2' || e.target.id === '_6') {
+	          //Stop tweenTwo
+	          flags.TWEENTWO_ = true;
+	        }
+	        if (flags.TWEEN_) {
+	          //Kill Spin.
+	          flags.SPIN_SWITCH_ = false;
+	          // //Create tween based on the camera's position.
+	          tween = new TWEEN.Tween(camera.position);
+	          //Configure animation.
+	          tween.to(camCoordinates[element(e.target).attrib('data-uri')], 1000).easing(TWEEN.Easing.Cubic.In).onUpdate(function () {
+	            camera.position.x = this.x;
+	            camera.position.y = this.y;
+	            camera.position.z = this.z;
+	            camera.lookAt(scene.position);
+	          }).start();
+	        }
+	        eTarget = e.target;
+	        //Set mouseout behaviour.
+	        on('mouseout', e.target, mouseoutCallBack);
+	        //Add onHover CSS.
+	        element(e.target).class('hover', '+');
+	      }
+	    }
+
+	    //Callback for once('mouseout')..
+	    function mouseoutCallBack() {
+	      if (flags.TWEEN_) {
+	        //Cancel handler
+	        off('mouseout', eTarget, mouseoutCallBack);
+	        //Stop Tween.
+	        // tween.stop()
+	        //Restart spin.
+	        flags.SPIN_SWITCH_ = true;
+	      }
+	      //Unhighlight target.
+	      element(eTarget).class('hover', '-');
+	    }
+
+	    //CubeFolio onClick function.
+	    function onClick() {
+	      var projectRE = /projects\-list\-item/;
+
+	      click(el('html'), function (e) {
+	        //Z-index swapping button for carousel on low ratio devices..
+	        if (e.target.id === 'swap' || hasAncestor(element(e.target).el, el('#swap'))) {
+	          if (flags.FLIPPER_) {
+	            //Pull image on top of caption..
+	            (function () {
+	              var elem0 = _$('.carousel-image') ? dom('.carousel-image') : make('.carousel-image').put("body");
+	              return elem0;
+	            })().every(function (element) {
+	              element.position('relative').zIndex('13');
+	            });
+	            //Reset flag
+	            flags.FLIPPER_ = false;
+	          } else {
+	            //Pull caption on top of image..
+	            (function () {
+	              var elem1 = _$('.carousel-image') ? dom('.carousel-image') : make('.carousel-image').put("body");
+	              return elem1;
+	            })().every(function (element) {
+	              element.position('static').zIndex('');
+	            });
+	            //Reset flag
+	            flags.FLIPPER_ = true;
+	          }
+	          //If one of the links in the main navigation header are clicked..
+	        } else if (e.target.className === 'head-nav') {
+	            //Find the currently 'active' link, and remove the active class..
+	            dom('[class~=active]').class('active', '-');
+	            //Add 'active' class to clicked link..
+	            element(e.target).ma().class('active', '+');
+	          } else if (e.target.id === 'chevy') {
+	            //Tween project-info out of the way..
+	            var _tween = new TWEEN.Tween({ top: 0, left: 0 });
+	            _tween.to({ left: 920 }, 1300).easing(TWEEN.Easing.Cubic.In).onUpdate(function () {
+	              el('#project-info').style.transform = 'translate(' + this.left + 'px, ' + this.top + 'px)';
+	            }).start();
+	            //Set flag that signifies that the project-info pane is off-screen..
+	            flags.PROJ_PANE_ = false;
+	            //Reveal left chevron button.
+	            (function () {
+	              var elem2 = _$('#chevyL') ? dom('#chevyL') : make('#chevyL').put("body");
+	              return elem2;
+	            })().class('hide', '-');
+	            //Hide right chevron.
+	            (function () {
+	              var elem3 = _$('#chevy') ? dom('#chevy') : make('#chevy').put("body");
+	              return elem3;
+	            })().class('hide', '+');
+	          } else if (e.target.id === 'chevyL') {
+	            //Tween project-info back into view..
+	            projectInfoTweenBack();
+	          } else if (e.target.id === 'x') {
+	            //Reset the FIRST_CLICK_..
+	            flags.FIRST_CLICK_ = true;
+	            //Return to spinning cube..
+	            backToSpinningCube();
+	          } else {
+	            //Highlight focused list item.
+	            if (flags.FOCUS_) {
+	              dom('[name=focus]').attrib('name', '').color('').fontWeight('').textShadow('').zIndex('');
+	            }
+	            flags.FOCUS_ = true;
+	            //Hone in on click events happening on our target elements.
+	            if (projectRE.test(e.target.className)) {
+	              //Give target focus.
+	              element(e.target).attrib('name', 'focus').color('#27130a').fontWeight('900').textShadow('0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927').zIndex('1000');
+	              //Kill spin.
+	              flags.SPIN_SWITCH_ = false;
+	              //New tween/target for close-up animation.
+	              var tween3 = new TWEEN.Tween(camera.position),
+	                  target = closeUps[element(e.target).attrib('data-uri')];
+	              //tweenify...
+	              tween3.to(target, 1500).easing(TWEEN.Easing.Linear.None).onUpdate(function () {
+	                camera.lookAt(scene.position);
+	              }).start();
+	              //kill mouseover/out behaviour..
+	              flags.TWEEN_ = false;
+	              // off('mouseover', el('html'), hoverCallBack);
+	              // off('mouseout', eTarget, mouseoutCallBack);
+	              //Setup the project-info pane..
+	              projectInfoPane(e.target);
+	            } else {
+	              flags.FOCUS_ = false;
+	            }
+	          }
+	      });
+	    }
+
+	    //Function containing code for the project-info pane setup/click responses..
+	    function projectInfoPane(e_target) {
+	      //If the show class has been assigned to an element, remove it..
+	      if (flags.SHOW_) {
+	        dom('[class~=show]').class('show', '-').class('hide', '+');
+	      }
+	      //Set the flag..
+	      flags.SHOW_ = true;
+	      var elString = '[name=' + e_target.id + ']';
+	      //Show Project Info, re-assign the 'show' class..
+	      (function () {
+	        var elem4 = _$('#project-info') ? dom('#project-info') : make('#project-info').put("body");
+	        return elem4;
+	      })().class('hidden', '-');
+	      dom(elString).class('hide', '-').class('show', '+');
+
+	      if (flags.SHOW2_) {
+	        dom('[class~=show2]').class('show2', '-').class('hide', '+');
+	      }
+	      (function () {
+	        var elem5 = _$('#github-link') ? dom('#github-link') : make('#github-link').put("body");
+	        return elem5;
+	      })().href(repos[e_target.id]);
+	      //determine which browser icon to show, using bowser.
+	      // log('browser');
+	      // log(browser.name);
+	      if (flags.SHOW3_) {
+	        dom('[class~=show3]').class('show3', '-').class('hide', '+');
+	      }
+	      switch (browser.name) {
+	        case 'Safari':
+	          (function () {
+	            var elem6 = _$('#safari') ? dom('#safari') : make('#safari').put("body");
+	            return elem6;
+	          })().class('hide', '-').class('show2', '+').sib('next').class('hide', '-').class('show3', '+').ma().href(projs[e_target.id]);
+	          break;
+	        case 'Chrome':
+	          (function () {
+	            var elem7 = _$('#chrome') ? dom('#chrome') : make('#chrome').put("body");
+	            return elem7;
+	          })().class('hide', '-').class('show2', '+').sib('next').class('hide', '-').class('show3', '+').ma().href(projs[e_target.id]);
+	          break;
+	        case 'Firefox':
+	          (function () {
+	            var elem8 = _$('#firefox') ? dom('#firefox') : make('#firefox').put("body");
+	            return elem8;
+	          })().class('hide', '-').class('show2', '+').sib('next').class('hide', '-').class('show3', '+').ma().href(projs[e_target.id]);
+	          break;
+	        case 'Internet Explorer':
+	          (function () {
+	            var elem9 = _$('#ie') ? dom('#ie') : make('#ie').put("body");
+	            return elem9;
+	          })().class('hide', '-').class('show2', '+').sib('next').class('hide', '-').class('show3', '+').ma().href(projs[e_target.id]);
+	          break;
+	        case 'Edge':
+	          (function () {
+	            var elem10 = _$('#ie') ? dom('#ie') : make('#ie').put("body");
+	            return elem10;
+	          })().class('hide', '-').class('show2', '+').sib('next').class('hide', '-').class('show3', '+').ma().href(projs[e_target.id]);
+	          break;
+	        default:
+	          (function () {
+	            var elem11 = _$('#www') ? dom('#www') : make('#www').put("body");
+	            return elem11;
+	          })().class('hide', '-').class('show2', '+').sib('next').class('hide', '-').class('show3', '+').ma().href(projs[e_target.id]);
+	      }
+	      //Display Project info Closing 'X' button.
+	      (function () {
+	        var elem12 = _$('#x') ? dom('#x') : make('#x').put("body");
+	        return elem12;
+	      })().class('hide', '-');
+	      //Check PROJ_PANE_ to see if project-info pane is offScreen. If so, move it back into view.
+	      if (!flags.PROJ_PANE_ && flags.FIRST_CLICK_) {
+	        //Invoke theSnitch Function..
+	        theSnitch();
+	        //reset FIRST_CLICK_ flag..
+	        flags.FIRST_CLICK_ = false;
+	      }
+	    }
+
+	    //Using a middle man (snitch) function to get a value for Function.caller;
+	    function theSnitch() {
+	      return projectInfoTweenBack();
+	    }
+
+	    //Return from closeUps to original camera coordinates and spinning cube.
+	    function backToSpinningCube() {
+	      //Return to spinning cube..
+	      //Check the orientation of the cube, to determine which "tweenBack" to run.
+	      //If the z coordinate = 90, we need to turn the cube as well is zoom out. (else)=>..
+	      if (camera.position.z === 90) {
+	        //Make sure camera is properly oriented. (Run the snap-back tween)
+	        var target = new THREE.Vector3(0, -90, -2200),
+	            _tweenTwo = new TWEEN.Tween(camera.position).to(target, 2500).easing(TWEEN.Easing.Elastic.Out).onUpdate(function () {
+	          camera.lookAt(scene.position);
+	        }).start();
+
+	        //Reset tTFlag..
+	        flags.TWEENTWO_ = false;
+
+	        //..<=(if) Otherwise, do the following..
+	      } else {
+	          var currentProject = void 0,
+	              camPosition = [];
+
+	          //Convert camera coordinates to simple array.
+	          camPosition.push(camera.position.x);
+	          camPosition.push(camera.position.y);
+	          camPosition.push(camera.position.z);
+
+	          for (var uri in closeUps) {
+	            var cUpsPosition = [];
+	            //Convert closeUps coordinates to simple array.
+	            cUpsPosition.push(closeUps[uri].x);
+	            cUpsPosition.push(closeUps[uri].y);
+	            cUpsPosition.push(closeUps[uri].z);
+	            //Compare cUpsPosition to camPosition to find a match.
+	            if (String(cUpsPosition) === String(camPosition)) {
+	              currentProject = uri;
+	            }
+	          }
+	          //Tween cube back to spinning state..
+	          var _tween2 = new TWEEN.Tween(camera.position);
+	          _tween2.to(camCoordinates[currentProject], 2000).easing(TWEEN.Easing.Elastic.Out).onUpdate(function () {
+	            camera.lookAt(scene.position);
+	          }).start();
+	        }
+
+	      //Get rid of 'x' and project-info pane..
+	      (function () {
+	        var elem13 = _$('#project-info') ? dom('#project-info') : make('#project-info').put("body");
+	        return elem13;
+	      })().class('hidden', '+');
+	      (function () {
+	        var elem14 = _$('#x') ? dom('#x') : make('#x').put("body");
+	        return elem14;
+	      })().class('hide', '+');
+	      //Flip the SPIN_SWITCH_/TWEEN_ back on.
+	      flags.SPIN_SWITCH_ = true;
+	      flags.TWEEN_ = true;
+	    }
+
+	    //moves project-info pane back into original viewing position.
+	    function projectInfoTweenBack() {
+	      var tweenTime = void 0;
+
+	      if (projectInfoTweenBack.caller.name.toString() === 'theSnitch') {
+	        tweenTime = 20;
+	      } else {
+	        tweenTime = 1300;
+	      }
+	      //Tween project-info back into view..
+	      var tween = new TWEEN.Tween({ top: 0, left: 920 });
+	      tween.to({ left: 0 }, tweenTime).easing(TWEEN.Easing.Cubic.In).onUpdate(function () {
+	        el('#project-info').style.transform = 'translate(' + this.left + 'px, ' + this.top + 'px)';
+	      }).start();
+	      //Set flag that signifies the project-info pane is on-screen..
+	      flags.PROJ_PANE_ = true;
+	      //Re-hide left chevron button.
+	      (function () {
+	        var elem15 = _$('#chevyL') ? dom('#chevyL') : make('#chevyL').put("body");
+	        return elem15;
+	      })().class('hide', '+');
+	      //Show right chevron.
+	      (function () {
+	        var elem16 = _$('#chevy') ? dom('#chevy') : make('#chevy').put("body");
+	        return elem16;
+	      })().class('hide', '-');
+	    }
+	  }
+
+	  //---Cube Animation Function============================>>>
+	  function animate() {
+	    //The Renderers Call to Render..
+	    css3DRenderer.render(scene, camera);
+	    //Make the cube spin..
+	    if (flags.SPIN_SWITCH_) {
+	      var x = camera.position.x,
+	          z = camera.position.z;
+	      camera.position.x = x * Math.cos(0.007) + z * Math.sin(0.007);
+	      camera.position.z = z * Math.cos(0.007) - x * Math.sin(0.007);
+	      camera.lookAt(scene.position);
+	    }
+	    //Update tween.
+	    TWEEN.update();
+	    //Animation Loop Function
+	    requestAnimationFrame(animate);
+	  }
+
+	  //Export public functions..
+	  return {
+	    assembleCube: assembleCubeFolio,
+	    controller: cubeFolioController,
+	    animate: animate
+	  };
+
+	  //Run IIFE..
+	}();
+
+/***/ },
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/**
@@ -21023,10 +21173,10 @@
 	  }
 	}.call(this));
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)(module), (function() { return this; }())))
 
 /***/ },
-/* 10 */
+/* 12 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -21042,7 +21192,7 @@
 
 
 /***/ },
-/* 11 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;var self = self || {};// File:src/Three.js
@@ -62805,7 +62955,7 @@
 
 
 /***/ },
-/* 12 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -63701,7 +63851,7 @@
 
 
 /***/ },
-/* 13 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -64125,7 +64275,7 @@
 
 
 /***/ },
-/* 14 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -64133,7 +64283,7 @@
 	 * @author mrdoob / http://mrdoob.com/
 	 */
 
-	var THREE = __webpack_require__(11);
+	var THREE = __webpack_require__(13);
 
 
 
@@ -64375,1682 +64525,6 @@
 		};
 
 	};
-
-
-/***/ },
-/* 15 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * @author Eberhard Graether / http://egraether.com/
-	 * @author Mark Lundin 	/ http://mark-lundin.com
-	 * @author Simone Manini / http://daron1337.github.io
-	 * @author Luca Antiga 	/ http://lantiga.github.io
-	 */
-	var THREE = __webpack_require__(11);
-
-
-	THREE.TrackballControls = function ( object, domElement ) {
-
-		var _this = this;
-		var STATE = { NONE: - 1, ROTATE: 0, ZOOM: 1, PAN: 2, TOUCH_ROTATE: 3, TOUCH_ZOOM_PAN: 4 };
-
-		this.object = object;
-		this.domElement = ( domElement !== undefined ) ? domElement : document;
-
-		// API
-
-		this.enabled = true;
-
-		this.screen = { left: 0, top: 0, width: 0, height: 0 };
-
-		this.rotateSpeed = 1.0;
-		this.zoomSpeed = 1.2;
-		this.panSpeed = 0.3;
-
-		this.noRotate = false;
-		this.noZoom = false;
-		this.noPan = false;
-
-		this.staticMoving = false;
-		this.dynamicDampingFactor = 0.2;
-
-		this.minDistance = 0;
-		this.maxDistance = Infinity;
-
-		this.keys = [ 65 /*A*/, 83 /*S*/, 68 /*D*/ ];
-
-		// internals
-
-		this.target = new THREE.Vector3();
-
-		var EPS = 0.000001;
-
-		var lastPosition = new THREE.Vector3();
-
-		var _state = STATE.NONE,
-		_prevState = STATE.NONE,
-
-		_eye = new THREE.Vector3(),
-
-		_movePrev = new THREE.Vector2(),
-		_moveCurr = new THREE.Vector2(),
-
-		_lastAxis = new THREE.Vector3(),
-		_lastAngle = 0,
-
-		_zoomStart = new THREE.Vector2(),
-		_zoomEnd = new THREE.Vector2(),
-
-		_touchZoomDistanceStart = 0,
-		_touchZoomDistanceEnd = 0,
-
-		_panStart = new THREE.Vector2(),
-		_panEnd = new THREE.Vector2();
-
-		// for reset
-
-		this.target0 = this.target.clone();
-		this.position0 = this.object.position.clone();
-		this.up0 = this.object.up.clone();
-
-		// events
-
-		var changeEvent = { type: 'change' };
-		var startEvent = { type: 'start' };
-		var endEvent = { type: 'end' };
-
-
-		// methods
-
-		this.handleResize = function () {
-
-			if ( this.domElement === document ) {
-
-				this.screen.left = 0;
-				this.screen.top = 0;
-				this.screen.width = window.innerWidth;
-				this.screen.height = window.innerHeight;
-
-			} else {
-
-				var box = this.domElement.getBoundingClientRect();
-				// adjustments come from similar code in the jquery offset() function
-				var d = this.domElement.ownerDocument.documentElement;
-				this.screen.left = box.left + window.pageXOffset - d.clientLeft;
-				this.screen.top = box.top + window.pageYOffset - d.clientTop;
-				this.screen.width = box.width;
-				this.screen.height = box.height;
-
-			}
-
-		};
-
-		this.handleEvent = function ( event ) {
-
-			if ( typeof this[ event.type ] == 'function' ) {
-
-				this[ event.type ]( event );
-
-			}
-
-		};
-
-		var getMouseOnScreen = ( function () {
-
-			var vector = new THREE.Vector2();
-
-			return function getMouseOnScreen( pageX, pageY ) {
-
-				vector.set(
-					( pageX - _this.screen.left ) / _this.screen.width,
-					( pageY - _this.screen.top ) / _this.screen.height
-				);
-
-				return vector;
-
-			};
-
-		}() );
-
-		var getMouseOnCircle = ( function () {
-
-			var vector = new THREE.Vector2();
-
-			return function getMouseOnCircle( pageX, pageY ) {
-
-				vector.set(
-					( ( pageX - _this.screen.width * 0.5 - _this.screen.left ) / ( _this.screen.width * 0.5 ) ),
-					( ( _this.screen.height + 2 * ( _this.screen.top - pageY ) ) / _this.screen.width ) // screen.width intentional
-				);
-
-				return vector;
-
-			};
-
-		}() );
-
-		this.rotateCamera = ( function() {
-
-			var axis = new THREE.Vector3(),
-				quaternion = new THREE.Quaternion(),
-				eyeDirection = new THREE.Vector3(),
-				objectUpDirection = new THREE.Vector3(),
-				objectSidewaysDirection = new THREE.Vector3(),
-				moveDirection = new THREE.Vector3(),
-				angle;
-
-			return function rotateCamera() {
-
-				moveDirection.set( _moveCurr.x - _movePrev.x, _moveCurr.y - _movePrev.y, 0 );
-				angle = moveDirection.length();
-
-				if ( angle ) {
-
-					_eye.copy( _this.object.position ).sub( _this.target );
-
-					eyeDirection.copy( _eye ).normalize();
-					objectUpDirection.copy( _this.object.up ).normalize();
-					objectSidewaysDirection.crossVectors( objectUpDirection, eyeDirection ).normalize();
-
-					objectUpDirection.setLength( _moveCurr.y - _movePrev.y );
-					objectSidewaysDirection.setLength( _moveCurr.x - _movePrev.x );
-
-					moveDirection.copy( objectUpDirection.add( objectSidewaysDirection ) );
-
-					axis.crossVectors( moveDirection, _eye ).normalize();
-
-					angle *= _this.rotateSpeed;
-					quaternion.setFromAxisAngle( axis, angle );
-
-					_eye.applyQuaternion( quaternion );
-					_this.object.up.applyQuaternion( quaternion );
-
-					_lastAxis.copy( axis );
-					_lastAngle = angle;
-
-				} else if ( ! _this.staticMoving && _lastAngle ) {
-
-					_lastAngle *= Math.sqrt( 1.0 - _this.dynamicDampingFactor );
-					_eye.copy( _this.object.position ).sub( _this.target );
-					quaternion.setFromAxisAngle( _lastAxis, _lastAngle );
-					_eye.applyQuaternion( quaternion );
-					_this.object.up.applyQuaternion( quaternion );
-
-				}
-
-				_movePrev.copy( _moveCurr );
-
-			};
-
-		}() );
-
-
-		this.zoomCamera = function () {
-
-			var factor;
-
-			if ( _state === STATE.TOUCH_ZOOM_PAN ) {
-
-				factor = _touchZoomDistanceStart / _touchZoomDistanceEnd;
-				_touchZoomDistanceStart = _touchZoomDistanceEnd;
-				_eye.multiplyScalar( factor );
-
-			} else {
-
-				factor = 1.0 + ( _zoomEnd.y - _zoomStart.y ) * _this.zoomSpeed;
-
-				if ( factor !== 1.0 && factor > 0.0 ) {
-
-					_eye.multiplyScalar( factor );
-
-					if ( _this.staticMoving ) {
-
-						_zoomStart.copy( _zoomEnd );
-
-					} else {
-
-						_zoomStart.y += ( _zoomEnd.y - _zoomStart.y ) * this.dynamicDampingFactor;
-
-					}
-
-				}
-
-			}
-
-		};
-
-		this.panCamera = ( function() {
-
-			var mouseChange = new THREE.Vector2(),
-				objectUp = new THREE.Vector3(),
-				pan = new THREE.Vector3();
-
-			return function panCamera() {
-
-				mouseChange.copy( _panEnd ).sub( _panStart );
-
-				if ( mouseChange.lengthSq() ) {
-
-					mouseChange.multiplyScalar( _eye.length() * _this.panSpeed );
-
-					pan.copy( _eye ).cross( _this.object.up ).setLength( mouseChange.x );
-					pan.add( objectUp.copy( _this.object.up ).setLength( mouseChange.y ) );
-
-					_this.object.position.add( pan );
-					_this.target.add( pan );
-
-					if ( _this.staticMoving ) {
-
-						_panStart.copy( _panEnd );
-
-					} else {
-
-						_panStart.add( mouseChange.subVectors( _panEnd, _panStart ).multiplyScalar( _this.dynamicDampingFactor ) );
-
-					}
-
-				}
-
-			};
-
-		}() );
-
-		this.checkDistances = function () {
-
-			if ( ! _this.noZoom || ! _this.noPan ) {
-
-				if ( _eye.lengthSq() > _this.maxDistance * _this.maxDistance ) {
-
-					_this.object.position.addVectors( _this.target, _eye.setLength( _this.maxDistance ) );
-					_zoomStart.copy( _zoomEnd );
-
-				}
-
-				if ( _eye.lengthSq() < _this.minDistance * _this.minDistance ) {
-
-					_this.object.position.addVectors( _this.target, _eye.setLength( _this.minDistance ) );
-					_zoomStart.copy( _zoomEnd );
-
-				}
-
-			}
-
-		};
-
-		this.update = function () {
-
-			_eye.subVectors( _this.object.position, _this.target );
-
-			if ( ! _this.noRotate ) {
-
-				_this.rotateCamera();
-
-			}
-
-			if ( ! _this.noZoom ) {
-
-				_this.zoomCamera();
-
-			}
-
-			if ( ! _this.noPan ) {
-
-				_this.panCamera();
-
-			}
-
-			_this.object.position.addVectors( _this.target, _eye );
-
-			_this.checkDistances();
-
-			_this.object.lookAt( _this.target );
-
-			if ( lastPosition.distanceToSquared( _this.object.position ) > EPS ) {
-
-				_this.dispatchEvent( changeEvent );
-
-				lastPosition.copy( _this.object.position );
-
-			}
-
-		};
-
-		this.reset = function () {
-
-			_state = STATE.NONE;
-			_prevState = STATE.NONE;
-
-			_this.target.copy( _this.target0 );
-			_this.object.position.copy( _this.position0 );
-			_this.object.up.copy( _this.up0 );
-
-			_eye.subVectors( _this.object.position, _this.target );
-
-			_this.object.lookAt( _this.target );
-
-			_this.dispatchEvent( changeEvent );
-
-			lastPosition.copy( _this.object.position );
-
-		};
-
-		// listeners
-
-		function keydown( event ) {
-
-			if ( _this.enabled === false ) return;
-
-			window.removeEventListener( 'keydown', keydown );
-
-			_prevState = _state;
-
-			if ( _state !== STATE.NONE ) {
-
-				return;
-
-			} else if ( event.keyCode === _this.keys[ STATE.ROTATE ] && ! _this.noRotate ) {
-
-				_state = STATE.ROTATE;
-
-			} else if ( event.keyCode === _this.keys[ STATE.ZOOM ] && ! _this.noZoom ) {
-
-				_state = STATE.ZOOM;
-
-			} else if ( event.keyCode === _this.keys[ STATE.PAN ] && ! _this.noPan ) {
-
-				_state = STATE.PAN;
-
-			}
-
-		}
-
-		function keyup( event ) {
-
-			if ( _this.enabled === false ) return;
-
-			_state = _prevState;
-
-			window.addEventListener( 'keydown', keydown, false );
-
-		}
-
-		function mousedown( event ) {
-
-			if ( _this.enabled === false ) return;
-
-			event.preventDefault();
-			event.stopPropagation();
-
-			if ( _state === STATE.NONE ) {
-
-				_state = event.button;
-
-			}
-
-			if ( _state === STATE.ROTATE && ! _this.noRotate ) {
-
-				_moveCurr.copy( getMouseOnCircle( event.pageX, event.pageY ) );
-				_movePrev.copy( _moveCurr );
-
-			} else if ( _state === STATE.ZOOM && ! _this.noZoom ) {
-
-				_zoomStart.copy( getMouseOnScreen( event.pageX, event.pageY ) );
-				_zoomEnd.copy( _zoomStart );
-
-			} else if ( _state === STATE.PAN && ! _this.noPan ) {
-
-				_panStart.copy( getMouseOnScreen( event.pageX, event.pageY ) );
-				_panEnd.copy( _panStart );
-
-			}
-
-			document.addEventListener( 'mousemove', mousemove, false );
-			document.addEventListener( 'mouseup', mouseup, false );
-
-			_this.dispatchEvent( startEvent );
-
-		}
-
-		function mousemove( event ) {
-
-			if ( _this.enabled === false ) return;
-
-			event.preventDefault();
-			event.stopPropagation();
-
-			if ( _state === STATE.ROTATE && ! _this.noRotate ) {
-
-				_movePrev.copy( _moveCurr );
-				_moveCurr.copy( getMouseOnCircle( event.pageX, event.pageY ) );
-
-			} else if ( _state === STATE.ZOOM && ! _this.noZoom ) {
-
-				_zoomEnd.copy( getMouseOnScreen( event.pageX, event.pageY ) );
-
-			} else if ( _state === STATE.PAN && ! _this.noPan ) {
-
-				_panEnd.copy( getMouseOnScreen( event.pageX, event.pageY ) );
-
-			}
-
-		}
-
-		function mouseup( event ) {
-
-			if ( _this.enabled === false ) return;
-
-			event.preventDefault();
-			event.stopPropagation();
-
-			_state = STATE.NONE;
-
-			document.removeEventListener( 'mousemove', mousemove );
-			document.removeEventListener( 'mouseup', mouseup );
-			_this.dispatchEvent( endEvent );
-
-		}
-
-		function mousewheel( event ) {
-
-			if ( _this.enabled === false ) return;
-
-			event.preventDefault();
-			event.stopPropagation();
-
-			var delta = 0;
-
-			if ( event.wheelDelta ) {
-
-				// WebKit / Opera / Explorer 9
-
-				delta = event.wheelDelta / 40;
-
-			} else if ( event.detail ) {
-
-				// Firefox
-
-				delta = - event.detail / 3;
-
-			}
-
-			_zoomStart.y += delta * 0.01;
-			_this.dispatchEvent( startEvent );
-			_this.dispatchEvent( endEvent );
-
-		}
-
-		function touchstart( event ) {
-
-			if ( _this.enabled === false ) return;
-
-			switch ( event.touches.length ) {
-
-				case 1:
-					_state = STATE.TOUCH_ROTATE;
-					_moveCurr.copy( getMouseOnCircle( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY ) );
-					_movePrev.copy( _moveCurr );
-					break;
-
-				default: // 2 or more
-					_state = STATE.TOUCH_ZOOM_PAN;
-					var dx = event.touches[ 0 ].pageX - event.touches[ 1 ].pageX;
-					var dy = event.touches[ 0 ].pageY - event.touches[ 1 ].pageY;
-					_touchZoomDistanceEnd = _touchZoomDistanceStart = Math.sqrt( dx * dx + dy * dy );
-
-					var x = ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX ) / 2;
-					var y = ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY ) / 2;
-					_panStart.copy( getMouseOnScreen( x, y ) );
-					_panEnd.copy( _panStart );
-					break;
-
-			}
-
-			_this.dispatchEvent( startEvent );
-
-		}
-
-		function touchmove( event ) {
-
-			if ( _this.enabled === false ) return;
-
-			event.preventDefault();
-			event.stopPropagation();
-
-			switch ( event.touches.length ) {
-
-				case 1:
-					_movePrev.copy( _moveCurr );
-					_moveCurr.copy( getMouseOnCircle( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY ) );
-					break;
-
-				default: // 2 or more
-					var dx = event.touches[ 0 ].pageX - event.touches[ 1 ].pageX;
-					var dy = event.touches[ 0 ].pageY - event.touches[ 1 ].pageY;
-					_touchZoomDistanceEnd = Math.sqrt( dx * dx + dy * dy );
-
-					var x = ( event.touches[ 0 ].pageX + event.touches[ 1 ].pageX ) / 2;
-					var y = ( event.touches[ 0 ].pageY + event.touches[ 1 ].pageY ) / 2;
-					_panEnd.copy( getMouseOnScreen( x, y ) );
-					break;
-
-			}
-
-		}
-
-		function touchend( event ) {
-
-			if ( _this.enabled === false ) return;
-
-			switch ( event.touches.length ) {
-
-				case 0:
-					_state = STATE.NONE;
-					break;
-
-				case 1:
-					_state = STATE.TOUCH_ROTATE;
-					_moveCurr.copy( getMouseOnCircle( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY ) );
-					_movePrev.copy( _moveCurr );
-					break;
-
-			}
-
-			_this.dispatchEvent( endEvent );
-
-		}
-
-		function contextmenu( event ) {
-
-			event.preventDefault();
-
-		}
-
-		this.dispose = function() {
-
-			this.domElement.removeEventListener( 'contextmenu', contextmenu, false );
-			this.domElement.removeEventListener( 'mousedown', mousedown, false );
-			this.domElement.removeEventListener( 'mousewheel', mousewheel, false );
-			this.domElement.removeEventListener( 'MozMousePixelScroll', mousewheel, false ); // firefox
-
-			this.domElement.removeEventListener( 'touchstart', touchstart, false );
-			this.domElement.removeEventListener( 'touchend', touchend, false );
-			this.domElement.removeEventListener( 'touchmove', touchmove, false );
-
-			document.removeEventListener( 'mousemove', mousemove, false );
-			document.removeEventListener( 'mouseup', mouseup, false );
-
-			window.removeEventListener( 'keydown', keydown, false );
-			window.removeEventListener( 'keyup', keyup, false );
-
-		};
-
-		this.domElement.addEventListener( 'contextmenu', contextmenu, false );
-		this.domElement.addEventListener( 'mousedown', mousedown, false );
-		this.domElement.addEventListener( 'mousewheel', mousewheel, false );
-		this.domElement.addEventListener( 'MozMousePixelScroll', mousewheel, false ); // firefox
-
-		this.domElement.addEventListener( 'touchstart', touchstart, false );
-		this.domElement.addEventListener( 'touchend', touchend, false );
-		this.domElement.addEventListener( 'touchmove', touchmove, false );
-
-		window.addEventListener( 'keydown', keydown, false );
-		window.addEventListener( 'keyup', keyup, false );
-
-		this.handleResize();
-
-		// force an update at start
-		this.update();
-
-	};
-
-	THREE.TrackballControls.prototype = Object.create( THREE.EventDispatcher.prototype );
-	THREE.TrackballControls.prototype.constructor = THREE.TrackballControls;
-
-
-/***/ },
-/* 16 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/**
-	 * @author qiao / https://github.com/qiao
-	 * @author mrdoob / http://mrdoob.com
-	 * @author alteredq / http://alteredqualia.com/
-	 * @author WestLangley / http://github.com/WestLangley
-	 * @author erich666 / http://erichaines.com
-	 */
-
-	// This set of controls performs orbiting, dollying (zooming), and panning.
-	// Unlike TrackballControls, it maintains the "up" direction object.up (+Y by default).
-	//
-	//    Orbit - left mouse / touch: one finger move
-	//    Zoom - middle mouse, or mousewheel / touch: two finger spread or squish
-	//    Pan - right mouse, or arrow keys / touch: three finter swipe
-	var THREE = __webpack_require__(11);
-
-
-	THREE.OrbitControls = function ( object, domElement ) {
-
-		this.object = object;
-
-		this.domElement = ( domElement !== undefined ) ? domElement : document;
-
-		// Set to false to disable this control
-		this.enabled = true;
-
-		// "target" sets the location of focus, where the object orbits around
-		this.target = new THREE.Vector3();
-
-		// How far you can dolly in and out ( PerspectiveCamera only )
-		this.minDistance = 0;
-		this.maxDistance = Infinity;
-
-		// How far you can zoom in and out ( OrthographicCamera only )
-		this.minZoom = 0;
-		this.maxZoom = Infinity;
-
-		// How far you can orbit vertically, upper and lower limits.
-		// Range is 0 to Math.PI radians.
-		this.minPolarAngle = 0; // radians
-		this.maxPolarAngle = Math.PI; // radians
-
-		// How far you can orbit horizontally, upper and lower limits.
-		// If set, must be a sub-interval of the interval [ - Math.PI, Math.PI ].
-		this.minAzimuthAngle = - Infinity; // radians
-		this.maxAzimuthAngle = Infinity; // radians
-
-		// Set to true to enable damping (inertia)
-		// If damping is enabled, you must call controls.update() in your animation loop
-		this.enableDamping = false;
-		this.dampingFactor = 0.25;
-
-		// This option actually enables dollying in and out; left as "zoom" for backwards compatibility.
-		// Set to false to disable zooming
-		this.enableZoom = true;
-		this.zoomSpeed = 1.0;
-
-		// Set to false to disable rotating
-		this.enableRotate = true;
-		this.rotateSpeed = 1.0;
-
-		// Set to false to disable panning
-		this.enablePan = true;
-		this.keyPanSpeed = 7.0;	// pixels moved per arrow key push
-
-		// Set to true to automatically rotate around the target
-		// If auto-rotate is enabled, you must call controls.update() in your animation loop
-		this.autoRotate = false;
-		this.autoRotateSpeed = 2.0; // 30 seconds per round when fps is 60
-
-		// Set to false to disable use of the keys
-		this.enableKeys = true;
-
-		// The four arrow keys
-		this.keys = { LEFT: 37, UP: 38, RIGHT: 39, BOTTOM: 40 };
-
-		// Mouse buttons
-		this.mouseButtons = { ORBIT: THREE.MOUSE.LEFT, ZOOM: THREE.MOUSE.MIDDLE, PAN: THREE.MOUSE.RIGHT };
-
-		// for reset
-		this.target0 = this.target.clone();
-		this.position0 = this.object.position.clone();
-		this.zoom0 = this.object.zoom;
-
-		//
-		// public methods
-		//
-
-		this.getPolarAngle = function () {
-
-			return spherical.phi;
-
-		};
-
-		this.getAzimuthalAngle = function () {
-
-			return spherical.theta;
-
-		};
-
-		this.reset = function () {
-
-			scope.target.copy( scope.target0 );
-			scope.object.position.copy( scope.position0 );
-			scope.object.zoom = scope.zoom0;
-
-			scope.object.updateProjectionMatrix();
-			scope.dispatchEvent( changeEvent );
-
-			scope.update();
-
-			state = STATE.NONE;
-
-		};
-
-		// this method is exposed, but perhaps it would be better if we can make it private...
-		this.update = function() {
-
-			var offset = new THREE.Vector3();
-
-			// so camera.up is the orbit axis
-			var quat = new THREE.Quaternion().setFromUnitVectors( object.up, new THREE.Vector3( 0, 1, 0 ) );
-			var quatInverse = quat.clone().inverse();
-
-			var lastPosition = new THREE.Vector3();
-			var lastQuaternion = new THREE.Quaternion();
-
-			return function () {
-
-				var position = scope.object.position;
-
-				offset.copy( position ).sub( scope.target );
-
-				// rotate offset to "y-axis-is-up" space
-				offset.applyQuaternion( quat );
-
-				// angle from z-axis around y-axis
-				spherical.setFromVector3( offset );
-
-				if ( scope.autoRotate && state === STATE.NONE ) {
-
-					rotateLeft( getAutoRotationAngle() );
-
-				}
-
-				spherical.theta += sphericalDelta.theta;
-				spherical.phi += sphericalDelta.phi;
-
-				// restrict theta to be between desired limits
-				spherical.theta = Math.max( scope.minAzimuthAngle, Math.min( scope.maxAzimuthAngle, spherical.theta ) );
-
-				// restrict phi to be between desired limits
-				spherical.phi = Math.max( scope.minPolarAngle, Math.min( scope.maxPolarAngle, spherical.phi ) );
-
-				spherical.makeSafe();
-
-
-				spherical.radius *= scale;
-
-				// restrict radius to be between desired limits
-				spherical.radius = Math.max( scope.minDistance, Math.min( scope.maxDistance, spherical.radius ) );
-
-				// move target to panned location
-				scope.target.add( panOffset );
-
-				offset.setFromSpherical( spherical );
-
-				// rotate offset back to "camera-up-vector-is-up" space
-				offset.applyQuaternion( quatInverse );
-
-				position.copy( scope.target ).add( offset );
-
-				scope.object.lookAt( scope.target );
-
-				if ( scope.enableDamping === true ) {
-
-					sphericalDelta.theta *= ( 1 - scope.dampingFactor );
-					sphericalDelta.phi *= ( 1 - scope.dampingFactor );
-
-				} else {
-
-					sphericalDelta.set( 0, 0, 0 );
-
-				}
-
-				scale = 1;
-				panOffset.set( 0, 0, 0 );
-
-				// update condition is:
-				// min(camera displacement, camera rotation in radians)^2 > EPS
-				// using small-angle approximation cos(x/2) = 1 - x^2 / 8
-
-				if ( zoomChanged ||
-					lastPosition.distanceToSquared( scope.object.position ) > EPS ||
-					8 * ( 1 - lastQuaternion.dot( scope.object.quaternion ) ) > EPS ) {
-
-					scope.dispatchEvent( changeEvent );
-
-					lastPosition.copy( scope.object.position );
-					lastQuaternion.copy( scope.object.quaternion );
-					zoomChanged = false;
-
-					return true;
-
-				}
-
-				return false;
-
-			};
-
-		}();
-
-		this.dispose = function() {
-
-			scope.domElement.removeEventListener( 'contextmenu', onContextMenu, false );
-			scope.domElement.removeEventListener( 'mousedown', onMouseDown, false );
-			scope.domElement.removeEventListener( 'mousewheel', onMouseWheel, false );
-			scope.domElement.removeEventListener( 'MozMousePixelScroll', onMouseWheel, false ); // firefox
-
-			scope.domElement.removeEventListener( 'touchstart', onTouchStart, false );
-			scope.domElement.removeEventListener( 'touchend', onTouchEnd, false );
-			scope.domElement.removeEventListener( 'touchmove', onTouchMove, false );
-
-			document.removeEventListener( 'mousemove', onMouseMove, false );
-			document.removeEventListener( 'mouseup', onMouseUp, false );
-			document.removeEventListener( 'mouseout', onMouseUp, false );
-
-			window.removeEventListener( 'keydown', onKeyDown, false );
-
-			//scope.dispatchEvent( { type: 'dispose' } ); // should this be added here?
-
-		};
-
-		//
-		// internals
-		//
-
-		var scope = this;
-
-		var changeEvent = { type: 'change' };
-		var startEvent = { type: 'start' };
-		var endEvent = { type: 'end' };
-
-		var STATE = { NONE : - 1, ROTATE : 0, DOLLY : 1, PAN : 2, TOUCH_ROTATE : 3, TOUCH_DOLLY : 4, TOUCH_PAN : 5 };
-
-		var state = STATE.NONE;
-
-		var EPS = 0.000001;
-
-		// current position in spherical coordinates
-		var spherical = new THREE.Spherical();
-		var sphericalDelta = new THREE.Spherical();
-
-		var scale = 1;
-		var panOffset = new THREE.Vector3();
-		var zoomChanged = false;
-
-		var rotateStart = new THREE.Vector2();
-		var rotateEnd = new THREE.Vector2();
-		var rotateDelta = new THREE.Vector2();
-
-		var panStart = new THREE.Vector2();
-		var panEnd = new THREE.Vector2();
-		var panDelta = new THREE.Vector2();
-
-		var dollyStart = new THREE.Vector2();
-		var dollyEnd = new THREE.Vector2();
-		var dollyDelta = new THREE.Vector2();
-
-		function getAutoRotationAngle() {
-
-			return 2 * Math.PI / 60 / 60 * scope.autoRotateSpeed;
-
-		}
-
-		function getZoomScale() {
-
-			return Math.pow( 0.95, scope.zoomSpeed );
-
-		}
-
-		function rotateLeft( angle ) {
-
-			sphericalDelta.theta -= angle;
-
-		}
-
-		function rotateUp( angle ) {
-
-			sphericalDelta.phi -= angle;
-
-		}
-
-		var panLeft = function() {
-
-			var v = new THREE.Vector3();
-
-			return function panLeft( distance, objectMatrix ) {
-
-				v.setFromMatrixColumn( objectMatrix, 0 ); // get X column of objectMatrix
-				v.multiplyScalar( - distance );
-
-				panOffset.add( v );
-
-			};
-
-		}();
-
-		var panUp = function() {
-
-			var v = new THREE.Vector3();
-
-			return function panUp( distance, objectMatrix ) {
-
-				v.setFromMatrixColumn( objectMatrix, 1 ); // get Y column of objectMatrix
-				v.multiplyScalar( distance );
-
-				panOffset.add( v );
-
-			};
-
-		}();
-
-		// deltaX and deltaY are in pixels; right and down are positive
-		var pan = function() {
-
-			var offset = new THREE.Vector3();
-
-			return function( deltaX, deltaY ) {
-
-				var element = scope.domElement === document ? scope.domElement.body : scope.domElement;
-
-				if ( scope.object instanceof THREE.PerspectiveCamera ) {
-
-					// perspective
-					var position = scope.object.position;
-					offset.copy( position ).sub( scope.target );
-					var targetDistance = offset.length();
-
-					// half of the fov is center to top of screen
-					targetDistance *= Math.tan( ( scope.object.fov / 2 ) * Math.PI / 180.0 );
-
-					// we actually don't use screenWidth, since perspective camera is fixed to screen height
-					panLeft( 2 * deltaX * targetDistance / element.clientHeight, scope.object.matrix );
-					panUp( 2 * deltaY * targetDistance / element.clientHeight, scope.object.matrix );
-
-				} else if ( scope.object instanceof THREE.OrthographicCamera ) {
-
-					// orthographic
-					panLeft( deltaX * ( scope.object.right - scope.object.left ) / scope.object.zoom / element.clientWidth, scope.object.matrix );
-					panUp( deltaY * ( scope.object.top - scope.object.bottom ) / scope.object.zoom / element.clientHeight, scope.object.matrix );
-
-				} else {
-
-					// camera neither orthographic nor perspective
-					console.warn( 'WARNING: OrbitControls.js encountered an unknown camera type - pan disabled.' );
-					scope.enablePan = false;
-
-				}
-
-			};
-
-		}();
-
-		function dollyIn( dollyScale ) {
-
-			if ( scope.object instanceof THREE.PerspectiveCamera ) {
-
-				scale /= dollyScale;
-
-			} else if ( scope.object instanceof THREE.OrthographicCamera ) {
-
-				scope.object.zoom = Math.max( scope.minZoom, Math.min( scope.maxZoom, scope.object.zoom * dollyScale ) );
-				scope.object.updateProjectionMatrix();
-				zoomChanged = true;
-
-			} else {
-
-				console.warn( 'WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.' );
-				scope.enableZoom = false;
-
-			}
-
-		}
-
-		function dollyOut( dollyScale ) {
-
-			if ( scope.object instanceof THREE.PerspectiveCamera ) {
-
-				scale *= dollyScale;
-
-			} else if ( scope.object instanceof THREE.OrthographicCamera ) {
-
-				scope.object.zoom = Math.max( scope.minZoom, Math.min( scope.maxZoom, scope.object.zoom / dollyScale ) );
-				scope.object.updateProjectionMatrix();
-				zoomChanged = true;
-
-			} else {
-
-				console.warn( 'WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.' );
-				scope.enableZoom = false;
-
-			}
-
-		}
-
-		//
-		// event callbacks - update the object state
-		//
-
-		function handleMouseDownRotate( event ) {
-
-			//console.log( 'handleMouseDownRotate' );
-
-			rotateStart.set( event.clientX, event.clientY );
-
-		}
-
-		function handleMouseDownDolly( event ) {
-
-			//console.log( 'handleMouseDownDolly' );
-
-			dollyStart.set( event.clientX, event.clientY );
-
-		}
-
-		function handleMouseDownPan( event ) {
-
-			//console.log( 'handleMouseDownPan' );
-
-			panStart.set( event.clientX, event.clientY );
-
-		}
-
-		function handleMouseMoveRotate( event ) {
-
-			//console.log( 'handleMouseMoveRotate' );
-
-			rotateEnd.set( event.clientX, event.clientY );
-			rotateDelta.subVectors( rotateEnd, rotateStart );
-
-			var element = scope.domElement === document ? scope.domElement.body : scope.domElement;
-
-			// rotating across whole screen goes 360 degrees around
-			rotateLeft( 2 * Math.PI * rotateDelta.x / element.clientWidth * scope.rotateSpeed );
-
-			// rotating up and down along whole screen attempts to go 360, but limited to 180
-			rotateUp( 2 * Math.PI * rotateDelta.y / element.clientHeight * scope.rotateSpeed );
-
-			rotateStart.copy( rotateEnd );
-
-			scope.update();
-
-		}
-
-		function handleMouseMoveDolly( event ) {
-
-			//console.log( 'handleMouseMoveDolly' );
-
-			dollyEnd.set( event.clientX, event.clientY );
-
-			dollyDelta.subVectors( dollyEnd, dollyStart );
-
-			if ( dollyDelta.y > 0 ) {
-
-				dollyIn( getZoomScale() );
-
-			} else if ( dollyDelta.y < 0 ) {
-
-				dollyOut( getZoomScale() );
-
-			}
-
-			dollyStart.copy( dollyEnd );
-
-			scope.update();
-
-		}
-
-		function handleMouseMovePan( event ) {
-
-			//console.log( 'handleMouseMovePan' );
-
-			panEnd.set( event.clientX, event.clientY );
-
-			panDelta.subVectors( panEnd, panStart );
-
-			pan( panDelta.x, panDelta.y );
-
-			panStart.copy( panEnd );
-
-			scope.update();
-
-		}
-
-		function handleMouseUp( event ) {
-
-			//console.log( 'handleMouseUp' );
-
-		}
-
-		function handleMouseWheel( event ) {
-
-			//console.log( 'handleMouseWheel' );
-
-			var delta = 0;
-
-			if ( event.wheelDelta !== undefined ) {
-
-				// WebKit / Opera / Explorer 9
-
-				delta = event.wheelDelta;
-
-			} else if ( event.detail !== undefined ) {
-
-				// Firefox
-
-				delta = - event.detail;
-
-			}
-
-			if ( delta > 0 ) {
-
-				dollyOut( getZoomScale() );
-
-			} else if ( delta < 0 ) {
-
-				dollyIn( getZoomScale() );
-
-			}
-
-			scope.update();
-
-		}
-
-		function handleKeyDown( event ) {
-
-			//console.log( 'handleKeyDown' );
-
-			switch ( event.keyCode ) {
-
-				case scope.keys.UP:
-					pan( 0, scope.keyPanSpeed );
-					scope.update();
-					break;
-
-				case scope.keys.BOTTOM:
-					pan( 0, - scope.keyPanSpeed );
-					scope.update();
-					break;
-
-				case scope.keys.LEFT:
-					pan( scope.keyPanSpeed, 0 );
-					scope.update();
-					break;
-
-				case scope.keys.RIGHT:
-					pan( - scope.keyPanSpeed, 0 );
-					scope.update();
-					break;
-
-			}
-
-		}
-
-		function handleTouchStartRotate( event ) {
-
-			//console.log( 'handleTouchStartRotate' );
-
-			rotateStart.set( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
-
-		}
-
-		function handleTouchStartDolly( event ) {
-
-			//console.log( 'handleTouchStartDolly' );
-
-			var dx = event.touches[ 0 ].pageX - event.touches[ 1 ].pageX;
-			var dy = event.touches[ 0 ].pageY - event.touches[ 1 ].pageY;
-
-			var distance = Math.sqrt( dx * dx + dy * dy );
-
-			dollyStart.set( 0, distance );
-
-		}
-
-		function handleTouchStartPan( event ) {
-
-			//console.log( 'handleTouchStartPan' );
-
-			panStart.set( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
-
-		}
-
-		function handleTouchMoveRotate( event ) {
-
-			//console.log( 'handleTouchMoveRotate' );
-
-			rotateEnd.set( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
-			rotateDelta.subVectors( rotateEnd, rotateStart );
-
-			var element = scope.domElement === document ? scope.domElement.body : scope.domElement;
-
-			// rotating across whole screen goes 360 degrees around
-			rotateLeft( 2 * Math.PI * rotateDelta.x / element.clientWidth * scope.rotateSpeed );
-
-			// rotating up and down along whole screen attempts to go 360, but limited to 180
-			rotateUp( 2 * Math.PI * rotateDelta.y / element.clientHeight * scope.rotateSpeed );
-
-			rotateStart.copy( rotateEnd );
-
-			scope.update();
-
-		}
-
-		function handleTouchMoveDolly( event ) {
-
-			//console.log( 'handleTouchMoveDolly' );
-
-			var dx = event.touches[ 0 ].pageX - event.touches[ 1 ].pageX;
-			var dy = event.touches[ 0 ].pageY - event.touches[ 1 ].pageY;
-
-			var distance = Math.sqrt( dx * dx + dy * dy );
-
-			dollyEnd.set( 0, distance );
-
-			dollyDelta.subVectors( dollyEnd, dollyStart );
-
-			if ( dollyDelta.y > 0 ) {
-
-				dollyOut( getZoomScale() );
-
-			} else if ( dollyDelta.y < 0 ) {
-
-				dollyIn( getZoomScale() );
-
-			}
-
-			dollyStart.copy( dollyEnd );
-
-			scope.update();
-
-		}
-
-		function handleTouchMovePan( event ) {
-
-			//console.log( 'handleTouchMovePan' );
-
-			panEnd.set( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
-
-			panDelta.subVectors( panEnd, panStart );
-
-			pan( panDelta.x, panDelta.y );
-
-			panStart.copy( panEnd );
-
-			scope.update();
-
-		}
-
-		function handleTouchEnd( event ) {
-
-			//console.log( 'handleTouchEnd' );
-
-		}
-
-		//
-		// event handlers - FSM: listen for events and reset state
-		//
-
-		function onMouseDown( event ) {
-
-			if ( scope.enabled === false ) return;
-
-			event.preventDefault();
-
-			if ( event.button === scope.mouseButtons.ORBIT ) {
-
-				if ( scope.enableRotate === false ) return;
-
-				handleMouseDownRotate( event );
-
-				state = STATE.ROTATE;
-
-			} else if ( event.button === scope.mouseButtons.ZOOM ) {
-
-				if ( scope.enableZoom === false ) return;
-
-				handleMouseDownDolly( event );
-
-				state = STATE.DOLLY;
-
-			} else if ( event.button === scope.mouseButtons.PAN ) {
-
-				if ( scope.enablePan === false ) return;
-
-				handleMouseDownPan( event );
-
-				state = STATE.PAN;
-
-			}
-
-			if ( state !== STATE.NONE ) {
-
-				document.addEventListener( 'mousemove', onMouseMove, false );
-				document.addEventListener( 'mouseup', onMouseUp, false );
-				document.addEventListener( 'mouseout', onMouseUp, false );
-
-				scope.dispatchEvent( startEvent );
-
-			}
-
-		}
-
-		function onMouseMove( event ) {
-
-			if ( scope.enabled === false ) return;
-
-			event.preventDefault();
-
-			if ( state === STATE.ROTATE ) {
-
-				if ( scope.enableRotate === false ) return;
-
-				handleMouseMoveRotate( event );
-
-			} else if ( state === STATE.DOLLY ) {
-
-				if ( scope.enableZoom === false ) return;
-
-				handleMouseMoveDolly( event );
-
-			} else if ( state === STATE.PAN ) {
-
-				if ( scope.enablePan === false ) return;
-
-				handleMouseMovePan( event );
-
-			}
-
-		}
-
-		function onMouseUp( event ) {
-
-			if ( scope.enabled === false ) return;
-
-			handleMouseUp( event );
-
-			document.removeEventListener( 'mousemove', onMouseMove, false );
-			document.removeEventListener( 'mouseup', onMouseUp, false );
-			document.removeEventListener( 'mouseout', onMouseUp, false );
-
-			scope.dispatchEvent( endEvent );
-
-			state = STATE.NONE;
-
-		}
-
-		function onMouseWheel( event ) {
-
-			if ( scope.enabled === false || scope.enableZoom === false || ( state !== STATE.NONE && state !== STATE.ROTATE ) ) return;
-
-			event.preventDefault();
-			event.stopPropagation();
-
-			handleMouseWheel( event );
-
-			scope.dispatchEvent( startEvent ); // not sure why these are here...
-			scope.dispatchEvent( endEvent );
-
-		}
-
-		function onKeyDown( event ) {
-
-			if ( scope.enabled === false || scope.enableKeys === false || scope.enablePan === false ) return;
-
-			handleKeyDown( event );
-
-		}
-
-		function onTouchStart( event ) {
-
-			if ( scope.enabled === false ) return;
-
-			switch ( event.touches.length ) {
-
-				case 1:	// one-fingered touch: rotate
-
-					if ( scope.enableRotate === false ) return;
-
-					handleTouchStartRotate( event );
-
-					state = STATE.TOUCH_ROTATE;
-
-					break;
-
-				case 2:	// two-fingered touch: dolly
-
-					if ( scope.enableZoom === false ) return;
-
-					handleTouchStartDolly( event );
-
-					state = STATE.TOUCH_DOLLY;
-
-					break;
-
-				case 3: // three-fingered touch: pan
-
-					if ( scope.enablePan === false ) return;
-
-					handleTouchStartPan( event );
-
-					state = STATE.TOUCH_PAN;
-
-					break;
-
-				default:
-
-					state = STATE.NONE;
-
-			}
-
-			if ( state !== STATE.NONE ) {
-
-				scope.dispatchEvent( startEvent );
-
-			}
-
-		}
-
-		function onTouchMove( event ) {
-
-			if ( scope.enabled === false ) return;
-
-			event.preventDefault();
-			event.stopPropagation();
-
-			switch ( event.touches.length ) {
-
-				case 1: // one-fingered touch: rotate
-
-					if ( scope.enableRotate === false ) return;
-					if ( state !== STATE.TOUCH_ROTATE ) return; // is this needed?...
-
-					handleTouchMoveRotate( event );
-
-					break;
-
-				case 2: // two-fingered touch: dolly
-
-					if ( scope.enableZoom === false ) return;
-					if ( state !== STATE.TOUCH_DOLLY ) return; // is this needed?...
-
-					handleTouchMoveDolly( event );
-
-					break;
-
-				case 3: // three-fingered touch: pan
-
-					if ( scope.enablePan === false ) return;
-					if ( state !== STATE.TOUCH_PAN ) return; // is this needed?...
-
-					handleTouchMovePan( event );
-
-					break;
-
-				default:
-
-					state = STATE.NONE;
-
-			}
-
-		}
-
-		function onTouchEnd( event ) {
-
-			if ( scope.enabled === false ) return;
-
-			handleTouchEnd( event );
-
-			scope.dispatchEvent( endEvent );
-
-			state = STATE.NONE;
-
-		}
-
-		function onContextMenu( event ) {
-
-			event.preventDefault();
-
-		}
-
-		//
-
-		scope.domElement.addEventListener( 'contextmenu', onContextMenu, false );
-
-		scope.domElement.addEventListener( 'mousedown', onMouseDown, false );
-		scope.domElement.addEventListener( 'mousewheel', onMouseWheel, false );
-		scope.domElement.addEventListener( 'MozMousePixelScroll', onMouseWheel, false ); // firefox
-
-		scope.domElement.addEventListener( 'touchstart', onTouchStart, false );
-		scope.domElement.addEventListener( 'touchend', onTouchEnd, false );
-		scope.domElement.addEventListener( 'touchmove', onTouchMove, false );
-
-		window.addEventListener( 'keydown', onKeyDown, false );
-
-		// force an update at start
-
-		this.update();
-
-	};
-
-	THREE.OrbitControls.prototype = Object.create( THREE.EventDispatcher.prototype );
-	THREE.OrbitControls.prototype.constructor = THREE.OrbitControls;
-
-	Object.defineProperties( THREE.OrbitControls.prototype, {
-
-		center: {
-
-			get: function () {
-
-				console.warn( 'THREE.OrbitControls: .center has been renamed to .target' );
-				return this.target;
-
-			}
-
-		},
-
-		// backward compatibility
-
-		noZoom: {
-
-			get: function () {
-
-				console.warn( 'THREE.OrbitControls: .noZoom has been deprecated. Use .enableZoom instead.' );
-				return ! this.enableZoom;
-
-			},
-
-			set: function ( value ) {
-
-				console.warn( 'THREE.OrbitControls: .noZoom has been deprecated. Use .enableZoom instead.' );
-				this.enableZoom = ! value;
-
-			}
-
-		},
-
-		noRotate: {
-
-			get: function () {
-
-				console.warn( 'THREE.OrbitControls: .noRotate has been deprecated. Use .enableRotate instead.' );
-				return ! this.enableRotate;
-
-			},
-
-			set: function ( value ) {
-
-				console.warn( 'THREE.OrbitControls: .noRotate has been deprecated. Use .enableRotate instead.' );
-				this.enableRotate = ! value;
-
-			}
-
-		},
-
-		noPan: {
-
-			get: function () {
-
-				console.warn( 'THREE.OrbitControls: .noPan has been deprecated. Use .enablePan instead.' );
-				return ! this.enablePan;
-
-			},
-
-			set: function ( value ) {
-
-				console.warn( 'THREE.OrbitControls: .noPan has been deprecated. Use .enablePan instead.' );
-				this.enablePan = ! value;
-
-			}
-
-		},
-
-		noKeys: {
-
-			get: function () {
-
-				console.warn( 'THREE.OrbitControls: .noKeys has been deprecated. Use .enableKeys instead.' );
-				return ! this.enableKeys;
-
-			},
-
-			set: function ( value ) {
-
-				console.warn( 'THREE.OrbitControls: .noKeys has been deprecated. Use .enableKeys instead.' );
-				this.enableKeys = ! value;
-
-			}
-
-		},
-
-		staticMoving : {
-
-			get: function () {
-
-				console.warn( 'THREE.OrbitControls: .staticMoving has been deprecated. Use .enableDamping instead.' );
-				return ! this.enableDamping;
-
-			},
-
-			set: function ( value ) {
-
-				console.warn( 'THREE.OrbitControls: .staticMoving has been deprecated. Use .enableDamping instead.' );
-				this.enableDamping = ! value;
-
-			}
-
-		},
-
-		dynamicDampingFactor : {
-
-			get: function () {
-
-				console.warn( 'THREE.OrbitControls: .dynamicDampingFactor has been renamed. Use .dampingFactor instead.' );
-				return this.dampingFactor;
-
-			},
-
-			set: function ( value ) {
-
-				console.warn( 'THREE.OrbitControls: .dynamicDampingFactor has been renamed. Use .dampingFactor instead.' );
-				this.dampingFactor = value;
-
-			}
-
-		}
-
-	} );
 
 
 /***/ }

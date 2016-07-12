@@ -24,7 +24,7 @@ const webpackConfig = {
 }
 
 gulp.task('ejf-babel', ()=> {
-  var jsSrc = './src/js/ericFosterIO.js',
+  var jsSrc = ['./src/js/ericFosterIO.js', './src/js/scrollControl.js', './src/js/cubeFolio.js'],
       jsDst = './dist/babel/';
 
   return gulp.src(jsSrc)
