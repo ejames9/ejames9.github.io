@@ -39,7 +39,7 @@ use 'bowser' as browser
                 .class('img-responsive', '-');
     }
     //If device is mobile, kill cubeFolio and show thumbNail portfolio..
-    if (window.innerWidth < 10100) {
+    if (isMobile()) {
       //Kill cubeFolio..
       x(<'#cubeFolio'>);
       //Show thumbFolio
@@ -79,11 +79,11 @@ use 'bowser' as browser
       scrollController();
       //Set up three.js scene.
       //Call Cube Assembly Function..
-      // cubeFolio.assembleCube();
-      // //Initiate cube hover and click events/behaviour.
+      cubeFolio.assembleCube();
+      //Initiate cube hover and click events/behaviour.
       cubeFolio.controller();
-      // //initiate render loop.
-      // cubeFolio.animate();
+      //initiate render loop.
+      cubeFolio.animate();
     }
   });
 

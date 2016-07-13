@@ -10,7 +10,8 @@ Author: Eric James Foster
 
 
 //import elementsJS, elementsJS style..
-use 'elementsJS' scroll, log, inspect
+use 'elementsJS' scroll, log, inspect, isMobile
+use './cubeFolio' cubeFolio
 use 'tween.js' as TWEEN
 
 
@@ -135,6 +136,12 @@ export function scrollController() {
         default:
             break;
       }
+
+
+
+      //===VV=Scroll-Snapper=VV===//
+
+
       //Check for existence of running setTimeout. If one exists, kill it, and create a new one.
       //The scrollSnapper() function will execute once the timer runs out (scrolling stops for 200 ms)..
       if (timeOutID) {
@@ -147,7 +154,7 @@ export function scrollController() {
   }
 
 
-  //This function will create an intuitive scrolling experience, allowing the user to scroll directly to different sections.
+  //This function will create an intuitive scrolling experience, allowing the user to flick directly to different sections.
   function scrollSnapper(destinations) {
     //Adjust the snapping range for different screen heights..
     let snapRange = window.innerHeight > 700 ? 150
@@ -157,46 +164,59 @@ export function scrollController() {
                   : 60
                   ;
 
+    //If user scrolls down, and beyond snap range....
     if (window.scrollY > currentSlideOffset + snapRange) {
-      let approxScrollDistance = Math.abs(window.scrollY - currentSlideOffset + snapRange);
-
-      if (approxScrollDistance > (window.innerHeight * 2) + 200) {
+      //Get approximate scrolled distance..
+      let approxScrollDistance = Math.abs(scrollY - currentSlideOffset + snapRange);
+      //If scrolled distance is greater than 2 viewport heights..
+      if (approxScrollDistance > (innerHeight * 2) + 200) {
+        //Reset position global to +3 and convert back to string..
         position = String(parseInt(position) + 3);
-      } else if (approxScrollDistance > window.innerHeight + 200) {
+        //If the scrolled distance is greater than 1 viewport height..
+      } else if (approxScrollDistance > innerHeight + 200) {
+        //Reset position global to +2 and convert back to string..
         position = String(parseInt(position) + 2);
       } else {
+        //Else, set position global to +1 and convert back to string..
         position = String(parseInt(position) + 1);
       }
+      //Call snapping function with 'position' as destinations' index..
       snap(destinations[position]);
+    //Else iff user scrolls up, and beyond snap range.... repeat above, but subtract from position, instead of add.
     } else if (window.scrollY < currentSlideOffset - snapRange) {
-      let approxScrollDistance = Math.abs(window.scrollY - currentSlideOffset + snapRange);
+      let approxScrollDistance = Math.abs(scrollY - currentSlideOffset + snapRange);
 
-      if (approxScrollDistance > (window.innerHeight * 2) + 200) {
+      if (approxScrollDistance > (innerHeight * 2) + 200) {
         position = String(parseInt(position) - 3);
-      } else if (approxScrollDistance > window.innerHeight + 200) {
+      } else if (approxScrollDistance > innerHeight + 200) {
         position = String(parseInt(position) - 2);
       } else {
         position = String(parseInt(position) - 1);
       }
+      //Call snap function, with adjusted position..
       snap(destinations[position]);
     } else {
-
+      //Snap back to same position..
       snap(destinations[position]);
     }
 
-
     //Snapping function..
     function snap(destination) {
-      //Tween cube back to spinning state..
+      //Tween for snapping scroll position to pre-specified offsets..
       const
-      tween = new TWEEN.Tween({x: 0, y: window.scrollY});
+      tween = new TWEEN.Tween( {x: 0, y: scrollY} );
       tween
-          .to({y: destination}, 300)
-          .easing(TWEEN.Easing.Exponential.In)
+          .to( {y: destination}, 300)
+          .easing(TWEEN.Easing.Back.Out)
           .onUpdate(function() {
             scrollTo(0, this.y);
-          })
+          } )
           .start();
+      //If cubeFolio is not present (mobile) we need to borrow it's animation function to update tween..
+      if (isMobile()) {
+        //Borrowing cubeFolio's animation function, for it's TWEEN updating/animating ability..
+        cubeFolio.animate();
+      }
       //Set new slide position once slide settles..
       setTimeout(()=> {
         currentSlideOffset = window.scrollY;
@@ -279,12 +299,3 @@ export function scrollController() {
     }
   }
 }
-
-
-function animate() {
-  TWEEN.update();
-
-  requestAnimationFrame(animate);
-}
-
-animate();

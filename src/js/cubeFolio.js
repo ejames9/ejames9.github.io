@@ -699,17 +699,20 @@ export const cubeFolio = (function() {
 
   //---Cube Animation Function============================>>>
   function animate() {
-    //The Renderers Call to Render..
-    css3DRenderer.render(scene, camera);
-    //Make the cube spin..
-    if (flags.SPIN_SWITCH_) {
-      let x = camera.position.x,
-          z = camera.position.z;
-      camera.position.x = x * Math.cos(0.007) +
-        z * Math.sin(0.007);
-      camera.position.z = z * Math.cos(0.007) -
-        x * Math.sin(0.007);
-      camera.lookAt(scene.position);
+    //Will not run in mobile mode..
+    if (<'#cubeFolio'>) {
+      //The Renderers Call to Render..
+      css3DRenderer.render(scene, camera);
+      //Make the cube spin..
+      if (flags.SPIN_SWITCH_) {
+        let x = camera.position.x,
+            z = camera.position.z;
+        camera.position.x = x * Math.cos(0.007) +
+          z * Math.sin(0.007);
+        camera.position.z = z * Math.cos(0.007) -
+          x * Math.sin(0.007);
+        camera.lookAt(scene.position);
+      }
     }
     //Update tween.
     TWEEN.update()
