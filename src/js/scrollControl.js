@@ -10,9 +10,11 @@ Author: Eric James Foster
 
 
 //import elementsJS, elementsJS style..
-use 'elementsJS' scroll
+use 'elementsJS' scroll, log, inspect
+use 'tween.js' as TWEEN
 
 
+window.position = null;
 
 //Created closure for organization of Scroll event-handling functions.
 export function scrollController() {
@@ -26,14 +28,27 @@ export function scrollController() {
     _meHead    = <'#me-head'/>,
     _footer    = <'#footer'/>;
 
-  let timeOutID = null,
-     snapPoints = [];
+  let timeOutID  = null,
+      snapPoints = {};
 
   //Get snapPoints..
-  <'.snap'/>
-        .every((element)=> {
-          snapPoints.push(element.fromTop());
-        });
+  (function() {
+    let index = -1;
+
+    <'.snap'/>
+          .every((element)=> {
+            snapPoints[String(index += 1)] = element.fromTop();
+          });
+
+    //Find current slide..
+    for (let s in snapPoints) {
+      if (currentSlideOffset === snapPoints[s]) {
+        position = s;
+      }
+    }
+
+    inspect(snapPoints);
+  })();
 
   // log('offsets2');
   // log(snapPoints);
@@ -127,7 +142,7 @@ export function scrollController() {
         clearTimeout(timeOutID);
       }
       //Set new setTimeout()..
-      timeOutID = setTimeout(scrollSnapper, 50, snapPoints);
+      timeOutID = setTimeout(scrollSnapper, 200, snapPoints);
     });
   }
 
@@ -135,46 +150,57 @@ export function scrollController() {
   //This function will create an intuitive scrolling experience, allowing the user to scroll directly to different sections.
   function scrollSnapper(destinations) {
     //Adjust the snapping range for different screen heights..
-    let snapRange = window.innerHeight > 700 ? 300
-                  : window.innerHeight > 550 ? 200
-                  : window.innerHeight > 400 ? 150
-                  : window.innerHeight > 200 ? 100
-                  : 90;
-    //Determine snapping locale, if any,  and call snap function..
-    switch (true) {
-      case (Math.abs(destinations[0] - window.scrollY) < snapRange):
-          //Call snap function..
-          snap(destinations[0]);
-          break;
+    let snapRange = window.innerHeight > 700 ? 150
+                  : window.innerHeight > 550 ? 120
+                  : window.innerHeight > 400 ? 90
+                  : window.innerHeight > 200 ? 70
+                  : 60
+                  ;
 
-      case (Math.abs(destinations[1] - window.scrollY) < snapRange):
-          //
-          snap(destinations[1]);
-          break;
+    if (window.scrollY > currentSlideOffset + snapRange) {
+      let approxScrollDistance = Math.abs(window.scrollY - currentSlideOffset + snapRange);
 
-      case (Math.abs(destinations[2] - window.scrollY) < snapRange):
-          //
-          snap(destinations[2]);
-          break;
+      if (approxScrollDistance > (window.innerHeight * 2) + 200) {
+        position = String(parseInt(position) + 3);
+      } else if (approxScrollDistance > window.innerHeight + 200) {
+        position = String(parseInt(position) + 2);
+      } else {
+        position = String(parseInt(position) + 1);
+      }
+      snap(destinations[position]);
+    } else if (window.scrollY < currentSlideOffset - snapRange) {
+      let approxScrollDistance = Math.abs(window.scrollY - currentSlideOffset + snapRange);
 
-      case (Math.abs(destinations[3] - window.scrollY) < snapRange):
-          //
-          snap(destinations[3]);
-          break;
+      if (approxScrollDistance > (window.innerHeight * 2) + 200) {
+        position = String(parseInt(position) - 3);
+      } else if (approxScrollDistance > window.innerHeight + 200) {
+        position = String(parseInt(position) - 2);
+      } else {
+        position = String(parseInt(position) - 1);
+      }
+      snap(destinations[position]);
+    } else {
 
-      default:
-          //Scrolling stopped between (outside of) snapping ranges..
-          break;
+      snap(destinations[position]);
     }
+
+
     //Snapping function..
     function snap(destination) {
-      //If scroll point is within 3 pixels, snap to destination, otherwise animate to destination..
-      if (Math.abs(destination - window.scrollY) < 3) {
-        scrollTo(0, destination);
-      } else {
-        scrollTo(0, window.scrollY + ((destination - window.scrollY) / 2));
-        setTimeout(snap, 20, destination);
-      }
+      //Tween cube back to spinning state..
+      const
+      tween = new TWEEN.Tween({x: 0, y: window.scrollY});
+      tween
+          .to({y: destination}, 300)
+          .easing(TWEEN.Easing.Exponential.In)
+          .onUpdate(function() {
+            scrollTo(0, this.y);
+          })
+          .start();
+      //Set new slide position once slide settles..
+      setTimeout(()=> {
+        currentSlideOffset = window.scrollY;
+      }, 350);
     }
   }
 
@@ -253,3 +279,12 @@ export function scrollController() {
     }
   }
 }
+
+
+function animate() {
+  TWEEN.update();
+
+  requestAnimationFrame(animate);
+}
+
+animate();
