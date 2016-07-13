@@ -24,6 +24,7 @@ const APPLICATION_DATA               = {};
       APPLICATION_DATA.FLAGS_        = {};
       APPLICATION_DATA.PROJECT_URLS  = {};
       APPLICATION_DATA.REPO_URLS     = {};
+      APPLICATION_DATA.USER_DATA     = {};
 //Boolean flag that enables code that spins the portfolio cube.
 APPLICATION_DATA.FLAGS_.SPIN_SWITCH_ = true;
 //Flag that allows code to know when it is being run for the first time.
@@ -64,6 +65,11 @@ APPLICATION_DATA.REPO_URLS['_3']     = 'https://github.com/ejames9/gulp-elements
 APPLICATION_DATA.REPO_URLS['_4']     = 'https://github.com/ejames9/GoOnTour';
 APPLICATION_DATA.REPO_URLS['_5']     = 'https://github.com/ejames9/DjamBase';
 APPLICATION_DATA.REPO_URLS['_6']     = 'https://github.com/ejames9/ejames9.github.io/blob/master/src/js/ericFosterIO.js';
+
+//This global hold the user's scroll/slide position.. for use with the scroll-snapping function..
+APPLICATION_DATA.USER_DATA.SLIDE     = window.scrollY;
+//Compress into global..
+window.currentSlideOffset = APPLICATION_DATA.USER_DATA.SLIDE;
 
 //Compress flag names.
 window.flags = APPLICATION_DATA.FLAGS_;
@@ -394,12 +400,12 @@ export const cubeFolio = (function() {
           //If one of the links in the main navigation header are clicked..
         } else if (e.target.className === 'head-nav') {
           //Find the currently 'active' link, and remove the active class..
-          <'[class~=active]'/>
-                  .class('active', '-');
+          <'[class~=activ]'/>
+                  .class('activ', '-');
           //Add 'active' class to clicked link..
           <e.target/>
                   .ma()
-                    .class('active', '+');
+                    .class('activ', '+');
         } else if (e.target.id === 'chevy') {
           //Tween project-info out of the way..
           const
@@ -654,7 +660,7 @@ export const cubeFolio = (function() {
       .class('hide', '+');
       //Flip the SPIN_SWITCH_/TWEEN_ back on.
       flags.SPIN_SWITCH_ = true;
-      flags.TWEEN_  = true;
+      flags.TWEEN_ = true;
     }
 
     //moves project-info pane back into original viewing position.
