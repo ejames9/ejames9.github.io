@@ -65,16 +65,10 @@ use 'bowser' as browser
     } else {
       flags.ME_HEAD_ = true;
     }
-    //Reload window if orientation changes, to avoid 'scrambling' of header.
-    // on('resize', <'body'>, ()=> {
-    //   <'#responsiveCSS'/>
-    //               .href('?', '+');
-    //   //Reset the scrollController..
-    //   currentSlideOffset = scrollY;
-    //   scrollController();
-    // });
 
+    //The following bit of code will allow for orientation change layout adjustments without a full page reload..
     on('orientationchange', window, ()=> {
+      //Reload css when orientation changes, so that appropriate @media rules will take effect..
       <'#responsiveCSS'/>
                   .href('?', '+');
       //Reset the scrollController..
@@ -102,9 +96,9 @@ use 'bowser' as browser
 
 function resetScrollControlGlobals() {
   let index = -1;
-
+  //Reset current slide offset global..
   currentSlideOffset = scrollY;
-
+  //Reset snapPoints global..
   <'.snap'/>
         .every((element)=> {
           snapPoints[String(index += 1)] = element.fromTop();
@@ -113,12 +107,16 @@ function resetScrollControlGlobals() {
   //Find current slide..
   for (let s in snapPoints) {
     if (currentSlideOffset === snapPoints[s]) {
+      //Set position global..
       position = s;
     }
   }
 
   inspect(snapPoints);
 }
+
+
+
 
 //===TO DO===============================================================>>>
 
@@ -150,6 +148,17 @@ function resetScrollControlGlobals() {
 //light table color combo
 //background-color: #3e6b6b;
 //color: #7ffffd;
+
+
+
+// on('resize', <'body'>, ()=> {
+//   <'#responsiveCSS'/>
+//               .href('?', '+');
+//   //Reset the scrollController..
+//   currentSlideOffset = scrollY;
+//   scrollController();
+// });
+
 
 
 //   //Create new tween for header animation..

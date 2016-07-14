@@ -135,16 +135,10 @@
 	  } else {
 	    flags.ME_HEAD_ = true;
 	  }
-	  //Reload window if orientation changes, to avoid 'scrambling' of header.
-	  // on('resize', el('body'), ()=> {
-	  //   <'#responsiveCSS'/>
-	  //               .href('?', '+');
-	  //   //Reset the scrollController..
-	  //   currentSlideOffset = scrollY;
-	  //   scrollController();
-	  // });
 
+	  //The following bit of code will allow for orientation change layout adjustments without a full page reload..
 	  on('orientationchange', window, function () {
+	    //Reload css when orientation changes, so that appropriate @media rules will take effect..
 	    (function () {
 	      var elem6 = _$('#responsiveCSS') ? dom('#responsiveCSS') : make('#responsiveCSS').put("body");
 	      return elem6;
@@ -173,9 +167,9 @@
 
 	function resetScrollControlGlobals() {
 	  var index = -1;
-
+	  //Reset current slide offset global..
 	  currentSlideOffset = scrollY;
-
+	  //Reset snapPoints global..
 	  (function () {
 	    var elem7 = _$('.snap') ? dom('.snap') : make('.snap').put("body");
 	    return elem7;
@@ -186,6 +180,7 @@
 	  //Find current slide..
 	  for (var s in snapPoints) {
 	    if (currentSlideOffset === snapPoints[s]) {
+	      //Set position global..
 	      position = s;
 	    }
 	  }
@@ -219,6 +214,14 @@
 	//light table color combo
 	//background-color: #3e6b6b;
 	//color: #7ffffd;
+
+	// on('resize', el('body'), ()=> {
+	//   <'#responsiveCSS'/>
+	//               .href('?', '+');
+	//   //Reset the scrollController..
+	//   currentSlideOffset = scrollY;
+	//   scrollController();
+	// });
 
 	//   //Create new tween for header animation..
 	//   if (flags.HEAD_TWEEN_) {
@@ -4072,7 +4075,6 @@
 	        default:
 	          break;
 	      }
-
 	      //===VV=Scroll-Snapper=VV===//
 
 	      //Check for existence of running setTimeout. If one exists, kill it, and create a new one.
@@ -4096,11 +4098,11 @@
 	      //Get approximate scrolled distance..
 	      var approxScrollDistance = Math.abs(scrollY - currentSlideOffset + snapRange);
 	      //If scrolled distance is greater than 2 viewport heights..
-	      if (approxScrollDistance > innerHeight * 2 + 200) {
+	      if (approxScrollDistance > innerHeight * 2.5) {
 	        //Reset position global to +3 and convert back to string..
 	        position = String(parseInt(position) + 3);
 	        //If the scrolled distance is greater than 1 viewport height..
-	      } else if (approxScrollDistance > innerHeight + 200) {
+	      } else if (approxScrollDistance > innerHeight * 1.5) {
 	          //Reset position global to +2 and convert back to string..
 	          position = String(parseInt(position) + 2);
 	        } else {
@@ -4113,9 +4115,9 @@
 	    } else if (window.scrollY < currentSlideOffset - snapRange) {
 	        var _approxScrollDistance = Math.abs(scrollY - currentSlideOffset + snapRange);
 
-	        if (_approxScrollDistance > innerHeight * 2 + 200) {
+	        if (_approxScrollDistance > innerHeight * 2.5) {
 	          position = String(parseInt(position) - 3);
-	        } else if (_approxScrollDistance > innerHeight + 200) {
+	        } else if (_approxScrollDistance > innerHeight * 1.5) {
 	          position = String(parseInt(position) - 2);
 	        } else {
 	          position = String(parseInt(position) - 1);

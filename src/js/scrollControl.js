@@ -136,8 +136,6 @@ export function scrollController() {
         default:
             break;
       }
-
-
       //===VV=Scroll-Snapper=VV===//
 
 
@@ -168,11 +166,11 @@ export function scrollController() {
       //Get approximate scrolled distance..
       let approxScrollDistance = Math.abs(scrollY - currentSlideOffset + snapRange);
       //If scrolled distance is greater than 2 viewport heights..
-      if (approxScrollDistance > (innerHeight * 2) + 200) {
+      if (approxScrollDistance > innerHeight * 2.5) {
         //Reset position global to +3 and convert back to string..
         position = String(parseInt(position) + 3);
         //If the scrolled distance is greater than 1 viewport height..
-      } else if (approxScrollDistance > innerHeight + 200) {
+      } else if (approxScrollDistance > innerHeight * 1.5) {
         //Reset position global to +2 and convert back to string..
         position = String(parseInt(position) + 2);
       } else {
@@ -185,9 +183,9 @@ export function scrollController() {
     } else if (window.scrollY < currentSlideOffset - snapRange) {
       let approxScrollDistance = Math.abs(scrollY - currentSlideOffset + snapRange);
 
-      if (approxScrollDistance > (innerHeight * 2) + 200) {
+      if (approxScrollDistance > innerHeight * 2.5) {
         position = String(parseInt(position) - 3);
-      } else if (approxScrollDistance > innerHeight + 200) {
+      } else if (approxScrollDistance > innerHeight * 1.5) {
         position = String(parseInt(position) - 2);
       } else {
         position = String(parseInt(position) - 1);
