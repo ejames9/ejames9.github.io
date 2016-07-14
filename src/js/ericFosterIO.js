@@ -69,12 +69,18 @@ use 'bowser' as browser
     on('resize', <'body'>, ()=> {
       <'#responsiveCSS'/>
                   .href('?', '+');
+      //Reset the scrollController..
+      currentSlideOffset = scrollY;
+      scrollController();
     });
 
-    on('orientationchange', window, ()=> {
-      <'#responsiveCSS'/>
-                  .href('?', '+');
-    });
+    // on('orientationchange', window, ()=> {
+    //   <'#responsiveCSS'/>
+    //               .href('?', '+');
+    //   //Reset the scrollController..
+    //   currentSlideOffset = scrollY;
+    //   scrollController();
+    // });
 
     if (!window.frameElement) {
       //Activate scroll-handling.

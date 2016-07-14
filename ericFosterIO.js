@@ -141,14 +141,18 @@
 	      var elem6 = _$('#responsiveCSS') ? dom('#responsiveCSS') : make('#responsiveCSS').put("body");
 	      return elem6;
 	    })().href('?', '+');
+	    //Reset the scrollController..
+	    currentSlideOffset = scrollY;
+	    scrollController();
 	  });
 
-	  on('orientationchange', window, function () {
-	    (function () {
-	      var elem7 = _$('#responsiveCSS') ? dom('#responsiveCSS') : make('#responsiveCSS').put("body");
-	      return elem7;
-	    })().href('?', '+');
-	  });
+	  // on('orientationchange', window, ()=> {
+	  //   <'#responsiveCSS'/>
+	  //               .href('?', '+');
+	  //   //Reset the scrollController..
+	  //   currentSlideOffset = scrollY;
+	  //   scrollController();
+	  // });
 
 	  if (!window.frameElement) {
 	    //Activate scroll-handling.
@@ -3899,6 +3903,7 @@
 	///End Module requires///
 
 	window.position = null;
+	window.snapPoints = {};
 
 	//Created closure for organization of Scroll event-handling functions.
 	function scrollController() {
@@ -3933,8 +3938,7 @@
 	    return elem6;
 	  }();
 
-	  var timeOutID = null,
-	      snapPoints = {};
+	  var timeOutID = null;
 
 	  //Get snapPoints..
 	  (function () {

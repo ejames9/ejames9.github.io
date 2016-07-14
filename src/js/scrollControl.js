@@ -15,7 +15,8 @@ use './cubeFolio' cubeFolio
 use 'tween.js' as TWEEN
 
 
-window.position = null;
+window.position   = null;
+window.snapPoints = {};
 
 //Created closure for organization of Scroll event-handling functions.
 export function scrollController() {
@@ -29,8 +30,7 @@ export function scrollController() {
     _meHead    = <'#me-head'/>,
     _footer    = <'#footer'/>;
 
-  let timeOutID  = null,
-      snapPoints = {};
+  let timeOutID  = null;
 
   //Get snapPoints..
   (function() {
