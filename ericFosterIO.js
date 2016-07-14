@@ -136,7 +136,15 @@
 	    flags.ME_HEAD_ = true;
 	  }
 	  //Reload window if orientation changes, to avoid 'scrambling' of header.
-	  on('resize', el('body'), function () {
+	  // on('resize', el('body'), ()=> {
+	  //   <'#responsiveCSS'/>
+	  //               .href('?', '+');
+	  //   //Reset the scrollController..
+	  //   currentSlideOffset = scrollY;
+	  //   scrollController();
+	  // });
+
+	  on('orientationchange', window, function () {
 	    (function () {
 	      var elem6 = _$('#responsiveCSS') ? dom('#responsiveCSS') : make('#responsiveCSS').put("body");
 	      return elem6;
@@ -145,14 +153,6 @@
 	    currentSlideOffset = scrollY;
 	    scrollController();
 	  });
-
-	  // on('orientationchange', window, ()=> {
-	  //   <'#responsiveCSS'/>
-	  //               .href('?', '+');
-	  //   //Reset the scrollController..
-	  //   currentSlideOffset = scrollY;
-	  //   scrollController();
-	  // });
 
 	  if (!window.frameElement) {
 	    //Activate scroll-handling.

@@ -66,21 +66,21 @@ use 'bowser' as browser
       flags.ME_HEAD_ = true;
     }
     //Reload window if orientation changes, to avoid 'scrambling' of header.
-    on('resize', <'body'>, ()=> {
-      <'#responsiveCSS'/>
-                  .href('?', '+');
-      //Reset the scrollController..
-      currentSlideOffset = scrollY;
-      scrollController();
-    });
-
-    // on('orientationchange', window, ()=> {
+    // on('resize', <'body'>, ()=> {
     //   <'#responsiveCSS'/>
     //               .href('?', '+');
     //   //Reset the scrollController..
     //   currentSlideOffset = scrollY;
     //   scrollController();
     // });
+
+    on('orientationchange', window, ()=> {
+      <'#responsiveCSS'/>
+                  .href('?', '+');
+      //Reset the scrollController..
+      currentSlideOffset = scrollY;
+      scrollController();
+    });
 
     if (!window.frameElement) {
       //Activate scroll-handling.
