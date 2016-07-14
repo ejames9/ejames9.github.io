@@ -102,7 +102,25 @@ function getPortfolioCode() {
     });
     //kill #cubefolio..
     x(<'#cubeFolio'>);
-
+    //reload css..
+    setTimeout(function() {
+      <'.caption'/>
+                  .every((element)=> {
+                    element
+                        .fontFamily('tulpen one');
+                  });
+      <'#responsiveCSS'/>
+                  .href('?', '+');
+      <'#carouFolio'/>
+                  .height('100%');
+      <'.carousel-indicators'/>
+                  .padding('8px')
+                  .bottom('20px');
+      <'.item-inner'/>
+                  .every((el)=> {
+                    el.top('53px');
+                  });
+    }, 700);
   } else {
     //get code from github repo with http request..
     ajax(url(rawGit, cubeFolio_), null, (r)=> {
@@ -112,8 +130,9 @@ function getPortfolioCode() {
     //Kill #carouFolio
     x(<'#carouFolio'>);
 
+    //FIXME: Use a promise here...
     //Fire up the cube!..
-    initiateCubeFolio();
+    setTimeout(initiateCubeFolio, 500);
   }
 }
 

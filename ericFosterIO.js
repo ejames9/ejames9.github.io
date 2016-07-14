@@ -173,19 +173,47 @@
 	    });
 	    //kill #cubefolio..
 	    x(el('#cubeFolio'));
+	    //reload css..
+	    setTimeout(function () {
+	      (function () {
+	        var elem7 = _$('.caption') ? dom('.caption') : make('.caption').put("body");
+	        return elem7;
+	      })().every(function (element) {
+	        element.fontFamily('tulpen one');
+	      });
+	      (function () {
+	        var elem8 = _$('#responsiveCSS') ? dom('#responsiveCSS') : make('#responsiveCSS').put("body");
+	        return elem8;
+	      })().href('?', '+');
+	      (function () {
+	        var elem9 = _$('#carouFolio') ? dom('#carouFolio') : make('#carouFolio').put("body");
+	        return elem9;
+	      })().height('100%');
+	      (function () {
+	        var elem10 = _$('.carousel-indicators') ? dom('.carousel-indicators') : make('.carousel-indicators').put("body");
+	        return elem10;
+	      })().padding('8px').bottom('20px');
+	      (function () {
+	        var elem11 = _$('.item-inner') ? dom('.item-inner') : make('.item-inner').put("body");
+	        return elem11;
+	      })().every(function (el) {
+	        el.top('53px');
+	      });
+	    }, 700);
 	  } else {
 	    //get code from github repo with http request..
 	    ajax(url(rawGit, cubeFolio_), null, function (r) {
 	      (function () {
-	        var elem7 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
-	        return elem7;
+	        var elem12 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
+	        return elem12;
 	      })().html(r);
 	    });
 	    //Kill #carouFolio
 	    x(el('#carouFolio'));
 
+	    //FIXME: Use a promise here...
 	    //Fire up the cube!..
-	    initiateCubeFolio();
+	    setTimeout(initiateCubeFolio, 500);
 	  }
 	}
 

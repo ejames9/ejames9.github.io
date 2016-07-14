@@ -759,6 +759,35 @@ Declare heights because of positioning of img element */
   top: 230px;
   /*z-index: 12;*/
 }
+
+#github-link2:hover > #github2 {
+  fill: #6f3b87;
+}
+#github-link2:active > #github2 {
+  fill: #164cac;
+}
+#github-link2:hover > #see-code2 {
+  color: #6f3b87;
+}
+#github-link2:active > #see-code2 {
+  color: yellow;
+}
+#github-link2:active > #see-code2 span {
+  color:#e12d22;
+}
+.site-link2:hover > .browser2 {
+  color: #e12d22;
+}
+.site-link2:active > .browser2 {
+  opacity: 1;
+}
+.site-link2:hover > .visit-page2 {
+  color: #e12d22;
+}
+.site-link2:active > .visit-page2 {
+  color: #164cac;
+}
+
 /*
 #thumbFolio page+++=====================================>>>>
 */
