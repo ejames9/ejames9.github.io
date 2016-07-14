@@ -10,10 +10,17 @@ Author: Eric Foster
 
 
 //elementsJS imports
-use 'elementsJS' go, el, x, log, on, inspect, isMobile
+use 'elementsJS' go, el, x, log, on, inspect, isMobile, ajax, url
 use './scrollControl' scrollController
 use './cubeFolio' cubeFolio
 use 'bowser' as browser
+
+
+//Portfolio code urls..
+let
+rawGit      = 'https://rawgit.com/ejames9/ejames9.github.io/split-up-portfolio-code/',
+cubeFolio_  = 'html/cubeFolio.html',
+carouFolio_ = 'html/carouFolio.html';
 
 
 
@@ -21,34 +28,13 @@ use 'bowser' as browser
   //---DOM Ready Function=================================>>>
   go
   (function() {
-
-    //Set projects pane to parameters appropriate for firefox
-    // if (browser.firefox) {
-    //   <'#aboutMe'/>
-    //             .top('-10px');
-    //   <'#aboutMeContainer'/>
-    //             .top('-35px');
-    // }
+    //1280 is the original width of the map image..
     if (window.innerWidth > 1280) {
       //Make sure map is centered by removing img-responsive class.
       <'#map-image'/>
                 .class('img-responsive', '-');
     }
-    //If device is mobile, kill cubeFolio and show thumbNail portfolio..
-    if (isMobile()) {
-      //Kill cubeFolio..
-      x(<'#cubeFolio'>);
-      //Show thumbFolio
-      <'#thumbFolio'/>
-            .display('block');
 
-    } else {
-      //Show cubeFolio..
-      <'#cubeFolio'/>
-            .display('block');
-      //Kill thumbFolio
-      x(<'#thumbFolio'>)
-    }
     if (window.innerWidth < 730 && window.innerHeight > window.innerWidth) {
       <'#meBrand'/>
           .position('relative')
@@ -65,15 +51,7 @@ use 'bowser' as browser
     } else {
       flags.ME_HEAD_ = true;
     }
-    //Reload window if orientation changes, to avoid 'scrambling' of header.
-    // on('resize', <'body'>, ()=> {
-    //   <'#responsiveCSS'/>
-    //               .href('?', '+');
-    //   //Reset the scrollController..
-    //   currentSlideOffset = scrollY;
-    //   scrollController();
-    // });
-
+    //Reload CSS and reset scroll handler globals upon orientation (layout) change..
     on('orientationchange', window, ()=> {
       <'#responsiveCSS'/>
                   .href('?', '+');
@@ -85,21 +63,13 @@ use 'bowser' as browser
       //Activate scroll-handling.
       scrollController();
 
-      try {
-        //Set up three.js scene.
-        //Call Cube Assembly Function..
-        cubeFolio.assembleCube();
-        //Initiate cube hover and click events/behaviour.
-        cubeFolio.controller();
-        //initiate render loop.
-        cubeFolio.animate();
-      } catch (e) {
-        log(e, 'red');
-      }
+      //
+      getPortfolioCode();
     }
   });
 
 
+//Reset scroll handler globals upon orientation (layout) change..
 function resetScrollControlGlobals() {
   let index = -1;
 
@@ -120,6 +90,45 @@ function resetScrollControlGlobals() {
   inspect(snapPoints);
 }
 
+
+//Decide which portfolio to use, and download it..
+function getPortfolioCode() {
+  //If device is mobile, kill cubeFolio and show thumbNail portfolio..
+  if (isMobile()) {
+    //get code from github repo with http request..
+    ajax(url(rawGit, carouFolio_), null, (r)=> {
+      <'#carouFolio'/>
+                .html(r);
+    });
+    //kill #cubefolio..
+    x(<'#cubeFolio'>);
+
+  } else {
+    //get code from github repo with http request..
+    ajax(url(rawGit, cubeFolio_), null, (r)=> {
+      <'#cubeFolio'/>
+                .html(r);
+    });
+    //Kill #carouFolio
+    x(<'#carouFolio'>);
+
+    //Fire up the cube!..
+    initiateCubeFolio();
+  }
+}
+
+
+//Initiate cube..
+function initiateCubeFolio() {
+  //Set up three.js scene.
+  //Call Cube Assembly Function..
+  cubeFolio.assembleCube();
+  //Initiate cube hover and click events/behaviour.
+  cubeFolio.controller();
+  //initiate render loop.
+  cubeFolio.animate();
+}
+
 //===TO DO===============================================================>>>
 
 //TODO: Add all items to Carousel.
@@ -135,21 +144,32 @@ function resetScrollControlGlobals() {
 
 
 
-// do({
-//         el: [<'#block'>, position],
-//     easing: [Elastic.In, 2000],
-//         to: target,
-//   onUpdate: (function() {
-//       <'#project-info'>.style.transform = 'translate(' + this.left + 'px, ' + this.top + 'px)';
-//   })
-// });
-
 
 
 //===CODE BIN===============================================================>>>
 //light table color combo
 //background-color: #3e6b6b;
 //color: #7ffffd;
+
+
+//Set projects pane to parameters appropriate for firefox
+// if (browser.firefox) {
+//   <'#aboutMe'/>
+//             .top('-10px');
+//   <'#aboutMeContainer'/>
+//             .top('-35px');
+// }
+
+
+//Reload window if orientation changes, to avoid 'scrambling' of header.
+// on('resize', <'body'>, ()=> {
+//   <'#responsiveCSS'/>
+//               .href('?', '+');
+//   //Reset the scrollController..
+//   currentSlideOffset = scrollY;
+//   scrollController();
+// });
+
 
 
 //   //Create new tween for header animation..

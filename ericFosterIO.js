@@ -72,6 +72,8 @@
 	var on = elementsJS.on;
 	var inspect = elementsJS.inspect;
 	var isMobile = elementsJS.isMobile;
+	var ajax = elementsJS.ajax;
+	var url = elementsJS.url;
 
 	var _ul = __webpack_require__(9);
 	var scrollController = _ul.scrollController;
@@ -83,16 +85,14 @@
 
 	///End Module requires///
 
+	//Portfolio code urls..
+	var rawGit = 'https://rawgit.com/ejames9/ejames9.github.io/split-up-portfolio-code/',
+	    cubeFolio_ = 'html/cubeFolio.html',
+	    carouFolio_ = 'html/carouFolio.html';
+
 	//---DOM Ready Function=================================>>>
 	go(function () {
-
-	  //Set projects pane to parameters appropriate for firefox
-	  // if (browser.firefox) {
-	  //   <'#aboutMe'/>
-	  //             .top('-10px');
-	  //   <'#aboutMeContainer'/>
-	  //             .top('-35px');
-	  // }
+	  //1280 is the original width of the map image..
 	  if (window.innerWidth > 1280) {
 	    //Make sure map is centered by removing img-responsive class.
 	    (function () {
@@ -100,54 +100,29 @@
 	      return elem0;
 	    })().class('img-responsive', '-');
 	  }
-	  //If device is mobile, kill cubeFolio and show thumbNail portfolio..
-	  if (isMobile()) {
-	    //Kill cubeFolio..
-	    x(el('#cubeFolio'));
-	    //Show thumbFolio
-	    (function () {
-	      var elem1 = _$('#thumbFolio') ? dom('#thumbFolio') : make('#thumbFolio').put("body");
-	      return elem1;
-	    })().display('block');
-	  } else {
-	    //Show cubeFolio..
-	    (function () {
-	      var elem2 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
-	      return elem2;
-	    })().display('block');
-	    //Kill thumbFolio
-	    x(el('#thumbFolio'));
-	  }
+
 	  if (window.innerWidth < 730 && window.innerHeight > window.innerWidth) {
 	    (function () {
-	      var elem3 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
-	      return elem3;
+	      var elem1 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
+	      return elem1;
 	    })().position('relative').display('inline').fontSize('40px').top('4px').left('0');
 	    (function () {
-	      var elem4 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
-	      return elem4;
+	      var elem2 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
+	      return elem2;
 	    })().class('naviBar', '-').class('naviBar_Mobile', '+');
 	    //
 	    (function () {
-	      var elem5 = _$('#me-head') ? dom('#me-head') : make('#me-head').put("body");
-	      return elem5;
+	      var elem3 = _$('#me-head') ? dom('#me-head') : make('#me-head').put("body");
+	      return elem3;
 	    })().display('none');
 	  } else {
 	    flags.ME_HEAD_ = true;
 	  }
-	  //Reload window if orientation changes, to avoid 'scrambling' of header.
-	  // on('resize', el('body'), ()=> {
-	  //   <'#responsiveCSS'/>
-	  //               .href('?', '+');
-	  //   //Reset the scrollController..
-	  //   currentSlideOffset = scrollY;
-	  //   scrollController();
-	  // });
-
+	  //Reload CSS and reset scroll handler globals upon orientation (layout) change..
 	  on('orientationchange', window, function () {
 	    (function () {
-	      var elem6 = _$('#responsiveCSS') ? dom('#responsiveCSS') : make('#responsiveCSS').put("body");
-	      return elem6;
+	      var elem4 = _$('#responsiveCSS') ? dom('#responsiveCSS') : make('#responsiveCSS').put("body");
+	      return elem4;
 	    })().href('?', '+');
 	    //Reset the scrollController..
 	    setTimeout(resetScrollControlGlobals, 1000);
@@ -157,28 +132,20 @@
 	    //Activate scroll-handling.
 	    scrollController();
 
-	    try {
-	      //Set up three.js scene.
-	      //Call Cube Assembly Function..
-	      cubeFolio.assembleCube();
-	      //Initiate cube hover and click events/behaviour.
-	      cubeFolio.controller();
-	      //initiate render loop.
-	      cubeFolio.animate();
-	    } catch (e) {
-	      log(e, 'red');
-	    }
+	    //
+	    getPortfolioCode();
 	  }
 	});
 
+	//Reset scroll handler globals upon orientation (layout) change..
 	function resetScrollControlGlobals() {
 	  var index = -1;
 
 	  currentSlideOffset = scrollY;
 
 	  (function () {
-	    var elem7 = _$('.snap') ? dom('.snap') : make('.snap').put("body");
-	    return elem7;
+	    var elem5 = _$('.snap') ? dom('.snap') : make('.snap').put("body");
+	    return elem5;
 	  })().every(function (element) {
 	    snapPoints[String(index += 1)] = element.fromTop();
 	  });
@@ -191,6 +158,46 @@
 	  }
 
 	  inspect(snapPoints);
+	}
+
+	//Decide which portfolio to use, and download it..
+	function getPortfolioCode() {
+	  //If device is mobile, kill cubeFolio and show thumbNail portfolio..
+	  if (isMobile()) {
+	    //get code from github repo with http request..
+	    ajax(url(rawGit, carouFolio_), null, function (r) {
+	      (function () {
+	        var elem6 = _$('#carouFolio') ? dom('#carouFolio') : make('#carouFolio').put("body");
+	        return elem6;
+	      })().html(r);
+	    });
+	    //kill #cubefolio..
+	    x(el('#cubeFolio'));
+	  } else {
+	    //get code from github repo with http request..
+	    ajax(url(rawGit, cubeFolio_), null, function (r) {
+	      (function () {
+	        var elem7 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
+	        return elem7;
+	      })().html(r);
+	    });
+	    //Kill #carouFolio
+	    x(el('#carouFolio'));
+
+	    //Fire up the cube!..
+	    initiateCubeFolio();
+	  }
+	}
+
+	//Initiate cube..
+	function initiateCubeFolio() {
+	  //Set up three.js scene.
+	  //Call Cube Assembly Function..
+	  cubeFolio.assembleCube();
+	  //Initiate cube hover and click events/behaviour.
+	  cubeFolio.controller();
+	  //initiate render loop.
+	  cubeFolio.animate();
 	}
 
 	//===TO DO===============================================================>>>
@@ -206,19 +213,27 @@
 	//TODO:
 	//TODO: Smoothly animate header..
 
-	// do({
-	//         el: [el('#block'), position],
-	//     easing: [Elastic.In, 2000],
-	//         to: target,
-	//   onUpdate: (function() {
-	//       el('#project-info').style.transform = 'translate(' + this.left + 'px, ' + this.top + 'px)';
-	//   })
-	// });
-
 	//===CODE BIN===============================================================>>>
 	//light table color combo
 	//background-color: #3e6b6b;
 	//color: #7ffffd;
+
+	//Set projects pane to parameters appropriate for firefox
+	// if (browser.firefox) {
+	//   <'#aboutMe'/>
+	//             .top('-10px');
+	//   <'#aboutMeContainer'/>
+	//             .top('-35px');
+	// }
+
+	//Reload window if orientation changes, to avoid 'scrambling' of header.
+	// on('resize', el('body'), ()=> {
+	//   <'#responsiveCSS'/>
+	//               .href('?', '+');
+	//   //Reset the scrollController..
+	//   currentSlideOffset = scrollY;
+	//   scrollController();
+	// });
 
 	//   //Create new tween for header animation..
 	//   if (flags.HEAD_TWEEN_) {
@@ -4234,6 +4249,7 @@
 	var on = elementsJS.on;
 	var off = elementsJS.off;
 	var hasAncestor = elementsJS.hasAncestor;
+	var isMobile = elementsJS.isMobile;
 
 	var lodash = __webpack_require__(11);
 	var zipObject = lodash.zipObject;
@@ -4264,6 +4280,7 @@
 	var on = elementsJS.on;
 	var off = elementsJS.off;
 	var hasAncestor = elementsJS.hasAncestor;
+	var isMobile = elementsJS.isMobile;
 
 	var lodash = __webpack_require__(11);
 	var zipObject = lodash.zipObject;
@@ -4838,7 +4855,7 @@
 	  //---Cube Animation Function============================>>>
 	  function animate() {
 	    //Will not run in mobile mode..
-	    if (el('#cubeFolio')) {
+	    if (!isMobile()) {
 	      //The Renderers Call to Render..
 	      css3DRenderer.render(scene, camera);
 	      //Make the cube spin..

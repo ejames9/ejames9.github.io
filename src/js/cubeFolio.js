@@ -9,7 +9,7 @@ Author: Eric James Foster
 */
 
 
-use 'elementsJS' log, el, make, inspect, mouse, click, once, on, off, hasAncestor
+use 'elementsJS' log, el, make, inspect, mouse, click, once, on, off, hasAncestor, isMobile
 use 'lodash' zipObject
 use 'three' as THREE
 use 'tween.js' as TWEEN
@@ -700,7 +700,7 @@ export const cubeFolio = (function() {
   //---Cube Animation Function============================>>>
   function animate() {
     //Will not run in mobile mode..
-    if (<'#cubeFolio'>) {
+    if (!isMobile()) {
       //The Renderers Call to Render..
       css3DRenderer.render(scene, camera);
       //Make the cube spin..
