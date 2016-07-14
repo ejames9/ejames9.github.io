@@ -144,7 +144,10 @@
 	  });
 
 	  on('orientationchange', window, function () {
-	    window.location.reload();
+	    (function () {
+	      var elem7 = _$('#responsiveCSS') ? dom('#responsiveCSS') : make('#responsiveCSS').put("body");
+	      return elem7;
+	    })().href('?', '+');
 	  });
 
 	  if (!window.frameElement) {

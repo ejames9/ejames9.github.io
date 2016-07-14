@@ -72,7 +72,8 @@ use 'bowser' as browser
     });
 
     on('orientationchange', window, ()=> {
-      window.location.reload();
+      <'#responsiveCSS'/>
+                  .href('?', '+');
     });
 
     if (!window.frameElement) {
