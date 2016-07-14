@@ -78,8 +78,7 @@ use 'bowser' as browser
       <'#responsiveCSS'/>
                   .href('?', '+');
       //Reset the scrollController..
-      currentSlideOffset = scrollY;
-      scrollController();
+      setTimeout(resetScrollControlGlobals, 1000);
     });
 
     if (!window.frameElement) {
@@ -101,7 +100,25 @@ use 'bowser' as browser
   });
 
 
+function resetScrollControlGlobals() {
+  let index = -1;
 
+  currentSlideOffset = scrollY;
+
+  <'.snap'/>
+        .every((element)=> {
+          snapPoints[String(index += 1)] = element.fromTop();
+        });
+
+  //Find current slide..
+  for (let s in snapPoints) {
+    if (currentSlideOffset === snapPoints[s]) {
+      position = s;
+    }
+  }
+
+  inspect(snapPoints);
+}
 
 //===TO DO===============================================================>>>
 

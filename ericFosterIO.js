@@ -150,8 +150,7 @@
 	      return elem6;
 	    })().href('?', '+');
 	    //Reset the scrollController..
-	    currentSlideOffset = scrollY;
-	    scrollController();
+	    setTimeout(resetScrollControlGlobals, 1000);
 	  });
 
 	  if (!window.frameElement) {
@@ -171,6 +170,28 @@
 	    }
 	  }
 	});
+
+	function resetScrollControlGlobals() {
+	  var index = -1;
+
+	  currentSlideOffset = scrollY;
+
+	  (function () {
+	    var elem7 = _$('.snap') ? dom('.snap') : make('.snap').put("body");
+	    return elem7;
+	  })().every(function (element) {
+	    snapPoints[String(index += 1)] = element.fromTop();
+	  });
+
+	  //Find current slide..
+	  for (var s in snapPoints) {
+	    if (currentSlideOffset === snapPoints[s]) {
+	      position = s;
+	    }
+	  }
+
+	  inspect(snapPoints);
+	}
 
 	//===TO DO===============================================================>>>
 
