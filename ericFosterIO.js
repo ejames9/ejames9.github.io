@@ -136,11 +136,15 @@
 	    flags.ME_HEAD_ = true;
 	  }
 	  //Reload window if orientation changes, to avoid 'scrambling' of header.
-	  on('resize', window, function () {
+	  on('resize', el('body'), function () {
 	    (function () {
 	      var elem6 = _$('#responsiveCSS') ? dom('#responsiveCSS') : make('#responsiveCSS').put("body");
 	      return elem6;
 	    })().href('?', '+');
+	  });
+
+	  on('orientationchange', window, function () {
+	    window.location.reload();
 	  });
 
 	  if (!window.frameElement) {

@@ -66,9 +66,13 @@ use 'bowser' as browser
       flags.ME_HEAD_ = true;
     }
     //Reload window if orientation changes, to avoid 'scrambling' of header.
-    on('resize', window, ()=> {
+    on('resize', <'body'>, ()=> {
       <'#responsiveCSS'/>
                   .href('?', '+');
+    });
+
+    on('orientationchange', window, ()=> {
+      window.location.reload();
     });
 
     if (!window.frameElement) {
