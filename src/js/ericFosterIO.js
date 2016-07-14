@@ -21,18 +21,14 @@ use 'bowser' as browser
   //---DOM Ready Function=================================>>>
   go
   (function() {
-    log('offsets', 'red');
-    <'.snap'/>
-          .every((element)=> {
-            log(element.fromTop(), 'green');
-          });
+
     //Set projects pane to parameters appropriate for firefox
-    if (browser.firefox) {
-      <'#aboutMe'/>
-                .top('-10px');
-      <'#aboutMeContainer'/>
-                .top('-35px');
-    }
+    // if (browser.firefox) {
+    //   <'#aboutMe'/>
+    //             .top('-10px');
+    //   <'#aboutMeContainer'/>
+    //             .top('-35px');
+    // }
     if (window.innerWidth > 1280) {
       //Make sure map is centered by removing img-responsive class.
       <'#map-image'/>
@@ -70,20 +66,26 @@ use 'bowser' as browser
       flags.ME_HEAD_ = true;
     }
     //Reload window if orientation changes, to avoid 'scrambling' of header.
-    on('orientationchange', window, ()=> {
-      window.location.reload();
+    on('resize', window, ()=> {
+      <'#responsiveCSS'/>
+                  .href('?', '+');
     });
 
     if (!window.frameElement) {
       //Activate scroll-handling.
       scrollController();
-      //Set up three.js scene.
-      //Call Cube Assembly Function..
-      cubeFolio.assembleCube();
-      //Initiate cube hover and click events/behaviour.
-      cubeFolio.controller();
-      //initiate render loop.
-      cubeFolio.animate();
+
+      try {
+        //Set up three.js scene.
+        //Call Cube Assembly Function..
+        cubeFolio.assembleCube();
+        //Initiate cube hover and click events/behaviour.
+        cubeFolio.controller();
+        //initiate render loop.
+        cubeFolio.animate();
+      } catch (e) {
+        log(e, 'red');
+      }
     }
   });
 
@@ -92,10 +94,17 @@ use 'bowser' as browser
 
 //===TO DO===============================================================>>>
 
-//TODO: Smoothly animate header..
-//TODO: Finish project descriptions..
+//TODO: Add all items to Carousel.
+//TODO: Make sure all links are working properly.
+//TODO: Make sure all buttons light up on 'active'.
+//TODO: Adjust size of icons at bottom of Cover page.
+//TODO: Make sure all bio's and descriptions are good, add dyi stuff etc.
+//TODO: Add Favicon.ico..
 //TODO: animate scroll to different sections..
+//TODO: Make sure 1300px wide and larger are looking good.
 //TODO:
+//TODO: Smoothly animate header..
+
 
 
 // do({

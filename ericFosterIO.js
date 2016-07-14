@@ -85,29 +85,19 @@
 
 	//---DOM Ready Function=================================>>>
 	go(function () {
-	  log('offsets', 'red');
-	  (function () {
-	    var elem0 = _$('.snap') ? dom('.snap') : make('.snap').put("body");
-	    return elem0;
-	  })().every(function (element) {
-	    log(element.fromTop(), 'green');
-	  });
+
 	  //Set projects pane to parameters appropriate for firefox
-	  if (browser.firefox) {
-	    (function () {
-	      var elem1 = _$('#aboutMe') ? dom('#aboutMe') : make('#aboutMe').put("body");
-	      return elem1;
-	    })().top('-10px');
-	    (function () {
-	      var elem2 = _$('#aboutMeContainer') ? dom('#aboutMeContainer') : make('#aboutMeContainer').put("body");
-	      return elem2;
-	    })().top('-35px');
-	  }
+	  // if (browser.firefox) {
+	  //   <'#aboutMe'/>
+	  //             .top('-10px');
+	  //   <'#aboutMeContainer'/>
+	  //             .top('-35px');
+	  // }
 	  if (window.innerWidth > 1280) {
 	    //Make sure map is centered by removing img-responsive class.
 	    (function () {
-	      var elem3 = _$('#map-image') ? dom('#map-image') : make('#map-image').put("body");
-	      return elem3;
+	      var elem0 = _$('#map-image') ? dom('#map-image') : make('#map-image').put("body");
+	      return elem0;
 	    })().class('img-responsive', '-');
 	  }
 	  //If device is mobile, kill cubeFolio and show thumbNail portfolio..
@@ -116,59 +106,73 @@
 	    x(el('#cubeFolio'));
 	    //Show thumbFolio
 	    (function () {
-	      var elem4 = _$('#thumbFolio') ? dom('#thumbFolio') : make('#thumbFolio').put("body");
-	      return elem4;
+	      var elem1 = _$('#thumbFolio') ? dom('#thumbFolio') : make('#thumbFolio').put("body");
+	      return elem1;
 	    })().display('block');
 	  } else {
 	    //Show cubeFolio..
 	    (function () {
-	      var elem5 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
-	      return elem5;
+	      var elem2 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
+	      return elem2;
 	    })().display('block');
 	    //Kill thumbFolio
 	    x(el('#thumbFolio'));
 	  }
 	  if (window.innerWidth < 730 && window.innerHeight > window.innerWidth) {
 	    (function () {
-	      var elem6 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
-	      return elem6;
+	      var elem3 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
+	      return elem3;
 	    })().position('relative').display('inline').fontSize('40px').top('4px').left('0');
 	    (function () {
-	      var elem7 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
-	      return elem7;
+	      var elem4 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
+	      return elem4;
 	    })().class('naviBar', '-').class('naviBar_Mobile', '+');
 	    //
 	    (function () {
-	      var elem8 = _$('#me-head') ? dom('#me-head') : make('#me-head').put("body");
-	      return elem8;
+	      var elem5 = _$('#me-head') ? dom('#me-head') : make('#me-head').put("body");
+	      return elem5;
 	    })().display('none');
 	  } else {
 	    flags.ME_HEAD_ = true;
 	  }
 	  //Reload window if orientation changes, to avoid 'scrambling' of header.
-	  on('orientationchange', window, function () {
-	    window.location.reload();
+	  on('resize', window, function () {
+	    (function () {
+	      var elem6 = _$('#responsiveCSS') ? dom('#responsiveCSS') : make('#responsiveCSS').put("body");
+	      return elem6;
+	    })().href('?', '+');
 	  });
 
 	  if (!window.frameElement) {
 	    //Activate scroll-handling.
 	    scrollController();
-	    //Set up three.js scene.
-	    //Call Cube Assembly Function..
-	    cubeFolio.assembleCube();
-	    //Initiate cube hover and click events/behaviour.
-	    cubeFolio.controller();
-	    //initiate render loop.
-	    cubeFolio.animate();
+
+	    try {
+	      //Set up three.js scene.
+	      //Call Cube Assembly Function..
+	      cubeFolio.assembleCube();
+	      //Initiate cube hover and click events/behaviour.
+	      cubeFolio.controller();
+	      //initiate render loop.
+	      cubeFolio.animate();
+	    } catch (e) {
+	      log(e, 'red');
+	    }
 	  }
 	});
 
 	//===TO DO===============================================================>>>
 
-	//TODO: Smoothly animate header..
-	//TODO: Finish project descriptions..
+	//TODO: Add all items to Carousel.
+	//TODO: Make sure all links are working properly.
+	//TODO: Make sure all buttons light up on 'active'.
+	//TODO: Adjust size of icons at bottom of Cover page.
+	//TODO: Make sure all bio's and descriptions are good, add dyi stuff etc.
+	//TODO: Add Favicon.ico..
 	//TODO: animate scroll to different sections..
+	//TODO: Make sure 1300px wide and larger are looking good.
 	//TODO:
+	//TODO: Smoothly animate header..
 
 	// do({
 	//         el: [el('#block'), position],
@@ -2316,10 +2320,22 @@
 	    }
 	  };
 
-	  this.href = function (val) {
+	  this.href = function (val, mod) {
+	    mod = mod || null;
+	    
 	    if (val !== undefined) {
-	      this.el.href = val;
-	      return this;
+	      if (mod) {
+	        if (mod === '+') {
+	          this.el.href += val;
+	          return this;
+	        } else {
+	          this.el.href = val;
+	          return this;
+	        }
+	      } else {
+	        this.el.href = val;
+	        return this;
+	      }
 	    } else {
 	      val = this.el.href;
 	      return val;
@@ -2343,6 +2359,7 @@
 	    }
 	  };
 	};
+
 
 /***/ },
 /* 3 */
