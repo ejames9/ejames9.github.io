@@ -1,12 +1,11 @@
-@import url(https://fonts.googleapis.com/css?family=Amatic+SC:400,700|Monoton|Rum+Raisin|Londrina+Sketch);
-@import 'https://fonts.googleapis.com/css?family=Aladin';
-@import 'https://fonts.googleapis.com/css?family=Advent+Pro|Berkshire+Swash|Crushed|Dorsa|Expletus+Sans|Macondo|Marko+One|Medula+One|Merienda+One|Six+Caps|Tulpen+One|Wire+One';
-/*
-amatic sc, righteous, bangers, rock salt, special elite, viga, homemade apple, limelight, bubblegum sans, fredericka the great, fontdiner swanky,
-cabin sketch, rye, monofett, fascinate, ribeye marrow,
+@import 'https://fonts.googleapis.com/css?family=Aladin|Tulpen+One|Amatic+SC:400,700|Rum+Raisin|Londrina+Sketch';
 
-amatic sc, monoton, love ya like a sister, im fell english sc, trade winds, henny penny, galindo, mystery quest, londrina shadow, londrina sketch,
-rum raisin,
+/*
+ericfosterIO.css
+
+Main CSS for ericfoster.io portfolio site.
+
+Author: Eric James Foster
 */
 
 
@@ -26,6 +25,9 @@ html,body {
   background-repeat: repeat-x;
   background-repeat: repeat-y;
   overflow-x: hidden;
+
+
+  VV--Put background image in separate div to appease mobile safari--VV
 }*/
 
 #back-image {
@@ -54,21 +56,6 @@ a:focus {
   /*right: 0px;*/
 }
 
-
-#container {
-
-
-          scroll-snap-type: mandatory;
-          scroll-snap-destination: 0 0;
-  /*-webkit-scroll-snap-type: mandatory;
-  -webkit-scroll-snap-points-y: repeat(102.5%);*/
-}
-
-.snap {
-  /*-webkit-scroll-snap-coordinate: 0% 0%;*/
-  /*-webkit-scroll-snap-align: none start;*/
-          scroll-snap-coordinate: 0 0;
-}
 
 
 #t {
@@ -118,8 +105,7 @@ a:focus {
   z-index: 999;
 }
 #meBrand:hover {
-  color: #714277;
-  font-weight: 900;
+  text-shadow: 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22;
 }
 
 .naviBar {
@@ -166,6 +152,7 @@ a:focus {
 
 #coverDesc {
   font-size: 30px;
+  color: #f8e7da;
 }
 
 
@@ -207,7 +194,7 @@ bangers, comfortaa, megrim, poiret one,
 #coverDescContainer div a:hover {
   background-color: #164cac;
   opacity: .7;
-  color: #fff;
+  color: #f8e7da;
   border: 1px solid #000;
 }
 #coverDescContainer div a:active {
@@ -393,6 +380,7 @@ bangers, comfortaa, megrim, poiret one,
   height: 100%;
   width: 100%;
   background-color: #191a1a;
+  color: #f8e7da;
   opacity: .9;
   text-align: center;
   font-family: tulpen one, aladin, cursive, bangers, amatic sc;
@@ -447,7 +435,7 @@ bangers, comfortaa, megrim, poiret one,
   position: absolute;
   top: 85px;
   left: 55px;
-  color: white;
+  color: #f8e7da;
   z-index: 10999;
 }
 #x:hover {
@@ -455,7 +443,7 @@ bangers, comfortaa, megrim, poiret one,
 }
 #x:active {
   text-shadow: 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22;
-  color: white;
+  color: #f8e7da;
 }
 
 
@@ -481,6 +469,7 @@ advent pro, aladin, cursive, medula one, merienda one, six caps,
   box-sizing: border-box;
   padding: 12px;
   bottom: 0;
+  color: #f8e7da;
   background-color: #191a1a;
   font-family: tulpen one;
   width: 28%;
@@ -496,7 +485,7 @@ advent pro, aladin, cursive, medula one, merienda one, six caps,
   z-index: 1000;
 }*/
 .projects-list-item:active {
-  color: #fff;
+  color: #f8e7da;
   font-weight: 900;
   text-shadow: 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927;
   z-index: 1000;
@@ -509,8 +498,8 @@ advent pro, aladin, cursive, medula one, merienda one, six caps,
   top: 110px;
   left: 300px;
   border-radius: 10px;
-  background-color: #000;
-  color: #fff;
+  background-color: #191a1a;
+  color: #f8e7da;
   opacity:  .8;
   font-family: tulpen one, amatic sc;
   /*font-size: 32px;*/
@@ -521,7 +510,7 @@ advent pro, aladin, cursive, medula one, merienda one, six caps,
 #project-info h2,
 .proj-descript h2 {
   font-family: aladin, cursive;
-  color: #FFf;
+  color: #f8e7da;
   font-weight: 900;
   text-shadow: 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22;
   /*text-shadow: 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87, 0 0 0.2em #6f3b87;*/
@@ -532,7 +521,7 @@ advent pro, aladin, cursive, medula one, merienda one, six caps,
   position: absolute;
   top: 15px;
   left: 20px;
-  color: white;
+  color: #f8e7da;
   z-index: 10000;
 }
 #chevyL:hover {
@@ -540,14 +529,14 @@ advent pro, aladin, cursive, medula one, merienda one, six caps,
 }
 #chevyL:active {
   text-shadow: 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927;
-  color: white;
+  color: #f8e7da;
 }
 
 #chevy {
   position: absolute;
   top: 15px;
   right: 20px;
-  color: white;
+  color: #f8e7da;
   z-index: 10000;
 }
 #chevy:hover {
@@ -555,7 +544,7 @@ advent pro, aladin, cursive, medula one, merienda one, six caps,
 }
 #chevy:active {
   text-shadow: 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927;
-  color: white;
+  color: #f8e7da;
 }
 
 .browser {
@@ -563,17 +552,17 @@ advent pro, aladin, cursive, medula one, merienda one, six caps,
   font-size: 66px;
   bottom: 20px;
   left: 230px;
-  color: white;
+  color: #f8e7da;
   z-index: 10000;
 }
 
 
 #github {
   position: absolute;
-  fill: white;
+  fill: #f8e7da;
   bottom: 20px;
   right: 230px;
-  color: white;
+  color: #f8e7da;
   z-index: 10000;
 }
 
@@ -583,6 +572,7 @@ advent pro, aladin, cursive, medula one, merienda one, six caps,
 
 #see-code {
   position: absolute;
+  color: #f8e7da;
   font-size: 4;
   font-family: londrina sketch, rum raisin;
   bottom: 20px;
@@ -593,7 +583,7 @@ advent pro, aladin, cursive, medula one, merienda one, six caps,
   position: absolute;
   font-size: 6;
   font-family: rum raisin;
-  color: white;
+  color: #f8e7da;
   bottom: 20px;
   left: 115px;
 }
@@ -721,6 +711,7 @@ Declare heights because of positioning of img element */
 
 .caption {
   background-color: #191a1a;
+  color: #f8e7da;
   opacity: .8;
   border-radius: 7px;
   bottom: 100px;
@@ -741,9 +732,14 @@ Declare heights because of positioning of img element */
 
 .carousel-indicators {
   background-color: #191a1a;
+  color: #f8e7da;
   opacity: .9;
   border-radius: 6px;
   margin-bottom: 15px;
+}
+
+.carousel-indicators li {
+  color: #f8e7da;
 }
 
 .left > .glyphicon {
@@ -821,10 +817,10 @@ Declare heights because of positioning of img element */
 .github2 {
   display: inline;
   margin-right: 3px;
-  fill: white;
+  fill: #f8e7da;
   height: 28px;
   width: 28px;
-  color: white;
+  color: #f8e7da;
   z-index: 10000;
 }
 
@@ -839,6 +835,7 @@ Declare heights because of positioning of img element */
 }
 
 .see-code2 {
+  color: #f8e7da;
   display: inline;
   position: relative;
   bottom: 5px;
@@ -859,6 +856,7 @@ Declare heights because of positioning of img element */
 }
 
 .visit-page2 {
+  color: #f8e7da;
   display: inline;
   position: relative;
   font-family: rum raisin;
@@ -867,6 +865,7 @@ Declare heights because of positioning of img element */
 }
 
 .www2 {
+  color: #f8e7da;
   position: relative;
   font-size: 30px;
   /*right: 100px;*/
@@ -1109,8 +1108,6 @@ Declare heights because of positioning of img element */
 }
 
 .active {
-  /*color: #6f3b87;*/
-  /*text-shadow: 0 0 0.2em #000, 0 0 0.2em #000, 0 0 0.2em #000, 0 0 0.2em #000, 0 0 0.2em #000, 0 0 0.2em #000, 0 0 0.2em #000, 0 0 0.2em #000;*/
  background-color: transparent;
 }
 

@@ -22,13 +22,6 @@ use 'bowser' as browser
   go
   (function() {
 
-    //Set projects pane to parameters appropriate for firefox
-    // if (browser.firefox) {
-    //   <'#aboutMe'/>
-    //             .top('-10px');
-    //   <'#aboutMeContainer'/>
-    //             .top('-35px');
-    // }
     if (window.innerWidth > 1280) {
       //Make sure map is centered by removing img-responsive class.
       <'#map-image'/>
@@ -133,15 +126,6 @@ function resetScrollControlGlobals() {
 
 
 
-// do({
-//         el: [<'#block'>, position],
-//     easing: [Elastic.In, 2000],
-//         to: target,
-//   onUpdate: (function() {
-//       <'#project-info'>.style.transform = 'translate(' + this.left + 'px, ' + this.top + 'px)';
-//   })
-// });
-
 
 
 //===CODE BIN===============================================================>>>
@@ -149,6 +133,14 @@ function resetScrollControlGlobals() {
 //background-color: #3e6b6b;
 //color: #7ffffd;
 
+
+//Set projects pane to parameters appropriate for firefox
+// if (browser.firefox) {
+//   <'#aboutMe'/>
+//             .top('-10px');
+//   <'#aboutMeContainer'/>
+//             .top('-35px');
+// }
 
 
 // on('resize', <'body'>, ()=> {
