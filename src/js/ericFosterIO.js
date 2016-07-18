@@ -71,6 +71,8 @@ use 'bowser' as browser
     if (!window.frameElement) {
       //Activate scroll-handling.
       scrollController();
+      //Activate touch control.
+      touchControl();
 
       try {
         //Set up three.js scene.
@@ -108,6 +110,40 @@ function resetScrollControlGlobals() {
   inspect(snapPoints);
 }
 
+
+//This function colors the backround of the project info buttons on touch start/end, making them more reactive.
+function touchControl() {
+  //Set background color of site link/github link buttons on touch start..
+  on('touchstart', <'body'>, (e)=> {
+    switch (true) {
+      case (e.target.className === 'site-link2'):
+          <e.target/>
+                .bgColor('#164cac');
+          break;
+      case (e.target.className === 'github-link2'):
+          <e.target/>
+                .bgColor('#6f3b87');
+          break;
+      default:
+          break;
+    }
+  });
+  //Set background color of site link/github link buttons on touch end..
+  on('touchend', <'body'>, (e)=> {
+    switch (true) {
+      case (e.target.className === 'site-link2'):
+          <e.target/>
+                .bgColor('transparent');
+          break;
+      case (e.target.className === 'github-link2'):
+          <e.target/>
+                .bgColor('transparent');
+          break;
+      default:
+          break;
+    }
+  });
+}
 
 
 
