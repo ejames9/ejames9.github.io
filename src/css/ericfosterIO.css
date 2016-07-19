@@ -964,22 +964,7 @@ Declare heights because of positioning of img element */
   display: inline;
   font-size: 48px;
   background-color: transparent;
-  color: f8e7da;
   margin-right: 40px;
-}
-#buttons div a:hover {
-  background-color: #fe7927;
-  /*opacity: .9;*/
-  /*color: #fff;*/
-  /*text-shadow: 0 0 0.2em #fff, 0 0 0.2em #fff, 0 0 0.2em #fff, 0 0 0.2em #fff, 0 0 0.2em #fff, 0 0 0.2em #fff, 0 0 0.2em #fff, 0 0 0.2em #fff;*/
-
-  border: 1px solid #fe7927;
-}
-#buttons div a:active {
-  background-color: #43234c;
-  opacity: 1;
-  /*color: #f8e7da;*/
-  border: 1px solid #43234c;
 }
 
 #buttonsContainer {

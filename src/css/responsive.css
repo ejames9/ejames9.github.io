@@ -16,7 +16,19 @@ Author: Eric James Foster
 Responsive Design+++++++++++++++++++======================>>>>
 --Media Queries--------------------*/
 
+@media screen and (min-width: 1000px) {
+ #buttons div a:hover {
+  background-color: #fe7927;
+  border: 1px solid #fe7927;
+ }
+ #buttons div a:active {
+  background-color: #43234c;
+  opacity: 1;
+  /*color: #f8e7da;*/
+  border: 1px solid #43234c;
+ }
 
+}
 
 
 /*

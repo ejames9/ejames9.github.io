@@ -115,32 +115,42 @@ function resetScrollControlGlobals() {
 function touchControl() {
   //Set background color of site link/github link buttons on touch start..
   on('touchstart', <'body'>, (e)=> {
-    switch (true) {
-      case (e.target.className === 'site-link2'):
-          <e.target/>
-                .bgColor('#164cac');
-          break;
-      case (e.target.className === 'github-link2'):
-          <e.target/>
-                .bgColor('#6f3b87');
-          break;
-      default:
-          break;
+    if (isMobile()) {
+      switch (true) {
+        case (e.target.className === 'site-link2'):
+            <e.target/>
+                  .bgColor('#164cac');
+            break;
+        case (e.target.className === 'github-link2'):
+            <e.target/>
+                  .bgColor('#6f3b87');
+            break;
+        case (/line/.test(e.target.className)):
+            <e.target/>
+                  .bgColor('#fe7927');
+        default:
+            break;
+      }
     }
   });
   //Set background color of site link/github link buttons on touch end..
   on('touchend', <'body'>, (e)=> {
-    switch (true) {
-      case (e.target.className === 'site-link2'):
-          <e.target/>
-                .bgColor('transparent');
-          break;
-      case (e.target.className === 'github-link2'):
-          <e.target/>
-                .bgColor('transparent');
-          break;
-      default:
-          break;
+    if (isMobile()) {
+      switch (true) {
+        case (e.target.className === 'site-link2'):
+            <e.target/>
+                  .bgColor('transparent');
+            break;
+        case (e.target.className === 'github-link2'):
+            <e.target/>
+                  .bgColor('transparent');
+            break;
+        case (/line/.test(e.target.className)):
+            <e.target/>
+                  .bgColor('transparent');
+        default:
+            break;
+      }
     }
   });
 }
