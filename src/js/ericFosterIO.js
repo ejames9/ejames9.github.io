@@ -10,7 +10,7 @@ Author: Eric Foster
 
 
 //elementsJS imports
-use 'elementsJS' go, el, x, log, on, inspect, isMobile
+use 'elementsJS' go, el, x, log, on, inspect, isMobile, hasAncestor, click
 use './scrollControl' scrollController
 use './cubeFolio' cubeFolio
 use 'bowser' as browser
@@ -74,16 +74,10 @@ use 'bowser' as browser
       //Activate touch control.
       touchControl();
 
-      try {
-        //Set up three.js scene.
-        //Call Cube Assembly Function..
-        cubeFolio.assembleCube();
-        //Initiate cube hover and click events/behaviour.
-        cubeFolio.controller();
-        //initiate render loop.
-        cubeFolio.animate();
-      } catch (e) {
-        log(e, 'red');
+      if (!isMobile()) {
+        initiateCubeFolio();
+      } else {
+        initiateCarouFolio();
       }
     }
   });
@@ -155,6 +149,47 @@ function touchControl() {
   });
 }
 
+
+function initiateCubeFolio() {
+  //Set up three.js scene.
+  //Call Cube Assembly Function..
+  cubeFolio.assembleCube();
+  //Initiate cube hover and click events/behaviour.
+  cubeFolio.controller();
+  //initiate render loop.
+  cubeFolio.animate();
+}
+
+
+function initiateCarouFolio() {
+  click(<'body'>, (e)=> {
+    //Z-index swapping button for carousel on low ratio devices..
+    if (e.target.id === 'swap' || hasAncestor(<e.target/>.el, <'#swap'>)) {
+      if (flags.FLIPPER_) {
+        log('hello');
+        //Pull image on top of caption..
+        <'.carousel-image'/>
+                  .every((element)=> {
+                    element
+                        .position('relative')
+                        .zIndex('13');
+                  });
+        //Reset flag
+        flags.FLIPPER_ = false;
+      } else {
+        //Pull caption on top of image..
+        <'.carousel-image'/>
+                  .every((element)=> {
+                    element
+                        .position('static')
+                        .zIndex('');
+                  });
+        //Reset flag
+        flags.FLIPPER_ = true;
+      }
+    }
+  });
+}
 
 
 //===TO DO===============================================================>>>

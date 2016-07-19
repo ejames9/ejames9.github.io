@@ -72,6 +72,8 @@
 	var on = elementsJS.on;
 	var inspect = elementsJS.inspect;
 	var isMobile = elementsJS.isMobile;
+	var hasAncestor = elementsJS.hasAncestor;
+	var click = elementsJS.click;
 
 	var _ul = __webpack_require__(9);
 	var scrollController = _ul.scrollController;
@@ -146,16 +148,10 @@
 	    //Activate touch control.
 	    touchControl();
 
-	    try {
-	      //Set up three.js scene.
-	      //Call Cube Assembly Function..
-	      cubeFolio.assembleCube();
-	      //Initiate cube hover and click events/behaviour.
-	      cubeFolio.controller();
-	      //initiate render loop.
-	      cubeFolio.animate();
-	    } catch (e) {
-	      log(e, 'red');
+	    if (!isMobile()) {
+	      initiateCubeFolio();
+	    } else {
+	      initiateCarouFolio();
 	    }
 	  }
 	});
@@ -216,6 +212,46 @@
 	          element(e.target).bgColor('transparent');
 	        default:
 	          break;
+	      }
+	    }
+	  });
+	}
+
+	function initiateCubeFolio() {
+	  //Set up three.js scene.
+	  //Call Cube Assembly Function..
+	  cubeFolio.assembleCube();
+	  //Initiate cube hover and click events/behaviour.
+	  cubeFolio.controller();
+	  //initiate render loop.
+	  cubeFolio.animate();
+	}
+
+	function initiateCarouFolio() {
+	  click(el('body'), function (e) {
+	    //Z-index swapping button for carousel on low ratio devices..
+	    if (e.target.id === 'swap' || hasAncestor(element(e.target).el, el('#swap'))) {
+	      if (flags.FLIPPER_) {
+	        log('hello');
+	        //Pull image on top of caption..
+	        (function () {
+	          var elem8 = _$('.carousel-image') ? dom('.carousel-image') : make('.carousel-image').put("body");
+	          return elem8;
+	        })().every(function (element) {
+	          element.position('relative').zIndex('13');
+	        });
+	        //Reset flag
+	        flags.FLIPPER_ = false;
+	      } else {
+	        //Pull caption on top of image..
+	        (function () {
+	          var elem9 = _$('.carousel-image') ? dom('.carousel-image') : make('.carousel-image').put("body");
+	          return elem9;
+	        })().every(function (element) {
+	          element.position('static').zIndex('');
+	        });
+	        //Reset flag
+	        flags.FLIPPER_ = true;
 	      }
 	    }
 	  });
@@ -4611,90 +4647,67 @@
 	      var projectRE = /projects\-list\-item/;
 
 	      click(el('html'), function (e) {
-	        //Z-index swapping button for carousel on low ratio devices..
-	        if (e.target.id === 'swap' || hasAncestor(element(e.target).el, el('#swap'))) {
-	          if (flags.FLIPPER_) {
-	            //Pull image on top of caption..
-	            (function () {
-	              var elem0 = _$('.carousel-image') ? dom('.carousel-image') : make('.carousel-image').put("body");
-	              return elem0;
-	            })().every(function (element) {
-	              element.position('relative').zIndex('13');
-	            });
-	            //Reset flag
-	            flags.FLIPPER_ = false;
-	          } else {
-	            //Pull caption on top of image..
-	            (function () {
-	              var elem1 = _$('.carousel-image') ? dom('.carousel-image') : make('.carousel-image').put("body");
-	              return elem1;
-	            })().every(function (element) {
-	              element.position('static').zIndex('');
-	            });
-	            //Reset flag
-	            flags.FLIPPER_ = true;
+	        //If one of the links in the main navigation header are clicked..
+	        if (e.target.className === 'head-nav') {
+	          //Find the currently 'active' link, and remove the active class..
+	          dom('[class~=activ]').class('activ', '-');
+	          //Add 'active' class to clicked link..
+	          element(e.target).ma().class('activ', '+');
+	        } else if (e.target.id === 'chevy') {
+	          //Tween project-info out of the way..
+	          var _tween = new TWEEN.Tween({ top: 0, left: 0 });
+	          _tween.to({ left: 920 }, 1300).easing(TWEEN.Easing.Cubic.In).onUpdate(function () {
+	            el('#project-info').style.transform = 'translate(' + this.left + 'px, ' + this.top + 'px)';
+	          }).start();
+	          //Set flag that signifies that the project-info pane is off-screen..
+	          flags.PROJ_PANE_ = false;
+	          //Reveal left chevron button.
+	          (function () {
+	            var elem0 = _$('#chevyL') ? dom('#chevyL') : make('#chevyL').put("body");
+	            return elem0;
+	          })().class('hide', '-');
+	          //Hide right chevron.
+	          (function () {
+	            var elem1 = _$('#chevy') ? dom('#chevy') : make('#chevy').put("body");
+	            return elem1;
+	          })().class('hide', '+');
+	        } else if (e.target.id === 'chevyL') {
+	          //Tween project-info back into view..
+	          projectInfoTweenBack();
+	        } else if (e.target.id === 'x') {
+	          //Reset the FIRST_CLICK_..
+	          flags.FIRST_CLICK_ = true;
+	          //Return to spinning cube..
+	          backToSpinningCube();
+	        } else {
+	          //Highlight focused list item.
+	          if (flags.FOCUS_) {
+	            dom('[name=focus]').attrib('name', '').color('').fontWeight('').textShadow('').zIndex('');
 	          }
-	          //If one of the links in the main navigation header are clicked..
-	        } else if (e.target.className === 'head-nav') {
-	            //Find the currently 'active' link, and remove the active class..
-	            dom('[class~=activ]').class('activ', '-');
-	            //Add 'active' class to clicked link..
-	            element(e.target).ma().class('activ', '+');
-	          } else if (e.target.id === 'chevy') {
-	            //Tween project-info out of the way..
-	            var _tween = new TWEEN.Tween({ top: 0, left: 0 });
-	            _tween.to({ left: 920 }, 1300).easing(TWEEN.Easing.Cubic.In).onUpdate(function () {
-	              el('#project-info').style.transform = 'translate(' + this.left + 'px, ' + this.top + 'px)';
+	          flags.FOCUS_ = true;
+	          //Hone in on click events happening on our target elements.
+	          if (projectRE.test(e.target.className)) {
+	            //Give target focus.
+	            element(e.target).attrib('name', 'focus').color('#27130a').fontWeight('900').textShadow('0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927').zIndex('1000');
+	            //Kill spin.
+	            flags.SPIN_SWITCH_ = false;
+	            //New tween/target for close-up animation.
+	            var tween3 = new TWEEN.Tween(camera.position),
+	                target = closeUps[element(e.target).attrib('data-uri')];
+	            //tweenify...
+	            tween3.to(target, 1500).easing(TWEEN.Easing.Linear.None).onUpdate(function () {
+	              camera.lookAt(scene.position);
 	            }).start();
-	            //Set flag that signifies that the project-info pane is off-screen..
-	            flags.PROJ_PANE_ = false;
-	            //Reveal left chevron button.
-	            (function () {
-	              var elem2 = _$('#chevyL') ? dom('#chevyL') : make('#chevyL').put("body");
-	              return elem2;
-	            })().class('hide', '-');
-	            //Hide right chevron.
-	            (function () {
-	              var elem3 = _$('#chevy') ? dom('#chevy') : make('#chevy').put("body");
-	              return elem3;
-	            })().class('hide', '+');
-	          } else if (e.target.id === 'chevyL') {
-	            //Tween project-info back into view..
-	            projectInfoTweenBack();
-	          } else if (e.target.id === 'x') {
-	            //Reset the FIRST_CLICK_..
-	            flags.FIRST_CLICK_ = true;
-	            //Return to spinning cube..
-	            backToSpinningCube();
+	            //kill mouseover/out behaviour..
+	            flags.TWEEN_ = false;
+	            // off('mouseover', el('html'), hoverCallBack);
+	            // off('mouseout', eTarget, mouseoutCallBack);
+	            //Setup the project-info pane..
+	            projectInfoPane(e.target);
 	          } else {
-	            //Highlight focused list item.
-	            if (flags.FOCUS_) {
-	              dom('[name=focus]').attrib('name', '').color('').fontWeight('').textShadow('').zIndex('');
-	            }
-	            flags.FOCUS_ = true;
-	            //Hone in on click events happening on our target elements.
-	            if (projectRE.test(e.target.className)) {
-	              //Give target focus.
-	              element(e.target).attrib('name', 'focus').color('#27130a').fontWeight('900').textShadow('0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927').zIndex('1000');
-	              //Kill spin.
-	              flags.SPIN_SWITCH_ = false;
-	              //New tween/target for close-up animation.
-	              var tween3 = new TWEEN.Tween(camera.position),
-	                  target = closeUps[element(e.target).attrib('data-uri')];
-	              //tweenify...
-	              tween3.to(target, 1500).easing(TWEEN.Easing.Linear.None).onUpdate(function () {
-	                camera.lookAt(scene.position);
-	              }).start();
-	              //kill mouseover/out behaviour..
-	              flags.TWEEN_ = false;
-	              // off('mouseover', el('html'), hoverCallBack);
-	              // off('mouseout', eTarget, mouseoutCallBack);
-	              //Setup the project-info pane..
-	              projectInfoPane(e.target);
-	            } else {
-	              flags.FOCUS_ = false;
-	            }
+	            flags.FOCUS_ = false;
 	          }
+	        }
 	      });
 	    }
 
@@ -4709,8 +4722,8 @@
 	      var elString = '[name=' + e_target.id + ']';
 	      //Show Project Info, re-assign the 'show' class..
 	      (function () {
-	        var elem4 = _$('#project-info') ? dom('#project-info') : make('#project-info').put("body");
-	        return elem4;
+	        var elem2 = _$('#project-info') ? dom('#project-info') : make('#project-info').put("body");
+	        return elem2;
 	      })().class('hidden', '-');
 	      dom(elString).class('hide', '-').class('show', '+');
 
@@ -4718,8 +4731,8 @@
 	        dom('[class~=show2]').class('show2', '-').class('hide', '+');
 	      }
 	      (function () {
-	        var elem5 = _$('#github-link') ? dom('#github-link') : make('#github-link').put("body");
-	        return elem5;
+	        var elem3 = _$('#github-link') ? dom('#github-link') : make('#github-link').put("body");
+	        return elem3;
 	      })().href(repos[e_target.id]);
 	      //determine which browser icon to show, using bowser.
 	      // log('browser');
@@ -4730,44 +4743,44 @@
 	      switch (browser.name) {
 	        case 'Safari':
 	          (function () {
-	            var elem6 = _$('#safari') ? dom('#safari') : make('#safari').put("body");
-	            return elem6;
+	            var elem4 = _$('#safari') ? dom('#safari') : make('#safari').put("body");
+	            return elem4;
 	          })().class('hide', '-').class('show2', '+').sib('next').class('hide', '-').class('show3', '+').ma().href(projs[e_target.id]);
 	          break;
 	        case 'Chrome':
 	          (function () {
-	            var elem7 = _$('#chrome') ? dom('#chrome') : make('#chrome').put("body");
-	            return elem7;
+	            var elem5 = _$('#chrome') ? dom('#chrome') : make('#chrome').put("body");
+	            return elem5;
 	          })().class('hide', '-').class('show2', '+').sib('next').class('hide', '-').class('show3', '+').ma().href(projs[e_target.id]);
 	          break;
 	        case 'Firefox':
 	          (function () {
-	            var elem8 = _$('#firefox') ? dom('#firefox') : make('#firefox').put("body");
-	            return elem8;
+	            var elem6 = _$('#firefox') ? dom('#firefox') : make('#firefox').put("body");
+	            return elem6;
 	          })().class('hide', '-').class('show2', '+').sib('next').class('hide', '-').class('show3', '+').ma().href(projs[e_target.id]);
 	          break;
 	        case 'Internet Explorer':
 	          (function () {
-	            var elem9 = _$('#ie') ? dom('#ie') : make('#ie').put("body");
-	            return elem9;
+	            var elem7 = _$('#ie') ? dom('#ie') : make('#ie').put("body");
+	            return elem7;
 	          })().class('hide', '-').class('show2', '+').sib('next').class('hide', '-').class('show3', '+').ma().href(projs[e_target.id]);
 	          break;
 	        case 'Edge':
 	          (function () {
-	            var elem10 = _$('#ie') ? dom('#ie') : make('#ie').put("body");
-	            return elem10;
+	            var elem8 = _$('#ie') ? dom('#ie') : make('#ie').put("body");
+	            return elem8;
 	          })().class('hide', '-').class('show2', '+').sib('next').class('hide', '-').class('show3', '+').ma().href(projs[e_target.id]);
 	          break;
 	        default:
 	          (function () {
-	            var elem11 = _$('#www') ? dom('#www') : make('#www').put("body");
-	            return elem11;
+	            var elem9 = _$('#www') ? dom('#www') : make('#www').put("body");
+	            return elem9;
 	          })().class('hide', '-').class('show2', '+').sib('next').class('hide', '-').class('show3', '+').ma().href(projs[e_target.id]);
 	      }
 	      //Display Project info Closing 'X' button.
 	      (function () {
-	        var elem12 = _$('#x') ? dom('#x') : make('#x').put("body");
-	        return elem12;
+	        var elem10 = _$('#x') ? dom('#x') : make('#x').put("body");
+	        return elem10;
 	      })().class('hide', '-');
 	      //Check PROJ_PANE_ to see if project-info pane is offScreen. If so, move it back into view.
 	      if (!flags.PROJ_PANE_ && flags.FIRST_CLICK_) {
@@ -4828,12 +4841,12 @@
 
 	      //Get rid of 'x' and project-info pane..
 	      (function () {
-	        var elem13 = _$('#project-info') ? dom('#project-info') : make('#project-info').put("body");
-	        return elem13;
+	        var elem11 = _$('#project-info') ? dom('#project-info') : make('#project-info').put("body");
+	        return elem11;
 	      })().class('hidden', '+');
 	      (function () {
-	        var elem14 = _$('#x') ? dom('#x') : make('#x').put("body");
-	        return elem14;
+	        var elem12 = _$('#x') ? dom('#x') : make('#x').put("body");
+	        return elem12;
 	      })().class('hide', '+');
 	      //Flip the SPIN_SWITCH_/TWEEN_ back on.
 	      flags.SPIN_SWITCH_ = true;
@@ -4858,13 +4871,13 @@
 	      flags.PROJ_PANE_ = true;
 	      //Re-hide left chevron button.
 	      (function () {
-	        var elem15 = _$('#chevyL') ? dom('#chevyL') : make('#chevyL').put("body");
-	        return elem15;
+	        var elem13 = _$('#chevyL') ? dom('#chevyL') : make('#chevyL').put("body");
+	        return elem13;
 	      })().class('hide', '+');
 	      //Show right chevron.
 	      (function () {
-	        var elem16 = _$('#chevy') ? dom('#chevy') : make('#chevy').put("body");
-	        return elem16;
+	        var elem14 = _$('#chevy') ? dom('#chevy') : make('#chevy').put("body");
+	        return elem14;
 	      })().class('hide', '-');
 	    }
 	  }

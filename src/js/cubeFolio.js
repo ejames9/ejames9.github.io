@@ -374,31 +374,8 @@ export const cubeFolio = (function() {
       const projectRE = /projects\-list\-item/;
 
       click(<'html'>, function(e) {
-        //Z-index swapping button for carousel on low ratio devices..
-        if (e.target.id === 'swap' || hasAncestor(<e.target/>.el, <'#swap'>)) {
-          if (flags.FLIPPER_) {
-            //Pull image on top of caption..
-            <'.carousel-image'/>
-                      .every((element)=> {
-                        element
-                            .position('relative')
-                            .zIndex('13');
-                      });
-            //Reset flag
-            flags.FLIPPER_ = false;
-          } else {
-            //Pull caption on top of image..
-            <'.carousel-image'/>
-                      .every((element)=> {
-                        element
-                            .position('static')
-                            .zIndex('');
-                      });
-            //Reset flag
-            flags.FLIPPER_ = true;
-          }
-          //If one of the links in the main navigation header are clicked..
-        } else if (e.target.className === 'head-nav') {
+        //If one of the links in the main navigation header are clicked..
+        if (e.target.className === 'head-nav') {
           //Find the currently 'active' link, and remove the active class..
           <'[class~=activ]'/>
                   .class('activ', '-');
