@@ -23,8 +23,15 @@ const webpackConfig = {
   }
 }
 
+const webpackConfig2 = {
+  entry: './dist/babel/insertPortfolioCode.js',
+  output: {
+    filename: 'insertPortfolioCode.js'
+  }
+}
+
 gulp.task('ejf-babel', ()=> {
-  var jsSrc = ['./src/js/ericFosterIO.js', './src/js/scrollControl.js', './src/js/cubeFolio.js'],
+  var jsSrc = ['./src/js/ericFosterIO.js', './src/js/scrollControl.js', './src/js/cubeFolio.js', './src/js/insertPortfolioCode.js'],
       jsDst = './dist/babel/';
 
   return gulp.src(jsSrc)
@@ -45,6 +52,16 @@ gulp.task('ejf-bundle', ()=> {
     .pipe(gulp.dest(jsDst));
 });
 
+gulp.task('portfolio-bundle', ()=> {
+  var compiler = gulpWebpack(webpackConfig2, webpack),
+      jsSrc    = './dist/babel/insertPortfolioCode.js',
+      jsDst    = './';
+
+  return gulp.src(jsSrc)
+    .pipe(compiler)
+    .pipe(gulp.dest(jsDst));
+});
+
 gulp.task('default', ()=> {
-  return run('ejf-babel', 'ejf-bundle');
+  return run('ejf-babel', 'ejf-bundle', 'portfolio-bundle');
 });

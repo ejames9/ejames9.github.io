@@ -85,11 +85,6 @@
 
 	///End Module requires///
 
-	//Portfolio code urls..
-	var rawGit = 'https://rawgit.com/ejames9/ejames9.github.io/split-up-portfolio-code/',
-	    cubeFolio_ = 'html/cubeFolio.html',
-	    carouFolio_ = 'html/carouFolio.html';
-
 	//---DOM Ready Function=================================>>>
 	go(function () {
 	  //1280 is the original width of the map image..
@@ -132,8 +127,10 @@
 	    //Activate scroll-handling.
 	    scrollController();
 
-	    //
-	    getPortfolioCode();
+	    //If user is on desktop computer, initiate the cube..
+	    if (!isMobile()) {
+	      initiateCubeFolio();
+	    }
 	  }
 	});
 
@@ -158,63 +155,6 @@
 	  }
 
 	  inspect(snapPoints);
-	}
-
-	//Decide which portfolio to use, and download it..
-	function getPortfolioCode() {
-	  //If device is mobile, kill cubeFolio and show thumbNail portfolio..
-	  if (isMobile()) {
-	    //get code from github repo with http request..
-	    ajax(url(rawGit, carouFolio_), null, function (r) {
-	      (function () {
-	        var elem6 = _$('#carouFolio') ? dom('#carouFolio') : make('#carouFolio').put("body");
-	        return elem6;
-	      })().html(r);
-	    });
-	    //kill #cubefolio..
-	    x(el('#cubeFolio'));
-	    //reload css..
-	    setTimeout(function () {
-	      (function () {
-	        var elem7 = _$('.caption') ? dom('.caption') : make('.caption').put("body");
-	        return elem7;
-	      })().every(function (element) {
-	        element.fontFamily('tulpen one');
-	      });
-	      (function () {
-	        var elem8 = _$('#responsiveCSS') ? dom('#responsiveCSS') : make('#responsiveCSS').put("body");
-	        return elem8;
-	      })().href('?', '+');
-	      (function () {
-	        var elem9 = _$('#carouFolio') ? dom('#carouFolio') : make('#carouFolio').put("body");
-	        return elem9;
-	      })().height('100%');
-	      (function () {
-	        var elem10 = _$('.carousel-indicators') ? dom('.carousel-indicators') : make('.carousel-indicators').put("body");
-	        return elem10;
-	      })().padding('8px').bottom('20px');
-	      (function () {
-	        var elem11 = _$('.item-inner') ? dom('.item-inner') : make('.item-inner').put("body");
-	        return elem11;
-	      })().every(function (el) {
-	        el.top('53px');
-	      });
-	    }, 700);
-	  } else {
-	    //get code from github repo with http request..
-	    ajax(url(rawGit, cubeFolio_), null, function (r) {
-	      (function () {
-	        var elem12 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
-	        return elem12;
-	      })().html(r);
-	    });
-	    //Kill #carouFolio
-	    x(el('#carouFolio'));
-
-	    //FIXME: Use a promise here...
-	    //Fire up the cube!..
-	    setTimeout(initiateCubeFolio, 500);
-	  }
 	}
 
 	//Initiate cube..

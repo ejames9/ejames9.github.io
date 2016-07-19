@@ -16,13 +16,6 @@ use './cubeFolio' cubeFolio
 use 'bowser' as browser
 
 
-//Portfolio code urls..
-let
-rawGit      = 'https://rawgit.com/ejames9/ejames9.github.io/split-up-portfolio-code/',
-cubeFolio_  = 'html/cubeFolio.html',
-carouFolio_ = 'html/carouFolio.html';
-
-
 
 
   //---DOM Ready Function=================================>>>
@@ -63,8 +56,10 @@ carouFolio_ = 'html/carouFolio.html';
       //Activate scroll-handling.
       scrollController();
 
-      //
-      getPortfolioCode();
+      //If user is on desktop computer, initiate the cube..
+      if (!isMobile()) {
+        initiateCubeFolio();
+      }
     }
   });
 
@@ -88,52 +83,6 @@ function resetScrollControlGlobals() {
   }
 
   inspect(snapPoints);
-}
-
-
-//Decide which portfolio to use, and download it..
-function getPortfolioCode() {
-  //If device is mobile, kill cubeFolio and show thumbNail portfolio..
-  if (isMobile()) {
-    //get code from github repo with http request..
-    ajax(url(rawGit, carouFolio_), null, (r)=> {
-      <'#carouFolio'/>
-                .html(r);
-    });
-    //kill #cubefolio..
-    x(<'#cubeFolio'>);
-    //reload css..
-    setTimeout(function() {
-      <'.caption'/>
-                  .every((element)=> {
-                    element
-                        .fontFamily('tulpen one');
-                  });
-      <'#responsiveCSS'/>
-                  .href('?', '+');
-      <'#carouFolio'/>
-                  .height('100%');
-      <'.carousel-indicators'/>
-                  .padding('8px')
-                  .bottom('20px');
-      <'.item-inner'/>
-                  .every((el)=> {
-                    el.top('53px');
-                  });
-    }, 700);
-  } else {
-    //get code from github repo with http request..
-    ajax(url(rawGit, cubeFolio_), null, (r)=> {
-      <'#cubeFolio'/>
-                .html(r);
-    });
-    //Kill #carouFolio
-    x(<'#carouFolio'>);
-
-    //FIXME: Use a promise here...
-    //Fire up the cube!..
-    setTimeout(initiateCubeFolio, 500);
-  }
 }
 
 
