@@ -10,7 +10,7 @@ Author: Eric James Foster
 
 
 //import elementsJS, elementsJS style..
-use 'elementsJS' scroll, log, inspect, isMobile
+use 'elementsJS' el, scroll, log, inspect, isMobile
 use './cubeFolio' cubeFolio
 use 'tween.js' as TWEEN
 
@@ -295,4 +295,25 @@ export function scrollController() {
       }
     }
   }
+}
+
+
+export function smoothScrollAnimation(e) {
+  let idRE = /\#\w*/;
+
+  //get destination element and it's offsetTop..
+  let elementID = idRE.exec(<e.target/>.href());
+           elem = document.querySelector(elementID);
+    destination = <elem/>.fromTop();
+
+  //Tween for smoothly animating scroll to diff sections of site upon clicking the main nav.
+  const
+  tween = new TWEEN.Tween( {x: 0, y: scrollY} );
+  tween
+      .to( {y: destination}, 1000)
+      .easing(TWEEN.Easing.Exponential.In)
+      .onUpdate(function() {
+        scrollTo(0, this.y);
+      } )
+      .start();
 }

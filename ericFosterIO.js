@@ -77,6 +77,7 @@
 
 	var _ul = __webpack_require__(9);
 	var scrollController = _ul.scrollController;
+	var smoothScrollAnimation = _ul.smoothScrollAnimation;
 
 	var _ul = __webpack_require__(10);
 	var cubeFolio = _ul.cubeFolio;
@@ -229,31 +230,41 @@
 
 	function initiateCarouFolio() {
 	  click(el('body'), function (e) {
-	    //Z-index swapping button for carousel on low ratio devices..
-	    if (e.target.id === 'swap' || hasAncestor(element(e.target).el, el('#swap'))) {
-	      if (flags.FLIPPER_) {
-	        log('hello');
-	        //Pull image on top of caption..
-	        (function () {
-	          var elem8 = _$('.carousel-image') ? dom('.carousel-image') : make('.carousel-image').put("body");
-	          return elem8;
-	        })().every(function (element) {
-	          element.position('relative').zIndex('13');
-	        });
-	        //Reset flag
-	        flags.FLIPPER_ = false;
-	      } else {
-	        //Pull caption on top of image..
-	        (function () {
-	          var elem9 = _$('.carousel-image') ? dom('.carousel-image') : make('.carousel-image').put("body");
-	          return elem9;
-	        })().every(function (element) {
-	          element.position('static').zIndex('');
-	        });
-	        //Reset flag
-	        flags.FLIPPER_ = true;
+	    //If one of the links in the main navigation header are clicked..
+	    if (e.target.className === 'head-nav') {
+	      //
+	      e.preventDefault();
+	      //Find the currently 'active' link, and remove the active class..
+	      dom('[class~=activ]').class('activ', '-');
+	      //Add 'active' class to clicked link..
+	      element(e.target).ma().class('activ', '+');
+	      //Scroll to targeted offset..
+	      smoothScrollAnimation(e);
+	      //Z-index swapping button for carousel on low ratio devices..
+	    } else if (e.target.id === 'swap' || hasAncestor(element(e.target).el, el('#swap'))) {
+	        if (flags.FLIPPER_) {
+	          log('hello');
+	          //Pull image on top of caption..
+	          (function () {
+	            var elem8 = _$('.carousel-image') ? dom('.carousel-image') : make('.carousel-image').put("body");
+	            return elem8;
+	          })().every(function (element) {
+	            element.position('relative').zIndex('13');
+	          });
+	          //Reset flag
+	          flags.FLIPPER_ = false;
+	        } else {
+	          //Pull caption on top of image..
+	          (function () {
+	            var elem9 = _$('.carousel-image') ? dom('.carousel-image') : make('.carousel-image').put("body");
+	            return elem9;
+	          })().every(function (element) {
+	            element.position('static').zIndex('');
+	          });
+	          //Reset flag
+	          flags.FLIPPER_ = true;
+	        }
 	      }
-	    }
 	  });
 	}
 
@@ -3962,6 +3973,7 @@
 
 	exports.__esModule = true;
 	exports.scrollController = scrollController;
+	exports.smoothScrollAnimation = smoothScrollAnimation;
 
 	/*
 	scrollController.js
@@ -3982,6 +3994,7 @@
 	///|------------------------------------|//
 
 	var elementsJS = __webpack_require__(1);
+	var el = elementsJS.el;
 	var scroll = elementsJS.scroll;
 	var log = elementsJS.log;
 	var inspect = elementsJS.inspect;
@@ -4269,6 +4282,21 @@
 	  }
 	}
 
+	function smoothScrollAnimation(e) {
+	  var idRE = /\#\w*/;
+
+	  //get destination element and it's offsetTop..
+	  var elementID = idRE.exec(element(e.target).href());
+	  elem = document.querySelector(elementID);
+	  destination = element(elem).fromTop();
+
+	  //Tween for smoothly animating scroll to diff sections of site upon clicking the main nav.
+	  var tween = new TWEEN.Tween({ x: 0, y: scrollY });
+	  tween.to({ y: destination }, 1000).easing(TWEEN.Easing.Exponential.In).onUpdate(function () {
+	    scrollTo(0, this.y);
+	  }).start();
+	}
+
 /***/ },
 /* 10 */
 /***/ function(module, exports, __webpack_require__) {
@@ -4345,6 +4373,9 @@
 	var browser = __webpack_require__(15);
 
 	__webpack_require__(16);
+
+	var _ul = __webpack_require__(9);
+	var smoothScrollAnimation = _ul.smoothScrollAnimation;
 
 	///End Module requires///
 
@@ -4649,10 +4680,14 @@
 	      click(el('html'), function (e) {
 	        //If one of the links in the main navigation header are clicked..
 	        if (e.target.className === 'head-nav') {
+	          //
+	          e.preventDefault();
 	          //Find the currently 'active' link, and remove the active class..
 	          dom('[class~=activ]').class('activ', '-');
 	          //Add 'active' class to clicked link..
 	          element(e.target).ma().class('activ', '+');
+	          //Scroll to targeted offset..
+	          smoothScrollAnimation(e);
 	        } else if (e.target.id === 'chevy') {
 	          //Tween project-info out of the way..
 	          var _tween = new TWEEN.Tween({ top: 0, left: 0 });

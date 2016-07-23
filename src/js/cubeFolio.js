@@ -16,6 +16,7 @@ use 'tween.js' as TWEEN
 use 'bowser' as browser
 
 use '../../src/js/CSS3DRenderer'
+use './scrollControl' smoothScrollAnimation
 
 
 
@@ -376,6 +377,8 @@ export const cubeFolio = (function() {
       click(<'html'>, function(e) {
         //If one of the links in the main navigation header are clicked..
         if (e.target.className === 'head-nav') {
+          //
+          e.preventDefault();
           //Find the currently 'active' link, and remove the active class..
           <'[class~=activ]'/>
                   .class('activ', '-');
@@ -383,6 +386,8 @@ export const cubeFolio = (function() {
           <e.target/>
                   .ma()
                     .class('activ', '+');
+          //Scroll to targeted offset..
+          smoothScrollAnimation(e);
         } else if (e.target.id === 'chevy') {
           //Tween project-info out of the way..
           const

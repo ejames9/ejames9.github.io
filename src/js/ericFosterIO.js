@@ -11,7 +11,7 @@ Author: Eric Foster
 
 //elementsJS imports
 use 'elementsJS' go, el, x, log, on, inspect, isMobile, hasAncestor, click
-use './scrollControl' scrollController
+use './scrollControl' scrollController, smoothScrollAnimation
 use './cubeFolio' cubeFolio
 use 'bowser' as browser
 
@@ -163,8 +163,21 @@ function initiateCubeFolio() {
 
 function initiateCarouFolio() {
   click(<'body'>, (e)=> {
+    //If one of the links in the main navigation header are clicked..
+    if (e.target.className === 'head-nav') {
+      //
+      e.preventDefault();
+      //Find the currently 'active' link, and remove the active class..
+      <'[class~=activ]'/>
+              .class('activ', '-');
+      //Add 'active' class to clicked link..
+      <e.target/>
+              .ma()
+                .class('activ', '+');
+      //Scroll to targeted offset..
+      smoothScrollAnimation(e);
     //Z-index swapping button for carousel on low ratio devices..
-    if (e.target.id === 'swap' || hasAncestor(<e.target/>.el, <'#swap'>)) {
+    } else if (e.target.id === 'swap' || hasAncestor(<e.target/>.el, <'#swap'>)) {
       if (flags.FLIPPER_) {
         log('hello');
         //Pull image on top of caption..

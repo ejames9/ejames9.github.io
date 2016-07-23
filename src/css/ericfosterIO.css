@@ -84,6 +84,9 @@ a:focus {
   width: 150px;
   border-radius: 50%;
   /*border: 7px solid #27130a;*/
+  box-shadow: 0 0 0.2em #3a90a9, 0 0 0.2em #3a90a9, 0 0 0.2em #3a90a9, 0 0 0.2em #3a90a9, 0 0 0.2em #3a90a9, 0 0 0.2em #3a90a9, 0 0 0.2em #3a90a9, 0 0 0.2em #3a90a9;
+  box-shadow: 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927;
+
   margin-right: 10px;
 }
 
