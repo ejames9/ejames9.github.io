@@ -14,74 +14,115 @@ use 'elementsJS' go, el, x, log, on, inspect, isMobile, hasAncestor, click
 use './scrollControl' scrollController, smoothScrollAnimation
 use './cubeFolio' cubeFolio
 use 'bowser' as browser
+use 'tween.js' as TWEEN
 
 
 
 
-  //---DOM Ready Function=================================>>>
-  go
-  (function() {
+//---DOM Ready Function=================================>>>
+go
+(function() {
 
-    if (window.innerWidth > 1280) {
-      //Make sure map is centered by removing img-responsive class.
-      <'#map-image'/>
-                .class('img-responsive', '-');
-    }
-    //If device is mobile, kill cubeFolio and show thumbNail portfolio..
-    if (isMobile()) {
-      //Kill cubeFolio..
-      x(<'#cubeFolio'>);
-      //Show thumbFolio
-      <'#thumbFolio'/>
-            .display('block');
+  if (window.innerWidth > 1280) {
+    //Make sure map is centered by removing img-responsive class.
+    <'#map-image'/>
+              .class('img-responsive', '-');
+  }
+  //If device is mobile, kill cubeFolio and show thumbNail portfolio..
+  if (isMobile()) {
+    //Kill cubeFolio..
+    x(<'#cubeFolio'>);
+    //Show thumbFolio
+    <'#thumbFolio'/>
+          .display('block');
 
-    } else {
-      //Show cubeFolio..
-      <'#cubeFolio'/>
-            .display('block');
-      //Kill thumbFolio
-      x(<'#thumbFolio'>)
-    }
-    if (window.innerWidth < 730 && window.innerHeight > window.innerWidth) {
-      <'#meBrand'/>
-          .position('relative')
-          .display('inline')
-          .fontSize('40px')
-          .top('4px')
-          .left('0');
-      <'#naviBar'/>
-          .class('naviBar', '-')
-          .class('naviBar_Mobile', '+');
-      //
-      <'#me-head'/>
-          .display('none');
-    } else {
-      flags.ME_HEAD_ = true;
-    }
+  } else {
+    //Show cubeFolio..
+    // <'#cubeFolio'/>
+    //       .display('block');
+    //Kill thumbFolio
+    x(<'#thumbFolio'>);
 
-    //The following bit of code will allow for orientation change layout adjustments without a full page reload..
-    on('orientationchange', window, ()=> {
-      //Reload css when orientation changes, so that appropriate @media rules will take effect..
-      <'#responsiveCSS'/>
-                  .href('?', '+');
-      //Reset the scrollController..
-      setTimeout(resetScrollControlGlobals, 1000);
-    });
+    //insert css
+    <link='#desktopCSS'/>
+                  .href('./src/css/ericfosterIODesktop.css')
+                  .attrib('rel', 'stylesheet')
+                  .aft('#mainCSS');
 
-    if (!window.frameElement) {
-      //Activate scroll-handling.
-      scrollController();
-      //Activate touch control.
-      touchControl();
+    //Reload css when orientation changes, so that appropriate @media rules will take effect..
+    // <'#desktopCSS'/>
+    //               .href('?', '+');
+  }
+  if (window.innerWidth < 730 && window.innerHeight > window.innerWidth) {
+    <'#meBrand'/>
+        .position('relative')
+        .display('inline')
+        .fontSize('40px')
+        .top('4px')
+        .left('0');
+    <'#naviBar'/>
+        .class('naviBar', '-')
+        .class('naviBar_Mobile', '+');
+    //
+    <'#me-head'/>
+        .display('none');
+  } else {
+    flags.ME_HEAD_ = true;
+  }
 
-      if (!isMobile()) {
-        initiateCubeFolio();
-      } else {
-        initiateCarouFolio();
-      }
-    }
+  //The following bit of code will allow for orientation change layout adjustments without a full page reload..
+  on('orientationchange', window, ()=> {
+    //Reload css when orientation changes, so that appropriate @media rules will take effect..
+    <'#responsiveCSS'/>
+                .href('?', '+');
+    //Reset the scrollController..
+    setTimeout(resetScrollControlGlobals, 1000);
   });
 
+  if (!window.frameElement) {
+    //Activate scroll-handling.
+    scrollController();
+    //Activate touch control.
+    touchControl();
+
+    if (!isMobile()) {
+      try {
+        // initiateCubeFolio();
+        cubeFolio.animate();
+      }
+      catch (e) {
+        log(e, 'red');
+      }
+    } else {
+      initiateCarouFolio();
+    }
+  }
+  openCurtains();
+});
+
+
+function openCurtains() {
+
+  function tada() {
+    //Tween for moving inner curtains..
+    let destination = 800;
+    const
+    tween = new TWEEN.Tween( {x: 0, y: 0} );
+    tween
+        .to( {x: destination}, 6000)
+        .easing(TWEEN.Easing.Back.Out)
+        .onUpdate(function() {
+          <'#leftCurtain'/>
+                    .toLeft(this.x);
+          //
+          <'#rightCurtain'/>
+                    .toRight(this.x);
+        })
+        .start();
+  }
+
+  setTimeout(tada, 3000);
+}
 
 function resetScrollControlGlobals() {
   let index = -1;

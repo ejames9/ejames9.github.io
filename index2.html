@@ -27,7 +27,7 @@
     <link href="./src/css/bootstrapCover.css" rel="stylesheet">
 
     <!-- Custom styles for this site -->
-    <link href="./src/css/ericfosterIO.css" rel="stylesheet">
+    <link id='mainCSS' href="./src/css/ericfosterIO.css" rel="stylesheet">
 
     <!-- Media queries for this site -->
     <link href="./src/css/responsive.css" rel="stylesheet" id='responsiveCSS'>
@@ -50,6 +50,11 @@
       <!--Top Cover Content=============================================-->
       <div id='top-container' style='height: 100%;'>
 
+        <img id='topRightCurtain' src='./images/topRightCurtain.png'>
+        <img id='topLeftCurtain' src='./images/topLeftCurtain.png'>
+        <img id='rightCurtain' src='./images/redCurtainRight.jpg'>
+        <img id='leftCurtain' src='./images/redCurtainLeft.jpg'>
+
         <!--Header, Fixed------------------------------------------------->
         <div id='header' class="masthead clearfix">
 
@@ -66,7 +71,7 @@
                   <span class="icon-bar"></span>
                 </button>
                 <img id='me-head' src='./images/me3.jpg'>
-                <h3 id='meBrand' class="masthead-brand">Eric James Foster</h3>
+                <h3 id='meBrand' class="">Eric James Foster</h3>
               </div>
 
               <div id='mobileNav' class="collapse navbar-collapse">
@@ -141,6 +146,7 @@
 
       <!--About Me Section and hash link-------------------------------->
       <a id='me'></a>
+
       <div id='aboutMe' class='snap'>
         <div id='aboutMeContainer'>
           <h2>Me</h2>
@@ -428,7 +434,7 @@
       <!--CubeFolio Container=============================================-->
       <div id='cubeFolio' class='snap'>
 
-        <i id='x' class="fa fa-times-circle-o fa-3x hide"></i>
+        <i id='ex' class="fa fa-times-circle-o fa-3x hide"></i>
         <ul id='leftProjList'                                              class='projects-list'>
           <li id='_1' data-uri='http://elementsjs.io'                      class='projects-list-item'>elementsJS DOM Manipulation Library/Project Site</li>
           <li id='_2' data-uri='http://elementsjs.io/#interpreter-install' class='projects-list-item'>elementsJS Site Documentation Navigation Menu</li>

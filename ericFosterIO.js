@@ -84,6 +84,8 @@
 
 	var browser = __webpack_require__(15);
 
+	var TWEEN = __webpack_require__(14);
+
 	///End Module requires///
 
 	//---DOM Ready Function=================================>>>
@@ -107,12 +109,20 @@
 	    })().display('block');
 	  } else {
 	    //Show cubeFolio..
-	    (function () {
-	      var elem2 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
-	      return elem2;
-	    })().display('block');
+	    // <'#cubeFolio'/>
+	    //       .display('block');
 	    //Kill thumbFolio
 	    x(el('#thumbFolio'));
+
+	    //insert css
+	    (function () {
+	      var elem2 = _$('#desktopCSS') ? dom('#desktopCSS') : make('#desktopCSS', "link").put("body");
+	      return elem2;
+	    })().href('./src/css/ericfosterIODesktop.css').attrib('rel', 'stylesheet').aft('#mainCSS');
+
+	    //Reload css when orientation changes, so that appropriate @media rules will take effect..
+	    // <'#desktopCSS'/>
+	    //               .href('?', '+');
 	  }
 	  if (window.innerWidth < 730 && window.innerHeight > window.innerWidth) {
 	    (function () {
@@ -150,12 +160,40 @@
 	    touchControl();
 
 	    if (!isMobile()) {
-	      initiateCubeFolio();
+	      try {
+	        // initiateCubeFolio();
+	        cubeFolio.animate();
+	      } catch (e) {
+	        log(e, 'red');
+	      }
 	    } else {
 	      initiateCarouFolio();
 	    }
 	  }
+	  openCurtains();
 	});
+
+	function openCurtains() {
+
+	  function tada() {
+	    //Tween for moving inner curtains..
+	    var destination = 800;
+	    var tween = new TWEEN.Tween({ x: 0, y: 0 });
+	    tween.to({ x: destination }, 6000).easing(TWEEN.Easing.Back.Out).onUpdate(function () {
+	      (function () {
+	        var elem7 = _$('#leftCurtain') ? dom('#leftCurtain') : make('#leftCurtain').put("body");
+	        return elem7;
+	      })().toLeft(this.x);
+	      //
+	      (function () {
+	        var elem8 = _$('#rightCurtain') ? dom('#rightCurtain') : make('#rightCurtain').put("body");
+	        return elem8;
+	      })().toRight(this.x);
+	    }).start();
+	  }
+
+	  setTimeout(tada, 3000);
+	}
 
 	function resetScrollControlGlobals() {
 	  var index = -1;
@@ -163,8 +201,8 @@
 	  currentSlideOffset = scrollY;
 	  //Reset snapPoints global..
 	  (function () {
-	    var elem7 = _$('.snap') ? dom('.snap') : make('.snap').put("body");
-	    return elem7;
+	    var elem9 = _$('.snap') ? dom('.snap') : make('.snap').put("body");
+	    return elem9;
 	  })().every(function (element) {
 	    snapPoints[String(index += 1)] = element.fromTop();
 	  });
@@ -246,8 +284,8 @@
 	          log('hello');
 	          //Pull image on top of caption..
 	          (function () {
-	            var elem8 = _$('.carousel-image') ? dom('.carousel-image') : make('.carousel-image').put("body");
-	            return elem8;
+	            var elem10 = _$('.carousel-image') ? dom('.carousel-image') : make('.carousel-image').put("body");
+	            return elem10;
 	          })().every(function (element) {
 	            element.position('relative').zIndex('13');
 	          });
@@ -256,8 +294,8 @@
 	        } else {
 	          //Pull caption on top of image..
 	          (function () {
-	            var elem9 = _$('.carousel-image') ? dom('.carousel-image') : make('.carousel-image').put("body");
-	            return elem9;
+	            var elem11 = _$('.carousel-image') ? dom('.carousel-image') : make('.carousel-image').put("body");
+	            return elem11;
 	          })().every(function (element) {
 	            element.position('static').zIndex('');
 	          });
@@ -1486,6 +1524,34 @@
 	    return this;
 	  };
 
+	  this.toRight = function(val) {
+	      this.el.style.transform = 'translateX(' + String(val) + 'px)';
+
+	      return this;
+	    };
+
+	  this.toLeft = function(val) {
+	    this.el.style.transform = 'translateX(' + String(-val) + 'px)';
+
+	    return this;
+	  };
+
+	  this.up = function(val) {
+	    this.el.style.transform = 'translateY(' + String(-val) + 'px)';
+
+	    return this;
+	  };
+
+	  this.down = function(val) {
+	    this.el.style.transform = 'translateY(' + String(val) + 'px)';
+
+	    return this;
+	  };
+
+
+
+
+
 	  this.textAlign = function (val) {
 	    if (val !== undefined) {
 	      el.style.textAlign = val;
@@ -2436,7 +2502,7 @@
 
 	  this.href = function (val, mod) {
 	    mod = mod || null;
-	    
+
 	    if (val !== undefined) {
 	      if (mod) {
 	        if (mod === '+') {
@@ -4404,6 +4470,8 @@
 	//global boolean flag that essentially turns off some event handling code  but continues to allow other code to run.
 	APPLICATION_DATA.FLAGS_.TWEEN_ = true;
 	APPLICATION_DATA.FLAGS_.HEAD_TWEEN_ = true;
+	APPLICATION_DATA.FLAGS_.CUBEFOLIO_ = false;
+
 	//This flag is set to true when the header is fixed to the top, and set back to false when it is released.
 	APPLICATION_DATA.FLAGS_.ME_HEAD_ = false;
 	//This flag is set to true when the caption is on top of the carousel-image and false otherwise.
@@ -4920,7 +4988,7 @@
 	  //---Cube Animation Function============================>>>
 	  function animate() {
 	    //Will not run in mobile mode..
-	    if (el('#cubeFolio')) {
+	    if (flags.CUBEFOLIO_) {
 	      //The Renderers Call to Render..
 	      css3DRenderer.render(scene, camera);
 	      //Make the cube spin..

@@ -70,6 +70,8 @@ a:focus {
 
 /*===Cover===============================================*/
 
+
+
 #navbar {
   width: 100%;
   opacity: .9;
@@ -88,6 +90,8 @@ a:focus {
   box-shadow: 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927;
 
   margin-right: 10px;
+  z-index: 19;
+
 }
 
 #header {
@@ -105,7 +109,7 @@ a:focus {
   left: 175px;
   font-family: monoton, love ya like a sister, im fell english sc, trade winds, henny penny, galindo, mystery quest, londrina shadow, londrina sketch, rum raisin;
   font-size: 144px;
-  z-index: 999;
+  z-index: 19;
 }
 #meBrand:hover {
   text-shadow: 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22;
@@ -377,8 +381,8 @@ bangers, comfortaa, megrim, poiret one,
 }
 
 #aboutMe {
-  position: relative;
-  top: 0px;
+  position: absolute;
+  top: 100%;
   left: 0px;
   height: 100%;
   width: 100%;
@@ -401,7 +405,30 @@ bangers, comfortaa, megrim, poiret one,
   font-size: 38px;
 }
 
+#rightCurtain {
+  position: absolute;
+  float: right;
+  height: 100%;
+  width: 50%;
+  top: 100%;
+  right: 0;
+  z-index: 20;
+  border-top: 4px solid #191a1a;
+  border-bottom: 4px solid #191a1a;
+}
 
+#leftCurtain {
+  position: absolute;
+  float: left;
+  height: 100%;
+  width: 50%;
+  top: 100%;
+  left: 0;
+
+  z-index: 20;
+  border-top: 4px solid #191a1a;
+  border-bottom: 4px solid #191a1a;
+}
 
 /*===Projects Page=======================================*/
 
@@ -414,8 +441,8 @@ bangers, comfortaa, megrim, poiret one,
 }
 
 #cubeFolio {
-  position: relative;
-  top: 0px;
+  position: absolute;
+  top: 100%;
   left: 0px;
   height: 100%;
   width: 100%;
@@ -434,17 +461,17 @@ bangers, comfortaa, megrim, poiret one,
   list-style: none;
 }
 
-#x {
+#ex {
   position: absolute;
   top: 85px;
   left: 55px;
   color: #f8e7da;
   z-index: 10999;
 }
-#x:hover {
+#ex:hover {
   color: #e12d22;
 }
-#x:active {
+#ex:active {
   text-shadow: 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22, 0 0 0.2em #e12d22;
   color: #f8e7da;
 }

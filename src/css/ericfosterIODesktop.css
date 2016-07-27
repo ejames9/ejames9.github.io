@@ -1,0 +1,121 @@
+
+
+
+/*===Cover===============================================*/
+
+#topRightCurtain {
+  position: absolute;
+  float: right;
+  height: 100%;
+  width: 50%;
+  top: 0;
+  right: 0;
+  z-index: 21;
+  border-top: 4px solid #191a1a;
+  border-bottom: 4px solid #191a1a;
+}
+
+#topLeftCurtain {
+  position: absolute;
+  float: left;
+  height: 100%;
+  width: 50%;
+  top: 0;
+  left: 0;
+  z-index: 21;
+  border-top: 4px solid #191a1a;
+  border-bottom: 4px solid #191a1a;
+}
+
+#rightCurtain {
+  position: absolute;
+  float: right;
+  height: 100%;
+  width: 50%;
+  top: 0;
+  right: 0;
+  z-index: 20;
+  border-top: 4px solid #191a1a;
+  border-bottom: 4px solid #191a1a;
+  /*opacity: .5;*/
+}
+
+#leftCurtain {
+  position: absolute;
+  float: left;
+  height: 100%;
+  width: 50%;
+  top: 0;
+  left: 0;
+  /*opacity: .5;*/
+  z-index: 20;
+  border-top: 4px solid #191a1a;
+  border-bottom: 4px solid #191a1a;
+}
+
+#me-head {
+  display: none;
+}
+
+#header {
+  z-index: 19;
+}
+
+
+/*===About Me===================================*/
+
+#me {
+  display: none;
+}
+
+#aboutMeContainer {
+  position: absolute;
+  top: 0px;
+}
+
+#aboutMe {
+  position: absolute;
+  top: 0;
+  z-index: 12;
+  display: none;
+}
+
+
+/*===Projects Page=======================================*/
+
+#projects {
+  display: none;
+}
+
+#cubeFolio {
+  position: absolute;
+  top: 0;
+  display: none;
+}
+
+
+
+/*===Contact Me======================================*/
+
+#contactMe {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  z-index: 11;
+}
+
+#contact {
+  display: none;
+}
+
+#map {
+  display: none;
+}
+
+#buttons {
+  display: none;
+}
+
+#footer {
+  display: none;
+}

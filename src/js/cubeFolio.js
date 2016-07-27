@@ -45,6 +45,8 @@ APPLICATION_DATA.FLAGS_.FIRST_CLICK_ = false;
 //global boolean flag that essentially turns off some event handling code  but continues to allow other code to run.
 APPLICATION_DATA.FLAGS_.TWEEN_       = true;
 APPLICATION_DATA.FLAGS_.HEAD_TWEEN_  = true;
+APPLICATION_DATA.FLAGS_.CUBEFOLIO_   = false;
+
 //This flag is set to true when the header is fixed to the top, and set back to false when it is released.
 APPLICATION_DATA.FLAGS_.ME_HEAD_     = false;
 //This flag is set to true when the caption is on top of the carousel-image and false otherwise.
@@ -682,7 +684,7 @@ export const cubeFolio = (function() {
   //---Cube Animation Function============================>>>
   function animate() {
     //Will not run in mobile mode..
-    if (<'#cubeFolio'>) {
+    if (flags.CUBEFOLIO_) {
       //The Renderers Call to Render..
       css3DRenderer.render(scene, camera);
       //Make the cube spin..
