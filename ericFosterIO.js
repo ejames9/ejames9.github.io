@@ -177,9 +177,9 @@
 
 	  function tada() {
 	    //Tween for moving inner curtains..
-	    var destination = 800;
+	    var destination = 550;
 	    var tween = new TWEEN.Tween({ x: 0, y: 0 });
-	    tween.to({ x: destination }, 6000).easing(TWEEN.Easing.Back.Out).onUpdate(function () {
+	    tween.to({ x: destination }, 3000).easing(TWEEN.Easing.Linear.None).onUpdate(function () {
 	      (function () {
 	        var elem7 = _$('#leftCurtain') ? dom('#leftCurtain') : make('#leftCurtain').put("body");
 	        return elem7;

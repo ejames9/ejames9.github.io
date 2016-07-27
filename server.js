@@ -10,7 +10,7 @@ const
 
 //Create/Connect to Server, Listen on port 8096
 connect().
-       use(server('./')).
+       use(server('./', {index: 'ericfosterIO.html'})).
        listen(8081);
 
 //Log Success to the console.

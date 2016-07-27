@@ -105,12 +105,12 @@ function openCurtains() {
 
   function tada() {
     //Tween for moving inner curtains..
-    let destination = 800;
+    let destination = 550;
     const
     tween = new TWEEN.Tween( {x: 0, y: 0} );
     tween
-        .to( {x: destination}, 6000)
-        .easing(TWEEN.Easing.Back.Out)
+        .to( {x: destination}, 3000)
+        .easing(TWEEN.Easing.Linear.None)
         .onUpdate(function() {
           <'#leftCurtain'/>
                     .toLeft(this.x);
