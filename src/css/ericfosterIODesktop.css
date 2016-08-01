@@ -1,63 +1,72 @@
 
 
-
 /*===Cover===============================================*/
 
 #topRightCurtain {
   position: absolute;
   float: right;
   height: 100%;
+  width: 50%;
   top: 0;
   right: 0;
   bottom: 0;
   z-index: 21;
-  border-top: 4px solid #191a1a;
-  border-bottom: 4px solid #191a1a;
-  opacity: .4;
+  pointer-events: none;
+  /*border-top: 4px solid #191a1a;
+  border-bottom: 4px solid #191a1a;*/
+
 }
 
 #topLeftCurtain {
   position: absolute;
   float: left;
   height: 100%;
+  width: 55%;
   top: 0;
   left: 0;
   bottom: 0;
   z-index: 21;
-  border-top: 4px solid #191a1a;
-  border-bottom: 4px solid #191a1a;
-  opacity: .4;
+  pointer-events: none;
+  /*border-top: 4px solid #191a1a;
+  border-bottom: 4px solid #191a1a;*/
+
 }
 
 #midRightCurtain2 {
   position: absolute;
   float: right;
   height: 100%;
+  width: 50%;
   top: 0;
   right: 0;
   bottom: 0;
   z-index: 20;
-  border-top: 4px solid #191a1a;
-  border-bottom: 4px solid #191a1a;
+  pointer-events: none;
+  /*border-top: 4px solid #191a1a;
+  border-bottom: 4px solid #191a1a;*/
 }
 
 #midLeftCurtain2 {
   position: absolute;
   float: left;
   height: 100%;
+  width: 52%;
   top: 0;
   left: 0;
   bottom: 0;
   z-index: 20;
-  border-top: 4px solid #191a1a;
-  border-bottom: 4px solid #191a1a;
+  pointer-events: none;
+  /*border-top: 4px solid #191a1a;
+  border-bottom: 4px solid #191a1a;*/
 }
 
 #topCurtain {
   position: absolute;
+  width: 100%;
   top: 0;
   right: 0;
   left: 0;
+
   z-index: 19;
 }
 
@@ -70,8 +79,9 @@
   top: 0;
   right: 0;
   z-index: 18;
-  border-top: 4px solid #191a1a;
-  border-bottom: 4px solid #191a1a;
+
+  /*border-top: 4px solid #191a1a;
+  border-bottom: 4px solid #191a1a;*/
   /*opacity: .5;*/
 }
 
@@ -84,16 +94,134 @@
   left: 0;
   /*opacity: .5;*/
   z-index: 18;
-  border-top: 4px solid #191a1a;
-  border-bottom: 4px solid #191a1a;
+
+  /*border-top: 4px solid #191a1a;
+  border-bottom: 4px solid #191a1a;*/
+}
+
+#meBrand {
+  /*font-family: circus;*/
+  font-size: 42px;
+  float: left;
+  left: 25px;
+  color: #191a1a;
+  color: #f8e7da;
+  z-index: 33;
+  top: -15px;
+  /*padding-right: 10px;
+  padding-left: 10px;*/
+  /*background-color: #191a1a;
+  border: 1.5px dotted #f8e7da;*/
+  /*left: 120px;
+  top: 47px;*/
+  /*display: none;*/
+  text-shadow: 0 0 0.2em #c01a24, 0 0 0.2em #c01a24, 0 0 0.2em #c01a24, 0 0 0.2em #c01a24, 0 0 0.2em #c01a24, 0 0 0.2em #c01a24, 0 0 0.2em #c01a24, 0 0 0.2em #c01a24;
+}
+
+
+#ericHead {
+  position: absolute;
+  top: 76px;
+  margin: auto;
+  right: 0;
+  left: 0;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  border: 4px solid #27130a;
+
+}
+#ericHead:hover {
+  border-radius: 0px;
+  border: 4px solid #fdb830;
+}
+#ericHead:active {
+  box-shadow: 0 0 1em #e12d22, 0 0 1.2em #e12d22, 0 0 1.2em #e12d22;
+}
+
+/*.cover-head {
+  font-family: circus;
+  font-size: 25px;
+}*/
+
+#ericHeadContainer {
+  display: block;
+  position: absolute;
+  width: 20%;
+  left: 26%;
+  top: -110px;
+}
+
+#crystalBallContainer {
+  display: block;
+  position: absolute;
+  width: 20%;
+  left: 2%;
+  top: 320px;
+}
+
+#crystalBall {
+  border-radius: 50%;
+  border: 6px solid #f8e7da;
+}
+
+#crystalBall:hover {
+  border-radius: 0px;
+  border: 6px solid #e12d22;
+}
+#crystalBall:active {
+  box-shadow: 0 0 1em #fdb830, 0 0 1.2em #fdb830, 0 0 1.2em #fdb830;
+}
+
+#magicHatContainer {
+  display: block;
+  position: absolute;
+  width: 20%;
+  left: 51%;
+  top: 320px;
+}
+
+
+#magicHat {
+  position: relative;
+  padding: 18px;
+  border-radius: 50%;
+  border: 11px solid #27130a;
+  left: 15px;
+}
+#magicHat:hover {
+  border: 11px solid #e12d22;
+}
+#magicHat:active {
+  box-shadow: 0 0 1em #164cac, 0 0 1.2em #164cac, 0 0 1.2em #164cac, 0 0 1.2em #164cac;
 }
 
 #me-head {
   display: none;
 }
 
+#wand {
+  position: absolute;
+  width: 70px;
+  left: 57.5%;
+  top: 273px;
+  transform: rotateZ(-19deg);
+}
+
+
+#coverDescContainer {
+  top: 255px;
+}
+
 #header {
-  z-index: 19;
+  z-index: 23;
+  display: none;
+}
+
+#mobileNav {
+  position: relative;
+  top: -17px;
+  right: -12px;
 }
 
 
@@ -125,7 +253,7 @@
 #cubeFolio {
   position: absolute;
   top: 0;
-  display: none;
+  visibility: hidden;
 }
 
 
@@ -153,4 +281,11 @@
 
 #footer {
   display: none;
+}
+
+/*===Fonts======================================*/
+
+@font-face {
+    font-family: circus;
+    src: url(../fonts/Circus.ttf);
 }

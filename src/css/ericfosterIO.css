@@ -16,6 +16,7 @@ html,body {
  height: 100%;
  margin: 0px;
  padding: 0px;
+ overflow-x: hidden;
 }
 
 /*body {
@@ -133,7 +134,7 @@ a:focus {
 
 #naviBar > .activ  a {
   background-color: transparent;
-  border-bottom: 1px solid #fe7927;
+  border-bottom: 1px solid #191a1a;
   border-radius: 10px;
 }
 
@@ -199,13 +200,11 @@ bangers, comfortaa, megrim, poiret one,
   padding: 10px 5px;
 }
 #coverDescContainer div a:hover {
-  background-color: #164cac;
-  opacity: .7;
-  color: #f8e7da;
-  border: 1px solid #000;
+  background-color: #cf2530;
+  color: #27130a;
 }
 #coverDescContainer div a:active {
-  background-color: #e12d22;
+  background-color: #164cac;
   opacity: 1;
   color: #000;
   border: 1px solid #000;

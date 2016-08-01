@@ -74,17 +74,21 @@
 	var isMobile = elementsJS.isMobile;
 	var hasAncestor = elementsJS.hasAncestor;
 	var click = elementsJS.click;
+	var mouse = elementsJS.mouse;
 
 	var _ul = __webpack_require__(9);
 	var scrollController = _ul.scrollController;
 	var smoothScrollAnimation = _ul.smoothScrollAnimation;
 
+	var _ul = __webpack_require__(18);
+	var openCurtains = _ul.openCurtains;
+	var closeCurtains = _ul.closeCurtains;
+	var spinningIcons = _ul.spinningIcons;
+
 	var _ul = __webpack_require__(10);
 	var cubeFolio = _ul.cubeFolio;
 
 	var browser = __webpack_require__(15);
-
-	var TWEEN = __webpack_require__(14);
 
 	///End Module requires///
 
@@ -161,6 +165,7 @@
 
 	    if (!isMobile()) {
 	      try {
+
 	        // initiateCubeFolio();
 	        cubeFolio.animate();
 	      } catch (e) {
@@ -170,30 +175,15 @@
 	      initiateCarouFolio();
 	    }
 	  }
-	  openCurtains();
+	  setTimeout(openCurtains, 1700, 1600);
+	  //
+	  spinningIcons();
+	  //
+	  inspect(headShotObj);
+	  onClick();
+	  //
+	  onHover();
 	});
-
-	function openCurtains() {
-
-	  function tada() {
-	    //Tween for moving inner curtains..
-	    var destination = 550;
-	    var tween = new TWEEN.Tween({ x: 0, y: 0 });
-	    tween.to({ x: destination }, 3000).easing(TWEEN.Easing.Linear.None).onUpdate(function () {
-	      (function () {
-	        var elem7 = _$('#leftCurtain') ? dom('#leftCurtain') : make('#leftCurtain').put("body");
-	        return elem7;
-	      })().toLeft(this.x);
-	      //
-	      (function () {
-	        var elem8 = _$('#rightCurtain') ? dom('#rightCurtain') : make('#rightCurtain').put("body");
-	        return elem8;
-	      })().toRight(this.x);
-	    }).start();
-	  }
-
-	  setTimeout(tada, 3000);
-	}
 
 	function resetScrollControlGlobals() {
 	  var index = -1;
@@ -201,8 +191,8 @@
 	  currentSlideOffset = scrollY;
 	  //Reset snapPoints global..
 	  (function () {
-	    var elem9 = _$('.snap') ? dom('.snap') : make('.snap').put("body");
-	    return elem9;
+	    var elem7 = _$('.snap') ? dom('.snap') : make('.snap').put("body");
+	    return elem7;
 	  })().every(function (element) {
 	    snapPoints[String(index += 1)] = element.fromTop();
 	  });
@@ -284,8 +274,8 @@
 	          log('hello');
 	          //Pull image on top of caption..
 	          (function () {
-	            var elem10 = _$('.carousel-image') ? dom('.carousel-image') : make('.carousel-image').put("body");
-	            return elem10;
+	            var elem8 = _$('.carousel-image') ? dom('.carousel-image') : make('.carousel-image').put("body");
+	            return elem8;
 	          })().every(function (element) {
 	            element.position('relative').zIndex('13');
 	          });
@@ -294,8 +284,8 @@
 	        } else {
 	          //Pull caption on top of image..
 	          (function () {
-	            var elem11 = _$('.carousel-image') ? dom('.carousel-image') : make('.carousel-image').put("body");
-	            return elem11;
+	            var elem9 = _$('.carousel-image') ? dom('.carousel-image') : make('.carousel-image').put("body");
+	            return elem9;
 	          })().every(function (element) {
 	            element.position('static').zIndex('');
 	          });
@@ -303,6 +293,87 @@
 	          flags.FLIPPER_ = true;
 	        }
 	      }
+	  });
+	}
+
+	function onClick() {
+	  //Click handler..
+	  click(el('html'), function (e) {
+	    switch (true) {
+	      case e.target.id === 'ericHead':
+	        closeCurtains(true);
+	        break;
+	      //
+	      case e.target.id === 'magicHat':
+	        closeCurtains(500, 400, 300);
+	        //
+	        (function () {
+	          var elem10 = _$('#menuContent') ? dom('#menuContent') : make('#menuContent').put("body");
+	          return elem10;
+	        })().display('none');
+	        (function () {
+	          var elem11 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
+	          return elem11;
+	        })().display('block');
+
+	        flags.CUBEFOLIO_ = true;
+	        //
+	        initiateCubeFolio();
+	        //
+	        setTimeout(openCurtains, 1000, 1000, 800, 700);
+	        break;
+
+	      case e.target.id === 'meBrand':
+	        openCurtains(1500, 1200, 800);
+	        break;
+	      default:
+	        break;
+	    }
+	  });
+	}
+
+	function onHover() {
+	  //Hover handler..
+	  mouse('over', el('html'), function (e) {
+	    switch (true) {
+	      case e.target.id === 'ericHead':
+	        //
+	        params.HEAD_SPEED = 1.062;
+	        setTimeout(function () {
+	          params.HEAD_SPEED = 0;
+	          headShotObj.rotation.y = 0.0;
+	          //
+	          mouse('out', e.target, function () {
+	            params.HEAD_SPEED = 0.012;
+	          });
+	        }, 300);
+	        break;
+	      case e.target.id === 'magicHat':
+	        //
+	        params.HATZ_SPEED = 1.062;
+	        params.HATX_SPEED = 0.0;
+	        setTimeout(function () {
+	          params.HATZ_SPEED = 0;
+	          magicHatObj.rotation.x = 0.0;
+	          magicHatObj.rotation.z = 0.0;
+	          //
+	          mouse('out', e.target, function () {
+	            params.HATZ_SPEED = 0.012;
+	            params.HATX_SPEED = 0.012;
+	          });
+	        }, 300);
+	        break;
+	      case e.target.id === 'crystalBall':
+	        //
+	        params.BALL_SPEED = 0;
+	        crystBallObj.rotation.x = 0.0;
+	        crystBallObj.rotation.y = 0.0;
+	        //
+	        mouse('out', e.target, function () {
+	          params.BALL_SPEED = 0.012;
+	        });
+	        break;
+	    }
 	  });
 	}
 
@@ -1524,11 +1595,23 @@
 	    return this;
 	  };
 
+	  this.moveX = function(val) {
+	    this.el.style.transform = 'translateX(' + String(val) + 'px)';
+
+	    return this;
+	  };
+
+	  this.moveY = function(val) {
+	    this.el.style.transform = 'translateY(' + String(val) + 'px)';
+
+	    return this;
+	  };
+
 	  this.toRight = function(val) {
 	      this.el.style.transform = 'translateX(' + String(val) + 'px)';
 
 	      return this;
-	    };
+	  };
 
 	  this.toLeft = function(val) {
 	    this.el.style.transform = 'translateX(' + String(-val) + 'px)';
@@ -4443,63 +4526,10 @@
 	var _ul = __webpack_require__(9);
 	var smoothScrollAnimation = _ul.smoothScrollAnimation;
 
+	var _ul = __webpack_require__(17);
+	var APPLICATION_DATA = _ul.APPLICATION_DATA;
+
 	///End Module requires///
-
-	//Application Data..
-	var APPLICATION_DATA = {};
-	APPLICATION_DATA.FLAGS_ = {};
-	APPLICATION_DATA.PROJECT_URLS = {};
-	APPLICATION_DATA.REPO_URLS = {};
-	APPLICATION_DATA.USER_DATA = {};
-	//Boolean flag that enables code that spins the portfolio cube.
-	APPLICATION_DATA.FLAGS_.SPIN_SWITCH_ = true;
-	//Flag that allows code to know when it is being run for the first time.
-	APPLICATION_DATA.FLAGS_.FOCUS_ = false;
-	//Flag that tells whether or not the 'show' class has been assigned yet. (project-info pane)
-	APPLICATION_DATA.FLAGS_.SHOW_ = false;
-	//Flag that tells whether or not the 'show2' class has been assigned yet. (browser-icon button)
-	APPLICATION_DATA.FLAGS_.SHOW2_ = false;
-	//Flag that tells whether or not the 'show3' class has been assigned yet. (visit-page text)
-	APPLICATION_DATA.FLAGS_.SHOW3_ = false;
-	//Flag that trips the tweenTwo snap-back animation.
-	APPLICATION_DATA.FLAGS_.TWEENTWO_ = false;
-	//This flag is set to false when the project-info pane is off-screen, and set back to true when it returns.
-	APPLICATION_DATA.FLAGS_.PROJ_PANE_ = true;
-	//This flag is set to true when a project is clicked, and not set back until the closeUp scene is exited.
-	APPLICATION_DATA.FLAGS_.FIRST_CLICK_ = false;
-	//global boolean flag that essentially turns off some event handling code  but continues to allow other code to run.
-	APPLICATION_DATA.FLAGS_.TWEEN_ = true;
-	APPLICATION_DATA.FLAGS_.HEAD_TWEEN_ = true;
-	APPLICATION_DATA.FLAGS_.CUBEFOLIO_ = false;
-
-	//This flag is set to true when the header is fixed to the top, and set back to false when it is released.
-	APPLICATION_DATA.FLAGS_.ME_HEAD_ = false;
-	//This flag is set to true when the caption is on top of the carousel-image and false otherwise.
-	APPLICATION_DATA.FLAGS_.FLIPPER_ = true;
-
-	//Project URLs..
-	APPLICATION_DATA.PROJECT_URLS['_1'] = 'http://elementsjs.io';
-	APPLICATION_DATA.PROJECT_URLS['_2'] = 'http://elementsjs.io/#interpreter-install';
-	APPLICATION_DATA.PROJECT_URLS['_3'] = 'https://www.npmjs.com/package/gulp-elementsjs-interpreter';
-	APPLICATION_DATA.PROJECT_URLS['_4'] = 'http://showtrippers.com';
-	APPLICATION_DATA.PROJECT_URLS['_5'] = 'https://pypi.python.org/pypi/DjamBase';
-	APPLICATION_DATA.PROJECT_URLS['_6'] = 'http://ejames9.github.io';
-
-	//Repository URLs..
-	APPLICATION_DATA.REPO_URLS['_1'] = 'https://github.com/ejames9/elementsJS';
-	APPLICATION_DATA.REPO_URLS['_2'] = 'https://github.com/ejames9/elementsJS/blob/gh-pages/js/sideNavControl.js';
-	APPLICATION_DATA.REPO_URLS['_3'] = 'https://github.com/ejames9/gulp-elementsJS-interpreter';
-	APPLICATION_DATA.REPO_URLS['_4'] = 'https://github.com/ejames9/GoOnTour';
-	APPLICATION_DATA.REPO_URLS['_5'] = 'https://github.com/ejames9/DjamBase';
-	APPLICATION_DATA.REPO_URLS['_6'] = 'https://github.com/ejames9/ejames9.github.io/blob/master/src/js/ericFosterIO.js';
-
-	//This global hold the user's scroll/slide position.. for use with the scroll-snapping function..
-	APPLICATION_DATA.USER_DATA.SLIDE = window.scrollY;
-	//Compress into global..
-	window.currentSlideOffset = APPLICATION_DATA.USER_DATA.SLIDE;
-
-	//Compress flag names.
-	window.flags = APPLICATION_DATA.FLAGS_;
 
 	//--The IIFE that runs my portfolio site.
 	//--Created a closure for organization, and fewer globals.============================>>>
@@ -4791,7 +4821,7 @@
 	          //Hone in on click events happening on our target elements.
 	          if (projectRE.test(e.target.className)) {
 	            //Give target focus.
-	            element(e.target).attrib('name', 'focus').color('#27130a').fontWeight('900').textShadow('0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927').zIndex('1000');
+	            element(e.target).attrib('name', 'focus').color('#27130a').fontWeight('900').textShadow('0 0 0.2em #fe7927, ' + '0 0 0.2em #fe7927, ' + '0 0 0.2em #fe7927, ' + '0 0 0.2em #fe7927, ' + '0 0 0.2em #fe7927, ' + '0 0 0.2em #fe7927, ' + '0 0 0.2em #fe7927, ' + '0 0 0.2em #fe7927').zIndex('1000');
 	            //Kill spin.
 	            flags.SPIN_SWITCH_ = false;
 	            //New tween/target for close-up animation.
@@ -4985,8 +5015,31 @@
 	    }
 	  }
 
-	  //---Cube Animation Function============================>>>
+	  //---Animation Function============================>>>
 	  function animate() {
+	    //
+	    if (flags.HEAD_SPIN_) {
+	      //render spinning head..
+	      css3DRenderer2.render(scene2, camera2);
+
+	      headShotObj.rotation.y += params.HEAD_SPEED;
+	    }
+	    //
+	    if (flags.BALL_SPIN_) {
+	      //render spinning crystal ball..
+	      css3DRenderer3.render(scene3, camera3);
+
+	      crystBallObj.rotation.x += params.BALL_SPEED;
+	      crystBallObj.rotation.y += params.BALL_SPEED;
+	    }
+	    //
+	    if (flags.HAT_SPIN_) {
+	      //render spinning magic hat/ wand..
+	      css3DRenderer4.render(scene4, camera4);
+
+	      magicHatObj.rotation.x += params.HATX_SPEED;
+	      magicHatObj.rotation.z += params.HATZ_SPEED;
+	    }
 	    //Will not run in mobile mode..
 	    if (flags.CUBEFOLIO_) {
 	      //The Renderers Call to Render..
@@ -64778,6 +64831,450 @@
 
 	};
 
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use_loosey_goosey";
+
+	exports.__esModule = true;
+
+
+	///-------elementsJS requires---------///
+	var _$ = __webpack_require__(1)._$;
+	var dom = __webpack_require__(1).dom;
+	var make = __webpack_require__(1).make;
+	var element = __webpack_require__(1).element;
+	///|------------------------------------|//
+
+	/*
+	APPDATA.js
+
+	This file houses the app data object, which contains user Data
+	and boolean flags which facilitate operation of the app.
+
+	Author: Eric James Foster
+	*/
+
+	//Application Data..
+	var APPLICATION_DATA = exports.APPLICATION_DATA = {};
+	APPLICATION_DATA.FLAGS_ = {};
+	APPLICATION_DATA.PROJECT_URLS = {};
+	APPLICATION_DATA.REPO_URLS = {};
+	APPLICATION_DATA.USER_DATA = {};
+	APPLICATION_DATA.PARAMETERS = {};
+
+	//Boolean flag that enables code that spins the portfolio cube.
+	APPLICATION_DATA.FLAGS_.SPIN_SWITCH_ = true;
+	//Flag that allows code to know when it is being run for the first time.
+	APPLICATION_DATA.FLAGS_.FOCUS_ = false;
+	//Flag that tells whether or not the 'show' class has been assigned yet. (project-info pane)
+	APPLICATION_DATA.FLAGS_.SHOW_ = false;
+	//Flag that tells whether or not the 'show2' class has been assigned yet. (browser-icon button)
+	APPLICATION_DATA.FLAGS_.SHOW2_ = false;
+	//Flag that tells whether or not the 'show3' class has been assigned yet. (visit-page text)
+	APPLICATION_DATA.FLAGS_.SHOW3_ = false;
+	//Flag that trips the tweenTwo snap-back animation.
+	APPLICATION_DATA.FLAGS_.TWEENTWO_ = false;
+	//This flag is set to false when the project-info pane is off-screen, and set back to true when it returns.
+	APPLICATION_DATA.FLAGS_.PROJ_PANE_ = true;
+	//This flag is set to true when a project is clicked, and not set back until the closeUp scene is exited.
+	APPLICATION_DATA.FLAGS_.FIRST_CLICK_ = false;
+	//global boolean flag that essentially turns off some event handling code  but continues to allow other code to run.
+	APPLICATION_DATA.FLAGS_.TWEEN_ = true;
+	//
+	APPLICATION_DATA.FLAGS_.HEAD_TWEEN_ = true;
+	//If user device is not mobile, this will be set to true.
+	APPLICATION_DATA.FLAGS_.CUBEFOLIO_ = false;
+	//This boolean will allow the cover head shot to spin when set to true.
+	APPLICATION_DATA.FLAGS_.HEAD_SPIN_ = false;
+	//This boolean will allow the cover magic hat/wand to spin when set to true.
+	APPLICATION_DATA.FLAGS_.BALL_SPIN_ = false;
+	//This boolean will allow the cover crystal ball to spin when set to true.
+	APPLICATION_DATA.FLAGS_.HAT_SPIN_ = false;
+	//This flag is set to true when the header is fixed to the top, and set back to false when it is released.
+	APPLICATION_DATA.FLAGS_.ME_HEAD_ = false;
+	//This flag is set to true when the caption is on top of the carousel-image and false otherwise.
+	APPLICATION_DATA.FLAGS_.FLIPPER_ = true;
+	//This flag is set to true when the full curtains are closed.
+	APPLICATION_DATA.FLAGS_.FULL_CURTS_ = true;
+	//This flag is set to true when the mid curtains are closed.
+	APPLICATION_DATA.FLAGS_.MID_CURTS_ = true;
+	//This flag is set to true when the outer curtains are closed.
+	APPLICATION_DATA.FLAGS_.OUTR_CURTS_ = true;
+
+	//
+	APPLICATION_DATA.PARAMETERS.HEAD_SPEED = 0.012;
+	APPLICATION_DATA.PARAMETERS.BALL_SPEED = 0.012;
+	APPLICATION_DATA.PARAMETERS.HATX_SPEED = 0.012;
+	APPLICATION_DATA.PARAMETERS.HATZ_SPEED = 0.012;
+
+	//Project URLs..
+	APPLICATION_DATA.PROJECT_URLS['_1'] = 'http://elementsjs.io';
+	APPLICATION_DATA.PROJECT_URLS['_2'] = 'http://elementsjs.io/#interpreter-install';
+	APPLICATION_DATA.PROJECT_URLS['_3'] = 'https://www.npmjs.com/package/gulp-elementsjs-interpreter';
+	APPLICATION_DATA.PROJECT_URLS['_4'] = 'http://showtrippers.com';
+	APPLICATION_DATA.PROJECT_URLS['_5'] = 'https://pypi.python.org/pypi/DjamBase';
+	APPLICATION_DATA.PROJECT_URLS['_6'] = 'http://ejames9.github.io';
+
+	//Repository URLs..
+	APPLICATION_DATA.REPO_URLS['_1'] = 'https://github.com/ejames9/elementsJS';
+	APPLICATION_DATA.REPO_URLS['_2'] = 'https://github.com/ejames9/elementsJS/blob/gh-pages/js/sideNavControl.js';
+	APPLICATION_DATA.REPO_URLS['_3'] = 'https://github.com/ejames9/gulp-elementsJS-interpreter';
+	APPLICATION_DATA.REPO_URLS['_4'] = 'https://github.com/ejames9/GoOnTour';
+	APPLICATION_DATA.REPO_URLS['_5'] = 'https://github.com/ejames9/DjamBase';
+	APPLICATION_DATA.REPO_URLS['_6'] = 'https://github.com/ejames9/ejames9.github.io/blob/master/src/js/ericFosterIO.js';
+
+	//This global hold the user's scroll/slide position.. for use with the scroll-snapping function..
+	APPLICATION_DATA.USER_DATA.SLIDE = window.scrollY;
+	//Compress into global..
+	window.currentSlideOffset = APPLICATION_DATA.USER_DATA.SLIDE;
+
+	//Compress var names.
+	window.flags = APPLICATION_DATA.FLAGS_;
+	window.params = APPLICATION_DATA.PARAMETERS;
+
+/***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use_loosey_goosey";
+
+	exports.__esModule = true;
+	exports.openCurtains = openCurtains;
+	exports.closeCurtains = closeCurtains;
+	exports.spinningIcons = spinningIcons;
+
+	/*
+	magicShow.js
+
+	This file controls the animations of the ericfoster.io site magic
+	show theme.
+
+	Author: Eric James Foster
+	*/
+
+	//imports..
+
+	///-------Begin Module Imports---------///
+	var _$ = __webpack_require__(1)._$;
+	var dom = __webpack_require__(1).dom;
+	var make = __webpack_require__(1).make;
+	var element = __webpack_require__(1).element;
+	///|------------------------------------|//
+
+	var elementsJS = __webpack_require__(1);
+	var log = elementsJS.log;
+	var el = elementsJS.el;
+
+	var THREE = __webpack_require__(13);
+
+	var TWEEN = __webpack_require__(14);
+
+	///End Module requires///
+
+	//Curtain position globals..
+	window.fullCurtainsX = 0;
+	window.midCurtainsX = 0;
+	window.outerCurtainsX = 0;
+
+	//Open Curtains..
+	function openCurtains() {
+	  var full = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+	  var mid = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+	  var outer = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+
+	  //Open outer curtains..
+	  function openOuterCurtains() {
+	    //Tween for moving inner curtains..
+	    var destination = 550;
+	    outerCurtainsX = 550;
+
+	    var tween = new TWEEN.Tween({ x: 0, y: 0 });
+	    tween.to({ x: destination }, outer).easing(TWEEN.Easing.Linear.None).onUpdate(function () {
+	      (function () {
+	        var elem0 = _$('#topLeftCurtain') ? dom('#topLeftCurtain') : make('#topLeftCurtain').put("body");
+	        return elem0;
+	      })().toLeft(this.x);
+
+	      //
+	      (function () {
+	        var elem1 = _$('#topRightCurtain') ? dom('#topRightCurtain') : make('#topRightCurtain').put("body");
+	        return elem1;
+	      })().toRight(this.x);
+	    }).start();
+
+	    (function () {
+	      var elem2 = _$('#header') ? dom('#header') : make('#header').put("body");
+	      return elem2;
+	    })().display('block');
+
+	    setTimeout(function () {
+	      element(topRightCurtain).display('none');
+	    }, outer);
+	    //
+	    flags.OUTR_CURTS_ = false;
+	  }
+
+	  function openMiddleCurtains() {
+	    //Tween for moving inner curtains..
+	    var destination = 650;
+	    midCurtainsX = 650;
+
+	    var tween = new TWEEN.Tween({ x: 0, y: 0 });
+	    tween.to({ x: destination }, mid).easing(TWEEN.Easing.Linear.None).onUpdate(function () {
+	      (function () {
+	        var elem3 = _$('#midLeftCurtain2') ? dom('#midLeftCurtain2') : make('#midLeftCurtain2').put("body");
+	        return elem3;
+	      })().toLeft(this.x);
+	      //
+	      (function () {
+	        var elem4 = _$('#midRightCurtain2') ? dom('#midRightCurtain2') : make('#midRightCurtain2').put("body");
+	        return elem4;
+	      })().toRight(this.x);
+	    }).start();
+
+	    if (outer) {
+	      setTimeout(openOuterCurtains, mid * 0.5);
+	    }
+	    setTimeout(function () {
+	      element(midRightCurtain2).display('none');
+	    }, mid);
+	    //
+	    flags.MID_CURTS_ = false;
+	  }
+
+	  function openFullCurtains() {
+	    //Tween for moving inner curtains..
+	    var destination = 650;
+	    fullCurtainsX = 650;
+
+	    var tween = new TWEEN.Tween({ x: 0, y: 0 });
+	    tween.to({ x: destination }, full).easing(TWEEN.Easing.Linear.None).onUpdate(function () {
+	      element(leftCurtain).toLeft(this.x);
+	      //
+	      element(rightCurtain).toRight(this.x);
+	    }).start();
+
+	    if (mid) {
+	      //Open mid curtains..
+	      setTimeout(openMiddleCurtains, full * 0.75);
+	    }
+	    setTimeout(function () {
+	      element(rightCurtain).display('none');
+	    }, full);
+	    //
+	    flags.FULL_CURTS_ = false;
+	  }
+	  //Open full curtains..
+	  openFullCurtains();
+	}
+
+	//Close Curtains.
+	function closeCurtains() {
+	  var outer = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
+	  var mid = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+	  var full = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+
+	  //Close full curtains..
+	  function closeFullCurtains() {
+	    //Tween for moving inner curtains..
+	    var destination = 0;
+
+	    var tween = new TWEEN.Tween({ x: -fullCurtainsX, y: 0 });
+	    tween.to({ x: destination }, full).easing(TWEEN.Easing.Linear.None).onUpdate(function () {
+	      (function () {
+	        var elem5 = _$('#leftCurtain') ? dom('#leftCurtain') : make('#leftCurtain').put("body");
+	        return elem5;
+	      })().toRight(this.x);
+	      //
+	      (function () {
+	        var elem6 = _$('#rightCurtain') ? dom('#rightCurtain') : make('#rightCurtain').put("body");
+	        return elem6;
+	      })().toLeft(this.x);
+	    }).start();
+	    //
+	    flags.FULL_CURTS_ = true;
+	  }
+
+	  function closeMiddleCurtains() {
+	    //Tween for moving inner curtains..
+	    var destination = 0;
+
+	    var tween = new TWEEN.Tween({ x: -midCurtainsX, y: 0 });
+	    tween.to({ x: destination }, mid).easing(TWEEN.Easing.Linear.None).onUpdate(function () {
+	      (function () {
+	        var elem7 = _$('#midLeftCurtain2') ? dom('#midLeftCurtain2') : make('#midLeftCurtain2').put("body");
+	        return elem7;
+	      })().toRight(this.x);
+	      //
+	      (function () {
+	        var elem8 = _$('#midRightCurtain2') ? dom('#midRightCurtain2') : make('#midRightCurtain2').put("body");
+	        return elem8;
+	      })().toLeft(this.x);
+	    }).start();
+	    //
+	    if (!flags.FULL_CURTS_) {
+	      //make tangible..
+	      element(rightCurtain).display('block');
+	      //Close FULL curtains..
+	      setTimeout(closeFullCurtains, mid * 0.5);
+	    }
+	    flags.MID_CURTS_ = true;
+	  }
+
+	  //Close outer curtains..
+	  function closeOuterCurtains() {
+	    //Tween for moving inner curtains..
+	    var destination = 0;
+
+	    var tween = new TWEEN.Tween({ x: -outerCurtainsX, y: 0 });
+	    tween.to({ x: destination }, outer).easing(TWEEN.Easing.Linear.None).onUpdate(function () {
+	      (function () {
+	        var elem9 = _$('#topLeftCurtain') ? dom('#topLeftCurtain') : make('#topLeftCurtain').put("body");
+	        return elem9;
+	      })().toRight(this.x);
+	      //
+	      (function () {
+	        var elem10 = _$('#topRightCurtain') ? dom('#topRightCurtain') : make('#topRightCurtain').put("body");
+	        return elem10;
+	      })().toLeft(this.x);
+	    }).start();
+
+	    (function () {
+	      var elem11 = _$('#header') ? dom('#header') : make('#header').put("body");
+	      return elem11;
+	    })().display('block');
+	    //
+	    if (!flags.MID_CURTS_) {
+	      //make tangible..
+	      element(midRightCurtain2).display('block');
+	      //Close mid curtains..
+	      setTimeout(closeMiddleCurtains, outer * 0.75);
+	    }
+	    flags.OUTR_CURTS_ = true;
+	  }
+	  //close curtains according to circumstances..
+	  if (!flags.OUTR_CURTS_) {
+	    //make tangible..
+	    element(topRightCurtain).display('block');
+	    //close
+	    closeOuterCurtains();
+	  } else if (!flags.MID_CURTS_) {
+	    //make tangible..
+	    element(midRightCurtain2).display('block');
+	    //
+	    closeMiddleCurtains();
+	  } else {
+	    //make tangible..
+	    element(rightCurtain).display('block');
+	    //
+	    closeFullCurtains();
+	  }
+	}
+
+	//This code makes my head spin......
+	function spinningIcons() {
+	  //
+	  initiate3DSpaces();
+	  //
+	  create3DObjects();
+
+	  //Set scene2 size, camera2 attributes and position, create container element, create renderer and attach to element.
+	  function initiate3DSpaces() {
+	    // set scene2 size
+	    var width = 600,
+	        height = 600;
+	    // set camera2 attributes
+	    var fov = 45,
+	        aspect = width / height,
+	        near = 0.1,
+	        far = 1000;
+	    // get the container element
+	    var _container = ericHeadContainer,
+	        _container2 = crystalBallContainer,
+	        _container3 = magicHatContainer;
+
+	    ////Set the webGL renderer to a global variable so that the animate function will find it..
+	    window.css3DRenderer2 = new THREE.CSS3DRenderer();
+	    css3DRenderer2.setSize(width, height);
+
+	    flags.HEAD_SPIN_ = true;
+
+	    window.css3DRenderer3 = new THREE.CSS3DRenderer();
+	    css3DRenderer3.setSize(width, height);
+
+	    flags.HAT_SPIN_ = true;
+
+	    window.css3DRenderer4 = new THREE.CSS3DRenderer();
+	    css3DRenderer4.setSize(width, height);
+
+	    flags.BALL_SPIN_ = true;
+
+	    //Setting up the cameras.
+	    window.camera2 = new THREE.PerspectiveCamera(fov, width / height, near, far);
+	    window.scene2 = new THREE.Scene();
+	    // add the camera2 to the scene2
+	    scene2.add(camera2);
+	    // the camera2 starts at 0,0,0, so pull it back
+	    camera2.position.z = 665;
+	    camera2.position.x = 0;
+	    camera2.position.y = -170;
+
+	    window.camera3 = new THREE.PerspectiveCamera(fov, width / height, near, far);
+	    window.scene3 = new THREE.Scene();
+	    // add the camera2 to the scene2
+	    scene3.add(camera3);
+	    // the camera2 starts at 0,0,0, so pull it back
+	    camera3.position.z = 1700;
+	    camera3.position.x = 0;
+	    camera3.position.y = -170;
+
+	    window.camera4 = new THREE.PerspectiveCamera(fov, width / height, near, far);
+	    window.scene4 = new THREE.Scene();
+	    // add the camera2 to the scene2
+	    scene4.add(camera4);
+	    // the camera2 starts at 0,0,0, so pull it back
+	    camera4.position.z = 1950;
+	    camera4.position.x = 0;
+	    camera4.position.y = -170;
+	    // camera2.lookAt(scene2.position);
+
+	    // attach the render-supplied DOM element
+	    _container.appendChild(css3DRenderer2.domElement);
+	    _container2.appendChild(css3DRenderer3.domElement);
+	    _container3.appendChild(css3DRenderer4.domElement);
+	  }
+
+	  //Create the 3D object from html img element..
+	  function create3DObjects() {
+	    //
+	    var img = document.createElement('div'),
+	        img2 = document.createElement('div'),
+	        img3 = document.createElement('div');
+	    //
+	    img.innerHTML = "<a id='ME'><img id='ericHead' style='margin-right: -75px;' src='./images/ericHeadHatfr.png'></a>";
+	    img.style.borderRadius = '50%';
+	    img.id = 'headShotDiv';
+
+	    img2.innerHTML = "<a id='CONTACT'><img id='crystalBall' src='./images/crystalBall.png'></a>";
+	    img2.style.borderRadius = '50%';
+	    img2.id = 'crystBallDiv';
+
+	    img3.innerHTML = "<a id='WORK'><img id='magicHat' src='./images/magicHat.png'></a>";
+	    img3.style.borderRadius = '50%';
+	    img3.style.padding = '20px';
+	    //
+	    window.headShotObj = new THREE.CSS3DObject(img);
+	    window.crystBallObj = new THREE.CSS3DObject(img2);
+	    window.magicHatObj = new THREE.CSS3DObject(img3);
+	    //
+	    scene2.add(headShotObj);
+	    scene3.add(crystBallObj);
+	    scene4.add(magicHatObj);
+	  }
+	}
 
 /***/ }
 /******/ ]);

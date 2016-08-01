@@ -9,10 +9,13 @@ Author: Eric James Foster
 */
 
 
+
+
 //import elementsJS, elementsJS style..
 use 'elementsJS' el, scroll, log, inspect, isMobile
 use './cubeFolio' cubeFolio
 use 'tween.js' as TWEEN
+
 
 
 window.position   = null;
@@ -296,6 +299,7 @@ export function scrollController() {
     }
   }
 }
+
 
 
 export function smoothScrollAnimation(e) {

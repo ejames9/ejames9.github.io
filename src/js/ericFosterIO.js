@@ -10,11 +10,11 @@ Author: Eric Foster
 
 
 //elementsJS imports
-use 'elementsJS' go, el, x, log, on, inspect, isMobile, hasAncestor, click
+use 'elementsJS' go, el, x, log, on, inspect, isMobile, hasAncestor, click, mouse
 use './scrollControl' scrollController, smoothScrollAnimation
+use './magicShow' openCurtains, closeCurtains, spinningIcons
 use './cubeFolio' cubeFolio
 use 'bowser' as browser
-use 'tween.js' as TWEEN
 
 
 
@@ -87,6 +87,7 @@ go
 
     if (!isMobile()) {
       try {
+
         // initiateCubeFolio();
         cubeFolio.animate();
       }
@@ -97,32 +98,17 @@ go
       initiateCarouFolio();
     }
   }
-  openCurtains();
+  setTimeout(openCurtains, 1700, 1600);
+  //
+  spinningIcons();
+  //
+  inspect(headShotObj);
+  onClick();
+  //
+  onHover();
 });
 
 
-function openCurtains() {
-
-  function tada() {
-    //Tween for moving inner curtains..
-    let destination = 550;
-    const
-    tween = new TWEEN.Tween( {x: 0, y: 0} );
-    tween
-        .to( {x: destination}, 3000)
-        .easing(TWEEN.Easing.Linear.None)
-        .onUpdate(function() {
-          <'#leftCurtain'/>
-                    .toLeft(this.x);
-          //
-          <'#rightCurtain'/>
-                    .toRight(this.x);
-        })
-        .start();
-  }
-
-  setTimeout(tada, 3000);
-}
 
 function resetScrollControlGlobals() {
   let index = -1;
@@ -243,6 +229,83 @@ function initiateCarouFolio() {
       }
     }
   });
+}
+
+function onClick() {
+  //Click handler..
+  click(<'html'>, (e)=> {
+    switch(true) {
+      case (e.target.id === 'ericHead'):
+        closeCurtains(true);
+        break;
+      //
+      case (e.target.id === 'magicHat'):
+        closeCurtains(500, 400, 300);
+        //
+        <'#menuContent'/>
+                  .display('none');
+        <'#cubeFolio'/>
+                  .display('block');
+
+        flags.CUBEFOLIO_ = true;
+        //
+        initiateCubeFolio()
+        //
+        setTimeout(openCurtains, 1000, 1000, 800, 700);
+        break;
+
+      case (e.target.id === 'meBrand'):
+        openCurtains(1500, 1200, 800);
+        break;
+      default:
+        break;
+    }
+  })
+}
+
+function onHover() {
+  //Hover handler..
+  mouse('over', <'html'>, (e)=> {
+    switch(true) {
+      case (e.target.id === 'ericHead'):
+          //
+          params.HEAD_SPEED = 1.062;
+          setTimeout(()=> {
+            params.HEAD_SPEED = 0;
+            headShotObj.rotation.y = 0.0;
+            //
+            mouse('out', e.target, ()=> {
+              params.HEAD_SPEED = 0.012;
+            });
+          }, 300);
+          break;
+      case (e.target.id === 'magicHat'):
+          //
+          params.HATZ_SPEED = 1.062;
+          params.HATX_SPEED = 0.0;
+          setTimeout(()=> {
+            params.HATZ_SPEED = 0;
+            magicHatObj.rotation.x = 0.0;
+            magicHatObj.rotation.z = 0.0;
+            //
+            mouse('out', e.target, ()=> {
+              params.HATZ_SPEED = 0.012;
+              params.HATX_SPEED = 0.012;
+            });
+          }, 300);
+          break;
+      case (e.target.id === 'crystalBall'):
+          //
+          params.BALL_SPEED = 0;
+          crystBallObj.rotation.x = 0.0;
+          crystBallObj.rotation.y = 0.0;
+          //
+          mouse('out', e.target, ()=> {
+            params.BALL_SPEED = 0.012;
+          });
+          break;
+    }
+  })
 }
 
 
