@@ -1102,3 +1102,8 @@ Declare heights because of positioning of img element */
  .info {
    margin-bottom: 20px;
  }
+
+ .shine {
+   box-shadow: 0 0 1.2em #f8e7da, 0 0 1.2em #f8e7da, 0 0 1.2em #f8e7da, 0 0 1.2em #f8e7da, 0 0 1.2em #f8e7da, 0 0 1.2em #f8e7da, 0 0 1.2em #f8e7da, 0 0 1.2em #f8e7da;
+
+ }

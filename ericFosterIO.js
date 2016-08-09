@@ -1486,6 +1486,46 @@
 	    return this;
 	  };
 
+	  this.moveX = function(val) {
+	    this.el.style.transform = 'translateX(' + String(val) + 'px)';
+
+	    return this;
+	  };
+
+	  this.moveY = function(val) {
+	    this.el.style.transform = 'translateY(' + String(val) + 'px)';
+
+	    return this;
+	  };
+
+	  this.toRight = function(val) {
+	      this.el.style.transform = 'translateX(' + String(val) + 'px)';
+
+	      return this;
+	  };
+
+	  this.toLeft = function(val) {
+	    this.el.style.transform = 'translateX(' + String(-val) + 'px)';
+
+	    return this;
+	  };
+
+	  this.up = function(val) {
+	    this.el.style.transform = 'translateY(' + String(-val) + 'px)';
+
+	    return this;
+	  };
+
+	  this.down = function(val) {
+	    this.el.style.transform = 'translateY(' + String(val) + 'px)';
+
+	    return this;
+	  };
+
+
+
+
+
 	  this.textAlign = function (val) {
 	    if (val !== undefined) {
 	      el.style.textAlign = val;
@@ -2436,7 +2476,7 @@
 
 	  this.href = function (val, mod) {
 	    mod = mod || null;
-	    
+
 	    if (val !== undefined) {
 	      if (mod) {
 	        if (mod === '+') {
@@ -4500,14 +4540,14 @@
 	    function assembleCube() {
 	      //iframe template.
 	      var iframe = '<iframe class="div" width="1280" height="740" frameborder="0"' + '2style="border:0" src="{URL}"></iframe>',
-	          boxFrame = '<iframe class="div" width="1280" height="1280" frameborder="0"' + 'style="border:0" src="{URL}"></iframe>',
-	          divWrap = '<div><img src="{SRC}" width="1280" height="740"></div>';
+	          boxWrap = '<div><img src="{SRC}" width="1280px" height="1280px" class="shine"></div>',
+	          divWrap = '<div><img src="{SRC}" width="1280px" height="740px" class="shine"></div>';
 
 	      //URL's....
-	      var eJSURL = 'http://elementsjs.io',
-	          eJSsideNavURL = 'http://elementsjs.io/#interpreter-install',
-	          efosterIOURL = 'http://ejames9.github.io',
-	          showTURL = 'http://showtrippers.com',
+	      var eJSURL = './images/elementsjs.io.png',
+	          eJSsideNavURL = './images/elementsjs.ioClick.png',
+	          efosterIOURL = './images/cubeFolio.png',
+	          showTURL = './images/showTrippers.png',
 	          dJamSRC = './images/DjamBase.png',
 	          gulpeJSIntSRC = './images/gulpEJSInterpreter.png',
 	          efosterIOSRC = './images/ericfosterIO.png',
@@ -4523,19 +4563,15 @@
 
 	      //Combine urls with iframe template in new array.
 	      URLs.forEach(function (url, i) {
-	        if (/https?\:\/\//.test(url)) {
-	          if (i === 2 || i === 3) {
-	            cubeSidesHTML.push(boxFrame.replace('{URL}', url));
-	          } else {
-	            cubeSidesHTML.push(iframe.replace('{URL}', url));
-	          }
+	        if (i === 2 || i === 3) {
+	          cubeSidesHTML.push(boxWrap.replace('{SRC}', url));
 	        } else {
 	          cubeSidesHTML.push(divWrap.replace('{SRC}', url));
 	        }
 	      });
 
 	      //Create the cube.
-	      createSides(cubeSidesHTML, new THREE.CubeGeometry(1280, 740, 1280));
+	      createSides(cubeSidesHTML, new THREE.CubeGeometry(1300, 760, 1300));
 	      //Map URLs to 3D coordinates, for tweening purposes.
 	      camCoordinates = zipObject(URLs, cameraPositions);
 	      closeUps = zipObject(URLs, closeUps);
