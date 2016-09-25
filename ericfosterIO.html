@@ -43,30 +43,52 @@
     <![endif]-->
   </head>
 
-  <body id='top' class='snap'>
+
+  <body id='top' class='loading snap'>
+
+    <!--SVG Loading Animation-->
+    <div id='loadingAnimation' class="loader" title="0"><span id="loading">LOADING</span>
+      <svg id='loadSVG' version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+        <path opacity="0.2" fill="#000" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946 s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634 c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/>
+        <path fill="#000" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0 C22.32,8.481,24.301,9.057,26.013,10.047z">
+          <!--Animation-->
+          <animateTransform
+              attributeType="xml"
+              attributeName="transform"
+                       type="rotate"
+                       from="0 20 20"
+                         to="360 20 20"
+                        dur="0.5s"
+                repeatCount="indefinite" />
+        </path>
+      </svg>
+    </div>
+
     <!--Site Content Container==========================================-->
-    <div id='container' class='.container-fluid'>
+    <div id='container' class='loading'>
+
+      <!-- Background image for mobile safari-->
+      <div id="back-image"></div>
 
       <!--Top Cover Content=============================================-->
       <div id='top-container' style='height: 100%;'>
 
         <!--Header, Fixed------------------------------------------------->
         <div id='header' class="masthead clearfix">
-
           <!-- <div class="inner"> -->
-
-
             <!--NavBar, Header=======-->
             <nav id='navbar' class='navbar navbar-inverse' role='navigation'>
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mobileNav">
+              <div id='navbar-header' class="navbar-header">
+                <button id='mobileMenu' type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mobileNav">
                   <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
+                  <span id="menuIcon">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </span>
                 </button>
-                <img id='me-head' src='./images/me3.jpg'>
-                <h3 id='meBrand' class="masthead-brand">Eric James Foster</h3>
+                <h3 id='meBrand' >ericfoster.io</h3>
+                <!-- <img id='me-head' src='./images/me3.jpg'> -->
               </div>
 
               <div id='mobileNav' class="collapse navbar-collapse">
@@ -124,17 +146,25 @@
         </div>
 
 
-
-        <!--My Head------------------------------------------------------->
-        <!-- <img id='me' src='./images/me.png'> -->
         <!--Top Inner Cover Content--------------------------------------->
         <div id='coverDescContainer' class="inner cover">
-          <h1 class="cover-head">Web Designer/</h1>
-          <h1 class="cover-head"> Full Stack Developer</h1>
-          <h5 id='coverDesc' class="cover-heading">Web Wizard. JavaScript Jedi. HTML Magician. CSS Sorcerer. A Regular Expression Wielding, Regular Espresso Addict. An Habitual Smiler. A Real Stand-Up Jib Cutter.</h5>
+          <!--EF Logo-->
+          <div>
+            <img id='efLogo' class='cdc' src="./images/efPentBlack.png" alt="">
+          </div>
+          <!-- <h1 class="cover-head">Web Designer/</h1> -->
+          <h1 id='cdcDesc' class="cdc cover-head">Full-Stack Node.js/Python Web Developer/Designer</h1>
+          <!-- <h5 id='coverDesc' class="cover-heading">Web Wizard. JavaScript Jedi. HTML Magician. CSS Sorcerer. A Regular Expression Wielding, Regular Espresso Addict. An Habitual Smiler. A Real Stand-Up Jib Cutter.</h5>
           <div class="buttons">
             <a id='more' href="#me" class="btn btn-lg btn-default">MORE?</a>
-          </div>
+          </div> -->
+        </div>
+
+        <!--Scroll Indicator-->
+        <div id="scrollIndicator">
+          <div id='tops' class="chevron"></div>
+          <div id='mid' class="chevron"></div>
+          <div id='bottom' class="chevron"></div>
         </div>
 
       </div><!--End #top-container-------------------------------->
@@ -233,11 +263,11 @@
 
                 <!--Image-->
                 <div class="img-box">
-                  <img class="carousel-image second-slide" src="./images/elementsjs.ioClick.png" alt="elementsjs.io side navigation menu">
+                  <img id='sideNav' class="carousel-image second-slide" src="./images/elementsjs.ioClick.png" alt="elementsjs.io side navigation menu">
                 </div>
 
                 <!--Caption-->
-                <div class="capt container">
+                <div id='sideNavCont' class="capt container">
                   <div class="caption">
                     <h2>elementsJS.io Nav-Menu</h2>
                     <p>This is the Side-Navigation Menu for the elementsjs.io project site. I am featuring this here because it took a lot of work to create, and I think the result is very intuitive and sophisticated. The component is modeled after the side menu on Bootstrap's documentation page. Please visit the site and take it for a spin!</p>
@@ -344,20 +374,20 @@
               <div class="item-inner">
                 <!--Image-->
                 <div class="img-box">
-                  <img class="carousel-image fifth-slide" src="./images/DjamBase.png" alt="DjamBase Python Library">
+                  <img class="carousel-image fifth-slide" src="./images/zooComedyNight.png" alt="DjamBase Python Library">
                 </div>
                 <!--Caption-->
                 <div class="container">
                   <div class="caption">
-                    <h2>DjamBase</h2>
-                    <p>This is a screenshot of the python package index page where my DjamBase python package is published. I wrote this for use with the showTrippers.com application. It makes querying JamBase for information about bands and/or upcoming events and concerts extremely easy!</p>
+                    <h2>zooComedyNight.com</h2>
+                    <p>This is a node.js web app I wrote for AAZK's comedy night at the Oregon zoo. I used Express with handlebars templating/view engine, a gulp build system, and MongoDB/Mongoose on the back-end for user management. </p>
                     <!--Visit Page Button-->
-                    <a class='site-link2' href='https://pypi.python.org/pypi/DjamBase/1.0.16'>
+                    <a class='site-link2' href='http://zooComedyNight.com'>
                       <p class='visit-page2'>Visit Page</p>
                       <i id='www2' class="fa fa-globe fa-5x www2 browser2"></i>
                     </a>
                     <!--Github Repo Button-->
-                    <a class='github-link2' href='https://github.com/ejames9/DjamBase'>
+                    <a class='github-link2' href='https://github.com/ejames9/zooComedyNight.com'>
                       <svg class='github2'  viewBox="0 0 128 128">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M64 5.103c-33.347 0-60.388 27.035-60.388 60.388 0 26.682 17.303 49.317 41.297 57.303 3.017.56 4.125-1.31 4.125-2.905 0-1.44-.056-6.197-.082-11.243-16.8 3.653-20.345-7.125-20.345-7.125-2.747-6.98-6.705-8.836-6.705-8.836-5.48-3.748.413-3.67.413-3.67 6.063.425 9.257 6.223 9.257 6.223 5.386 9.23 14.127 6.562 17.573 5.02.542-3.903 2.107-6.568 3.834-8.076-13.413-1.525-27.514-6.704-27.514-29.843 0-6.593 2.36-11.98 6.223-16.21-.628-1.52-2.695-7.662.584-15.98 0 0 5.07-1.623 16.61 6.19C53.7 35 58.867 34.327 64 34.304c5.13.023 10.3.694 15.127 2.033 11.526-7.813 16.59-6.19 16.59-6.19 3.287 8.317 1.22 14.46.593 15.98 3.872 4.23 6.215 9.617 6.215 16.21 0 23.194-14.127 28.3-27.574 29.796 2.167 1.874 4.097 5.55 4.097 11.183 0 8.08-.07 14.583-.07 16.572 0 1.607 1.088 3.49 4.148 2.897 23.98-7.994 41.263-30.622 41.263-57.294C124.388 32.14 97.35 5.104 64 5.104z"></path><path d="M26.484 91.806c-.133.3-.605.39-1.035.185-.44-.196-.685-.605-.543-.906.13-.31.603-.395 1.04-.188.44.197.69.61.537.91zm-.743-.55M28.93 94.535c-.287.267-.85.143-1.232-.28-.396-.42-.47-.983-.177-1.254.298-.266.844-.14 1.24.28.394.426.472.984.17 1.255zm-.575-.618M31.312 98.012c-.37.258-.976.017-1.35-.52-.37-.538-.37-1.183.01-1.44.373-.258.97-.025 1.35.507.368.545.368 1.19-.01 1.452zm0 0M34.573 101.373c-.33.365-1.036.267-1.552-.23-.527-.487-.674-1.18-.343-1.544.336-.366 1.045-.264 1.564.23.527.486.686 1.18.333 1.543zm0 0M39.073 103.324c-.147.473-.825.688-1.51.486-.683-.207-1.13-.76-.99-1.238.14-.477.823-.7 1.512-.485.683.206 1.13.756.988 1.237zm0 0M44.016 103.685c.017.498-.563.91-1.28.92-.723.017-1.308-.387-1.315-.877 0-.503.568-.91 1.29-.924.717-.013 1.306.387 1.306.88zm0 0M48.614 102.903c.086.485-.413.984-1.126 1.117-.7.13-1.35-.172-1.44-.653-.086-.498.422-.997 1.122-1.126.714-.123 1.354.17 1.444.663zm0 0"></path>
                       </svg>
@@ -406,7 +436,6 @@
                 </div><!--/End Caption Container-->
               </div>
             </div><!--/End Item Container-->
-
           </div>
 
           <!--Directional pagination Icons
@@ -436,7 +465,7 @@
         </ul>
         <ul id='rightProjList'                                             class='projects-list'>
           <li id='_4' data-uri='./images/showTrippers.png'                   class='projects-list-item'>showTrippers.com Web Application (In progress)</li>
-          <li id='_5' data-uri='./images/DjamBase.png'                     class='projects-list-item'>Djambase Python Library</li>
+          <li id='_5' data-uri='./images/zooComedyNight.png'                     class='projects-list-item'>zooComedyNight.com Web App</li>
           <li id='_6' data-uri='./images/cubeFolio.png'                  class='projects-list-item'>ericfoster.io Portfolio Cube</li>
         </ul>
 
@@ -461,8 +490,8 @@
             <p>This is an unfinished web-application I am working on. I was forced to temporarily shelf it, but I'm back at it again. I've included it here, because it shows my ability to deploy. It is built with Django, and hosted on an AWS EC2 Ubuntu linux instance, using an apache2 server. The app, when finished, will create a trip route/itinerary for live music lovers based on information given such as time-frame, musical taste, travel-range etc.</p>
           </div>
           <div class='info hide' name='_5'>
-            <h2>DjamBase</h2>
-            <p>This is a screenshot of the python package index page where my DjamBase python package is published. I wrote this for use with the showTrippers.com application. It makes querying JamBase for information about bands and/or upcoming events and concerts extremely easy!</p>
+            <h2>zooComedyNight.com</h2>
+            <p>This is a node.js web app I wrote for AAZK's comedy night at the Oregon zoo. I used Express with handlebars templating/view engine, a gulp build system, and MongoDB/Mongoose on the back-end for user management. </p>
           </div>
           <div class='info hide' name='_6'>
             <h2>ericfoster.io "CubeFolio"</h2>
@@ -511,8 +540,8 @@
       <a id='mapLink'></a>
       <div id='map'>
         <div id='mapFrame'>
-          <img id='map-image' class='img-responsive' src="https://api.mapbox.com/styles/v1/ejames9/cip74e9ve0016bdm6w2ot6gtv/static/-122.677487,45.522526,12.14,23.00,60.00/1280x400@2x?access_token=pk.eyJ1IjoiZWphbWVzOSIsImEiOiIyNGNlYWUyYTU4M2Q4YTViYWM0YTBlMDRmNzIyMTYyNCJ9.RbU_-nlAAF6EOSVxj1kVMg&attribution=false" width="1280" height="400" alt="Dark" />
-
+          <!-- <img id='map-image' class='img-responsive' src="https://api.mapbox.com/styles/v1/ejames9/cip74e9ve0016bdm6w2ot6gtv/static/-122.677487,45.522526,12.14,23.00,60.00/1280x400@2x?access_token=pk.eyJ1IjoiZWphbWVzOSIsImEiOiIyNGNlYWUyYTU4M2Q4YTViYWM0YTBlMDRmNzIyMTYyNCJ9.RbU_-nlAAF6EOSVxj1kVMg&attribution=false" width="1280" height="400" alt="Dark" /> -->
+          <img id='map-image' class='img-responsive' src="https://api.mapbox.com/styles/v1/ejames9/cistatqw0000t2ytckscvzpor/static/-122.673762,45.522438,12.14,23.00,60.00/1280x400@2x?access_token=pk.eyJ1IjoiZWphbWVzOSIsImEiOiIyNGNlYWUyYTU4M2Q4YTViYWM0YTBlMDRmNzIyMTYyNCJ9.RbU_-nlAAF6EOSVxj1kVMg&attribution=false" width="1280"height="400"alt="Dark-copy" />
         </div>
       </div>
 
@@ -525,8 +554,6 @@
 
     </div><!--End container--------------------------------------->
 
-    <!--Background image for mobile safari-->
-    <div id="back-image"></div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

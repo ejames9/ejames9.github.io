@@ -88,12 +88,25 @@
 
 	//---DOM Ready Function=================================>>>
 	go(function () {
+	  //Kill loading animation..
+	  (function () {
+	    setTimeout(function () {
+	      element(loadingAnimation).viz('hidden');
+
+	      (function () {
+	        var elem0 = _$('.loading') ? dom('.loading') : make('.loading').put("body");
+	        return elem0;
+	      })().every(function (elem) {
+	        elem.class('loading', '-');
+	      });
+	    }, 1200);
+	  })();
 
 	  if (window.innerWidth > 1280) {
 	    //Make sure map is centered by removing img-responsive class.
 	    (function () {
-	      var elem0 = _$('#map-image') ? dom('#map-image') : make('#map-image').put("body");
-	      return elem0;
+	      var elem1 = _$('#map-image') ? dom('#map-image') : make('#map-image').put("body");
+	      return elem1;
 	    })().class('img-responsive', '-');
 	  }
 	  //If device is mobile, kill cubeFolio and show thumbNail portfolio..
@@ -102,31 +115,31 @@
 	    x(el('#cubeFolio'));
 	    //Show thumbFolio
 	    (function () {
-	      var elem1 = _$('#thumbFolio') ? dom('#thumbFolio') : make('#thumbFolio').put("body");
-	      return elem1;
+	      var elem2 = _$('#thumbFolio') ? dom('#thumbFolio') : make('#thumbFolio').put("body");
+	      return elem2;
 	    })().display('block');
 	  } else {
 	    //Show cubeFolio..
 	    (function () {
-	      var elem2 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
-	      return elem2;
+	      var elem3 = _$('#cubeFolio') ? dom('#cubeFolio') : make('#cubeFolio').put("body");
+	      return elem3;
 	    })().display('block');
 	    //Kill thumbFolio
 	    x(el('#thumbFolio'));
 	  }
 	  if (window.innerWidth < 730 && window.innerHeight > window.innerWidth) {
 	    (function () {
-	      var elem3 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
-	      return elem3;
+	      var elem4 = _$('#meBrand') ? dom('#meBrand') : make('#meBrand').put("body");
+	      return elem4;
 	    })().position('relative').display('inline').fontSize('40px').top('4px').left('0');
 	    (function () {
-	      var elem4 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
-	      return elem4;
+	      var elem5 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
+	      return elem5;
 	    })().class('naviBar', '-').class('naviBar_Mobile', '+');
 	    //
 	    (function () {
-	      var elem5 = _$('#me-head') ? dom('#me-head') : make('#me-head').put("body");
-	      return elem5;
+	      var elem6 = _$('#me-head') ? dom('#me-head') : make('#me-head').put("body");
+	      return elem6;
 	    })().display('none');
 	  } else {
 	    flags.ME_HEAD_ = true;
@@ -136,8 +149,8 @@
 	  on('orientationchange', window, function () {
 	    //Reload css when orientation changes, so that appropriate @media rules will take effect..
 	    (function () {
-	      var elem6 = _$('#responsiveCSS') ? dom('#responsiveCSS') : make('#responsiveCSS').put("body");
-	      return elem6;
+	      var elem7 = _$('#responsiveCSS') ? dom('#responsiveCSS') : make('#responsiveCSS').put("body");
+	      return elem7;
 	    })().href('?', '+');
 	    //Reset the scrollController..
 	    setTimeout(resetScrollControlGlobals, 1000);
@@ -145,7 +158,7 @@
 
 	  if (!window.frameElement) {
 	    //Activate scroll-handling.
-	    scrollController();
+	    setTimeout(scrollController, 1300);
 	    //Activate touch control.
 	    touchControl();
 
@@ -163,8 +176,8 @@
 	  currentSlideOffset = scrollY;
 	  //Reset snapPoints global..
 	  (function () {
-	    var elem7 = _$('.snap') ? dom('.snap') : make('.snap').put("body");
-	    return elem7;
+	    var elem8 = _$('.snap') ? dom('.snap') : make('.snap').put("body");
+	    return elem8;
 	  })().every(function (element) {
 	    snapPoints[String(index += 1)] = element.fromTop();
 	  });
@@ -246,8 +259,8 @@
 	          log('hello');
 	          //Pull image on top of caption..
 	          (function () {
-	            var elem8 = _$('.carousel-image') ? dom('.carousel-image') : make('.carousel-image').put("body");
-	            return elem8;
+	            var elem9 = _$('.carousel-image') ? dom('.carousel-image') : make('.carousel-image').put("body");
+	            return elem9;
 	          })().every(function (element) {
 	            element.position('relative').zIndex('13');
 	          });
@@ -256,8 +269,8 @@
 	        } else {
 	          //Pull caption on top of image..
 	          (function () {
-	            var elem9 = _$('.carousel-image') ? dom('.carousel-image') : make('.carousel-image').put("body");
-	            return elem9;
+	            var elem10 = _$('.carousel-image') ? dom('.carousel-image') : make('.carousel-image').put("body");
+	            return elem10;
 	          })().every(function (element) {
 	            element.position('static').zIndex('');
 	          });
@@ -4070,6 +4083,8 @@
 	    var elem3 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
 	    return elem3;
 	  }(),
+	      _mobiMenu = element(mobileMenu),
+	      _navbar = element(navbar),
 	      _header = function () {
 	    var elem4 = _$('#navbar') ? dom('#navbar') : make('#navbar').put("body");
 	    return elem4;
@@ -4078,9 +4093,13 @@
 	    var elem5 = _$('#me-head') ? dom('#me-head') : make('#me-head').put("body");
 	    return elem5;
 	  }(),
-	      _footer = function () {
-	    var elem6 = _$('#footer') ? dom('#footer') : make('#footer').put("body");
+	      _efLogo = function () {
+	    var elem6 = _$('#efLogo') ? dom('#efLogo') : make('#efLogo').put("body");
 	    return elem6;
+	  }(),
+	      _footer = function () {
+	    var elem7 = _$('#footer') ? dom('#footer') : make('#footer').put("body");
+	    return elem7;
 	  }();
 
 	  var timeOutID = null;
@@ -4090,8 +4109,8 @@
 	    var index = -1;
 
 	    (function () {
-	      var elem7 = _$('.snap') ? dom('.snap') : make('.snap').put("body");
-	      return elem7;
+	      var elem8 = _$('.snap') ? dom('.snap') : make('.snap').put("body");
+	      return elem8;
 	    })().every(function (element) {
 	      snapPoints[String(index += 1)] = element.fromTop();
 	    });
@@ -4106,8 +4125,6 @@
 	    inspect(snapPoints);
 	  })();
 
-	  // log('offsets2');
-	  // log(snapPoints);
 	  onScroll();
 
 	  //--ericfoster.io Scroll events=====================================>>>
@@ -4129,7 +4146,7 @@
 	            headerFooterAnimation(500, 1960, 42, 36, 0);
 	          } else {
 	            //Landscape
-	            headerFooterAnimation(370, 1560, 42, 36, 0, '');
+	            headerFooterAnimation(370, 1560, 42, 36, 0, '', -100);
 	          }
 	          break;
 	        case window.innerWidth > 700:
@@ -4143,29 +4160,29 @@
 	          if (window.innerHeight > 600) {
 	            footerAnimation_Mobile(2000);
 	          } else {
-	            headerFooterAnimation(380, 1450, 42, 36, 0, '');
+	            headerFooterAnimation(380, 1450, 42, 36, 0, '', -100);
 	          }
 	          break;
 	        case window.innerWidth > 500:
 	          if (window.innerHeight > 500) {
 	            footerAnimation_Mobile(2000);
 	          } else {
-	            headerFooterAnimation(310, 1330, 32, 32, 0, '');
+	            headerFooterAnimation(310, 1330, 32, 32, 0, '', -100);
 	          }
 	          break;
 	        case window.innerWidth > 400:
 	          if (window.innerHeight > 400) {
 	            footerAnimation_Mobile(2275);
 	          } else {
-	            headerFooterAnimation(300, 1400, 26, 29, 0, '');
+	            headerFooterAnimation(300, 1400, 26, 29, 0, '', -100);
 	            //Make a couple tweaks..
 	            (function () {
-	              var elem8 = _$('#header') ? dom('#header') : make('#header').put("body");
-	              return elem8;
+	              var elem9 = _$('#header') ? dom('#header') : make('#header').put("body");
+	              return elem9;
 	            })().height('45px');
 	            (function () {
-	              var elem9 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
-	              return elem9;
+	              var elem10 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
+	              return elem10;
 	            })().right('5px');
 	          }
 	          break;
@@ -4182,12 +4199,12 @@
 	            headerFooterAnimation(300, 1400, 26, 29);
 	            //A couple tweaks..
 	            (function () {
-	              var elem10 = _$('#header') ? dom('#header') : make('#header').put("body");
-	              return elem10;
+	              var elem11 = _$('#header') ? dom('#header') : make('#header').put("body");
+	              return elem11;
 	            })().height('45px');
 	            (function () {
-	              var elem11 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
-	              return elem11;
+	              var elem12 = _$('#naviBar') ? dom('#naviBar') : make('#naviBar').put("body");
+	              return elem12;
 	            })().right('5px');
 	          }
 	          break;
@@ -4281,18 +4298,21 @@
 
 	  //This function adjusts header footer animation..
 	  function headerFooterAnimation(offSet1, offSet2, fontSize1, fontSize2) {
-	    var top = arguments.length <= 4 || arguments[4] === undefined ? 25 : arguments[4];
-	    var left = arguments.length <= 5 || arguments[5] === undefined ? '175px' : arguments[5];
+	    var top = arguments.length <= 4 || arguments[4] === undefined ? 0 : arguments[4];
+	    var left = arguments.length <= 5 || arguments[5] === undefined ? '125px' : arguments[5];
+	    var top2 = arguments[6];
 
 	    //The following code exectutes if the page is scrolled beyond the # of px's below. This is the header animation.
 	    if (_body.scrolled() > offSet1 || _html.scrolled() > offSet1 - 20) {
-	      _meBrand.fontSize(String(fontSize1) + 'px').textShadow('0 0 0.2em #5b85d1, 0 0 0.2em #5b85d1, 0 0 0.2em #5b85d1, 0 0 0.2em #5b85d1, 0 0 0.2em #5b85d1, 0 0 0.2em #5b85d1, 0 0 0.2em #5b85d1, 0 0 0.2em #5b85d1').top('-8px').left('12px');
-
+	      _meBrand.fontSize(String(fontSize1) + 'px').textShadow('0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927').top('-20px').zIndex('9999').left('12px');
+	      _navbar.top(top2 + 'px');
+	      _mobiMenu.bottom('0px');
 	      _naviBar.top('0');
 	      _naviBarLI.every(function (element) {
 	        element.fontSize('32px');
 	      });
 	      _header.bgColor('#191a1a').opacity('.9').border('');
+	      _efLogo.display('none');
 
 	      if (_meHead.display() !== 'none') {
 	        _meHead.display('none');
@@ -4306,13 +4326,16 @@
 	    } else {
 	      //Release.
 	      _meBrand.fontSize('').textShadow('0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927').top('').left(left);
-
+	      _navbar.top('');
+	      _mobiMenu.bottom('10px');
 	      _naviBar.top(top + 'px');
 	      _naviBarLI.every(function (element) {
-	        element.fontSize('40px');
+	        element.fontSize('32px');
 	      });
 	      _header.bgColor('transparent').border('none');
 	      //
+	      _efLogo.display('block');
+
 	      if (flags.ME_HEAD_) {
 	        if (_meHead.display() === 'none') {
 	          _meHead.display('block');
@@ -4454,7 +4477,7 @@
 	APPLICATION_DATA.PROJECT_URLS['_2'] = 'http://elementsjs.io/#interpreter-install';
 	APPLICATION_DATA.PROJECT_URLS['_3'] = 'https://www.npmjs.com/package/gulp-elementsjs-interpreter';
 	APPLICATION_DATA.PROJECT_URLS['_4'] = 'http://showtrippers.com';
-	APPLICATION_DATA.PROJECT_URLS['_5'] = 'https://pypi.python.org/pypi/DjamBase';
+	APPLICATION_DATA.PROJECT_URLS['_5'] = 'http://zooComedyNight.com';
 	APPLICATION_DATA.PROJECT_URLS['_6'] = 'http://ejames9.github.io';
 
 	//Repository URLs..
@@ -4462,7 +4485,7 @@
 	APPLICATION_DATA.REPO_URLS['_2'] = 'https://github.com/ejames9/elementsJS/blob/gh-pages/js/sideNavControl.js';
 	APPLICATION_DATA.REPO_URLS['_3'] = 'https://github.com/ejames9/gulp-elementsJS-interpreter';
 	APPLICATION_DATA.REPO_URLS['_4'] = 'https://github.com/ejames9/GoOnTour';
-	APPLICATION_DATA.REPO_URLS['_5'] = 'https://github.com/ejames9/DjamBase';
+	APPLICATION_DATA.REPO_URLS['_5'] = 'https://github.com/ejames9/zooComedyNight.com';
 	APPLICATION_DATA.REPO_URLS['_6'] = 'https://github.com/ejames9/ejames9.github.io/blob/master/src/js/ericFosterIO.js';
 
 	//This global hold the user's scroll/slide position.. for use with the scroll-snapping function..
@@ -4548,13 +4571,13 @@
 	          eJSsideNavURL = './images/elementsjs.ioClick.png',
 	          efosterIOURL = './images/cubeFolio.png',
 	          showTURL = './images/showTrippers.png',
-	          dJamSRC = './images/DjamBase.png',
+	          zooComSRC = './images/zooComedyNight.png',
 	          gulpeJSIntSRC = './images/gulpEJSInterpreter.png',
 	          efosterIOSRC = './images/ericfosterIO.png',
 	          cubeSidesHTML = [];
 
 	      //Store urls in array.
-	      URLs.push(dJamSRC);
+	      URLs.push(zooComSRC);
 	      URLs.push(gulpeJSIntSRC);
 	      URLs.push(eJSsideNavURL);
 	      URLs.push(efosterIOURL);

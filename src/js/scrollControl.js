@@ -26,8 +26,11 @@ export function scrollController() {
     _meBrand   = <'#meBrand'/>,
     _naviBarLI = <'#naviBar li a'/>,
     _naviBar   = <'#naviBar'/>,
+    _mobiMenu  = <mobileMenu/>,
+    _navbar    = <navbar/>,
     _header    = <'#navbar'/>,
     _meHead    = <'#me-head'/>,
+    _efLogo    = <'#efLogo'/>,
     _footer    = <'#footer'/>;
 
   let timeOutID  = null;
@@ -51,8 +54,6 @@ export function scrollController() {
     inspect(snapPoints);
   })();
 
-  // log('offsets2');
-  // log(snapPoints);
   onScroll();
 
   //--ericfoster.io Scroll events=====================================>>>
@@ -74,7 +75,7 @@ export function scrollController() {
               headerFooterAnimation(500, 1960, 42, 36, 0);
             } else {
               //Landscape
-              headerFooterAnimation(370, 1560, 42, 36, 0, '');
+              headerFooterAnimation(370, 1560, 42, 36, 0, '', -100);
             }
             break;
         case (window.innerWidth > 700):
@@ -88,14 +89,14 @@ export function scrollController() {
             if (window.innerHeight > 600) {
               footerAnimation_Mobile(2000);
             } else {
-              headerFooterAnimation(380, 1450, 42, 36, 0, '');
+              headerFooterAnimation(380, 1450, 42, 36, 0, '', -100);
             }
             break;
         case (window.innerWidth > 500):
             if (window.innerHeight > 500) {
               footerAnimation_Mobile(2000);
             } else {
-              headerFooterAnimation(310, 1330, 32, 32, 0, '');
+              headerFooterAnimation(310, 1330, 32, 32, 0, '', -100);
             }
             break;
         case (window.innerWidth > 400):
@@ -103,7 +104,7 @@ export function scrollController() {
               footerAnimation_Mobile(2275);
 
             } else {
-              headerFooterAnimation(300, 1400, 26, 29, 0, '');
+              headerFooterAnimation(300, 1400, 26, 29, 0, '', -100);
               //Make a couple tweaks..
               <'#header'/>
                     .height('45px');
@@ -235,15 +236,19 @@ export function scrollController() {
   }
 
   //This function adjusts header footer animation..
-  function headerFooterAnimation(offSet1, offSet2, fontSize1, fontSize2, top=25, left='175px') {
+  function headerFooterAnimation(offSet1, offSet2, fontSize1, fontSize2, top=0, left='125px', top2) {
     //The following code exectutes if the page is scrolled beyond the # of px's below. This is the header animation.
     if (_body.scrolled() > offSet1 || _html.scrolled() > offSet1 - 20) {
       _meBrand
             .fontSize(String(fontSize1) + 'px')
-            .textShadow('0 0 0.2em #5b85d1, 0 0 0.2em #5b85d1, 0 0 0.2em #5b85d1, 0 0 0.2em #5b85d1, 0 0 0.2em #5b85d1, 0 0 0.2em #5b85d1, 0 0 0.2em #5b85d1, 0 0 0.2em #5b85d1')
-            .top('-8px')
+            .textShadow('0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927')
+            .top('-20px')
+            .zIndex('9999')
             .left('12px');
-
+      _navbar
+            .top(top2 + 'px');
+      _mobiMenu
+            .bottom('0px');
       _naviBar
             .top('0');
       _naviBarLI
@@ -255,6 +260,8 @@ export function scrollController() {
             .bgColor('#191a1a')
             .opacity('.9')
             .border('');
+      _efLogo
+            .display('none');
 
       if (_meHead.display() !== 'none') {
         _meHead
@@ -275,18 +282,24 @@ export function scrollController() {
             .textShadow('0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927, 0 0 0.2em #fe7927')
             .top('')
             .left(left);
-
+      _navbar
+            .top('');
+      _mobiMenu
+            .bottom('10px');
       _naviBar
             .top(top + 'px')
       _naviBarLI
             .every((element)=> {
               element
-                .fontSize('40px');
+                .fontSize('32px');
             });
       _header
             .bgColor('transparent')
             .border('none');
       //
+      _efLogo
+            .display('block');
+
       if (flags.ME_HEAD_) {
         if (_meHead.display() === 'none') {
           _meHead

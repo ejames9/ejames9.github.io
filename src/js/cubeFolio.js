@@ -56,7 +56,7 @@ APPLICATION_DATA.PROJECT_URLS['_1']  = 'http://elementsjs.io';
 APPLICATION_DATA.PROJECT_URLS['_2']  = 'http://elementsjs.io/#interpreter-install';
 APPLICATION_DATA.PROJECT_URLS['_3']  = 'https://www.npmjs.com/package/gulp-elementsjs-interpreter';
 APPLICATION_DATA.PROJECT_URLS['_4']  = 'http://showtrippers.com';
-APPLICATION_DATA.PROJECT_URLS['_5']  = 'https://pypi.python.org/pypi/DjamBase';
+APPLICATION_DATA.PROJECT_URLS['_5']  = 'http://zooComedyNight.com';
 APPLICATION_DATA.PROJECT_URLS['_6']  = 'http://ejames9.github.io';
 
 //Repository URLs..
@@ -64,7 +64,7 @@ APPLICATION_DATA.REPO_URLS['_1']     = 'https://github.com/ejames9/elementsJS';
 APPLICATION_DATA.REPO_URLS['_2']     = 'https://github.com/ejames9/elementsJS/blob/gh-pages/js/sideNavControl.js';
 APPLICATION_DATA.REPO_URLS['_3']     = 'https://github.com/ejames9/gulp-elementsJS-interpreter';
 APPLICATION_DATA.REPO_URLS['_4']     = 'https://github.com/ejames9/GoOnTour';
-APPLICATION_DATA.REPO_URLS['_5']     = 'https://github.com/ejames9/DjamBase';
+APPLICATION_DATA.REPO_URLS['_5']     = 'https://github.com/ejames9/zooComedyNight.com';
 APPLICATION_DATA.REPO_URLS['_6']     = 'https://github.com/ejames9/ejames9.github.io/blob/master/src/js/ericFosterIO.js';
 
 //This global hold the user's scroll/slide position.. for use with the scroll-snapping function..
@@ -172,13 +172,13 @@ export const cubeFolio = (function() {
             eJSsideNavURL = './images/elementsjs.ioClick.png',
             efosterIOURL  = './images/cubeFolio.png',
             showTURL      = './images/showTrippers.png',
-            dJamSRC       = './images/DjamBase.png',
+            zooComSRC     = './images/zooComedyNight.png',
             gulpeJSIntSRC = './images/gulpEJSInterpreter.png',
             efosterIOSRC  = './images/ericfosterIO.png',
             cubeSidesHTML = [];
 
         //Store urls in array.
-        URLs.push(dJamSRC);
+        URLs.push(zooComSRC);
         URLs.push(gulpeJSIntSRC);
         URLs.push(eJSsideNavURL);
         URLs.push(efosterIOURL);
