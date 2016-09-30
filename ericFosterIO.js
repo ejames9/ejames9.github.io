@@ -147,6 +147,7 @@
 
 	  //The following bit of code will allow for orientation change layout adjustments without a full page reload..
 	  on('orientationchange', window, function () {
+	    log('O-change');
 	    //Reload css when orientation changes, so that appropriate @media rules will take effect..
 	    (function () {
 	      var elem7 = _$('#responsiveCSS') ? dom('#responsiveCSS') : make('#responsiveCSS').put("body");

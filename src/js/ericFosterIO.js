@@ -74,6 +74,7 @@ go
 
   //The following bit of code will allow for orientation change layout adjustments without a full page reload..
   on('orientationchange', window, ()=> {
+    log('O-change');
     //Reload css when orientation changes, so that appropriate @media rules will take effect..
     <'#responsiveCSS'/>
                 .href('?', '+');
