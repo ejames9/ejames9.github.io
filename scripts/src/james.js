@@ -52,24 +52,7 @@ const blinkLickNShowHeader =()=>
   }, 3000)
 
 
-// const innerMarkup =()=>`
-//   <div>
-//     <div></div>
-//     <img src="" alt="" />
-//   </div>
-// `;
-//
-// const container =()=>`
-//   <MyApp->
-//     ${innerMarkup()}
-//   </MyApp->
-// `;
-//
-// dom('#root')
-//   .html(container());
-//
-// inspect(dom('#root'));
-// inspect(dom('MyApp-'));
+
 go(
   ()=>
     {

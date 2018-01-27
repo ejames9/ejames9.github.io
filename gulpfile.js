@@ -1,4 +1,8 @@
+/*
+gulpfile.js
 
+gulpfile for ericfoster.io
+*/
 
 var gulp = require('gulp');
 var babel = require('gulp-babel');
@@ -37,4 +41,4 @@ gulp.task('bundle', function() {
 
 gulp.task('default', gulp.series('babel', 'bundle'));
 
-gulp.watch('./*.js', gulp.series('babel', 'bundle'));
+gulp.watch('./scripts/src/*.js', gulp.series('babel', 'bundle'));
